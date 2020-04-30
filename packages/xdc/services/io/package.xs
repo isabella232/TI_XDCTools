@@ -14,7 +14,7 @@
  */
 function getLibs() 
 {
-    if (Program.build.target.name == "Win32") {
+    if (Program.build.target.name == "Win64") {
 	/* *.o files are returned only when Dos.dll is built within this
 	 * package.
 	 */
@@ -41,6 +41,6 @@ function getLibs()
     }
 }
 /*
- *  @(#) xdc.services.io; 1, 0, 0,0; 5-15-2019 11:23:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.services.io; 1, 0, 0,0; 2-9-2020 18:49:42; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -36,10 +36,12 @@
 #define xdc_runtime_knl_CacheSupportNull__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_CacheSupportNull___VERS 200
@@ -258,27 +260,27 @@ __extern const xdc_runtime_knl_CacheSupportNull_Fxns__ xdc_runtime_knl_CacheSupp
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_CacheSupportNull_Module__startupDone__S, "xdc_runtime_knl_CacheSupportNull_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_Module__startupDone__S( void);
 
 /* inv__E */
 #define xdc_runtime_knl_CacheSupportNull_inv xdc_runtime_knl_CacheSupportNull_inv__E
 xdc__CODESECT(xdc_runtime_knl_CacheSupportNull_inv__E, "xdc_runtime_knl_CacheSupportNull_inv")
-__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_inv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_inv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wb__E */
 #define xdc_runtime_knl_CacheSupportNull_wb xdc_runtime_knl_CacheSupportNull_wb__E
 xdc__CODESECT(xdc_runtime_knl_CacheSupportNull_wb__E, "xdc_runtime_knl_CacheSupportNull_wb")
-__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wb__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wb__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wbInv__E */
 #define xdc_runtime_knl_CacheSupportNull_wbInv xdc_runtime_knl_CacheSupportNull_wbInv__E
 xdc__CODESECT(xdc_runtime_knl_CacheSupportNull_wbInv__E, "xdc_runtime_knl_CacheSupportNull_wbInv")
-__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wbInv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wbInv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wait__E */
 #define xdc_runtime_knl_CacheSupportNull_wait xdc_runtime_knl_CacheSupportNull_wait__E
 xdc__CODESECT(xdc_runtime_knl_CacheSupportNull_wait__E, "xdc_runtime_knl_CacheSupportNull_wait")
-__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wait__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_CacheSupportNull_wait__E( xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -394,6 +396,6 @@ static inline xdc_Void xdc_runtime_knl_CacheSupportNull_Module_setMask(xdc_Bits1
 #endif /* xdc_runtime_knl_CacheSupportNull__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:05; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

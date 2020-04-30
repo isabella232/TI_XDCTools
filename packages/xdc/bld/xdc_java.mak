@@ -25,7 +25,7 @@ ifneq (,$(findstring v,$(XDCOPTIONS)))
 endif
 
 # XDCTOOLS_JVM_TARGET specifies the JVM version "targeted" by javac
-XDCTOOLS_JVM_TARGET ?= 1.6
+XDCTOOLS_JVM_TARGET ?= 1.7
 
 #
 #  We must also explicitly compile against the specified JVM's boot classes:
@@ -36,10 +36,10 @@ XDCTOOLS_JVM_TARGET ?= 1.6
 #      Platform API that would not be present on the specified VM and fail
 #      at runtime. 
 #
-ifeq (1.6,$(XDCTOOLS_JVM_TARGET))
-  # set default for 1.6 for compatibility with XDCtools 3.25 and newer
-  ifneq (,$(wildcard $(TOOLS)/vendors/oracle/jdk/jdk1.6.0_34/Linux/jre/lib/rt.jar))
-    XDCTOOLS_JVM1.6_BOOTCLASSES ?= $(TOOLS)/vendors/oracle/jdk/jdk1.6.0_34/Linux/jre/lib/rt.jar
+ifeq (1.7,$(XDCTOOLS_JVM_TARGET))
+  # set default for 1.7 for compatibility with XDCtools 3.51
+  ifneq (,$(wildcard $(TOOLS)/vendors/oracle/jre/1.7.0_80/Linux/lib/rt.jar))
+    XDCTOOLS_JVM1.7_BOOTCLASSES ?= $(TOOLS)/vendors/oracle/jre/1.7.0_80/Linux/lib/rt.jar
   endif
 endif
 
@@ -96,6 +96,6 @@ $(CLASSDIR)/%.class:%.java
 clean::
 	$(RMDIR) $(CLASSTOP)
 #
-#  @(#) xdc.bld; 1, 0, 2,0; 5-15-2019 11:20:51; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+#  @(#) xdc.bld; 1, 0, 2,0; 2-9-2020 18:48:43; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
 #
 

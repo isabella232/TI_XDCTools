@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -179,7 +179,7 @@ Void LoggerBuf_setFilterLevel(LoggerBuf_Object *obj, Diags_Mask mask,
  *  This API is an instance function per the IFilterLogger interface, but
  *  LoggerBuf only maintains module-wide filter levels.
  */
-Diags_Mask LoggerBuf_getFilterLevel(LoggerBuf_Object *obj, 
+Diags_Mask LoggerBuf_getFilterLevel(LoggerBuf_Object *obj,
                                     Diags_EventLevel level)
 {
     /* Return the mask of diags categories associated with 'level'. */
@@ -220,7 +220,7 @@ Bool LoggerBuf_filterOutEvent(Diags_Mask mask)
      * If filtering for the event's diags category is currently
      * set to level1...
      */
-    if (LoggerBuf_module->level1 & mask) {
+    if ((LoggerBuf_module->level1 & mask) != FALSE) {
         /* If the event is lower than level1, filter it out. */
         return (Bool)(Diags_compareLevels(Diags_getLevel(mask),
                       (Bits16)Diags_LEVEL1));
@@ -229,7 +229,7 @@ Bool LoggerBuf_filterOutEvent(Diags_Mask mask)
      * If filtering for the event's diags category is currently
      * set to level2...
      */
-    else if (LoggerBuf_module->level2 & mask) {
+    else if ((LoggerBuf_module->level2 & mask) != FALSE) {
         /* If the event is lower than level2, filter it out. */
         return (Bool)(Diags_compareLevels(Diags_getLevel(mask),
                       (Bits16)Diags_LEVEL2));
@@ -238,7 +238,7 @@ Bool LoggerBuf_filterOutEvent(Diags_Mask mask)
      * If filtering for the event's diags category is currently
      * set to level3...
      */
-    else if (LoggerBuf_module->level3 & mask) {
+    else if ((LoggerBuf_module->level3 & mask) != FALSE) {
         /* If the event is lower than level3, filter it out. */
         return (Bool)(Diags_compareLevels(Diags_getLevel(mask),
                       (Bits16)Diags_LEVEL3));
@@ -324,10 +324,9 @@ Void LoggerBuf_write4(LoggerBuf_Object *obj, Log_Event evt,
     key = Gate_enterModule();
 
     /*
-     * Record new serial number even if the buffer is FULL.  We do this
-     * because a reader (decoder) of the buffer needs to know if events
-     * have been missed, and the buffer might become un-FULL at some
-     * later time.
+     * Record new serial number even if the buffer is FULL. We do this because
+     * a reader (decoder) of the buffer needs to know if events have been
+     * missed, and the buffer might become un-FULL at some later time.
      */
     ser = obj->serial;
     obj->serial += 2U;
@@ -500,7 +499,7 @@ Void LoggerBuf_flushAll(Void)
     /* flush static instances */
     for (i = 0; i < LoggerBuf_Object_count(); i++) {
         obj = LoggerBuf_Object_get(NULL, i);
-        if (obj->flush) {
+        if (obj->flush != FALSE) {
             LoggerBuf_flush(obj);
         }
     }
@@ -510,7 +509,7 @@ Void LoggerBuf_flushAll(Void)
     /* loop over all dynamic instances */
     for (obj = LoggerBuf_Object_first(); obj != NULL;
          obj = LoggerBuf_Object_next(obj)) {
-        if (obj->flush) {
+        if (obj->flush != FALSE) {
             LoggerBuf_flush(obj);               /* flush obj */
         }
     }
@@ -692,6 +691,6 @@ Int LoggerBuf_getNextEntry(LoggerBuf_Object *obj, Log_EventRec *evtRec)
     return (nEntries);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

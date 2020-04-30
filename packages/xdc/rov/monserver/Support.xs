@@ -78,12 +78,9 @@ function startModel(execPath, urlArgs, logger, progress)
     model = {};
 
     /* load recap file */
-    var rInst = new Packages.xdc.rta.Recap();
-    var recapFile = rInst.locateRecap(execPath, ".rov.xs");
-    var recap = xdc.loadCapsule(recapFile);
-    progress("Loaded the executable's configuration data: " + recapFile);
+    var recap = loadRecap(execPath, progress);
 
-    /* check to make sure exe is a supported format */
+     /* check to make sure exe is a supported format */
     var parser = recap.build.target.binaryParser;
     if (parser && parser != "ti.targets.omf.elf.Elf32"
         && parser != "ti.targets.omf.elf.Elf"
@@ -123,7 +120,7 @@ function startModel(execPath, urlArgs, logger, progress)
     var sym = xdc.module('xdc.rov.monserver.SymbolTable').create(model.elf);
 
     var ProgressCallBack = xdc.module("xdc.rov.monserver.ProgressCallBack");
-    var params = new ProgressCallBack.Params; 
+    var params = new ProgressCallBack.Params;
     params.args = {logger: logger, progress: progress};
     var progressCB = xdc.module("xdc.rov.monserver.ProgressCallBack").create(params);
 
@@ -161,7 +158,7 @@ function startModel(execPath, urlArgs, logger, progress)
         }
 
         try {
-            debug.println("starting DSMemoryReader(" 
+            debug.println("starting DSMemoryReader("
                           + dslitePort + ", " + coreId + ", ...) ...");
             model.reader = new Packages.xdc.rov.monserver.DSMemoryReader(
                 dslitePort, coreId, model.elf);
@@ -217,7 +214,7 @@ function startModel(execPath, urlArgs, logger, progress)
         if ("setThrowViewErrors" in Program) {
             Program.setThrowViewErrors(false);
         }
-    } 
+    }
     catch (x) {
         stopModel(); /* need to close the connection if there's a problem */
         throw x;
@@ -234,6 +231,37 @@ function startModel(execPath, urlArgs, logger, progress)
     //sections.addSection(0x20000000, 0x20040000);
 
     return;
+}
+
+/*
+ *  ======== loadRecap ========
+ */
+function loadRecap(execPath, progress)
+{
+    var rInst = new Packages.xdc.rta.Recap();
+    var recapFile;
+    var noRuntime = false;
+    try {
+        recapFile = rInst.locateRecap(execPath, ".rov.xs");
+    }
+    catch (e) {
+        recapFile = "xdc/rov/monserver/noruntime.rov.xs";
+        noRuntime = true;
+    }
+
+    var recap = xdc.loadCapsule(recapFile);
+    if (noRuntime) {
+        var modules = {};
+        for (var mname in recap.$modules) {
+            if (mname == "xdc.runtime.System"
+                || mname == "xdc.rov.runtime.Monitor") {
+                modules[mname] = recap.$modules[mname];
+            }
+        }
+        recap.$modules = modules;
+    }
+    progress("Loaded the executable's configuration data: " + recapFile);
+    return (recap);
 }
 
 /*
@@ -261,7 +289,7 @@ function checkTarget(model, execPath, progress)
 
         elfSum = model.elf.getSectionCRC(text, text.sh_addr, text.sh_size);
 
-        progress("computing checksums: start = " + text.sh_addr 
+        progress("computing checksums: start = " + text.sh_addr
                  + ", len = " + text.sh_size);
 
         /* can the target compute its own checkSum? */
@@ -278,7 +306,7 @@ function checkTarget(model, execPath, progress)
     if (elfSum != null && targetSum != null && targetSum != elfSum) {
         throw new Error("The executable '" + execPath
             + "' doesn't match the target's program: file checksum (0x"
-            + Number(elfSum).toString(16) 
+            + Number(elfSum).toString(16)
             + ") != target's checksum (0x"
             + Number(targetSum).toString(16) + ")");
     }
@@ -346,9 +374,9 @@ function stringify(obj, indent, path)
 
     for (var prop in obj) {
         if (prop[0] != '#'
-            && (prop.indexOf('$') == -1 
+            && (prop.indexOf('$') == -1
                 || prop == "common$" || prop == "$addr" || prop == "$label")
-                || prop == "$name" || prop == "$type" 
+                || prop == "$name" || prop == "$type"
                 || prop == "$category") {
             var field = obj[prop];
             var next;
@@ -413,7 +441,7 @@ function stringify(obj, indent, path)
         for (var prop in obj.$status) {
             var msg = obj.$status[prop];
             if (msg != null) {
-                s = s.concat(prefix + '"' 
+                s = s.concat(prefix + '"'
                              + prop + "$status\": " + localEscape(msg));
             }
         }

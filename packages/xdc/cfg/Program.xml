@@ -66,7 +66,7 @@
 	    </tr>
 	    
 	  </table>
-          <control type="hyperlink" label="* changes to these values must be made by selecting a different platform" link="http://rtsc.eclipse.org/docs-tip/Demo_of_the_RTSC_Platform_Wizard_in_CCSv4" tooltip="click for help changing the platform or creating a new platform"/>
+          <control type="hyperlink" label="* changes to these values must be made by selecting a different platform" link="http://rtsc.eclipseprojects.io/docs-tip/Demo_of_the_RTSC_Platform_Wizard_in_CCSv4" tooltip="click for help changing the platform or creating a new platform"/>
 	  </td></tr>
 	</table>
 	</body></html>
@@ -267,7 +267,7 @@
 </gep>
 <!--
 /*
- * @(#) xdc.cfg; 1, 0, 2,0; 5-15-2019 11:21:07; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.cfg; 1, 0, 2,0; 2-9-2020 18:48:50; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

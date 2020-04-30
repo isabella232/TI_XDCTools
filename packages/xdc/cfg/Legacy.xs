@@ -267,6 +267,6 @@ function validate(genList, requireList)
     }
 }
 /*
- *  @(#) xdc.cfg; 1, 0, 2,0; 5-15-2019 11:21:07; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.cfg; 1, 0, 2,0; 2-9-2020 18:48:50; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

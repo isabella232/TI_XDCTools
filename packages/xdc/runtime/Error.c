@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -18,11 +18,11 @@
 #include <xdc/runtime/System.h>
 #include <xdc/runtime/Text.h>
 #include <xdc/runtime/Types.h>
-#include <xdc/runtime/Diags.h>
-#include <xdc/runtime/Log.h>
 
 #include <string.h>
 
+/* Implementation of the following requirements is in Error__epilogue.h */
+/* REQ_TAG(SYSBIOS-859), REQ_TAG(SYSBIOS-860), REQ_TAG(SYSBIOS-863) */
 #include "package/internal/Error.xdc.h"
 
 /*
@@ -38,6 +38,7 @@ Void Error_init(Error_Block *eb)
 /*
  *  ======== Error_check ========
  */
+/* REQ_TAG(SYSBIOS-864) */
 Bool Error_check(Error_Block *eb)
 {
     /* The condition eb->id != 0 rejects Error_IGNORE */
@@ -52,6 +53,7 @@ Bool Error_check(Error_Block *eb)
 /*
  *  ======== Error_getData ========
  */
+/* REQ_TAG(SYSBIOS-868) */
 Error_Data *Error_getData(Error_Block *eb)
 {
     return (&eb->data);
@@ -68,6 +70,7 @@ UInt16 Error_getCode(Error_Block *eb)
 /*
  *  ======== Error_getId ========
  */
+/* REQ_TAG(SYSBIOS-869) */
 Error_Id Error_getId(Error_Block *eb)
 {
     return (eb->id);
@@ -76,6 +79,7 @@ Error_Id Error_getId(Error_Block *eb)
 /*
  *  ======== Error_getMsg ========
  */
+/* REQ_TAG(SYSBIOS-867) */
 CString Error_getMsg(Error_Block *eb)
 {
     return (eb->msg);
@@ -84,6 +88,7 @@ CString Error_getMsg(Error_Block *eb)
 /*
  *  ======== Error_getSite ========
  */
+/* REQ_TAG(SYSBIOS-866) */
 Types_Site *Error_getSite(Error_Block *eb)
 {
     return (&eb->site);
@@ -92,13 +97,14 @@ Types_Site *Error_getSite(Error_Block *eb)
 /*
  *  ======== Error_print ========
  */
+/* REQ_TAG(SYSBIOS-870) */
 Void Error_print(Error_Block *eb)
 {
     if (eb != NULL && eb->unused == 0U) {
 
-        if (eb->msg != 0) {
+        if (eb->msg != NULL) {
             (void)Text_putSite(Error_getSite(eb), NULL, -1);
-            if (Text_isLoaded) {
+            if (Text_isLoaded == TRUE) {
                 (void)System_aprintf(eb->msg, eb->data.arg[0], eb->data.arg[1]);
             }
             else {
@@ -116,14 +122,16 @@ Void Error_print(Error_Block *eb)
 Void Error_raiseX(Error_Block *eb, Types_ModuleId mod, CString file,
     Int line, Error_Id id, IArg arg1, IArg arg2)
 {
+    /* REQ_TAG(SYSBIOS-856) */
     Error_policyFxn(eb, mod, file, line, id, arg1, arg2);
 }
 
 /*
  *  ======== Error_policyDefault ========
  */
+/* REQ_TAG(SYSBIOS-853), REQ_TAG(SYSBIOS-865) */
 Void Error_policyDefault(Error_Block *eb, Types_ModuleId mod, CString file,
-    Int line, Error_Id id, IArg arg1, IArg arg2)
+                         Int line, Error_Id id, IArg arg1, IArg arg2)
 {
     Error_Block defErr;
     IArg gateKey;
@@ -137,23 +145,9 @@ Void Error_policyDefault(Error_Block *eb, Types_ModuleId mod, CString file,
 
     /* fill in the error block */
     Error_setX(eb, mod, file, line, id, arg1, arg2);
-
-    /*
-     * Log the error, now that we've retrieved the error message.
-     *
-     * We call Log_put here instead of Log_write so that we can log the
-     * caller's module id instead of the Error module's id.
-     *
-     * In logging this event, we'll use the Error module's mask and logger. We
-     * don't have a way to reliably access the caller's diags mask and logger.
-     * The caller isn't guaranteed to have a mask on the target, even if they
-     * are performing logging.
-     */
-    if (Module__LOGDEF == TRUE && Diags_query(Log_L_error)) {
-        Log_put8(Log_L_error, mod, (IArg) file, line,
-                 (IArg) eb->msg, arg1, arg2, 0, 0, 0);
+    if (Module__LOGDEF == TRUE) {
+        Error_policyLog(mod, file, line, eb->msg, arg1, arg2);
     }
-
     /* count nesting level of errors */
     gateKey = Gate_enterSystem();
     oldCount = module->count;
@@ -161,10 +155,12 @@ Void Error_policyDefault(Error_Block *eb, Types_ModuleId mod, CString file,
     Gate_leaveSystem(gateKey);
 
     /* call any provided error hook, unless we are too deeply nested */
+    /* REQ_TAG(SYSBIOS-857) */
     if (Error_raiseHook != (Error_HookFxn)NULL && oldCount < Error_maxDepth) {
         (Error_raiseHook)(eb);
     }
 
+    /* REQ_TAG(SYSBIOS-852), REQ_TAG(SYSBIOS-859) */
     if ((UInt)Error_policy == (UInt)Error_TERMINATE || errorAbort == TRUE) {
         System_abort("xdc.runtime.Error.raise: terminating execution\n");
     }
@@ -177,9 +173,11 @@ Void Error_policyDefault(Error_Block *eb, Types_ModuleId mod, CString file,
 /*
  *  ======== Error_policyMin ========
  */
+/* REQ_TAG(SYSBIOS-855) */
 Void Error_policyMin(Error_Block *eb, Types_ModuleId mod, CString file,
     Int line, Error_Id id, IArg arg1, IArg arg2)
 {
+    /* REQ_TAG(SYSBIOS-852) */
     if (eb == NULL || (UInt)Error_policy == (UInt)Error_TERMINATE) {
         for(;;) {
         }
@@ -187,15 +185,20 @@ Void Error_policyMin(Error_Block *eb, Types_ModuleId mod, CString file,
     else if (eb != &xdc_runtime_Error_IgnoreBlock) {
         eb->id = id;
     }
-    return;
+    else {
+        return;
+    }
 }
 
 /*
  *  ======== Error_policySpin ========
  */
+/* REQ_TAG(SYSBIOS-854) */
+/* LCOV_EXCL_START */
 Void Error_policySpin(Error_Block *eb, Types_ModuleId mod, CString file,
     Int line, Error_Id id, IArg arg1, IArg arg2)
 {
+/* LCOV_EXCL_STOP */
     for(;;) {
     }
 }
@@ -208,6 +211,7 @@ Void Error_setX(Error_Block *eb, Types_ModuleId mod, CString file,
 {
     Error_init(eb);
 
+    /* REQ_TAG(SYSBIOS-862) */
     eb->data.arg[0] = arg1;
     eb->data.arg[1] = arg2;
     eb->id = id;
@@ -218,6 +222,6 @@ Void Error_setX(Error_Block *eb, Types_ModuleId mod, CString file,
     eb->site.line = line;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

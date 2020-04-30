@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -14,16 +14,18 @@
  *  ======== xdc_noinit.c ========
  */
 
-int __xdc__init(void);
+#include <stdint.h>
+
+int_least32_t __xdc__init(void);
 
 /*
  *  ======== __xdc__init ========
  */
-int  __xdc__init(void)
+int_least32_t  __xdc__init(void)
 {
     return (-1);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:22:00; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:13; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

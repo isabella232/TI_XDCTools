@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Startup__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Startup___VERS 200
@@ -339,32 +341,32 @@ __extern __FAR__ const CT__xdc_runtime_Startup_sfxnRts xdc_runtime_Startup_sfxnR
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Startup_Module__startupDone__S, "xdc_runtime_Startup_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Startup_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Startup_Module__startupDone__S( void);
 
 /* exec__E */
 #define xdc_runtime_Startup_exec xdc_runtime_Startup_exec__E
 xdc__CODESECT(xdc_runtime_Startup_exec__E, "xdc_runtime_Startup_exec")
-__extern xdc_Void xdc_runtime_Startup_exec__E( void );
+__extern xdc_Void xdc_runtime_Startup_exec__E( void);
 
 /* rtsDone__E */
 #define xdc_runtime_Startup_rtsDone xdc_runtime_Startup_rtsDone__E
 xdc__CODESECT(xdc_runtime_Startup_rtsDone__E, "xdc_runtime_Startup_rtsDone")
-__extern xdc_Bool xdc_runtime_Startup_rtsDone__E( void );
+__extern xdc_Bool xdc_runtime_Startup_rtsDone__E( void);
 
 /* reset__I */
 #define xdc_runtime_Startup_reset xdc_runtime_Startup_reset__I
 xdc__CODESECT(xdc_runtime_Startup_reset__I, "xdc_runtime_Startup_reset")
-__extern xdc_Void xdc_runtime_Startup_reset__I( void );
+__extern xdc_Void xdc_runtime_Startup_reset__I( void);
 
 /* startMods__I */
 #define xdc_runtime_Startup_startMods xdc_runtime_Startup_startMods__I
 xdc__CODESECT(xdc_runtime_Startup_startMods__I, "xdc_runtime_Startup_startMods")
-__extern xdc_Void xdc_runtime_Startup_startMods__I( xdc_Int state[], xdc_Int len );
+__extern xdc_Void xdc_runtime_Startup_startMods__I( xdc_Int state[], xdc_Int len);
 
 /* getState__I */
 #define xdc_runtime_Startup_getState xdc_runtime_Startup_getState__I
 xdc__CODESECT(xdc_runtime_Startup_getState__I, "xdc_runtime_Startup_getState")
-__extern xdc_Int xdc_runtime_Startup_getState__I( xdc_runtime_Types_ModuleId id );
+__extern xdc_Int xdc_runtime_Startup_getState__I( xdc_runtime_Types_ModuleId id);
 
 
 /*
@@ -489,6 +491,6 @@ extern struct xdc_runtime_Startup_Module_State__ xdc_runtime_Startup_Module__sta
 #endif /* xdc_runtime_Startup__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

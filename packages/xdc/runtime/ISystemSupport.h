@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -32,10 +32,12 @@
 #define xdc_runtime_ISystemSupport__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_ISystemSupport___VERS 200
@@ -224,6 +226,6 @@ static inline xdc_runtime_ISystemSupport_ready_FxnT xdc_runtime_ISystemSupport_r
 #endif /* xdc_runtime_ISystemSupport__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

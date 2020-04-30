@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_runtime
 {
-    static final String VERS = "@(#) xdc-F14\n";
+    static final String VERS = "@(#) xdc-I08\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -888,13 +888,12 @@ public class xdc_runtime
     void Core$$CONSTS()
     {
         // module Core
-        om.bind("xdc.runtime.Core.allocObject", new Extern("xdc_runtime_Core_allocObject__I", "xdc_Ptr(*)(xdc_runtime_Core_ObjDesc*,xdc_runtime_Error_Block*)", true, false));
+        om.bind("xdc.runtime.Core.NOSTATE", Global.eval("-1"));
         om.bind("xdc.runtime.Core.assignLabel", new Extern("xdc_runtime_Core_assignLabel__I", "xdc_Void(*)(xdc_runtime_Types_Label*,xdc_runtime_Types_CordAddr__*,xdc_Bool)", true, false));
         om.bind("xdc.runtime.Core.assignParams", new Extern("xdc_runtime_Core_assignParams__I", "xdc_Void(*)(xdc_Ptr,xdc_CPtr,xdc_SizeT,xdc_SizeT)", true, false));
         om.bind("xdc.runtime.Core.createObject", new Extern("xdc_runtime_Core_createObject__I", "xdc_Ptr(*)(xdc_runtime_Core_ObjDesc*,xdc_Ptr,xdc_Ptr,xdc_CPtr,xdc_SizeT,xdc_runtime_Error_Block*)", true, false));
         om.bind("xdc.runtime.Core.constructObject", new Extern("xdc_runtime_Core_constructObject__I", "xdc_Ptr(*)(xdc_runtime_Core_ObjDesc*,xdc_Ptr,xdc_Ptr,xdc_CPtr,xdc_SizeT,xdc_runtime_Error_Block*)", true, false));
         om.bind("xdc.runtime.Core.deleteObject", new Extern("xdc_runtime_Core_deleteObject__I", "xdc_Void(*)(xdc_runtime_Core_ObjDesc*,xdc_Ptr,xdc_Fxn,xdc_Int,xdc_Bool)", true, false));
-        om.bind("xdc.runtime.Core.delistObject", new Extern("xdc_runtime_Core_delistObject__I", "xdc_Void(*)(xdc_runtime_Core_ObjDesc*,xdc_Ptr)", true, false));
         om.bind("xdc.runtime.Core.destructObject", new Extern("xdc_runtime_Core_destructObject__I", "xdc_Void(*)(xdc_runtime_Core_ObjDesc*,xdc_Ptr,xdc_Fxn,xdc_Int,xdc_Bool)", true, false));
     }
 
@@ -959,6 +958,7 @@ public class xdc_runtime
         om.bind("xdc.runtime.Error.policySpin", new Extern("xdc_runtime_Error_policySpin__E", "xdc_Void(*)(xdc_runtime_Error_Block*,xdc_Bits16,xdc_CString,xdc_Int,xdc_runtime_Error_Id,xdc_IArg,xdc_IArg)", true, false));
         om.bind("xdc.runtime.Error.raiseX", new Extern("xdc_runtime_Error_raiseX__E", "xdc_Void(*)(xdc_runtime_Error_Block*,xdc_Bits16,xdc_CString,xdc_Int,xdc_runtime_Error_Id,xdc_IArg,xdc_IArg)", true, false));
         om.bind("xdc.runtime.Error.setX", new Extern("xdc_runtime_Error_setX__E", "xdc_Void(*)(xdc_runtime_Error_Block*,xdc_Bits16,xdc_CString,xdc_Int,xdc_runtime_Error_Id,xdc_IArg,xdc_IArg)", true, false));
+        om.bind("xdc.runtime.Error.policyLog", new Extern("xdc_runtime_Error_policyLog__I", "xdc_Void(*)(xdc_Bits16,xdc_CString,xdc_Int,xdc_CString,xdc_IArg,xdc_IArg)", true, false));
     }
 
     void Gate$$CONSTS()
@@ -1204,8 +1204,8 @@ public class xdc_runtime
         om.bind("xdc.runtime.Text.putSite", new Extern("xdc_runtime_Text_putSite__E", "xdc_Int(*)(xdc_runtime_Types_Site*,xdc_Char**,xdc_Int)", true, false));
         om.bind("xdc.runtime.Text.matchVisFxn", new Extern("xdc_runtime_Text_matchVisFxn__I", "xdc_Bool(*)(xdc_Ptr,xdc_CString)", true, false));
         om.bind("xdc.runtime.Text.printVisFxn", new Extern("xdc_runtime_Text_printVisFxn__I", "xdc_Bool(*)(xdc_Ptr,xdc_CString)", true, false));
-        om.bind("xdc.runtime.Text.visitRope", new Extern("xdc_runtime_Text_visitRope__I", "xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr)", true, false));
-        om.bind("xdc.runtime.Text.visitRope2", new Extern("xdc_runtime_Text_visitRope2__I", "xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr,xdc_CString[])", true, false));
+        om.bind("xdc.runtime.Text.visitRope", new Extern("xdc_runtime_Text_visitRope__I", "xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr)", true, false));
+        om.bind("xdc.runtime.Text.visitRope2", new Extern("xdc_runtime_Text_visitRope2__I", "xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr,xdc_CString[])", true, false));
         om.bind("xdc.runtime.Text.xprintf", new Extern("xdc_runtime_Text_xprintf__I", "xdc_Int(*)(xdc_Char**,xdc_SizeT,xdc_CString,...)", true, false));
     }
 
@@ -3347,8 +3347,10 @@ public class xdc_runtime
         po = (Proto.Obj)om.findStrict("xdc.runtime.Core.Module", "xdc.runtime");
         po.init("xdc.runtime.Core.Module", om.findStrict("xdc.runtime.IModule.Module", "xdc.runtime"));
                 po.addFld("$hostonly", $$T_Num, 0, "r");
+                po.addFld("NOSTATE", Proto.Elm.newCNum("(xdc_Int)"), Global.eval("-1"), "rh");
         if (isCFG) {
             po.addFld("A_initializedParams", (Proto)om.findStrict("xdc.runtime.Assert$$Id", "xdc.runtime"), Global.newObject("msg", "A_initializedParams: uninitialized Params struct"), "w");
+            po.addFld("noAsserts", $$T_Bool, false, "wh");
         }//isCFG
         // struct Core.ObjDesc
         po = (Proto.Obj)om.findStrict("xdc.runtime.Core$$ObjDesc", "xdc.runtime");
@@ -4797,8 +4799,8 @@ public class xdc_runtime
             po.addFld("nodeCnt", Proto.Elm.newCNum("(xdc_Int16)"), 1L, "w");
             po.addFld("unnamedModsLastId", Proto.Elm.newCNum("(xdc_UInt16)"), 0x4000L, "w");
             po.addFld("registryModsLastId", Proto.Elm.newCNum("(xdc_UInt16)"), 0x7FFFL, "w");
-            po.addFld("visitRopeFxn", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr)", "PFv"), om.find("xdc.runtime.Text.visitRope"), "w");
-            po.addFld("visitRopeFxn2", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr,xdc_CString[])", "PFv"), om.find("xdc.runtime.Text.visitRope2"), "w");
+            po.addFld("visitRopeFxn", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr)", "PFv"), om.find("xdc.runtime.Text.visitRope"), "w");
+            po.addFld("visitRopeFxn2", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr,xdc_CString[])", "PFv"), om.find("xdc.runtime.Text.visitRope2"), "w");
         }//isCFG
         fxn = Global.get(cap, "module$use");
         if (fxn != null) om.bind("xdc.runtime.Text$$module$use", true);
@@ -4856,9 +4858,9 @@ public class xdc_runtime
                 po.addFld("len", Proto.Elm.newCNum("(xdc_UShort)"), $$UNDEF, "w");
                 po.addFld("res", Proto.Elm.newCNum("(xdc_Int)"), $$UNDEF, "w");
         // typedef Text.VisitRopeFxn
-        om.bind("xdc.runtime.Text.VisitRopeFxn", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr)", "PFv"));
+        om.bind("xdc.runtime.Text.VisitRopeFxn", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr)", "PFv"));
         // typedef Text.VisitRopeFxn2
-        om.bind("xdc.runtime.Text.VisitRopeFxn2", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Fxn,xdc_Ptr,xdc_CString[])", "PFv"));
+        om.bind("xdc.runtime.Text.VisitRopeFxn2", new Proto.Adr("xdc_Void(*)(xdc_Bits16,xdc_Bool(*)(xdc_Ptr,xdc_CString),xdc_Ptr,xdc_CString[])", "PFv"));
         // struct Text.Module_State
         po = (Proto.Obj)om.findStrict("xdc.runtime.Text$$Module_State", "xdc.runtime");
         po.init("xdc.runtime.Text.Module_State", null);
@@ -6090,6 +6092,7 @@ public class xdc_runtime
         mcfgs.add("Object__table");
         icfgs.add("Object__table");
         mcfgs.add("A_initializedParams");
+        icfgs.add("noAsserts");
         vo.bind("ObjDesc", om.findStrict("xdc.runtime.Core.ObjDesc", "xdc.runtime"));
         tdefs.add(om.findStrict("xdc.runtime.Core.ObjDesc", "xdc.runtime"));
         vo.bind("$$tdefs", Global.newArray(tdefs.toArray()));
@@ -6112,13 +6115,11 @@ public class xdc_runtime
             if (ps != null) vo.bind("$object", ps.newInstance());
             vo.bind("$$meta_iobj", 1);
         }//isCFG
-        vo.bind("allocObject", om.findStrict("xdc.runtime.Core.allocObject", "xdc.runtime"));
         vo.bind("assignLabel", om.findStrict("xdc.runtime.Core.assignLabel", "xdc.runtime"));
         vo.bind("assignParams", om.findStrict("xdc.runtime.Core.assignParams", "xdc.runtime"));
         vo.bind("createObject", om.findStrict("xdc.runtime.Core.createObject", "xdc.runtime"));
         vo.bind("constructObject", om.findStrict("xdc.runtime.Core.constructObject", "xdc.runtime"));
         vo.bind("deleteObject", om.findStrict("xdc.runtime.Core.deleteObject", "xdc.runtime"));
-        vo.bind("delistObject", om.findStrict("xdc.runtime.Core.delistObject", "xdc.runtime"));
         vo.bind("destructObject", om.findStrict("xdc.runtime.Core.destructObject", "xdc.runtime"));
         vo.bind("$$fxntab", Global.newArray("xdc_runtime_Core_Module__startupDone__E"));
         vo.bind("$$logEvtCfgs", Global.newArray());
@@ -6434,13 +6435,14 @@ public class xdc_runtime
         vo.bind("policySpin", om.findStrict("xdc.runtime.Error.policySpin", "xdc.runtime"));
         vo.bind("raiseX", om.findStrict("xdc.runtime.Error.raiseX", "xdc.runtime"));
         vo.bind("setX", om.findStrict("xdc.runtime.Error.setX", "xdc.runtime"));
+        vo.bind("policyLog", om.findStrict("xdc.runtime.Error.policyLog", "xdc.runtime"));
         vo.bind("$$fxntab", Global.newArray("xdc_runtime_Error_Module__startupDone__E", "xdc_runtime_Error_check__E", "xdc_runtime_Error_getData__E", "xdc_runtime_Error_getCode__E", "xdc_runtime_Error_getId__E", "xdc_runtime_Error_getMsg__E", "xdc_runtime_Error_getSite__E", "xdc_runtime_Error_idToCode__E", "xdc_runtime_Error_idToUid__E", "xdc_runtime_Error_init__E", "xdc_runtime_Error_print__E", "xdc_runtime_Error_policyDefault__E", "xdc_runtime_Error_policyMin__E", "xdc_runtime_Error_policySpin__E", "xdc_runtime_Error_raise__E", "xdc_runtime_Error_raiseX__E", "xdc_runtime_Error_setX__E"));
         vo.bind("$$logEvtCfgs", Global.newArray());
         vo.bind("$$errorDescCfgs", Global.newArray("E_generic", "E_memory", "E_msgCode"));
         vo.bind("$$assertDescCfgs", Global.newArray());
         Value.Map atmap = (Value.Map)vo.getv("$attr");
-        atmap.setElem("", "./Error.xdt");
         atmap.setElem("", true);
+        atmap.setElem("", "./Error.xdt");
         atmap.seal("length");
         vo.bind("MODULE_STARTUP$", 0);
         vo.bind("PROXY$", 0);
@@ -7923,8 +7925,8 @@ public class xdc_runtime
         vo.bind("$$errorDescCfgs", Global.newArray());
         vo.bind("$$assertDescCfgs", Global.newArray());
         Value.Map atmap = (Value.Map)vo.getv("$attr");
-        atmap.setElem("", true);
         atmap.setElem("", "./Startup.xdt");
+        atmap.setElem("", true);
         atmap.seal("length");
         vo.bind("MODULE_STARTUP$", 0);
         vo.bind("PROXY$", 0);
@@ -8107,8 +8109,8 @@ public class xdc_runtime
         vo.bind("$$assertDescCfgs", Global.newArray("A_cannotFitIntoArg"));
         Value.Map atmap = (Value.Map)vo.getv("$attr");
         atmap.setElem("", true);
-        atmap.setElem("", "./System.xdt");
         atmap.setElem("", true);
+        atmap.setElem("", "./System.xdt");
         atmap.setElem("", true);
         atmap.seal("length");
         vo.bind("MODULE_STARTUP$", 1);
@@ -8355,9 +8357,9 @@ public class xdc_runtime
         vo.bind("$$errorDescCfgs", Global.newArray());
         vo.bind("$$assertDescCfgs", Global.newArray());
         Value.Map atmap = (Value.Map)vo.getv("$attr");
+        atmap.setElem("", true);
+        atmap.setElem("", true);
         atmap.setElem("", "./SysMin.xdt");
-        atmap.setElem("", true);
-        atmap.setElem("", true);
         atmap.seal("length");
         vo.bind("MODULE_STARTUP$", 1);
         vo.bind("PROXY$", 0);
@@ -8583,8 +8585,8 @@ public class xdc_runtime
         vo.bind("$$errorDescCfgs", Global.newArray());
         vo.bind("$$assertDescCfgs", Global.newArray());
         Value.Map atmap = (Value.Map)vo.getv("$attr");
-        atmap.setElem("", true);
         atmap.setElem("", "./Text.xdt");
+        atmap.setElem("", true);
         atmap.seal("length");
         vo.bind("MODULE_STARTUP$", 0);
         vo.bind("PROXY$", 0);

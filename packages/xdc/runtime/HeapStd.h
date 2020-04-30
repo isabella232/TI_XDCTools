@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -37,10 +37,12 @@
 #define xdc_runtime_HeapStd__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_HeapStd___VERS 200
@@ -354,55 +356,55 @@ __extern void xdc_runtime_HeapStd_destruct(xdc_runtime_HeapStd_Struct *obj);
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Handle__label__S, "xdc_runtime_HeapStd_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_HeapStd_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_HeapStd_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Module__startupDone__S, "xdc_runtime_HeapStd_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_HeapStd_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_HeapStd_Module__startupDone__S( void);
 
 /* Object__create__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Object__create__S, "xdc_runtime_HeapStd_Object__create__S")
-__extern xdc_Ptr xdc_runtime_HeapStd_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_HeapStd_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb);
 
 /* Object__delete__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Object__delete__S, "xdc_runtime_HeapStd_Object__delete__S")
-__extern xdc_Void xdc_runtime_HeapStd_Object__delete__S( xdc_Ptr instp );
+__extern xdc_Void xdc_runtime_HeapStd_Object__delete__S( xdc_Ptr instp);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Object__get__S, "xdc_runtime_HeapStd_Object__get__S")
-__extern xdc_Ptr xdc_runtime_HeapStd_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_HeapStd_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Object__first__S, "xdc_runtime_HeapStd_Object__first__S")
-__extern xdc_Ptr xdc_runtime_HeapStd_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_HeapStd_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Object__next__S, "xdc_runtime_HeapStd_Object__next__S")
-__extern xdc_Ptr xdc_runtime_HeapStd_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_HeapStd_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_HeapStd_Params__init__S, "xdc_runtime_HeapStd_Params__init__S")
-__extern xdc_Void xdc_runtime_HeapStd_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_HeapStd_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* free__E */
 #define xdc_runtime_HeapStd_free xdc_runtime_HeapStd_free__E
 xdc__CODESECT(xdc_runtime_HeapStd_free__E, "xdc_runtime_HeapStd_free")
-__extern xdc_Void xdc_runtime_HeapStd_free__E( xdc_runtime_HeapStd_Handle __inst, xdc_Ptr block, xdc_SizeT size );
+__extern xdc_Void xdc_runtime_HeapStd_free__E( xdc_runtime_HeapStd_Handle instp, xdc_Ptr block, xdc_SizeT size);
 
 /* getStats__E */
 #define xdc_runtime_HeapStd_getStats xdc_runtime_HeapStd_getStats__E
 xdc__CODESECT(xdc_runtime_HeapStd_getStats__E, "xdc_runtime_HeapStd_getStats")
-__extern xdc_Void xdc_runtime_HeapStd_getStats__E( xdc_runtime_HeapStd_Handle __inst, xdc_runtime_Memory_Stats *stats );
+__extern xdc_Void xdc_runtime_HeapStd_getStats__E( xdc_runtime_HeapStd_Handle instp, xdc_runtime_Memory_Stats *stats);
 
 /* alloc__E */
 #define xdc_runtime_HeapStd_alloc xdc_runtime_HeapStd_alloc__E
 xdc__CODESECT(xdc_runtime_HeapStd_alloc__E, "xdc_runtime_HeapStd_alloc")
-__extern xdc_Ptr xdc_runtime_HeapStd_alloc__E( xdc_runtime_HeapStd_Handle __inst, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_HeapStd_alloc__E( xdc_runtime_HeapStd_Handle instp, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb);
 
 /* isBlocking__E */
 #define xdc_runtime_HeapStd_isBlocking xdc_runtime_HeapStd_isBlocking__E
 xdc__CODESECT(xdc_runtime_HeapStd_isBlocking__E, "xdc_runtime_HeapStd_isBlocking")
-__extern xdc_Bool xdc_runtime_HeapStd_isBlocking__E( xdc_runtime_HeapStd_Handle __inst );
+__extern xdc_Bool xdc_runtime_HeapStd_isBlocking__E( xdc_runtime_HeapStd_Handle instp);
 
 
 /*
@@ -509,8 +511,8 @@ static inline void xdc_runtime_HeapStd_Params_copy(xdc_runtime_HeapStd_Params *d
 #define xdc_runtime_HeapStd_Object_sizeof() xdc_runtime_HeapStd_Object__sizeof__C
 
 /* Object_get */
-static inline xdc_runtime_HeapStd_Handle xdc_runtime_HeapStd_Object_get(xdc_runtime_HeapStd_Instance_State *oarr, int i);
-static inline xdc_runtime_HeapStd_Handle xdc_runtime_HeapStd_Object_get(xdc_runtime_HeapStd_Instance_State *oarr, int i) 
+static inline xdc_runtime_HeapStd_Handle xdc_runtime_HeapStd_Object_get(xdc_runtime_HeapStd_Object *oarr, int i);
+static inline xdc_runtime_HeapStd_Handle xdc_runtime_HeapStd_Object_get(xdc_runtime_HeapStd_Object *oarr, int i) 
 {
     return (xdc_runtime_HeapStd_Handle)xdc_runtime_HeapStd_Object__get__S(oarr, i);
 }
@@ -666,6 +668,6 @@ struct xdc_runtime_HeapStd_Object {
 #endif /* xdc_runtime_HeapStd__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

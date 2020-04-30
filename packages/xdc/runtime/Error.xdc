@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -197,11 +197,11 @@
  *  <hr />
  *  @p
  *
- *  Example 5: The following C code shows how to write a function that
- *  is not part of a module and that takes an error block and raises
- *  the generic error type provided by the Error module. Note, if the
- *  caller passes `Error_ABORT` for the error block or if the error policy is
- *  `{@link #Policy TERMINATE}`, then the call to
+ *  Example 5: The following C code shows how to write a function that is not a
+ *  part of a module. The function accepts an error block as a parameter and
+ *  raises an error of the generic error type provided by the Error module.
+ *  Note that if the caller passes `Error_ABORT` for the error block or if the
+ *  error policy is `{@link #Policy TERMINATE}`, then the call to
  *  `{@link #raise Error_raise()}` will call
  *  `{@link System#abort xdc_runtime_System_abort()}` and never return.
  *
@@ -240,6 +240,7 @@ module Error {
      *  @field(UNWIND) Errors are returned to the caller. A call to
      *  `{@link #raise Error_raise}` will return back to the caller.
      */
+    /* REQ_TAG(SYSBIOS-859) */
     enum Policy {
         TERMINATE,
         UNWIND
@@ -252,7 +253,7 @@ module Error {
      *  Each type of error is defined with an error descriptor. This
      *  structure groups common information about the errors of this type.
      *
-     *  @field(msg) The error message using a `printf` style format string, 
+     *  @field(msg) The error message using a `printf` style format string,
      *              but limited to `{@link #NUMARGS}` arguments.
      *              This format string together with the two arguments passed
      *              to `Error_raise`` are used to create a human readable
@@ -260,8 +261,9 @@ module Error {
      *
      *  @field(code) A user assignable code, 0 by default. The user may
      *              optionally set this field during config to give the
-     *              error a well-known numeric code. 
+     *              error a well-known numeric code.
      */
+    /* REQ_TAG(SYSBIOS-861) */
     metaonly struct Desc {
         String msg;
         UInt16 code;
@@ -282,16 +284,18 @@ module Error {
      *  `{@link #E_generic}`.  If you need error numbers that remain
      *  invariant, use the user definable `{@link #Desc Desc.code}` field.
      */
+    /* REQ_TAG(SYSBIOS-858) */
     @Encoded typedef Desc Id;
 
     /*!
      *  ======== HookFxn ========
-     *  Function called whenever an error is raised
+     *  Function type for a function called whenever an error is raised
      *
-     *  The first parameter and only parameter passed to this function is a
-     *  pointer to an `Error_Block`.  Even if the client passes a `NULL` error
-     *  block pointer to `{@link #raise Error_raise}`, this parameter passed 
-     *  to this "hook" function is always `non-NULL`.
+     *  The only parameter passed to a function of this type is a  pointer to an
+     *  `Error_Block`.  Even if the client passes a `NULL` error block pointer
+     *  to `{@link #raise Error_raise}`, the function `Error_raise` will
+     *  ensure that the argument passed to this "hook" function is always
+     *  `non-NULL`.
      */
     typedef Void (*HookFxn)(Block *);
 
@@ -299,19 +303,20 @@ module Error {
      *  ======== NUMARGS ========
      *  Maximum number of arguments supported by an error
      */
+    /* REQ_TAG(SYSBIOS-862) */
     const Int NUMARGS = 2;
 
     /*!
      *  ======== Data ========
      *  Error args
      *
-     *  The two arguments (arg1, arg2) passed to `{@link #raise}` are 
-     *  stored in one of these arrays within the associated Error_Block.
-     *  To access these arguments use `{@link #getData}` to obtain a 
-     *  pointer to the Error_Block's Data array.
+     *  The two arguments (arg1, arg2) passed to `{@link #raise}` are stored
+     *  within the associated Error_Block. To access these arguments use
+     *  `{@link #getData}` to obtain a pointer to the Error_Block's Data array.
      *
      *  @see #getData
      */
+    /* REQ_TAG(SYSBIOS-862) */
     struct Data {
         IArg arg[NUMARGS];
     }
@@ -334,8 +339,8 @@ module Error {
 
     /*!
      *  ======== IGNORE ========
-     *  Special Error_Block used when the caller does not want to check
-     *  Error_Block
+     *  A pointer to a special Error_Block used when the caller does not want to
+     *  check Error_Block
      *
      *  This constant should be used when the caller does not plan to check
      *  `Error_Block` after the call returns, but wants the call to return even
@@ -344,16 +349,19 @@ module Error {
      *  is raised if `Error_policy` is not set to
      *  `{@link #Policy Error_UNWIND}`.
      */
+    /* REQ_TAG(SYSBIOS-860) */
     const Block IGNORE;
 
     /*!
      *  ======== ABORT ========
-     *  Special Error_Block that terminates the application in case of an error
+     *  A special Error_Block pointer that terminates the application in case of
+     *  an error
      *
      *  This constant has the same effect as passing `NULL` in place of an
      *  `Error_Block`. If an error is raised when `Error_ABORT` is passed, the
      *  application terminates regardless of `{@link #policy Error_policy}`.
      */
+    /* REQ_TAG(SYSBIOS-859) */
     const Block ABORT;
 
     /*!
@@ -365,7 +373,7 @@ module Error {
      *  @p(dlist)
      *      - `eb`
      *        A pointer to an `{@link #Block Error_Block}` structure to be
-     *        initialized using the subsequent arguments.  This pointer may 
+     *        initialized using the subsequent arguments.  This pointer may
      *        be `NULL`.
      *      - `modId`
      *        The module ID of the module calling
@@ -399,10 +407,9 @@ module Error {
      *  `raiseHook` with an initialized `Error_Block` structure, logs the
      *  error using this module's logger.
      *
-     *  Alternately, `{@link #policySpin}`, which simply loops
-     *  indefinitely, can be used to minimize target footprint.  Note, this
-     *  function does NOT call `raiseHook`, and also ignores
-     *  `{@link Error#policy Error.policy}`.
+     *  Alternately, `{@link #policySpin}`, which simply loops indefinitely, can
+     *  be used to minimize target footprint.  Note, this function does NOT call
+     *  `raiseHook`, and also ignores `{@link Error#policy Error.policy}`.
      *
      *  The third implementation, `{@link #policyMin}` finds a middle ground
      *  between the two implementations above in terms of memory footprint and
@@ -410,7 +417,18 @@ module Error {
      *  error being raised is available in the resulting `Error_Block`,
      *  `raiseHook` is not invoked, but `{@link Error#policy Error.policy}` is
      *  observed.
+     *
+     *  Implementations of `policyFxn` are allowed to ignore `Error.policy` and
+     *  the special `Error_Block` constants `{@link #IGNORE}` and
+     *  `{@link #ABORT}`, as well as NULL, passed instead of an initialized
+     *  `Error_Block`. However, it is recommended to observe as much as
+     *  possible these special cases in order to make the code invoking
+     *  `Error_raise` independent from `policyFxn` implementations.
+     *  For example, the SYS/BIOS kernel assumes all `Error_raise` calls with
+     *  NULL `Error_Block` are going to terminate the application.
+     *
      */
+    /* REQ_TAG(SYSBIOS-959) */
     config PolicyFxn policyFxn = Error.policyDefault;
 
     /*!
@@ -428,6 +446,7 @@ module Error {
      *  @see System#extendedFormats
      *  @see System#printf
      */
+    /* REQ_TAG(SYSBIOS-863) */
     config Id E_generic = {msg: "%$S"};
 
     /*!
@@ -437,13 +456,13 @@ module Error {
      *  The first parameter must be the heap instance handle. The second
      *  parameter is the size of the object for which the allocation failed.
      */
-    config Id E_memory = {msg: "out of memory: heap=0x%x, size=%u"}; 
+    config Id E_memory = {msg: "out of memory: heap=0x%x, size=%u"};
 
     /*!
      *  ======== E_msgCode ========
      *  Generic error that displays a string and a numeric value
      */
-    config Id E_msgCode = {msg: "%s 0x%x"}; 
+    config Id E_msgCode = {msg: "%s 0x%x"};
 
     /*!
      *  ======== policy ========
@@ -455,8 +474,9 @@ module Error {
      *  `{@link Error#policyFxn Error.policyFxn}` should consider this
      *  parameter, but some implementations may not do so to save the memory
      *  footprint (`Error_policySpin`, for example).
-     * 
+     *
      */
+    /* REQ_TAG(SYSBIOS-852) */
     config Policy policy = UNWIND;
 
     /*!
@@ -469,12 +489,11 @@ module Error {
      *  raised error does not trigger a call to `raiseHook`; see
      *  `{@link #maxDepth}`.
      *
-     *  Regardless of the current policy in use, raising an error by
-     *  calling `{@link #raise Error_raise}` will always invoke the
-     *  error raise hook function assigned to the
-     *  `{@link #raiseHook Error.raiseHook}` configuration parameter, if the
-     *  default `{@link Error#policyFxn Error.policyFxn}` implementation is
-     *  used.
+     *  Regardless of the current policy in use, raising an error by calling
+     *  `{@link #raise Error_raise}` will always invoke the error raise hook
+     *  function assigned to the `{@link #raiseHook Error.raiseHook}`
+     *  configuration parameter, if the default
+     *  `{@link Error#policyFxn Error.policyFxn}` implementation is used.
      *
      *
      *  By default, this function is set to `{@link #print Error_print}`
@@ -487,6 +506,7 @@ module Error {
      *  @see #HookFxn
      *  @see #print
      */
+    /* REQ_TAG(SYSBIOS-856) */
     config HookFxn raiseHook = Error.print;
 
     /*!
@@ -510,6 +530,7 @@ module Error {
      *  function that can raise an error or add checks in `raiseHook` to
      *  protect against "double faults".
      */
+    /* REQ_TAG(SYSBIOS-857) */
     config UInt16 maxDepth = 16;
 
     /*!
@@ -523,6 +544,7 @@ module Error {
      *  an error was raised on `eb`, this function returns `TRUE`.  Otherwise,
      *  it returns `FALSE`.
      */
+    /* REQ_TAG(SYSBIOS-864) */
     Bool check(Block *eb);
 
     /*!
@@ -538,6 +560,7 @@ module Error {
      *
      *  @see #raise
      */
+    /* REQ_TAG(SYSBIOS-868) */
     Data *getData(Block *eb);
 
     /*!
@@ -570,6 +593,7 @@ module Error {
      *  @see #raise
      *  @see #Desc
      */
+    /* REQ_TAG(SYSBIOS-869) */
     Id getId(Block *eb);
 
     /*!
@@ -581,6 +605,7 @@ module Error {
      *  @see #raise
      *  @see #Desc
      */
+    /* REQ_TAG(SYSBIOS-867) */
     CString getMsg(Block *eb);
 
     /*!
@@ -599,6 +624,7 @@ module Error {
      *  @see #raise
      *  @see #Desc
      */
+    /* REQ_TAG(SYSBIOS-866) */
     Types.Site *getSite(Block *eb);
 
     /*!
@@ -606,7 +632,7 @@ module Error {
      *  Extract the user's error code associated with an `Error_Id`
      *
      *  @param(id) `Error_Id` from which to extract the user defined
-     *             code 
+     *             code
      *  @_nodoc
      */
     @Macro UInt16 idToCode(Id id);
@@ -665,6 +691,7 @@ module Error {
      *  `Gate_enter`/`Gate_leave` pair or simply ensure that only one
      *  thread in the system ever calls this method.
      */
+    /* REQ_TAG(SYSBIOS-870) */
     Void print(Block *eb);
 
     /*!
@@ -676,6 +703,7 @@ module Error {
      *  returning to the caller or aborting - depending on the error policy
      *  `{@link #policy}`.
      */
+    /* REQ_TAG(SYSBIOS-853), REQ_TAG(SYSBIOS-865) */
     Void policyDefault(Block *eb, Types.ModuleId mod, CString file, Int line,
         Id id, IArg arg1, IArg arg2);
 
@@ -693,6 +721,7 @@ module Error {
      *  the only information available in the returned `Error_Block` is the
      *  error ID.
      */
+    /* REQ_TAG(SYSBIOS-855) */
     Void policyMin(Block *eb, Types.ModuleId mod, CString file, Int line,
         Id id, IArg arg1, IArg arg2);
 
@@ -708,6 +737,7 @@ module Error {
      *  the caller.  As a result, ANY error raised by the application will cause
      *  it to indefinitly hang.
      */
+    /* REQ_TAG(SYSBIOS-854) */
     Void policySpin(Block *eb, Types.ModuleId mod, CString file, Int line,
         Id id, IArg arg1, IArg arg2);
 
@@ -763,12 +793,19 @@ module Error {
 
 internal:
 
+    /*!
+     *  ======== policyLog ========
+     *  @_nodoc
+     */
+    Void policyLog(Types.ModuleId mod, CString file, Int line, CString msg,
+        IArg arg1, IArg arg2);
+
     struct Module_State {
         UInt16      count;
     };
 
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

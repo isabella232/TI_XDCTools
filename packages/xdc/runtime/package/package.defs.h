@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 #ifndef xdc_runtime__
@@ -70,7 +70,6 @@ typedef struct xdc_runtime_GateNull_Params xdc_runtime_GateNull_Params;
 typedef struct xdc_runtime_GateNull_Object xdc_runtime_GateNull_Object;
 typedef struct xdc_runtime_GateNull_Struct xdc_runtime_GateNull_Struct;
 typedef xdc_runtime_GateNull_Object* xdc_runtime_GateNull_Handle;
-typedef struct xdc_runtime_GateNull_Object__ xdc_runtime_GateNull_Instance_State;
 typedef xdc_runtime_GateNull_Object* xdc_runtime_GateNull_Instance;
 
 /*
@@ -109,7 +108,6 @@ typedef struct xdc_runtime_LoggerBuf_Params xdc_runtime_LoggerBuf_Params;
 typedef struct xdc_runtime_LoggerBuf_Object xdc_runtime_LoggerBuf_Object;
 typedef struct xdc_runtime_LoggerBuf_Struct xdc_runtime_LoggerBuf_Struct;
 typedef xdc_runtime_LoggerBuf_Object* xdc_runtime_LoggerBuf_Handle;
-typedef struct xdc_runtime_LoggerBuf_Object__ xdc_runtime_LoggerBuf_Instance_State;
 typedef xdc_runtime_LoggerBuf_Object* xdc_runtime_LoggerBuf_Instance;
 
 /*
@@ -122,7 +120,6 @@ typedef struct xdc_runtime_LoggerCallback_Params xdc_runtime_LoggerCallback_Para
 typedef struct xdc_runtime_LoggerCallback_Object xdc_runtime_LoggerCallback_Object;
 typedef struct xdc_runtime_LoggerCallback_Struct xdc_runtime_LoggerCallback_Struct;
 typedef xdc_runtime_LoggerCallback_Object* xdc_runtime_LoggerCallback_Handle;
-typedef struct xdc_runtime_LoggerCallback_Object__ xdc_runtime_LoggerCallback_Instance_State;
 typedef xdc_runtime_LoggerCallback_Object* xdc_runtime_LoggerCallback_Instance;
 
 /*
@@ -135,7 +132,6 @@ typedef struct xdc_runtime_LoggerSys_Params xdc_runtime_LoggerSys_Params;
 typedef struct xdc_runtime_LoggerSys_Object xdc_runtime_LoggerSys_Object;
 typedef struct xdc_runtime_LoggerSys_Struct xdc_runtime_LoggerSys_Struct;
 typedef xdc_runtime_LoggerSys_Object* xdc_runtime_LoggerSys_Handle;
-typedef struct xdc_runtime_LoggerSys_Object__ xdc_runtime_LoggerSys_Instance_State;
 typedef xdc_runtime_LoggerSys_Object* xdc_runtime_LoggerSys_Instance;
 
 /*
@@ -169,7 +165,6 @@ typedef struct xdc_runtime_HeapMin_Params xdc_runtime_HeapMin_Params;
 typedef struct xdc_runtime_HeapMin_Object xdc_runtime_HeapMin_Object;
 typedef struct xdc_runtime_HeapMin_Struct xdc_runtime_HeapMin_Struct;
 typedef xdc_runtime_HeapMin_Object* xdc_runtime_HeapMin_Handle;
-typedef struct xdc_runtime_HeapMin_Object__ xdc_runtime_HeapMin_Instance_State;
 typedef xdc_runtime_HeapMin_Object* xdc_runtime_HeapMin_Instance;
 
 /*
@@ -183,7 +178,6 @@ typedef struct xdc_runtime_HeapStd_Params xdc_runtime_HeapStd_Params;
 typedef struct xdc_runtime_HeapStd_Object xdc_runtime_HeapStd_Object;
 typedef struct xdc_runtime_HeapStd_Struct xdc_runtime_HeapStd_Struct;
 typedef xdc_runtime_HeapStd_Object* xdc_runtime_HeapStd_Handle;
-typedef struct xdc_runtime_HeapStd_Object__ xdc_runtime_HeapStd_Instance_State;
 typedef xdc_runtime_HeapStd_Object* xdc_runtime_HeapStd_Instance;
 
 /*

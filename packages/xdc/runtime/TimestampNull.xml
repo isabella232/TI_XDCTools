@@ -18,7 +18,7 @@ Contributors:
 <page>
 <html><body>
   <table>
-    <tr><td colspan="2">  <form><p>This module provides time values for the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/Timestamp.html">Timestamp</a> module.  In this case, a constant 0 value is always returned.  This module is used to minimize code space and time overhead for configurations which do not need timestamps but use other modules that require a timestamp provider.</p><p></p></form></td></tr>
+    <tr><td colspan="2">  <form><p>This module provides time values for the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/Timestamp.html">Timestamp</a> module.  In this case, a constant 0 value is always returned.  This module is used to minimize code space and time overhead for configurations which do not need timestamps but use other modules that require a timestamp provider.</p><p></p></form></td></tr>
     <tr><td colspan="2">
       <control type="checkbox" label="Add TimestampNull to my configuration" value="value:this.$used" bold="true"/></td>
     </tr>
@@ -28,7 +28,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

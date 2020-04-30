@@ -38,7 +38,7 @@ module Monitor
                 ],
                 ['ReadMemory',
                     {
-                        description: "Read Memory",
+                        description: "Memory Read Settings",
                         args: [
                             {
                                 name: "addr/name",
@@ -60,7 +60,7 @@ module Monitor
                 ],
                 ['FindSymbols',
                     {
-                        description: "Find Symbols",
+                        description: "Find Symbol Settings",
                         args: [
                             {
                                 name: "addr/name",

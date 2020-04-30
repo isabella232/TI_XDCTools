@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_System__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_System___VERS 200
@@ -325,157 +327,157 @@ __extern xdc_Int xdc_runtime_System_Module_startup__F( xdc_Int state );
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_System_Module__startupDone__S, "xdc_runtime_System_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_System_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_System_Module__startupDone__S( void);
 
 /* abort__E */
 #define xdc_runtime_System_abort xdc_runtime_System_abort__E
 xdc__CODESECT(xdc_runtime_System_abort__E, "xdc_runtime_System_abort")
-__extern xdc_Void xdc_runtime_System_abort__E( xdc_CString str );
+__extern xdc_Void xdc_runtime_System_abort__E( xdc_CString str);
 
 /* abortStd__E */
 #define xdc_runtime_System_abortStd xdc_runtime_System_abortStd__E
 xdc__CODESECT(xdc_runtime_System_abortStd__E, "xdc_runtime_System_abortStd")
-__extern xdc_Void xdc_runtime_System_abortStd__E( void );
+__extern xdc_Void xdc_runtime_System_abortStd__E( void);
 
 /* abortSpin__E */
 #define xdc_runtime_System_abortSpin xdc_runtime_System_abortSpin__E
 xdc__CODESECT(xdc_runtime_System_abortSpin__E, "xdc_runtime_System_abortSpin")
-__extern xdc_Void xdc_runtime_System_abortSpin__E( void );
+__extern xdc_Void xdc_runtime_System_abortSpin__E( void);
 
 /* atexit__E */
 #define xdc_runtime_System_atexit xdc_runtime_System_atexit__E
 xdc__CODESECT(xdc_runtime_System_atexit__E, "xdc_runtime_System_atexit")
-__extern xdc_Bool xdc_runtime_System_atexit__E( xdc_runtime_System_AtexitHandler handler );
+__extern xdc_Bool xdc_runtime_System_atexit__E( xdc_runtime_System_AtexitHandler handler);
 
 /* exit__E */
 #define xdc_runtime_System_exit xdc_runtime_System_exit__E
 xdc__CODESECT(xdc_runtime_System_exit__E, "xdc_runtime_System_exit")
-__extern xdc_Void xdc_runtime_System_exit__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_System_exit__E( xdc_Int stat);
 
 /* exitStd__E */
 #define xdc_runtime_System_exitStd xdc_runtime_System_exitStd__E
 xdc__CODESECT(xdc_runtime_System_exitStd__E, "xdc_runtime_System_exitStd")
-__extern xdc_Void xdc_runtime_System_exitStd__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_System_exitStd__E( xdc_Int stat);
 
 /* exitSpin__E */
 #define xdc_runtime_System_exitSpin xdc_runtime_System_exitSpin__E
 xdc__CODESECT(xdc_runtime_System_exitSpin__E, "xdc_runtime_System_exitSpin")
-__extern xdc_Void xdc_runtime_System_exitSpin__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_System_exitSpin__E( xdc_Int stat);
 
 /* processAtExit__E */
 #define xdc_runtime_System_processAtExit xdc_runtime_System_processAtExit__E
 xdc__CODESECT(xdc_runtime_System_processAtExit__E, "xdc_runtime_System_processAtExit")
-__extern xdc_Void xdc_runtime_System_processAtExit__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_System_processAtExit__E( xdc_Int stat);
 
 /* putch__E */
 #define xdc_runtime_System_putch xdc_runtime_System_putch__E
 xdc__CODESECT(xdc_runtime_System_putch__E, "xdc_runtime_System_putch")
-__extern xdc_Void xdc_runtime_System_putch__E( xdc_Char ch );
+__extern xdc_Void xdc_runtime_System_putch__E( xdc_Char ch);
 
 /* flush__E */
 #define xdc_runtime_System_flush xdc_runtime_System_flush__E
 xdc__CODESECT(xdc_runtime_System_flush__E, "xdc_runtime_System_flush")
-__extern xdc_Void xdc_runtime_System_flush__E( void );
+__extern xdc_Void xdc_runtime_System_flush__E( void);
 
 /* printf__E */
 #define xdc_runtime_System_printf xdc_runtime_System_printf__E
 xdc__CODESECT(xdc_runtime_System_printf__E, "xdc_runtime_System_printf")
-__extern xdc_Int xdc_runtime_System_printf__E( xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_System_printf__E( xdc_CString fmt, ...);
 xdc__CODESECT(xdc_runtime_System_printf_va__E, "xdc_runtime_System_printf")
-__extern xdc_Int xdc_runtime_System_printf_va__E( xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_printf_va__E( xdc_CString fmt, va_list _va);
 xdc__CODESECT(xdc_runtime_System_printf_va__F, "xdc_runtime_System_printf")
-__extern xdc_Int xdc_runtime_System_printf_va__F( xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_printf_va__F( xdc_CString fmt, va_list _va);
 
 /* aprintf__E */
 #define xdc_runtime_System_aprintf xdc_runtime_System_aprintf__E
 xdc__CODESECT(xdc_runtime_System_aprintf__E, "xdc_runtime_System_aprintf")
-__extern xdc_Int xdc_runtime_System_aprintf__E( xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_System_aprintf__E( xdc_CString fmt, ...);
 xdc__CODESECT(xdc_runtime_System_aprintf_va__E, "xdc_runtime_System_aprintf")
-__extern xdc_Int xdc_runtime_System_aprintf_va__E( xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_aprintf_va__E( xdc_CString fmt, va_list _va);
 xdc__CODESECT(xdc_runtime_System_aprintf_va__F, "xdc_runtime_System_aprintf")
-__extern xdc_Int xdc_runtime_System_aprintf_va__F( xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_aprintf_va__F( xdc_CString fmt, va_list _va);
 
 /* sprintf__E */
 #define xdc_runtime_System_sprintf xdc_runtime_System_sprintf__E
 xdc__CODESECT(xdc_runtime_System_sprintf__E, "xdc_runtime_System_sprintf")
-__extern xdc_Int xdc_runtime_System_sprintf__E( xdc_Char buf[], xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_System_sprintf__E( xdc_Char buf[], xdc_CString fmt, ...);
 xdc__CODESECT(xdc_runtime_System_sprintf_va__E, "xdc_runtime_System_sprintf")
-__extern xdc_Int xdc_runtime_System_sprintf_va__E( xdc_Char buf[], xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_sprintf_va__E( xdc_Char buf[], xdc_CString fmt, va_list _va);
 xdc__CODESECT(xdc_runtime_System_sprintf_va__F, "xdc_runtime_System_sprintf")
-__extern xdc_Int xdc_runtime_System_sprintf_va__F( xdc_Char buf[], xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_sprintf_va__F( xdc_Char buf[], xdc_CString fmt, va_list _va);
 
 /* asprintf__E */
 #define xdc_runtime_System_asprintf xdc_runtime_System_asprintf__E
 xdc__CODESECT(xdc_runtime_System_asprintf__E, "xdc_runtime_System_asprintf")
-__extern xdc_Int xdc_runtime_System_asprintf__E( xdc_Char buf[], xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_System_asprintf__E( xdc_Char buf[], xdc_CString fmt, ...);
 xdc__CODESECT(xdc_runtime_System_asprintf_va__E, "xdc_runtime_System_asprintf")
-__extern xdc_Int xdc_runtime_System_asprintf_va__E( xdc_Char buf[], xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_asprintf_va__E( xdc_Char buf[], xdc_CString fmt, va_list _va);
 xdc__CODESECT(xdc_runtime_System_asprintf_va__F, "xdc_runtime_System_asprintf")
-__extern xdc_Int xdc_runtime_System_asprintf_va__F( xdc_Char buf[], xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_asprintf_va__F( xdc_Char buf[], xdc_CString fmt, va_list _va);
 
 /* vprintf__E */
 #define xdc_runtime_System_vprintf xdc_runtime_System_vprintf__E
 xdc__CODESECT(xdc_runtime_System_vprintf__E, "xdc_runtime_System_vprintf")
-__extern xdc_Int xdc_runtime_System_vprintf__E( xdc_CString fmt, xdc_VaList va );
+__extern xdc_Int xdc_runtime_System_vprintf__E( xdc_CString fmt, xdc_VaList va);
 
 /* avprintf__E */
 #define xdc_runtime_System_avprintf xdc_runtime_System_avprintf__E
 xdc__CODESECT(xdc_runtime_System_avprintf__E, "xdc_runtime_System_avprintf")
-__extern xdc_Int xdc_runtime_System_avprintf__E( xdc_CString fmt, xdc_VaList va );
+__extern xdc_Int xdc_runtime_System_avprintf__E( xdc_CString fmt, xdc_VaList va);
 
 /* vsprintf__E */
 #define xdc_runtime_System_vsprintf xdc_runtime_System_vsprintf__E
 xdc__CODESECT(xdc_runtime_System_vsprintf__E, "xdc_runtime_System_vsprintf")
-__extern xdc_Int xdc_runtime_System_vsprintf__E( xdc_Char buf[], xdc_CString fmt, xdc_VaList va );
+__extern xdc_Int xdc_runtime_System_vsprintf__E( xdc_Char buf[], xdc_CString fmt, xdc_VaList va);
 
 /* avsprintf__E */
 #define xdc_runtime_System_avsprintf xdc_runtime_System_avsprintf__E
 xdc__CODESECT(xdc_runtime_System_avsprintf__E, "xdc_runtime_System_avsprintf")
-__extern xdc_Int xdc_runtime_System_avsprintf__E( xdc_Char buf[], xdc_CString fmt, xdc_VaList va );
+__extern xdc_Int xdc_runtime_System_avsprintf__E( xdc_Char buf[], xdc_CString fmt, xdc_VaList va);
 
 /* snprintf__E */
 #define xdc_runtime_System_snprintf xdc_runtime_System_snprintf__E
 xdc__CODESECT(xdc_runtime_System_snprintf__E, "xdc_runtime_System_snprintf")
-__extern xdc_Int xdc_runtime_System_snprintf__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_System_snprintf__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, ...);
 xdc__CODESECT(xdc_runtime_System_snprintf_va__E, "xdc_runtime_System_snprintf")
-__extern xdc_Int xdc_runtime_System_snprintf_va__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_snprintf_va__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, va_list _va);
 xdc__CODESECT(xdc_runtime_System_snprintf_va__F, "xdc_runtime_System_snprintf")
-__extern xdc_Int xdc_runtime_System_snprintf_va__F( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, va_list _va );
+__extern xdc_Int xdc_runtime_System_snprintf_va__F( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, va_list _va);
 
 /* vsnprintf__E */
 #define xdc_runtime_System_vsnprintf xdc_runtime_System_vsnprintf__E
 xdc__CODESECT(xdc_runtime_System_vsnprintf__E, "xdc_runtime_System_vsnprintf")
-__extern xdc_Int xdc_runtime_System_vsnprintf__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, xdc_VaList va );
+__extern xdc_Int xdc_runtime_System_vsnprintf__E( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, xdc_VaList va);
 
 /* printfExtend__I */
 #define xdc_runtime_System_printfExtend xdc_runtime_System_printfExtend__I
 xdc__CODESECT(xdc_runtime_System_printfExtend__I, "xdc_runtime_System_printfExtend")
-__extern xdc_Int xdc_runtime_System_printfExtend__I( xdc_Char **bufp, xdc_CString *fmt, xdc_VaList *va, xdc_runtime_System_ParseData *parse );
+__extern xdc_Int xdc_runtime_System_printfExtend__I( xdc_Char **bufp, xdc_CString *fmt, xdc_VaList *va, xdc_runtime_System_ParseData *parse);
 
 /* doPrint__I */
 #define xdc_runtime_System_doPrint xdc_runtime_System_doPrint__I
 xdc__CODESECT(xdc_runtime_System_doPrint__I, "xdc_runtime_System_doPrint")
-__extern xdc_Int xdc_runtime_System_doPrint__I( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, xdc_VaList *pva, xdc_Bool aFlag );
+__extern xdc_Int xdc_runtime_System_doPrint__I( xdc_Char buf[], xdc_SizeT n, xdc_CString fmt, xdc_VaList *pva, xdc_Bool aFlag);
 
 /* lastFxn__I */
 #define xdc_runtime_System_lastFxn xdc_runtime_System_lastFxn__I
 xdc__CODESECT(xdc_runtime_System_lastFxn__I, "xdc_runtime_System_lastFxn")
-__extern xdc_Void xdc_runtime_System_lastFxn__I( void );
+__extern xdc_Void xdc_runtime_System_lastFxn__I( void);
 
 /* putchar__I */
 #define xdc_runtime_System_putchar xdc_runtime_System_putchar__I
 xdc__CODESECT(xdc_runtime_System_putchar__I, "xdc_runtime_System_putchar")
-__extern xdc_Void xdc_runtime_System_putchar__I( xdc_Char **bufp, xdc_Char ch, xdc_SizeT *n );
+__extern xdc_Void xdc_runtime_System_putchar__I( xdc_Char **bufp, xdc_Char ch, xdc_SizeT *n);
 
 /* rtsExit__I */
 #define xdc_runtime_System_rtsExit xdc_runtime_System_rtsExit__I
 xdc__CODESECT(xdc_runtime_System_rtsExit__I, "xdc_runtime_System_rtsExit")
-__extern xdc_Void xdc_runtime_System_rtsExit__I( void );
+__extern xdc_Void xdc_runtime_System_rtsExit__I( void);
 
 /* atexitDone__I */
 #define xdc_runtime_System_atexitDone xdc_runtime_System_atexitDone__I
 xdc__CODESECT(xdc_runtime_System_atexitDone__I, "xdc_runtime_System_atexitDone")
-__extern xdc_Bool xdc_runtime_System_atexitDone__I( void );
+__extern xdc_Bool xdc_runtime_System_atexitDone__I( void);
 
 
 /*
@@ -626,6 +628,6 @@ extern struct xdc_runtime_System_Module_State__ xdc_runtime_System_Module__state
 #endif /* xdc_runtime_System__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

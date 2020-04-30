@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_rov
 {
-    static final String VERS = "@(#) xdc-F14\n";
+    static final String VERS = "@(#) xdc-I08\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -638,6 +638,9 @@ public class xdc_rov
         // fxn Program.debugPrint
         fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$debugPrint", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), null, 1, 1, false));
                 fxn.addArg(0, "msg", $$T_Str, $$UNDEF);
+        // fxn Program.print
+        fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$print", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), null, 1, 1, false));
+                fxn.addArg(0, "msg", $$T_Str, $$UNDEF);
         // fxn Program.timestamp
         fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$timestamp", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), null, 1, 1, false));
                 fxn.addArg(0, "msg", $$T_Str, $$UNDEF);
@@ -962,6 +965,7 @@ public class xdc_rov
                 po.addFxn("ptrToHex", (Proto.Fxn)om.findStrict("xdc.rov.Program$$ptrToHex", "xdc.rov"), Global.get(cap, "ptrToHex"));
                 po.addFxn("getShortName", (Proto.Fxn)om.findStrict("xdc.rov.Program$$getShortName", "xdc.rov"), Global.get(cap, "getShortName"));
                 po.addFxn("debugPrint", (Proto.Fxn)om.findStrict("xdc.rov.Program$$debugPrint", "xdc.rov"), Global.get(cap, "debugPrint"));
+                po.addFxn("print", (Proto.Fxn)om.findStrict("xdc.rov.Program$$print", "xdc.rov"), Global.get(cap, "print"));
                 po.addFxn("timestamp", (Proto.Fxn)om.findStrict("xdc.rov.Program$$timestamp", "xdc.rov"), Global.get(cap, "timestamp"));
                 po.addFxn("setTimestampFunc", (Proto.Fxn)om.findStrict("xdc.rov.Program$$setTimestampFunc", "xdc.rov"), Global.get(cap, "setTimestampFunc"));
                 po.addFxn("newViewStruct", (Proto.Fxn)om.findStrict("xdc.rov.Program$$newViewStruct", "xdc.rov"), Global.get(cap, "newViewStruct"));

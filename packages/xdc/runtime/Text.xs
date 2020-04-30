@@ -1,6 +1,6 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
@@ -24,7 +24,9 @@ var maxDepth = 1;
  */
 function module$use()
 {
-    xdc.useModule('xdc.runtime.Registry');
+    /* we don't call xdc.useModule('xdc.runtime.Registry') here anymore.
+     * See the comment in Text_putMod().
+     */
 }
 
 /*
@@ -91,17 +93,18 @@ function defineRopeCord(text)
  *  Create a new node and return its node id
  *
  *  Node ids are defined as (index into nodeTab[] | 0x8000). The upper bit
- *  (0x8000) is set to distinguish node ids from offsets into charTab; a
- *  rope id is either a node id or an offset into charTab.  The upper bit
- *  also allows us to use these IDs as module ids; unnamed modules are
- *  simply numbered from 1 to 0x7fff whereas named modules have ids equal
- *  to their "rope node id".
+ *  (0x8000) is set to distinguish node ids from offsets into charTab; a rope
+ *  id is either a node id or an offset into charTab.  The upper bit also
+ *  allows us to use these IDs as module ids; unnamed modules are simply
+ *  numbered from 1 to 0x7fff whereas named modules have ids equal to their
+ *  "rope node id".
  *
  *  We don't need to check 'isLoaded' here because this function is invoked
  *  only from genPkgName and genModNames, and the check for 'isLoaded' in
  *  genModNames ensures that genPkgName and defineRopeNode are not invoked if
  *  'isLoaded' is false.
  */
+/* REQ_TAG(SYSBIOS-892) */
 function defineRopeNode(left, right)
 {
     var nid = this.nodeTab.length | 0x8000;
@@ -177,11 +180,11 @@ function fetchNode(nid)
 
 /*
  *  ======== genModNames ========
- *  This function generates module IDs by "registering" module names in the 
- *  nodeTab[] and using the returned node ID or by simply incrementing a 
- *  counter starting from one. Node IDs are guarenteed to be 0x8000
+ *  This function generates module IDs by "registering" module names in
+ *  nodeTab[] and using the returned node ID or by simply incrementing a
+ *  counter starting from one. Node IDs are guaranteed to be 0x8000
  *  or above, so named modules occupy 0x8000-0xFFFF. The range from 0x0001 to
- *  0x7FFF is divided between unnamed modules and Registry modules. 
+ *  0x7FFF is divided between unnamed modules and Registry modules.
  *  The module IDs are allocated as follows:
  *
  *     0x0000    - invalid module ID
@@ -258,7 +261,19 @@ function genPkgName(qn)
 
     return (nid);
 }
+
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  ======== validate ========
+ *  This function is called during the validation phase of configuration
+ */
+function validate()
+{
+    if (this.charCnt > 0x7FFF) {
+        this.$logError("The strings managed by 'Text' exceed 32K in size",
+                       this, "charTab");
+    }
+}
+/*
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

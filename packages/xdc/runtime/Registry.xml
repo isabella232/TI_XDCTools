@@ -18,7 +18,7 @@ Contributors:
 <page>
 <html><body>
   <table>
-  <tr><td colspan="2">  <form><p>This module does not have any user settable configuration parameters.  For more information about this module, see the on-line reference documentation for the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/Registry.html">Registry module</a> in the xdc.runtime package.</p><p>For more information about the xdc.runtime package, see the <a href="http://rtsc.eclipse.org/docs-tip/XDCtools_User%27s_Guide#The_xdc.runtime_package">xdc.runtime User's Guide</a> maintained in the <a href="http://rtsc.eclipse.org/docs">RTSCpedia.</a></p><p></p></form></td></tr>
+  <tr><td colspan="2">  <form><p>This module does not have any user settable configuration parameters.  For more information about this module, see the on-line reference documentation for the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/Registry.html">Registry module</a> in the xdc.runtime package.</p><p>For more information about the xdc.runtime package, see the <a href="http://rtsc.eclipseprojects.io/docs-tip/XDCtools_User%27s_Guide#The_xdc.runtime_package">xdc.runtime User's Guide</a> maintained in the <a href="http://rtsc.eclipseprojects.io/docs">RTSCpedia.</a></p><p></p></form></td></tr>
   <tr><td colspan="2">
     <control type="checkbox" label="Add Registry to my configuration" value="value:this.$used" bold="true"/></td>
   </tr>
@@ -27,7 +27,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

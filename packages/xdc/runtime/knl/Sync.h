@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_knl_Sync__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_Sync___VERS 200
@@ -251,22 +253,22 @@ __extern __FAR__ const CT__xdc_runtime_knl_Sync_Object__table xdc_runtime_knl_Sy
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_Sync_Module__startupDone__S, "xdc_runtime_knl_Sync_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_Sync_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_Sync_Module__startupDone__S( void);
 
 /* query__E */
 #define xdc_runtime_knl_Sync_query xdc_runtime_knl_Sync_query__E
 xdc__CODESECT(xdc_runtime_knl_Sync_query__E, "xdc_runtime_knl_Sync_query")
-__extern xdc_Bool xdc_runtime_knl_Sync_query__E( xdc_runtime_knl_ISync_Handle sync, xdc_Int qual );
+__extern xdc_Bool xdc_runtime_knl_Sync_query__E( xdc_runtime_knl_ISync_Handle sync, xdc_Int qual);
 
 /* signal__E */
 #define xdc_runtime_knl_Sync_signal xdc_runtime_knl_Sync_signal__E
 xdc__CODESECT(xdc_runtime_knl_Sync_signal__E, "xdc_runtime_knl_Sync_signal")
-__extern xdc_Void xdc_runtime_knl_Sync_signal__E( xdc_runtime_knl_ISync_Handle sync );
+__extern xdc_Void xdc_runtime_knl_Sync_signal__E( xdc_runtime_knl_ISync_Handle sync);
 
 /* wait__E */
 #define xdc_runtime_knl_Sync_wait xdc_runtime_knl_Sync_wait__E
 xdc__CODESECT(xdc_runtime_knl_Sync_wait__E, "xdc_runtime_knl_Sync_wait")
-__extern xdc_Int xdc_runtime_knl_Sync_wait__E( xdc_runtime_knl_ISync_Handle sync, xdc_UInt timeout, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_Sync_wait__E( xdc_runtime_knl_ISync_Handle sync, xdc_UInt timeout, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -373,6 +375,6 @@ static inline xdc_Void xdc_runtime_knl_Sync_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_knl_Sync__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

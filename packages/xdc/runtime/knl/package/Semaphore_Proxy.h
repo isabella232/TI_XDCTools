@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -35,10 +35,12 @@
 #define xdc_runtime_knl_Semaphore_Proxy__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_Semaphore_Proxy___VERS 200
@@ -281,45 +283,45 @@ __extern const xdc_runtime_knl_Semaphore_Proxy_Fxns__ xdc_runtime_knl_Semaphore_
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Handle__label__S, "xdc_runtime_knl_Semaphore_Proxy_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_knl_Semaphore_Proxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_knl_Semaphore_Proxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Module__startupDone__S, "xdc_runtime_knl_Semaphore_Proxy_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_Module__startupDone__S( void);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Object__get__S, "xdc_runtime_knl_Semaphore_Proxy_Object__get__S")
-__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Object__first__S, "xdc_runtime_knl_Semaphore_Proxy_Object__first__S")
-__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Object__next__S, "xdc_runtime_knl_Semaphore_Proxy_Object__next__S")
-__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_knl_Semaphore_Proxy_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Params__init__S, "xdc_runtime_knl_Semaphore_Proxy_Params__init__S")
-__extern xdc_Void xdc_runtime_knl_Semaphore_Proxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_knl_Semaphore_Proxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* Proxy__abstract__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S, "xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S")
-__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S( void );
+__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S( void);
 
 /* Proxy__delegate__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_Proxy__delegate__S, "xdc_runtime_knl_Semaphore_Proxy_Proxy__delegate__S")
-__extern xdc_CPtr xdc_runtime_knl_Semaphore_Proxy_Proxy__delegate__S( void );
+__extern xdc_CPtr xdc_runtime_knl_Semaphore_Proxy_Proxy__delegate__S( void);
 
 /* pend__E */
 #define xdc_runtime_knl_Semaphore_Proxy_pend xdc_runtime_knl_Semaphore_Proxy_pend__E
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_pend__E, "xdc_runtime_knl_Semaphore_Proxy_pend")
-__extern xdc_Int xdc_runtime_knl_Semaphore_Proxy_pend__E( xdc_runtime_knl_Semaphore_Proxy_Handle __inst, xdc_UInt timeout, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_Semaphore_Proxy_pend__E( xdc_runtime_knl_Semaphore_Proxy_Handle instp, xdc_UInt timeout, xdc_runtime_Error_Block *eb);
 
 /* post__E */
 #define xdc_runtime_knl_Semaphore_Proxy_post xdc_runtime_knl_Semaphore_Proxy_post__E
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Proxy_post__E, "xdc_runtime_knl_Semaphore_Proxy_post")
-__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_post__E( xdc_runtime_knl_Semaphore_Proxy_Handle __inst, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Semaphore_Proxy_post__E( xdc_runtime_knl_Semaphore_Proxy_Handle instp, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -351,7 +353,7 @@ static inline xdc_runtime_knl_Semaphore_Proxy_Handle xdc_runtime_knl_Semaphore_P
 static inline xdc_runtime_knl_Semaphore_Proxy_Handle xdc_runtime_knl_Semaphore_Proxy_Handle_downCast(xdc_runtime_knl_ISemaphore_Handle i)
 {
     xdc_runtime_knl_ISemaphore_Handle i2 = (xdc_runtime_knl_ISemaphore_Handle)i;
-    if (xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S()) {
+    if (xdc_runtime_knl_Semaphore_Proxy_Proxy__abstract__S() != 0U) {
         return (xdc_runtime_knl_Semaphore_Proxy_Handle)i;
     }
     return ((const void*)i2->__fxns == (const void*)xdc_runtime_knl_Semaphore_Proxy_Proxy__delegate__S()) ? (xdc_runtime_knl_Semaphore_Proxy_Handle)i : (xdc_runtime_knl_Semaphore_Proxy_Handle)NULL;
@@ -461,7 +463,6 @@ static inline void xdc_runtime_knl_Semaphore_Proxy_Params_copy(xdc_runtime_knl_S
 #define Semaphore_Proxy_Object_sizeof xdc_runtime_knl_Semaphore_Proxy_Object_sizeof
 #define Semaphore_Proxy_Params_copy xdc_runtime_knl_Semaphore_Proxy_Params_copy
 #define Semaphore_Proxy_Params_init xdc_runtime_knl_Semaphore_Proxy_Params_init
-#define Semaphore_Proxy_Instance_State xdc_runtime_knl_Semaphore_Proxy_Instance_State
 #define Semaphore_Proxy_Proxy_abstract xdc_runtime_knl_Semaphore_Proxy_Proxy_abstract
 #define Semaphore_Proxy_Proxy_delegate xdc_runtime_knl_Semaphore_Proxy_Proxy_delegate
 #define Semaphore_Proxy_delete xdc_runtime_knl_Semaphore_Proxy_delete

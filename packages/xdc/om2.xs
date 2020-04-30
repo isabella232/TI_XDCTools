@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2018 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -238,7 +238,7 @@ xdc.global.$$computeSizes = function(stype)
     var ms = 0, ma = 0;
 
     var target = Program.build.target;
-    
+
     for (var i = 0; i < sizes.length; i++) {
         var fld = sizes[i][0];
         var ts = sizes[i][1];
@@ -323,13 +323,13 @@ xdc.global.$$getEnumType = function (ts, target)
     if (k < 0) {
         return (target.stdTypes.t_Int);
     }
-    
+
     var suffix = ts.substr(k + 1);
     var name = ts.substr(1, k);
-    
+
     var sa = suffix.split(';');
     var refType = sa.shift();
-	    
+
     if (refType != "") {
         /* refType[0] == 'T' or 'U' */
         return (target.stdTypes['t_' + refType.substring(1)]);
@@ -359,7 +359,7 @@ xdc.global.$$getEnumType = function (ts, target)
         }
         return (target.stdTypes.t_Int32);
     }
-    
+
     return (target.stdTypes.t_Int);
 };
 
@@ -383,6 +383,6 @@ xdc.om.$$bind('$om', xdc.om);
 Packages.xdc.services.intern.xsr.XScriptO.setOM(xdc.om);
 xdc.global.$om = xdc.om;                /* DEPRECATED ALIAS */
 /*
- *  @(#) xdc; 1, 1, 1,0; 5-15-2019 11:20:40; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc; 1, 1, 1,0; 2-9-2020 18:48:38; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

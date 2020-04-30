@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -90,18 +90,21 @@ Int System_Module_startup(Int stat)
 /*
  *  ======== System_abort ========
  */
+/* REQ_TAG(SYSBIOS-1069) */
 Void System_abort(CString str)
 {
     (void)Gate_enterSystem();
 
     System_SupportProxy_abort(str);
 
+    /* REQ_TAG(SYSBIOS-899) */
     System_abortFxn();
 }
 
 /*
  *  ======== System_atexit ========
  */
+/* REQ_TAG(SYSBIOS-910) */
 Bool System_atexit(System_AtexitHandler handler)
 {
     IArg key;
@@ -125,16 +128,19 @@ Bool System_atexit(System_AtexitHandler handler)
 /*
  *  ======== System_exit ========
  */
+/* REQ_TAG(SYSBIOS-1070) */
 Void System_exit(Int stat)
 {
     System_processAtExit(stat);
 
+    /* REQ_TAG(SYSBIOS-906) */
     System_exitFxn(stat);
 }
 
 /*
  *  ======== System_abortStd ========
  */
+/* REQ_TAG(SYSBIOS-901) */
 Void System_abortStd(Void)
 {
     abort();
@@ -143,8 +149,11 @@ Void System_abortStd(Void)
 /*
  *  ======== System_abortSpin ========
  */
+/* REQ_TAG(SYSBIOS-900) */
+/* LCOV_EXCL_START */
 Void System_abortSpin(Void)
 {
+/* LCOV_EXCL_STOP */
     for (;;) {
     }
 }
@@ -152,6 +161,7 @@ Void System_abortSpin(Void)
 /*
  *  ======== System_exitStd ========
  */
+/* REQ_TAG(SYSBIOS-908) */
 Void System_exitStd(Int stat)
 {
     exit(stat);
@@ -160,8 +170,11 @@ Void System_exitStd(Int stat)
 /*
  *  ======== System_exitSpin ========
  */
+/* REQ_TAG(SYSBIOS-907) */
+/* LCOV_EXCL_START */
 Void System_exitSpin(Int stat)
 {
+/* LCOV_EXCL_STOP */
     for (;;) {
     }
 }
@@ -169,6 +182,7 @@ Void System_exitSpin(Int stat)
 /*
  *  ======== System_processAtExit ========
  */
+/* REQ_TAG(SYSBIOS-911) */
 Void System_processAtExit(Int stat)
 {
     Int i;
@@ -185,6 +199,7 @@ Void System_processAtExit(Int stat)
 /*
  *  ======== System_flush ========
  */
+/* REQ_TAG(SYSBIOS-909) */
 Void System_flush(Void)
 {
     System_SupportProxy_flush();
@@ -194,9 +209,10 @@ Void System_flush(Void)
 /*
  *  ======== System_putch ========
  */
+/* REQ_TAG(SYSBIOS-912) */
 Void System_putch(Char ch)
 {
-    if (System_SupportProxy_ready()) {
+    if (System_SupportProxy_ready() == TRUE) {
         System_SupportProxy_putch(ch);
     }
 }
@@ -213,6 +229,7 @@ Int System_aprintf_va(CString fmt, VaList va)
  *  ======== System_avprintf ========
  *  -1 indicates infinite output
  */
+/* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903) */
 Int System_avprintf(CString fmt, VaList va)
 {
     return ((System_SupportProxy_ready() == TRUE)
@@ -232,6 +249,7 @@ Int System_asprintf_va(Char buf[], CString fmt, VaList va)
  *  ======== System_avsprintf ========
  *  -1 indicates infinite output
  */
+/* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903), REQ_TAG(SYSBIOS-904) */
 Int System_avsprintf(Char buf[], CString fmt, VaList va)
 {
     return (System_doPrint(buf, (SizeT)-1, fmt, vaRef(va), TRUE));
@@ -249,6 +267,7 @@ Int System_printf_va(CString fmt, VaList va)
  *  ======== System_vprintf ========
  *  -1 indicates infinite output
  */
+/* REQ_TAG(SYSBIOS-902) */
 Int System_vprintf(CString fmt, VaList va)
 {
     return ((System_SupportProxy_ready() == TRUE)
@@ -268,6 +287,7 @@ Int System_sprintf_va(Char buf[], CString fmt, VaList va)
  *  ======== System_vsprintf ========
  *  -1 indicates infinite output
  */
+/* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
 Int System_vsprintf(Char buf[], CString fmt, VaList va)
 {
     return (System_doPrint(buf, (SizeT)-1, fmt, vaRef(va), FALSE));
@@ -284,6 +304,7 @@ Int System_snprintf_va(Char buf[], SizeT n, CString fmt, VaList va)
 /*
  *  ======== System_vsnprintf ========
  */
+/* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
 Int System_vsnprintf(Char buf[], SizeT n, CString fmt, VaList va)
 {
     return (System_doPrint(buf, n, fmt, vaRef(va), FALSE));
@@ -399,7 +420,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
             }
 
             /* setup for leading zero padding */
-            if (parse.zpad) {
+            if (parse.zpad != 0) {
                 parse.zpad = parse.width;
             }
 
@@ -436,21 +457,13 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
                 diff = parse.end - parse.ptr;
                 parse.len = (UInt)diff;
             }
-            /* use comma operator to optimize code generation!
-             * This breaks MISRA 2012 rule 13.4, but there is no any undefined
-             * behaviour. The first operand of ',' is evaluated first, and then
-             * the second operand is evaluated.
-             * However, this code also breaks the rule 13.5.
-             */
-            else if (((base = 10), (c == 'u')) ||       /* unsigned decimal */
-                     ((base = 16), (c == 'x')) ||       /* unsigned hex */
-                     ((base = 8),  (c == 'o'))) {       /* unsigned octal */
-
+            else if (c == 'u' || c == 'x' || c == 'o') {
                 UIntMax val =
                     (parse.aFlag == TRUE) ? (UIntMax)va_arg(*pva, IArg) :
                     (parse.lFlag == TRUE) ? (UIntMax)va_arg(*pva, unsigned long)
                         : (UIntMax)va_arg(*pva, unsigned);
 
+                base = (c == 'u') ? 10 : ((c == 'x') ? 16 : 8);
                 if (parse.precis > parse.zpad) {
                     parse.zpad = parse.precis;
                 }
@@ -486,7 +499,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
                 if (parse.ptr == (char *)NULL) {
                     parse.ptr = "(null)";
                 }
-                parse.len = strlen(parse.ptr);
+                parse.len = (UInt)(strlen(parse.ptr));
                 if ((parse.precis != -1) && ((UInt)parse.precis < parse.len)) {
                     parse.len = (UInt)parse.precis;
                 }
@@ -502,7 +515,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
                      * https://stackoverflow.com/questions/46508831/is-the-max-value-of-size-t-size-max-defined-relative-to-the-other-integer-type?rq=1
                     */
                     if ((parse.precis == -1) || ((SizeT)parse.precis >= n)) {
-                         if (n < INT_MAX) {
+                         if (n < (SizeT)INT_MAX) {
                              parse.precis = (Int)n;
                          }
                          else {
@@ -511,17 +524,17 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
                     }
                     else {
                          /* Have enough space, increment to account for '\0' */
-                         parse.precis++; 
+                         parse.precis++;
                     }
                     temp_res = System_extendFxn(&buf, &fmt, pva, &parse);
                     /* temp_res is how many were printed. We are losing here the
                      * info about how many characters would be printed, but that
-                     * info is lost by calling various Text functions that do
+                     * info is lost by calling various Text functions that don't
                      * report how many characters would be printed if there were
                      * enough space.
                      */
                     res += temp_res;
-                    n = n - temp_res;
+                    n = n - (SizeT)temp_res;
                 }
             }
 
@@ -537,7 +550,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
             }
 
             /* output number, character or string */
-            while (parse.len--) {
+            while (parse.len-- != 0U) {
                 System_putchar(&buf, *parse.ptr, &n);
                 parse.ptr++;
                 res++;
@@ -554,7 +567,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
         fmt++;
     } /* while */
 
-    if (buf) {
+    if (buf != NULL) {
         *buf = '\0';
     }
 
@@ -604,7 +617,7 @@ Char *formatNum(Char *ptr, UIntMax un, Int zpad, Int base)
         *ptr = "0123456789abcdef"[n % (UInt)base];
         n = n / (UInt)base;
         ++i;
-    } while (n);
+    } while (n != 0U);
 
     /* pad with leading 0s on left */
     while (i < zpad) {
@@ -614,7 +627,7 @@ Char *formatNum(Char *ptr, UIntMax un, Int zpad, Int base)
     }
 
     /* add sign indicator */
-    if (sign) {
+    if (sign != '\0') {
         ptr--;
         *ptr = sign;
     }
@@ -643,16 +656,19 @@ Void System_putchar(Char **bufp, Char c, SizeT *n)
          *  If the buffer is non-NULL, use it, otherwise call the
          *  proxy's putch function (if it is ready).
          */
-        if (*bufp) {
+        if (*bufp != NULL) {
             **bufp = c;
             (*bufp)++;
         }
-        else if (System_SupportProxy_ready()) {
+        else if (System_SupportProxy_ready() == TRUE) {
             System_SupportProxy_putch(c);
+        }
+        else {
+            return;
         }
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

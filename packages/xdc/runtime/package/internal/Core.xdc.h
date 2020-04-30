@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 #ifndef xdc_runtime_Core__INTERNAL__
@@ -21,9 +21,6 @@
 #define xdc_FILE__ xdc_FILE
 #endif
 
-/* allocObject */
-#define Core_allocObject xdc_runtime_Core_allocObject__I
-
 /* assignLabel */
 #define Core_assignLabel xdc_runtime_Core_assignLabel__I
 
@@ -38,9 +35,6 @@
 
 /* deleteObject */
 #define Core_deleteObject xdc_runtime_Core_deleteObject__I
-
-/* delistObject */
-#define Core_delistObject xdc_runtime_Core_delistObject__I
 
 /* destructObject */
 #define Core_destructObject xdc_runtime_Core_destructObject__I

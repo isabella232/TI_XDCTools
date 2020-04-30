@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -26,12 +26,16 @@
 /*
  *  ======== cordText ========
  *  This function is invoked from Core_assignLabel, which is invoked from
- *  Mod_Handle_label.
+ *  Mod_Handle_label. The purpose of the function is to signal to
+ *  Core_assignLabel that an instance name is in charTab, but charTab is not
+ *  loaded to the target, or if that's not the case then the argument is simply
+ *  returned back.
  */
 String Text_cordText(Text_CordAddr cord)
 {
     Char *p = (Char *)cord;
 
+    /* REQ_TAG(SYSBIOS-888) */
     if (p >= Text_charTab && p < Text_charTab + Text_charCnt
         && Text_isLoaded == FALSE) {
         return (NULL);
@@ -43,6 +47,7 @@ String Text_cordText(Text_CordAddr cord)
 /*
  *  ======== matchRope ========
  */
+/* REQ_TAG(SYSBIOS-893) */
 Int Text_matchRope(Types_RopeId rope, CString pat, UShort *lenp)
 {
     Text_MatchVisState state;
@@ -56,7 +61,7 @@ Int Text_matchRope(Types_RopeId rope, CString pat, UShort *lenp)
      * It's visitRope() with a stack large enough for all ropes in the
      * application.
      */
-    Text_visitRopeFxn(rope, (Fxn)Text_matchVisFxn, &state);
+    Text_visitRopeFxn(rope, Text_matchVisFxn, &state);
 
     return (state.res);
 }
@@ -78,6 +83,10 @@ Int Text_matchRope(Types_RopeId rope, CString pat, UShort *lenp)
  *  FALSE if we need to move on to the next rope node, or TRUE if the
  *  comparison is complete. The actual result of the comparison is returned
  *  through the MatchVisState. 'res' is 1 if it's a match, -1 if not.
+ *
+ *  If *lenp == 0 and *src == '\0' at the same time, state->res will stay at 0
+ *  if the calling function doesn't call again with the new 'src'. If it does,
+ *  *src != '\0' and state->res changes to -1.
  */
 Bool Text_matchVisFxn(Ptr obj, CString src)
 {
@@ -99,7 +108,11 @@ Bool Text_matchVisFxn(Ptr obj, CString src)
         pat++;
     }
 
-    /* if src[0] != 0, we reached the end of pat */
+    /* if src[0] != 0, we reached the end of pat, there is no wildcard at there
+     * end, and we haven't finished the string, so there is no match. If the
+     * pattern is 'xdc.runtime.Timestamp' and the string is
+     * 'xdc.runtime.TimestampNull', that's not a match.
+     */
     if (*src != '\0') {
         state->res = -1;
         return (TRUE);
@@ -132,8 +145,9 @@ Bool Text_printVisFxn(Ptr obj, CString src)
 
 /*
  *  ======== putLab ========
- *  len == -1 => infinite output 
+ *  len == -1 => infinite output
  */
+/* REQ_TAG(SYSBIOS-895), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
 Int Text_putLab(Types_Label *lab, Char **bufp, Int len)
 {
     Int res;
@@ -158,6 +172,7 @@ Int Text_putLab(Types_Label *lab, Char **bufp, Int len)
 /*
  *  ======== putMod ========
  */
+/* REQ_TAG(SYSBIOS-894), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
 Int Text_putMod(Types_ModuleId mid, Char **bufp, Int len)
 {
     Text_PrintVisState state;
@@ -167,28 +182,30 @@ Int Text_putMod(Types_ModuleId mid, Char **bufp, Int len)
         return (Text_xprintf(bufp, (SizeT)len, "{module#%d}", mid));
     }
 
-    /* If this is a dynamically registered module... */
+    /* If this is a dynamically registered module...
+     * Modules with the ID between Text_unnamedModsLastId and
+     * Text_registryModsLastId can exist only if some code outside of
+     * xdc.runtime called Registry_addModule at runtime. Metacode for such
+     * runtime code is obligated to call useModule('Registry') at the config
+     * time. By this change, we will possibly break some code that did not
+     * follow this rule before.
+     */
     if (mid <= Text_registryModsLastId) {
         Registry_Desc *desc = Registry_findById(mid);
         CString fmt = desc != NULL ? desc->modName : "{module#%d}";
         return (Text_xprintf(bufp, (SizeT)len, fmt, mid));
     }
 
-    /* If this is a static, named module, but the strings are not loaded... */
-    if (Text_isLoaded == FALSE) {
-        return (Text_xprintf(bufp, (SizeT)len, "{module-rope:%x}", mid));
-    }
-    else {
-        /* Otherwise, this is a static, named module. */
-        state.bufp = bufp;
-        state.len = len < 0 ? (UShort)0x7fff : (UShort)len;
-            /* 0x7fff == infinite, almost */
-        state.res = 0;
+    /* This is a static, named module, and we know that the strings are loaded.
+     * Otherwise, the module's Id wouldn't be above unnamedModsLastId.
+     */
+    state.bufp = bufp;
+    state.len = len < 0 ? (UShort)0x7fff : (UShort)len;
+        /* 0x7fff == infinite, almost */
+    state.res = 0;
+    Text_visitRopeFxn(mid, Text_printVisFxn, &state);
 
-        Text_visitRopeFxn(mid, (Fxn)Text_printVisFxn, &state);
-
-        return (state.res);
-    }
+    return (state.res);
 }
 
 /*
@@ -198,6 +215,7 @@ Int Text_putMod(Types_ModuleId mid, Char **bufp, Int len)
  *  If site->mod == 0, the module is unspecified and will be omitted from
  *  the output.
  */
+/* REQ_TAG(SYSBIOS-896), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
 Int Text_putSite(Types_Site *site, Char **bufp, Int len)
 {
     UShort res;
@@ -215,7 +233,7 @@ Int Text_putSite(Types_Site *site, Char **bufp, Int len)
         res = (UShort)Text_putMod(site->mod, bufp, (Int)max);
     }
 
-    if ((max - res) > 0U) {
+    if ((UInt)(max - res) > 0U) {
         /* Don't output this if there's no mod */
         if (site->mod != 0U) {
             res += (UShort)Text_xprintf(bufp, (UInt)max - (UInt)res, ": ");
@@ -234,7 +252,7 @@ Int Text_putSite(Types_Site *site, Char **bufp, Int len)
 
         /* 7 + 1 = length of "line : " including '\0', 10 = max decimal digits
            in 32-bit number */
-        if ((max - res) >= (8U + 10U)) {
+        if ((UInt)(max - res) >= (8U + 10U)) {
             res += (UShort)
                 Text_xprintf(bufp, (UInt)max - (UInt)res, "line %d: ",
                              site->line);
@@ -263,7 +281,8 @@ CString Text_ropeText(Text_RopeId rope)
  *  The stack array must be large enough to hold the maximum number of
  *  nodes "in" rope.
  */
-Void Text_visitRope2(Text_RopeId rope, Fxn visFxn, Ptr visState, CString stack[])
+Void Text_visitRope2(Text_RopeId rope, Text_RopeVisitor visFxn, Ptr visState,
+                     CString stack[])
 {
     Int tos = 0;
 
@@ -287,7 +306,7 @@ Void Text_visitRope2(Text_RopeId rope, Fxn visFxn, Ptr visState, CString stack[]
         CString s;
         tos--;
         s = stack[tos];
-        if (((Text_RopeVisitor)visFxn)(visState, s) != FALSE) {
+        if (visFxn(visState, s) != FALSE) {
             return;
         }
     } while (tos != 0);
@@ -295,6 +314,7 @@ Void Text_visitRope2(Text_RopeId rope, Fxn visFxn, Ptr visState, CString stack[]
 
 /*
  *  ======== xprintf ========
+ *  After xprintf returns, *bufp points to '\0'
  */
 Int Text_xprintf(Char **bufp, SizeT len, CString fmt, ...)
 {
@@ -327,6 +347,6 @@ Int Text_xprintf(Char **bufp, SizeT len, CString fmt, ...)
     return ((Int)res);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

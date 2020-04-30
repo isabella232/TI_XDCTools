@@ -20,8 +20,8 @@ Contributors:
   <tr>
     <td>
       <form>
-        <p>The HeapMin module provides a minimal alloc-only heap manager that can be used with the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/Memory.html">Memory</a> module.
-        In most cases, runtime allocation is handled by the <a href="ref:xdc.runtime.Memory">default heap</a> defined by the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/Memory.html">Memory</a> module.</p>
+        <p>The HeapMin module provides a minimal alloc-only heap manager that can be used with the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/Memory.html">Memory</a> module.
+        In most cases, runtime allocation is handled by the <a href="ref:xdc.runtime.Memory">default heap</a> defined by the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/Memory.html">Memory</a> module.</p>
         <p> </p>
       </form>
     </td>
@@ -93,7 +93,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

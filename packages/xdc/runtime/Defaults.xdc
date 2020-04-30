@@ -1,6 +1,6 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
@@ -20,7 +20,7 @@ package xdc.runtime;
  *  ======== Defaults ========
  *  Default attributes inherited by all target modules
  *
- *  This module defines default values for `common$` structure. If other 
+ *  This module defines default values for `common$` structure. If other
  *  modules do not set `common$` properties explicitly, these values will be
  *  used.
  */
@@ -68,11 +68,11 @@ module Defaults {
      *  module in order for events to be logged.
      *
      *  @a(diags_INFO)
-     *  Enables logging of generic informational events. Default is 
+     *  Enables logging of generic informational events. Default is
      *  `ALWAYS_OFF`.
      *
      *  @a(diags_ANALYSIS)
-     *  Enables logging of analysis events, such as benchmarking events. 
+     *  Enables logging of analysis events, such as benchmarking events.
      *  Default is `ALWAYS_OFF`.
      *
      *  @a(diags_USER)
@@ -94,16 +94,15 @@ module Defaults {
      *  the heap specified by `{@link Memory#defaultHeapInstance}`.
      *
      *  @a(instanceSection)
-     *  Specify section to be used to place module instances. Default is
-     *  `null`.
+     *  Specify section to be used to place module instances. Default is `null`.
      *
      *  @a(logger)
-     *  Default logger used by modules to write logs. By default there is 
+     *  Default logger used by modules to write logs. By default there is
      *  no logger.
      *
      *  @a(memoryPolicy)
      *  Used to specify type of application. `Types.STATIC_POLICY` is used when
-     *  all objects are created statically. `Types.CREATE_POLICY` is used when 
+     *  all objects are created statically. `Types.CREATE_POLICY` is used when
      *  the application creates objects at runtime. `Types.DELETE_POLICY` is
      *  used when the application creates and deletes objects at runtime. This
      *  helps eliminate unwanted create and delete code.
@@ -130,6 +129,7 @@ module Defaults {
      *  @a(romPatchTable)
      *  Specify whether modules that are allocated to ROM are patchable.
      */
+    /* REQ_TAG(SYSBIOS-921) */
     override metaonly config Types.Common$ common$ = {
         diags_ASSERT:       Diags.ALWAYS_ON,
         diags_ENTRY:        Diags.ALWAYS_OFF,
@@ -222,6 +222,6 @@ module Defaults {
     metaonly Any getCommon(IModule.Module mod, String param);
 };
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

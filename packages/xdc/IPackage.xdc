@@ -46,8 +46,8 @@ package xdc;
  *      }
  *  @p
  *  For additional information about `xdc.om`, see
- *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_-_xdc.om xdc.om} in the
- *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
+ *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_-_xdc.om xdc.om} in the
+ *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
  */
 metaonly interface IPackage {
     /*!
@@ -202,9 +202,9 @@ metaonly interface IPackage {
      *      }
      *  @p
      *  For additional information about `xdc.om`, see
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_-_xdc.om xdc.om}
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_-_xdc.om xdc.om}
      *  in the
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
      */
     function init();
 
@@ -253,9 +253,9 @@ metaonly interface IPackage {
      *      }
      *  @p
      *  For additional information about `xdc.om`, see
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_-_xdc.om xdc.om}
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_-_xdc.om xdc.om}
      *  in the
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
      */
     function close();
 
@@ -301,9 +301,9 @@ metaonly interface IPackage {
      *      }
      *  @p
      *  For additional information about `xdc.om`, see
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_-_xdc.om xdc.om}
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_-_xdc.om xdc.om}
      *  in the
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
      */
     function validate();
 
@@ -338,9 +338,9 @@ metaonly interface IPackage {
      *      }
      *  @p
      *  For additional information about `xdc.om`, see
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_-_xdc.om xdc.om}
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_-_xdc.om xdc.om}
      *  in the
-     *  {@link http://rtsc.eclipse.org/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
+     *  {@link http://rtsc.eclipseprojects.io/docs-tip/XDCscript_Language_Reference XDCscript Language Reference}.
      */
     function exit();
 
@@ -447,6 +447,6 @@ metaonly interface IPackage {
     function getSects();
 }
 /*
- *  @(#) xdc; 1, 1, 1,0; 5-15-2019 11:20:40; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc; 1, 1, 1,0; 2-9-2020 18:48:38; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

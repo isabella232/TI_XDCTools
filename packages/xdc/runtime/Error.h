@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Error__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Error___VERS 200
@@ -340,72 +342,77 @@ __extern __FAR__ const CT__xdc_runtime_Error_maxDepth xdc_runtime_Error_maxDepth
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Error_Module__startupDone__S, "xdc_runtime_Error_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Error_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Error_Module__startupDone__S( void);
 
 /* check__E */
 #define xdc_runtime_Error_check xdc_runtime_Error_check__E
 xdc__CODESECT(xdc_runtime_Error_check__E, "xdc_runtime_Error_check")
-__extern xdc_Bool xdc_runtime_Error_check__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_Error_check__E( xdc_runtime_Error_Block *eb);
 
 /* getData__E */
 #define xdc_runtime_Error_getData xdc_runtime_Error_getData__E
 xdc__CODESECT(xdc_runtime_Error_getData__E, "xdc_runtime_Error_getData")
-__extern xdc_runtime_Error_Data *xdc_runtime_Error_getData__E( xdc_runtime_Error_Block *eb );
+__extern xdc_runtime_Error_Data *xdc_runtime_Error_getData__E( xdc_runtime_Error_Block *eb);
 
 /* getCode__E */
 #define xdc_runtime_Error_getCode xdc_runtime_Error_getCode__E
 xdc__CODESECT(xdc_runtime_Error_getCode__E, "xdc_runtime_Error_getCode")
-__extern xdc_UInt16 xdc_runtime_Error_getCode__E( xdc_runtime_Error_Block *eb );
+__extern xdc_UInt16 xdc_runtime_Error_getCode__E( xdc_runtime_Error_Block *eb);
 
 /* getId__E */
 #define xdc_runtime_Error_getId xdc_runtime_Error_getId__E
 xdc__CODESECT(xdc_runtime_Error_getId__E, "xdc_runtime_Error_getId")
-__extern xdc_runtime_Error_Id xdc_runtime_Error_getId__E( xdc_runtime_Error_Block *eb );
+__extern xdc_runtime_Error_Id xdc_runtime_Error_getId__E( xdc_runtime_Error_Block *eb);
 
 /* getMsg__E */
 #define xdc_runtime_Error_getMsg xdc_runtime_Error_getMsg__E
 xdc__CODESECT(xdc_runtime_Error_getMsg__E, "xdc_runtime_Error_getMsg")
-__extern xdc_CString xdc_runtime_Error_getMsg__E( xdc_runtime_Error_Block *eb );
+__extern xdc_CString xdc_runtime_Error_getMsg__E( xdc_runtime_Error_Block *eb);
 
 /* getSite__E */
 #define xdc_runtime_Error_getSite xdc_runtime_Error_getSite__E
 xdc__CODESECT(xdc_runtime_Error_getSite__E, "xdc_runtime_Error_getSite")
-__extern xdc_runtime_Types_Site *xdc_runtime_Error_getSite__E( xdc_runtime_Error_Block *eb );
+__extern xdc_runtime_Types_Site *xdc_runtime_Error_getSite__E( xdc_runtime_Error_Block *eb);
 
 /* init__E */
 #define xdc_runtime_Error_init xdc_runtime_Error_init__E
 xdc__CODESECT(xdc_runtime_Error_init__E, "xdc_runtime_Error_init")
-__extern xdc_Void xdc_runtime_Error_init__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Void xdc_runtime_Error_init__E( xdc_runtime_Error_Block *eb);
 
 /* print__E */
 #define xdc_runtime_Error_print xdc_runtime_Error_print__E
 xdc__CODESECT(xdc_runtime_Error_print__E, "xdc_runtime_Error_print")
-__extern xdc_Void xdc_runtime_Error_print__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Void xdc_runtime_Error_print__E( xdc_runtime_Error_Block *eb);
 
 /* policyDefault__E */
 #define xdc_runtime_Error_policyDefault xdc_runtime_Error_policyDefault__E
 xdc__CODESECT(xdc_runtime_Error_policyDefault__E, "xdc_runtime_Error_policyDefault")
-__extern xdc_Void xdc_runtime_Error_policyDefault__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2 );
+__extern xdc_Void xdc_runtime_Error_policyDefault__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2);
 
 /* policyMin__E */
 #define xdc_runtime_Error_policyMin xdc_runtime_Error_policyMin__E
 xdc__CODESECT(xdc_runtime_Error_policyMin__E, "xdc_runtime_Error_policyMin")
-__extern xdc_Void xdc_runtime_Error_policyMin__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2 );
+__extern xdc_Void xdc_runtime_Error_policyMin__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2);
 
 /* policySpin__E */
 #define xdc_runtime_Error_policySpin xdc_runtime_Error_policySpin__E
 xdc__CODESECT(xdc_runtime_Error_policySpin__E, "xdc_runtime_Error_policySpin")
-__extern xdc_Void xdc_runtime_Error_policySpin__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2 );
+__extern xdc_Void xdc_runtime_Error_policySpin__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2);
 
 /* raiseX__E */
 #define xdc_runtime_Error_raiseX xdc_runtime_Error_raiseX__E
 xdc__CODESECT(xdc_runtime_Error_raiseX__E, "xdc_runtime_Error_raiseX")
-__extern xdc_Void xdc_runtime_Error_raiseX__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2 );
+__extern xdc_Void xdc_runtime_Error_raiseX__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2);
 
 /* setX__E */
 #define xdc_runtime_Error_setX xdc_runtime_Error_setX__E
 xdc__CODESECT(xdc_runtime_Error_setX__E, "xdc_runtime_Error_setX")
-__extern xdc_Void xdc_runtime_Error_setX__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2 );
+__extern xdc_Void xdc_runtime_Error_setX__E( xdc_runtime_Error_Block *eb, xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Error_Id id, xdc_IArg arg1, xdc_IArg arg2);
+
+/* policyLog__I */
+#define xdc_runtime_Error_policyLog xdc_runtime_Error_policyLog__I
+xdc__CODESECT(xdc_runtime_Error_policyLog__I, "xdc_runtime_Error_policyLog")
+__extern xdc_Void xdc_runtime_Error_policyLog__I( xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_CString msg, xdc_IArg arg1, xdc_IArg arg2);
 
 
 /*
@@ -549,6 +556,6 @@ extern struct xdc_runtime_Error_Module_State__ xdc_runtime_Error_Module__state__
 #endif /* xdc_runtime_Error__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

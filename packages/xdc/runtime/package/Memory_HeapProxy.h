@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -35,10 +35,12 @@
 #define xdc_runtime_Memory_HeapProxy__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Memory_HeapProxy___VERS 200
@@ -281,55 +283,55 @@ __extern void xdc_runtime_Memory_HeapProxy_delete(xdc_runtime_Memory_HeapProxy_H
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Handle__label__S, "xdc_runtime_Memory_HeapProxy_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_Memory_HeapProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_Memory_HeapProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Module__startupDone__S, "xdc_runtime_Memory_HeapProxy_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Memory_HeapProxy_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Memory_HeapProxy_Module__startupDone__S( void);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Object__get__S, "xdc_runtime_Memory_HeapProxy_Object__get__S")
-__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Object__first__S, "xdc_runtime_Memory_HeapProxy_Object__first__S")
-__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Object__next__S, "xdc_runtime_Memory_HeapProxy_Object__next__S")
-__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Params__init__S, "xdc_runtime_Memory_HeapProxy_Params__init__S")
-__extern xdc_Void xdc_runtime_Memory_HeapProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_Memory_HeapProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* Proxy__abstract__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Proxy__abstract__S, "xdc_runtime_Memory_HeapProxy_Proxy__abstract__S")
-__extern xdc_Bool xdc_runtime_Memory_HeapProxy_Proxy__abstract__S( void );
+__extern xdc_Bool xdc_runtime_Memory_HeapProxy_Proxy__abstract__S( void);
 
 /* Proxy__delegate__S */
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_Proxy__delegate__S, "xdc_runtime_Memory_HeapProxy_Proxy__delegate__S")
-__extern xdc_CPtr xdc_runtime_Memory_HeapProxy_Proxy__delegate__S( void );
+__extern xdc_CPtr xdc_runtime_Memory_HeapProxy_Proxy__delegate__S( void);
 
 /* alloc__E */
 #define xdc_runtime_Memory_HeapProxy_alloc xdc_runtime_Memory_HeapProxy_alloc__E
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_alloc__E, "xdc_runtime_Memory_HeapProxy_alloc")
-__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_alloc__E( xdc_runtime_Memory_HeapProxy_Handle __inst, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Memory_HeapProxy_alloc__E( xdc_runtime_Memory_HeapProxy_Handle instp, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb);
 
 /* free__E */
 #define xdc_runtime_Memory_HeapProxy_free xdc_runtime_Memory_HeapProxy_free__E
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_free__E, "xdc_runtime_Memory_HeapProxy_free")
-__extern xdc_Void xdc_runtime_Memory_HeapProxy_free__E( xdc_runtime_Memory_HeapProxy_Handle __inst, xdc_Ptr block, xdc_SizeT size );
+__extern xdc_Void xdc_runtime_Memory_HeapProxy_free__E( xdc_runtime_Memory_HeapProxy_Handle instp, xdc_Ptr block, xdc_SizeT size);
 
 /* isBlocking__E */
 #define xdc_runtime_Memory_HeapProxy_isBlocking xdc_runtime_Memory_HeapProxy_isBlocking__E
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_isBlocking__E, "xdc_runtime_Memory_HeapProxy_isBlocking")
-__extern xdc_Bool xdc_runtime_Memory_HeapProxy_isBlocking__E( xdc_runtime_Memory_HeapProxy_Handle __inst );
+__extern xdc_Bool xdc_runtime_Memory_HeapProxy_isBlocking__E( xdc_runtime_Memory_HeapProxy_Handle instp);
 
 /* getStats__E */
 #define xdc_runtime_Memory_HeapProxy_getStats xdc_runtime_Memory_HeapProxy_getStats__E
 xdc__CODESECT(xdc_runtime_Memory_HeapProxy_getStats__E, "xdc_runtime_Memory_HeapProxy_getStats")
-__extern xdc_Void xdc_runtime_Memory_HeapProxy_getStats__E( xdc_runtime_Memory_HeapProxy_Handle __inst, xdc_runtime_Memory_Stats *stats );
+__extern xdc_Void xdc_runtime_Memory_HeapProxy_getStats__E( xdc_runtime_Memory_HeapProxy_Handle instp, xdc_runtime_Memory_Stats *stats);
 
 
 /*
@@ -361,7 +363,7 @@ static inline xdc_runtime_Memory_HeapProxy_Handle xdc_runtime_Memory_HeapProxy_H
 static inline xdc_runtime_Memory_HeapProxy_Handle xdc_runtime_Memory_HeapProxy_Handle_downCast(xdc_runtime_IHeap_Handle i)
 {
     xdc_runtime_IHeap_Handle i2 = (xdc_runtime_IHeap_Handle)i;
-    if (xdc_runtime_Memory_HeapProxy_Proxy__abstract__S()) {
+    if (xdc_runtime_Memory_HeapProxy_Proxy__abstract__S() != 0U) {
         return (xdc_runtime_Memory_HeapProxy_Handle)i;
     }
     return ((const void*)i2->__fxns == (const void*)xdc_runtime_Memory_HeapProxy_Proxy__delegate__S()) ? (xdc_runtime_Memory_HeapProxy_Handle)i : (xdc_runtime_Memory_HeapProxy_Handle)NULL;
@@ -470,7 +472,6 @@ static inline void xdc_runtime_Memory_HeapProxy_Params_copy(xdc_runtime_Memory_H
 #define Memory_HeapProxy_Object_sizeof xdc_runtime_Memory_HeapProxy_Object_sizeof
 #define Memory_HeapProxy_Params_copy xdc_runtime_Memory_HeapProxy_Params_copy
 #define Memory_HeapProxy_Params_init xdc_runtime_Memory_HeapProxy_Params_init
-#define Memory_HeapProxy_Instance_State xdc_runtime_Memory_HeapProxy_Instance_State
 #define Memory_HeapProxy_Proxy_abstract xdc_runtime_Memory_HeapProxy_Proxy_abstract
 #define Memory_HeapProxy_Proxy_delegate xdc_runtime_Memory_HeapProxy_Proxy_delegate
 #define Memory_HeapProxy_delete xdc_runtime_Memory_HeapProxy_delete

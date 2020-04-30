@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Memory__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Memory___VERS 200
@@ -258,42 +260,42 @@ __extern __FAR__ const CT__xdc_runtime_Memory_defaultHeapInstance xdc_runtime_Me
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Memory_Module__startupDone__S, "xdc_runtime_Memory_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Memory_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Memory_Module__startupDone__S( void);
 
 /* alloc__E */
 #define xdc_runtime_Memory_alloc xdc_runtime_Memory_alloc__E
 xdc__CODESECT(xdc_runtime_Memory_alloc__E, "xdc_runtime_Memory_alloc")
-__extern xdc_Ptr xdc_runtime_Memory_alloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Memory_alloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb);
 
 /* calloc__E */
 #define xdc_runtime_Memory_calloc xdc_runtime_Memory_calloc__E
 xdc__CODESECT(xdc_runtime_Memory_calloc__E, "xdc_runtime_Memory_calloc")
-__extern xdc_Ptr xdc_runtime_Memory_calloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Memory_calloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_runtime_Error_Block *eb);
 
 /* free__E */
 #define xdc_runtime_Memory_free xdc_runtime_Memory_free__E
 xdc__CODESECT(xdc_runtime_Memory_free__E, "xdc_runtime_Memory_free")
-__extern xdc_Void xdc_runtime_Memory_free__E( xdc_runtime_IHeap_Handle heap, xdc_Ptr block, xdc_SizeT size );
+__extern xdc_Void xdc_runtime_Memory_free__E( xdc_runtime_IHeap_Handle heap, xdc_Ptr block, xdc_SizeT size);
 
 /* getStats__E */
 #define xdc_runtime_Memory_getStats xdc_runtime_Memory_getStats__E
 xdc__CODESECT(xdc_runtime_Memory_getStats__E, "xdc_runtime_Memory_getStats")
-__extern xdc_Void xdc_runtime_Memory_getStats__E( xdc_runtime_IHeap_Handle heap, xdc_runtime_Memory_Stats *stats );
+__extern xdc_Void xdc_runtime_Memory_getStats__E( xdc_runtime_IHeap_Handle heap, xdc_runtime_Memory_Stats *stats);
 
 /* query__E */
 #define xdc_runtime_Memory_query xdc_runtime_Memory_query__E
 xdc__CODESECT(xdc_runtime_Memory_query__E, "xdc_runtime_Memory_query")
-__extern xdc_Bool xdc_runtime_Memory_query__E( xdc_runtime_IHeap_Handle heap, xdc_Int qual );
+__extern xdc_Bool xdc_runtime_Memory_query__E( xdc_runtime_IHeap_Handle heap, xdc_Int qual);
 
 /* getMaxDefaultTypeAlign__E */
 #define xdc_runtime_Memory_getMaxDefaultTypeAlign xdc_runtime_Memory_getMaxDefaultTypeAlign__E
 xdc__CODESECT(xdc_runtime_Memory_getMaxDefaultTypeAlign__E, "xdc_runtime_Memory_getMaxDefaultTypeAlign")
-__extern xdc_SizeT xdc_runtime_Memory_getMaxDefaultTypeAlign__E( void );
+__extern xdc_SizeT xdc_runtime_Memory_getMaxDefaultTypeAlign__E( void);
 
 /* valloc__E */
 #define xdc_runtime_Memory_valloc xdc_runtime_Memory_valloc__E
 xdc__CODESECT(xdc_runtime_Memory_valloc__E, "xdc_runtime_Memory_valloc")
-__extern xdc_Ptr xdc_runtime_Memory_valloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_Char value, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Memory_valloc__E( xdc_runtime_IHeap_Handle heap, xdc_SizeT size, xdc_SizeT align, xdc_Char value, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -415,6 +417,6 @@ extern struct xdc_runtime_Memory_Module_State__ xdc_runtime_Memory_Module__state
 #endif /* xdc_runtime_Memory__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

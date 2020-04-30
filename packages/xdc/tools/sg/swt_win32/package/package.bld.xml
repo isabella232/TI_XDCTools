@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.tools.sg.swt_win32" version="3, 2, 0" producerId="/db/ztree/library/trees/xdcutils/xdcutils-h31/src/">
+<package name="xdc.tools.sg.swt_win32" version="3, 2, 0" producerId="/db/ztree/library/trees/xdcutils/xdcutils-i01/src/">
     <units>
     </units>
     <sources>

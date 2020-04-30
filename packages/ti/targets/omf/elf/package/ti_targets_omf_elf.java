@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-D21
+ * @(#) xdc-F07
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class ti_targets_omf_elf
 {
-    static final String VERS = "@(#) xdc-D21\n";
+    static final String VERS = "@(#) xdc-F07\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -91,12 +91,8 @@ public class ti_targets_omf_elf
             sb.append("pkg.packageRepository = xdc.om['ti.targets.omf.elf$$stat$root'];\n");
         sb.append("}\n");
         sb.append("pkg.build.libraries = [\n");
-            sb.append("'lib/elf.a86_64U',\n");
-            sb.append("'lib/elf.a86W',\n");
         sb.append("];\n");
         sb.append("pkg.build.libDesc = [\n");
-            sb.append("['lib/elf.a86_64U', {target: 'gnu.targets.Linux86_64', suffix: '86_64U'}],\n");
-            sb.append("['lib/elf.a86W', {target: 'microsoft.targets.Win32', suffix: '86W'}],\n");
         sb.append("];\n");
         Global.eval(sb.toString());
     }

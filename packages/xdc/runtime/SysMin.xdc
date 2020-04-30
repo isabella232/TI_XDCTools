@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -20,7 +20,7 @@
  *  Minimal implementation of `{@link ISystemSupport}`
  *
  *  This implementation provides a fully functional implementation of
- *  all methods specified by `ISystemSupport`. 
+ *  all methods specified by `ISystemSupport`.
  *
  *  The module maintains an internal buffer (with a configurable size)
  *  that stores on the "output". When full, the data is over-written.  When
@@ -75,12 +75,13 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *  ======== bufSize ========
      *  Size (in MAUs) of the output.
      *
-     *  An internal buffer of this size is allocated. All output is stored 
-     *  in this internal buffer. 
+     *  An internal buffer of this size is allocated. All output is stored
+     *  in this internal buffer.
      *
      *  If 0 is specified for the size, no buffer is created, all output
      *  is dropped, and `{@link SysMin#ready()}` always returns `FALSE`.
      */
+    /* REQ_TAG(SYSBIOS-913), REQ_TAG(SYSBIOS-919) */
     config SizeT bufSize = 1024;
 
     /*!
@@ -94,10 +95,11 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *  If the application's target is not a TI target, the internal buffer
      *  is flushed to `stdout` via `fwrite(..., stdout)`.
      *
-     *  Setting this parameter to `false` reduces the footprint of the 
+     *  Setting this parameter to `false` reduces the footprint of the
      *  application at the expense of not getting output when the application
-     *  ends via a `System_exit()`, `System_abort()`, `exit()` or `abort()`.  
+     *  ends via a `System_exit()`, `System_abort()`, `exit()` or `abort()`.
      */
+    /* REQ_TAG(SYSBIOS-920) */
     config Bool flushAtExit = true;
 
     /*!
@@ -119,7 +121,7 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *
      *  This function may be called with 0 as the second parameter.  In this
      *  case, the function should simply return.
-     *  
+     *
      */
     typedef Void (*OutputFxn)(Char *, UInt);
 
@@ -139,43 +141,43 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *      SysMin.outputFxn = "&myOutputFxn";
      *  @p
      *
-     *  If this parameter is not set, a default function will be used which
-     *  uses the ANSI C Standard Library function `fwrite()` (or `HOSTwrite` 
-     *  in the TI C Run Time Support library) to output
-     *  accumulated output characters.
+     *  If this parameter is not set, a default function will be used which uses
+     *  the ANSI C Standard Library function `fwrite()` (or `HOSTwrite` in the
+     *  TI C Run Time Support library) to output accumulated output characters.
      *
      *  @see #OutputFxn
      */
+    /* REQ_TAG(SYSBIOS-914) */
     config OutputFxn outputFxn = null;
 
     /*!
      *  ======== abort ========
      *  Backend for `{@link System#abort()}`
      *
-     *  This abort function writes the string to the internal
-     *  output buffer and then gives all internal output to the 
-     *  `{@link #outputFxn}` function if the `{@link #flushAtExit}` 
-     *  configuration parameter is true.
+     *  This abort function writes the string to the internal output buffer and
+     *  then gives all internal output to the `{@link #outputFxn}` function if
+     *  the `{@link #flushAtExit}` configuration parameter is true.
      *
      *  @param(str)  message to output just prior to aborting
      *
      *      If non-`NULL`, this string should be output just prior to
-     *      terminating. 
+     *      terminating.
      *
      *  @see ISystemSupport#abort
      */
+    /* REQ_TAG(SYSBIOS-915) */
     override Void abort(CString str);
 
     /*!
      *  ======== exit ========
      *  Backend for `{@link System#exit()}`
      *
-     *  This exit function gives all internal output to the 
-     *  `{@link #outputFxn}` function if the `{@link #flushAtExit}` 
-     *  configuration parameter is true.
+     *  This exit function gives all internal output to the `{@link #outputFxn}`
+     *  function if the `{@link #flushAtExit}` configuration parameter is true.
      *
      *  @see ISystemSupport#exit
      */
+    /* REQ_TAG(SYSBIOS-916) */
     override Void exit(Int stat);
 
     /*!
@@ -208,12 +210,13 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *  `SysMin_flush` passes the internal buffer to the
      *  `{@link #outputFxn}` function and resets the internal buffer.
      *
-     *  If the `{@link #flushAtExit}` configuration parameter is true, 
+     *  If the `{@link #flushAtExit}` configuration parameter is true,
      *  `SysMin_flush` is implicitly called by `{@link #exit}` and
      *  `{@link #abort}`.
      *
      *  @see ISystemSupport#putch
      */
+    /* REQ_TAG(SYSBIOS-917) */
     override Void putch(Char ch);
 
     /*!
@@ -224,6 +227,7 @@ module SysMin inherits xdc.runtime.ISystemSupport {
      *
      *  @see ISystemSupport#ready
      */
+    /* REQ_TAG(SYSBIOS-918) */
     override Bool ready();
 
 internal:
@@ -252,6 +256,6 @@ internal:
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Core__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Core___VERS 200
@@ -57,8 +59,8 @@
 #include <xdc/runtime/Assert.h>
 #include <xdc/runtime/Types.h>
 #include <xdc/runtime/IHeap.h>
-#include <xdc/runtime/Error.h>
 #include <xdc/runtime/Text.h>
+#include <xdc/runtime/Error.h>
 
 
 /*
@@ -81,6 +83,9 @@ struct xdc_runtime_Core_ObjDesc {
     xdc_CPtr prmsInit;
     xdc_SizeT prmsSize;
 };
+
+/* NOSTATE */
+#define xdc_runtime_Core_NOSTATE (-1)
 
 
 /*
@@ -259,47 +264,37 @@ __extern __FAR__ const CT__xdc_runtime_Core_A_initializedParams xdc_runtime_Core
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Core_Module__startupDone__S, "xdc_runtime_Core_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Core_Module__startupDone__S( void );
-
-/* allocObject__I */
-#define xdc_runtime_Core_allocObject xdc_runtime_Core_allocObject__I
-xdc__CODESECT(xdc_runtime_Core_allocObject__I, "xdc_runtime_Core_allocObject")
-__extern xdc_Ptr xdc_runtime_Core_allocObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_Core_Module__startupDone__S( void);
 
 /* assignLabel__I */
 #define xdc_runtime_Core_assignLabel xdc_runtime_Core_assignLabel__I
 xdc__CODESECT(xdc_runtime_Core_assignLabel__I, "xdc_runtime_Core_assignLabel")
-__extern xdc_Void xdc_runtime_Core_assignLabel__I( xdc_runtime_Types_Label *lab, xdc_runtime_Text_CordAddr iname, xdc_Bool named );
+__extern xdc_Void xdc_runtime_Core_assignLabel__I( xdc_runtime_Types_Label *lab, xdc_runtime_Text_CordAddr iname, xdc_Bool named);
 
 /* assignParams__I */
 #define xdc_runtime_Core_assignParams xdc_runtime_Core_assignParams__I
 xdc__CODESECT(xdc_runtime_Core_assignParams__I, "xdc_runtime_Core_assignParams")
-__extern xdc_Void xdc_runtime_Core_assignParams__I( xdc_Ptr dstPrms, xdc_CPtr srcPrms, xdc_SizeT mpsz, xdc_SizeT ipsz );
+__extern xdc_Void xdc_runtime_Core_assignParams__I( xdc_Ptr dstPrms, xdc_CPtr srcPrms, xdc_SizeT mpsz, xdc_SizeT ipsz);
 
 /* createObject__I */
 #define xdc_runtime_Core_createObject xdc_runtime_Core_createObject__I
 xdc__CODESECT(xdc_runtime_Core_createObject__I, "xdc_runtime_Core_createObject")
-__extern xdc_Ptr xdc_runtime_Core_createObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Ptr resPrms, xdc_CPtr argPrms, xdc_SizeT argPrmsSize, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Core_createObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Ptr resPrms, xdc_CPtr argPrms, xdc_SizeT argPrmsSize, xdc_runtime_Error_Block *eb);
 
 /* constructObject__I */
 #define xdc_runtime_Core_constructObject xdc_runtime_Core_constructObject__I
 xdc__CODESECT(xdc_runtime_Core_constructObject__I, "xdc_runtime_Core_constructObject")
-__extern xdc_Ptr xdc_runtime_Core_constructObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Ptr resPrms, xdc_CPtr argPrms, xdc_SizeT argPrmsSize, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_Core_constructObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Ptr resPrms, xdc_CPtr argPrms, xdc_SizeT argPrmsSize, xdc_runtime_Error_Block *eb);
 
 /* deleteObject__I */
 #define xdc_runtime_Core_deleteObject xdc_runtime_Core_deleteObject__I
 xdc__CODESECT(xdc_runtime_Core_deleteObject__I, "xdc_runtime_Core_deleteObject")
-__extern xdc_Void xdc_runtime_Core_deleteObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Fxn finalFxn, xdc_Int istat, xdc_Bool consFlg );
-
-/* delistObject__I */
-#define xdc_runtime_Core_delistObject xdc_runtime_Core_delistObject__I
-xdc__CODESECT(xdc_runtime_Core_delistObject__I, "xdc_runtime_Core_delistObject")
-__extern xdc_Void xdc_runtime_Core_delistObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj );
+__extern xdc_Void xdc_runtime_Core_deleteObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Fxn finalFxn, xdc_Int istat, xdc_Bool consFlg);
 
 /* destructObject__I */
 #define xdc_runtime_Core_destructObject xdc_runtime_Core_destructObject__I
 xdc__CODESECT(xdc_runtime_Core_destructObject__I, "xdc_runtime_Core_destructObject")
-__extern xdc_Void xdc_runtime_Core_destructObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Fxn finalFxn, xdc_Int istat, xdc_Bool consFlg );
+__extern xdc_Void xdc_runtime_Core_destructObject__I( const xdc_runtime_Core_ObjDesc *od, xdc_Ptr curObj, xdc_Fxn finalFxn, xdc_Int istat, xdc_Bool consFlg);
 
 
 /*
@@ -382,6 +377,7 @@ static inline xdc_Void xdc_runtime_Core_Module_setMask(xdc_Bits16 mask)
 
 /* module prefix */
 #define Core_ObjDesc xdc_runtime_Core_ObjDesc
+#define Core_NOSTATE xdc_runtime_Core_NOSTATE
 #define Core_A_initializedParams xdc_runtime_Core_A_initializedParams
 #define Core_Module_name xdc_runtime_Core_Module_name
 #define Core_Module_id xdc_runtime_Core_Module_id
@@ -396,6 +392,6 @@ static inline xdc_Void xdc_runtime_Core_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_Core__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

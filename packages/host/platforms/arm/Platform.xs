@@ -1,38 +1,16 @@
-/*
- * Copyright (c) 2016, Texas Instruments Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
+/* 
+ *  Copyright (c) 2008 Texas Instruments and others.
+ *  All rights reserved. This program and the accompanying materials
+ *  are made available under the terms of the Eclipse Public License v1.0
+ *  which accompanies this distribution, and is available at
+ *  http://www.eclipse.org/legal/epl-v10.html
+ * 
+ *  Contributors:
+ *      Texas Instruments - initial implementation
+ * 
+ * */
 /*
  *  ======== Platform.xs ========
- *
  */
 
 /*
@@ -58,11 +36,11 @@ function getCpuDataSheet(cpuId)
 function getExeContext(prog)
 {
     var ExeContext = xdc.useModule('xdc.platform.ExeContext');
-
+    
     if (prog.build.target.$name.match("ti.targets")) {
         this.$module.$logError("This platform is intended to be used with "
             + "non-TI targets. Please use 'ti.platforms.generic' for TI "
-            + "targets.", this, prog.build.target.$name);
+            + "targets.", this, prog.build.target.$name);	
     }
 
     /* create a default ExeContext execution context */
@@ -77,6 +55,10 @@ function getExeContext(prog)
  */
 function getExecCmd(prog)
 {
+    if (this.$private.name == "native") {
+        return ("./" + prog.name);
+    }
+
     return ("@$(ECHO) host.platforms.arm package does not know how to " +
         "execute " + prog.name + "\n");
 }
@@ -113,27 +95,30 @@ function instance$meta$init(name)
     /*  cache the platform instance name for the methods above. */
     this.$private.name = name;
 
-    /*  Determine an appropriate CPU to simulate
-     */
-
     var cpuAttrs = new xdc.om['xdc.platform'].IExeContext.Cpu({clockRate: 0});
 
+    /* Determine an appropriate CPU to simulate */
+    if (name == "native") {
+	this.deviceName = this.$module.CPU.deviceName;
+	this.catalogName = this.$module.CPU.catalogName;
+    }
+
     if (this.deviceName != undefined) {
-        if ((typeof this.deviceName) != "string") {
-            this.$module.$logError(this.$package.$name + ": 'deviceName' must "
-                + "be a string", this, this.deviceName);
-        }
+	if ((typeof this.deviceName) != "string") {
+	    this.$module.$logError(this.$package.$name + ": 'deviceName' must "
+	        + "be a string", this, this.deviceName);
+	}
     }
     else {
         this.$module.$logError("Parameter deviceName must be specified for "
-            + "'host.platforms.arm' platform.", this, this.deviceName);
+            + "'host.platforms.arm' platform.", this, this.deviceName);	
     }
-
+        
     if (this.catalogName != undefined) {
-        if ((typeof this.catalogName) != "string") {
-            this.$module.$logError(this.$package.$name + ": catalog name must "
-                + "be a string", this, this.catalogName);
-        }
+	if ((typeof this.catalogName) != "string") {
+	    this.$module.$logError(this.$package.$name + ": catalog name must "
+	        + "be a string", this, this.catalogName);
+	}
 
         /* this platform doesn't know the catalog package until now, so it
          * must dynamically import it here; "real" platforms would declare
@@ -141,17 +126,17 @@ function instance$meta$init(name)
          */
         xdc.loadPackage(this.catalogName);
 
-        if (!(this.deviceName in xdc.om[this.catalogName])) {
+    	if (!(this.deviceName in xdc.om[this.catalogName])) {
             this.$module.$logError("Device " + this.deviceName + " does not"
                 + " exist in " + this.catalogName, this, this.deviceName);
-        }
+    	}
     }
     else {
         this.$module.$logError("Parameter catalogName must be specified for "
-            + "'host.platforms.arm' platform.", this, this.deviceName);
+            + "'host.platforms.arm' platform.", this, this.deviceName);	
     }
 
-    if (this.externalMemoryMap.length > 0 || this.customMemoryMap.length > 0
+    if (this.externalMemoryMap.length > 0 || this.customMemoryMap.length > 0 
         || this.renameMap.lenght > 0 || this.sectMap.length > 0
         || this.codeMemory != undefined || this.dataMemory != undefined
         || this.stackMemory != undefined) {
@@ -160,8 +145,12 @@ function instance$meta$init(name)
             + " 'customMemoryMap', 'renameMap', 'externalMemoryMap', "
             + " 'codeMemory', 'dataMemory' and 'stackMemory'.", this, null);
     }
-
+        
     cpuAttrs.deviceName = this.deviceName;
     cpuAttrs.catalogName = this.catalogName;
     this.$private.cpuAttrs = cpuAttrs;
 }
+/*
+ *  @(#) host.platforms.arm; 1, 0, 0,0; 2-9-2020 18:48:30; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ */
+

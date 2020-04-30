@@ -23,7 +23,7 @@ Contributors:
   <tr>
     <td colspan="2">
     <h1>Description</h1>
-    <form><p>The SysCallback module provides "back-end" support for the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/System.html">System</a> module. This module allows user to define C callback functions to support the low level character output.  For more information see the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/SysCallback.html">SysCallback reference</a> documentation.</p></form>
+    <form><p>The SysCallback module provides "back-end" support for the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/System.html">System</a> module. This module allows user to define C callback functions to support the low level character output.  For more information see the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/SysCallback.html">SysCallback reference</a> documentation.</p></form>
     </td>
   </tr>
   <tr>
@@ -82,7 +82,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

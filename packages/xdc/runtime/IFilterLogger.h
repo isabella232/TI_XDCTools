@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_IFilterLogger__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_IFilterLogger___VERS 200
@@ -309,7 +311,7 @@ static inline xdc_runtime_IFilterLogger_Module xdc_runtime_IFilterLogger_Module_
             return (xdc_runtime_IFilterLogger_Module)m;
         }
     }
-    return 0;
+    return NULL;
 }
 
 /* Module_from_xdc_runtime_ILogger */
@@ -411,6 +413,6 @@ static inline xdc_runtime_IFilterLogger_Handle xdc_runtime_IFilterLogger_Handle_
 #endif /* xdc_runtime_IFilterLogger__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

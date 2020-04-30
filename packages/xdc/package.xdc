@@ -90,7 +90,7 @@
  *  `xdc__nolocalnames`, enable you to easily control the definitions provided
  *  `std.h`.  In this case, however, these symbols are used to manage the
  *  deprecation of symbols provided in earlier releases.  For more information
- *  about when to use these symbols, see {@link http://rtsc.eclipse.org/docs-tip/Integrating_RTSC_Modules#Disabling_and_Enabling_Deprecated_Definitions Disabling and Enabling Deprecated Definitions}`.
+ *  about when to use these symbols, see {@link http://rtsc.eclipseprojects.io/docs-tip/Integrating_RTSC_Modules#Disabling_and_Enabling_Deprecated_Definitions Disabling and Enabling Deprecated Definitions}`.
  *
  *  @a(Standard Types)
  *  This header may be included multiple times and defines the following
@@ -347,6 +347,6 @@ package xdc [1, 1, 1] {
     module Warnings;
 }
 /*
- *  @(#) xdc; 1, 1, 1,0; 5-15-2019 11:20:40; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc; 1, 1, 1,0; 2-9-2020 18:48:38; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

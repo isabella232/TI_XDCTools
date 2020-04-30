@@ -19,6 +19,6 @@ package xdc.productview {
     module ProductView;
 }
 /*
- *  @(#) xdc.productview; 1,0,0,0; 5-15-2019 11:21:29; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.productview; 1,0,0,0; 2-9-2020 18:48:59; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

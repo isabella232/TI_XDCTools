@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Text__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Text___VERS 200
@@ -99,10 +101,10 @@ struct xdc_runtime_Text_PrintVisState {
 };
 
 /* VisitRopeFxn */
-typedef xdc_Void (*xdc_runtime_Text_VisitRopeFxn)(xdc_runtime_Text_RopeId arg1, xdc_Fxn arg2, xdc_Ptr arg3);
+typedef xdc_Void (*xdc_runtime_Text_VisitRopeFxn)(xdc_runtime_Text_RopeId arg1, xdc_runtime_Text_RopeVisitor arg2, xdc_Ptr arg3);
 
 /* VisitRopeFxn2 */
-typedef xdc_Void (*xdc_runtime_Text_VisitRopeFxn2)(xdc_runtime_Text_RopeId arg1, xdc_Fxn arg2, xdc_Ptr arg3, xdc_CString arg4[]);
+typedef xdc_Void (*xdc_runtime_Text_VisitRopeFxn2)(xdc_runtime_Text_RopeId arg1, xdc_runtime_Text_RopeVisitor arg2, xdc_Ptr arg3, xdc_CString arg4[]);
 
 
 /*
@@ -408,62 +410,62 @@ __extern __FAR__ const CT__xdc_runtime_Text_visitRopeFxn2 xdc_runtime_Text_visit
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Text_Module__startupDone__S, "xdc_runtime_Text_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Text_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Text_Module__startupDone__S( void);
 
 /* cordText__E */
 #define xdc_runtime_Text_cordText xdc_runtime_Text_cordText__E
 xdc__CODESECT(xdc_runtime_Text_cordText__E, "xdc_runtime_Text_cordText")
-__extern xdc_String xdc_runtime_Text_cordText__E( xdc_runtime_Text_CordAddr cord );
+__extern xdc_String xdc_runtime_Text_cordText__E( xdc_runtime_Text_CordAddr cord);
 
 /* ropeText__E */
 #define xdc_runtime_Text_ropeText xdc_runtime_Text_ropeText__E
 xdc__CODESECT(xdc_runtime_Text_ropeText__E, "xdc_runtime_Text_ropeText")
-__extern xdc_CString xdc_runtime_Text_ropeText__E( xdc_runtime_Text_RopeId rope );
+__extern xdc_CString xdc_runtime_Text_ropeText__E( xdc_runtime_Text_RopeId rope);
 
 /* matchRope__E */
 #define xdc_runtime_Text_matchRope xdc_runtime_Text_matchRope__E
 xdc__CODESECT(xdc_runtime_Text_matchRope__E, "xdc_runtime_Text_matchRope")
-__extern xdc_Int xdc_runtime_Text_matchRope__E( xdc_runtime_Text_RopeId rope, xdc_CString pat, xdc_UShort *lenp );
+__extern xdc_Int xdc_runtime_Text_matchRope__E( xdc_runtime_Text_RopeId rope, xdc_CString pat, xdc_UShort *lenp);
 
 /* putLab__E */
 #define xdc_runtime_Text_putLab xdc_runtime_Text_putLab__E
 xdc__CODESECT(xdc_runtime_Text_putLab__E, "xdc_runtime_Text_putLab")
-__extern xdc_Int xdc_runtime_Text_putLab__E( xdc_runtime_Types_Label *lab, xdc_Char **bufp, xdc_Int len );
+__extern xdc_Int xdc_runtime_Text_putLab__E( xdc_runtime_Types_Label *lab, xdc_Char **bufp, xdc_Int len);
 
 /* putMod__E */
 #define xdc_runtime_Text_putMod xdc_runtime_Text_putMod__E
 xdc__CODESECT(xdc_runtime_Text_putMod__E, "xdc_runtime_Text_putMod")
-__extern xdc_Int xdc_runtime_Text_putMod__E( xdc_runtime_Types_ModuleId mid, xdc_Char **bufp, xdc_Int len );
+__extern xdc_Int xdc_runtime_Text_putMod__E( xdc_runtime_Types_ModuleId mid, xdc_Char **bufp, xdc_Int len);
 
 /* putSite__E */
 #define xdc_runtime_Text_putSite xdc_runtime_Text_putSite__E
 xdc__CODESECT(xdc_runtime_Text_putSite__E, "xdc_runtime_Text_putSite")
-__extern xdc_Int xdc_runtime_Text_putSite__E( xdc_runtime_Types_Site *site, xdc_Char **bufp, xdc_Int len );
+__extern xdc_Int xdc_runtime_Text_putSite__E( xdc_runtime_Types_Site *site, xdc_Char **bufp, xdc_Int len);
 
 /* matchVisFxn__I */
 #define xdc_runtime_Text_matchVisFxn xdc_runtime_Text_matchVisFxn__I
 xdc__CODESECT(xdc_runtime_Text_matchVisFxn__I, "xdc_runtime_Text_matchVisFxn")
-__extern xdc_Bool xdc_runtime_Text_matchVisFxn__I( xdc_Ptr p, xdc_CString s );
+__extern xdc_Bool xdc_runtime_Text_matchVisFxn__I( xdc_Ptr p, xdc_CString s);
 
 /* printVisFxn__I */
 #define xdc_runtime_Text_printVisFxn xdc_runtime_Text_printVisFxn__I
 xdc__CODESECT(xdc_runtime_Text_printVisFxn__I, "xdc_runtime_Text_printVisFxn")
-__extern xdc_Bool xdc_runtime_Text_printVisFxn__I( xdc_Ptr p, xdc_CString s );
+__extern xdc_Bool xdc_runtime_Text_printVisFxn__I( xdc_Ptr p, xdc_CString s);
 
 /* visitRope__I */
 #define xdc_runtime_Text_visitRope xdc_runtime_Text_visitRope__I
 xdc__CODESECT(xdc_runtime_Text_visitRope__I, "xdc_runtime_Text_visitRope")
-__extern xdc_Void xdc_runtime_Text_visitRope__I( xdc_runtime_Text_RopeId rope, xdc_Fxn visFxn, xdc_Ptr visState );
+__extern xdc_Void xdc_runtime_Text_visitRope__I( xdc_runtime_Text_RopeId rope, xdc_runtime_Text_RopeVisitor visFxn, xdc_Ptr visState);
 
 /* visitRope2__I */
 #define xdc_runtime_Text_visitRope2 xdc_runtime_Text_visitRope2__I
 xdc__CODESECT(xdc_runtime_Text_visitRope2__I, "xdc_runtime_Text_visitRope2")
-__extern xdc_Void xdc_runtime_Text_visitRope2__I( xdc_runtime_Text_RopeId rope, xdc_Fxn visFxn, xdc_Ptr visState, xdc_CString stack[] );
+__extern xdc_Void xdc_runtime_Text_visitRope2__I( xdc_runtime_Text_RopeId rope, xdc_runtime_Text_RopeVisitor visFxn, xdc_Ptr visState, xdc_CString stack[]);
 
 /* xprintf__I */
 #define xdc_runtime_Text_xprintf xdc_runtime_Text_xprintf__I
 xdc__CODESECT(xdc_runtime_Text_xprintf__I, "xdc_runtime_Text_xprintf")
-__extern xdc_Int xdc_runtime_Text_xprintf__I( xdc_Char **bufp, xdc_SizeT len, xdc_CString fmt, ... );
+__extern xdc_Int xdc_runtime_Text_xprintf__I( xdc_Char **bufp, xdc_SizeT len, xdc_CString fmt, ...);
 
 
 /*
@@ -599,6 +601,6 @@ extern struct xdc_runtime_Text_Module_State__ xdc_runtime_Text_Module__state__V;
 #endif /* xdc_runtime_Text__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

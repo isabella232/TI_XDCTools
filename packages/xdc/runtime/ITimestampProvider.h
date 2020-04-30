@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -33,10 +33,12 @@
 #define xdc_runtime_ITimestampProvider__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_ITimestampProvider___VERS 200
@@ -175,7 +177,7 @@ static inline xdc_runtime_ITimestampProvider_Module xdc_runtime_ITimestampProvid
             return (xdc_runtime_ITimestampProvider_Module)m;
         }
     }
-    return 0;
+    return NULL;
 }
 
 /* Module_from_xdc_runtime_ITimestampClient */
@@ -222,6 +224,6 @@ static inline xdc_runtime_ITimestampProvider_Module xdc_runtime_ITimestampProvid
 #endif /* xdc_runtime_ITimestampProvider__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

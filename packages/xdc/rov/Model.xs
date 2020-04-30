@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -13,7 +13,7 @@
  *  ======== Model.xs ========
  */
 
-var cmodules = [];  /* array of pure C modules with ROV code */
+var cmodules = {};  /* map of C modules with ROV code */
 
 /*
  *  ======== start ========
@@ -39,7 +39,7 @@ function start(vers, executable, recap, sym, mem, callBack)
 
     xdc.useModule('xdc.rov.support.ScalarStructs');
 
-    /* Read ROV config file */
+    /* Read the ROV config file and/or sysconfig ROV file */
     readConfig(executable);
 
     /* Store off the list of all modules in the recap file */
@@ -50,8 +50,8 @@ function start(vers, executable, recap, sym, mem, callBack)
         }
     }
 
-    for (var i = 0; i < cmodules.length; i++) {
-        mnames.push(cmodules[i]);
+    for (var name in cmodules) {
+        mnames.push(name);
     }
 
     Program.$unseal('moduleNames');
@@ -75,7 +75,7 @@ function start(vers, executable, recap, sym, mem, callBack)
                 + "too long.\nTo speed up the ROV startup, with some loss of "
                 + "functionality, you can create a new empty file " + rovFile
                 + ".rov.js. For a detailed explanation of this feature, see "
-                + "http://rtsc.eclipse.org/docs-tip/Runtime_Object_Viewer"
+                + "http://rtsc.eclipseprojects.io/docs-tip/Runtime_Object_Viewer"
                 + "#Retrieving_constructed_objects.");
                 java.lang.Thread.currentThread().sleep(10000);
         }
@@ -462,16 +462,95 @@ function indexOfChild(pkg, name)
 }
 
 /*
+ *  ======== setFullName ========
+ *
+ *  From an ROV module name, which may or may not contain a namespace name
+ *  separated by "::", creates <namespace>.<short module name>. We add '.' to
+ *  conform to RTSC fully qualified names that separate the package name and
+ *  the module name with '.' for RTSC ROV.
+ *  The default ROV namespace is "Global". If there is a clash, where
+ *  two modules have the same full name, we add numbers to the namespace name.
+ */
+function setFullName(fullname) {
+    var namespace = "Global";
+    var shortname = fullname;
+    var splitstr = fullname.match(/(.*)::([^:]+)$/);
+    if (splitstr != null) {
+        shortname = splitstr[2];
+        if (splitstr[1].length > 0) {
+            namespace = splitstr[1];
+        }
+    }
+    var modname;
+
+    modname = namespace + "." + shortname;
+    var cnt = 1;
+    while (cmodules[modname] != undefined) {
+        modname = namespace + cnt++ + "." + shortname;
+    };
+    return (modname);
+}
+
+/*
  *  ======== readConfig ========
- *  An executable can have an ROV config file found along the executable or
- *  in a directory above.
+ *  An executable can have an ROV config file found next to the executable
+ *  or in a directory above.
  */
 function readConfig(executable)
 {
-    var configFile = locateFile(executable, ".rov.js");
-    if (configFile != "") {
+    var sysConfig = locateSysconfigFile(executable);
+    if (sysConfig != "") {
+        var sconfig = xdc.loadCapsule(sysConfig);
+        var list = sconfig.crovFiles;
+        for (var k = 0; k < list.length; k++) {
+            var modCaps = {};
+            if (xdc.findFile(list[k]) != null) {
+                modCaps = xdc.loadCapsule(list[k]);
+            }
+            else {
+                /* ignore missing capsules; proceed with what's possible */
+                Program.debugPrint("Warning: Can't find " + list[k]
+                                   + " along the path: " + xdc.curPath());
+            }
+
+            var mod = {};
+            if (modCaps.moduleName != null && modCaps.viewMap != null) {
+                mod.name = setFullName(modCaps.moduleName);
+                mod.viewMap = modCaps.viewMap;
+                mod.argsMap = modCaps.argsMap;
+                mod.capsule = modCaps;
+                Program.addCMod(mod);
+                cmodules[mod.name] = 1;
+            }
+        }
+    }
+
+    var rovConfig = locateRovFile(executable, ".rov.js");
+    if (rovConfig != "") {
         //try {
-            var config = xdc.loadCapsule(configFile);
+            var config = xdc.loadCapsule(rovConfig);
+            /* This code reads an array of declared constructed objects from
+             * a ROV configuration file with the .rov.js extension.
+             *  Example:
+             *  var constructedObjects = [
+             *      {
+             *          "type": "ti_sysbios_knl_Task_Struct",
+             *          "name": "tStruct",
+             *      },
+             *      {
+             *          "type": "ti_sysbios_knl_Task_Struct",
+             *          "name": "tStruct2",
+             *      },
+             *      {
+             *          "type": "ti_sysbios_knl_Semaphore_Struct",
+             *          "name": "sem",
+             *      },
+             * ];
+             *
+             * The .rov.js file should have the same name as the executable
+             * (.out) and can be in the same directory as, one directory level
+             * above or two directory levels above the executable.
+             */
             var constructed = config.constructedObjects;
             if (constructed != null) {
                 var constructInstArr = [];
@@ -510,12 +589,12 @@ function readConfig(executable)
                             var mod = {};
                             if (modCaps.moduleName != null
                                 && modCaps.viewMap != null) {
-                                /* All C modules belong to the package "C" */
-                                mod.name = "C." + modCaps.moduleName;
+                                mod.name = setFullName(modCaps.moduleName);
                                 mod.viewMap = modCaps.viewMap;
+                                mod.argsMap = modCaps.argsMap;
                                 mod.capsule = modCaps;
                                 Program.addCMod(mod);
-                                cmodules.push(mod.name);
+                                cmodules[mod.name] = 1;
                             }
                         }
                     }
@@ -523,37 +602,14 @@ function readConfig(executable)
             }
         //}
         //catch(e) {
-            Program.debugPrint("Cannot load " + configFile);
+            Program.debugPrint("Cannot load " + rovConfig);
         //}
     }
 }
 
 /*
  *  ======== fetchConstructObjects ========
- *  Reads constructed objects from object file and user specified json file
- *
- *  This function parses object file to find the constructed objects.
- *  Alternatively, the user can specify a json file with .rov.json extension
- *  with an array of constructed objects.
- *  Example:
- *     [
- *        {
- *           "type": "ti_sysbios_knl_Task_Struct",
- *           "name": "tStruct",
- *        },
- *        {
- *           "type": "ti_sysbios_knl_Task_Struct",
- *           "name": "tStruct2",
- *        },
- *        {
- *           "type": "ti_sysbios_knl_Semaphore_Struct",
- *           "name": "sem",
- *        },
- *     ]
- *
- *   The .rov.json should of the same name as the executable (.out) and
- *   can be in the same directory as, one directory level above or two directory
- *   levels above the executable.
+ *  Reads constructed objects from the object file
  */
 function fetchConstructObjects(executable)
 {
@@ -561,56 +617,9 @@ function fetchConstructObjects(executable)
     var binaryParser = "";
     var ofReader = null;
 
-    /* Read from the .rov.json */
-    try {
-        var constructFilePath = locateFile(executable, ".rov.json");
-        if (constructFilePath != "") {
-            var File = xdc.useModule('xdc.services.io.File');
-            var constructFile = File.open(constructFilePath, "r");
-
-            var constructText = "";
-            var line;
-            while ((line = constructFile.readLine()) != null) {
-                constructText += line;
-            }
-            constructFile.close();
-
-            /* Convert json text to javascript object */
-            if (constructText.trim().length == 0) {
-                // empty file, just return to avoid an exception from eval
-                Program.$$bind('$constructInst', constructInstArr);
-                return;
-            }
-            var constructInst2 = eval('(' + constructText + ')');
-
-            /* Run through all the user specified construct objects */
-            for (var i = 0; i < constructInst2.length; i++) {
-                var varObj = {};
-                varObj.name = constructInst2[i].name;
-                varObj.type = constructInst2[i].type;
-                varObj.addr = constructInst2[i].addr;
-                varObj.offset = 0;
-                if (constructInst2[i].offset != undefined) {
-                    varObj.offset = constructInst2[i].offset;
-                    varObj.name = varObj.name + "." + varObj.offset;
-                }
-
-                /* Add it to an Array */
-                constructInstArr[varObj.name] = varObj;
-            }
-            /* Add it to the Program instance for later use */
-            Program.$$bind('$constructInst', constructInstArr);
-            return;
-        }
-    }
-    catch(e) {
-        Program.debugPrint("Can't find " + constructFilePath + ". "
-            + e.toString());
-    }
-
     /* Read from the object file */
     try {
-        binaryParser = Program.build.target.binaryParser; 
+        binaryParser = Program.build.target.binaryParser;
         if (binaryParser !== undefined) {
 
             /* Parse the package name from the class name so we can load it. */
@@ -674,10 +683,10 @@ function fetchConstructObjects(executable)
 }
 
 /*
- *  ======== locate file ========
- *  Find a file with the supplied extension along the executable
+ *  ======== locate the ROV config file ========
+ *  Find a file with the exe's name but with a ".rov.js" extension
  */
- function locateFile(mainExec, extension)
+ function locateRovFile(mainExec, extension)
 {
     try {
         var ePath = mainExec.replace(/\\/g, '/');
@@ -703,7 +712,37 @@ function fetchConstructObjects(executable)
     }
     return("");
 }
+
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 5-15-2019 11:21:43; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  ======== locate the sysconfig ROV file ========
+ */
+function locateSysconfigFile(mainExec) {
+    var sysconfigFile = "syscfg_c.rov.xs";
+    try {
+        var ePath = mainExec.replace(/\\/g, '/');
+        var fPath = ePath.substring(0, ePath.lastIndexOf('/') + 1);
+
+        /* Search for the file */
+        var locatedFile = "";
+        var File = xdc.useModule('xdc.services.io.File');
+        if (File.exists(fPath + sysconfigFile)) {
+            locatedFile = fPath + sysconfigFile;
+        }
+        else if (File.exists(fPath + "syscfg/" + sysconfigFile)) {
+            locatedFile = fPath + "syscfg/" + sysconfigFile;
+        }
+        if (locatedFile != "") {
+            return (String(File.getCanonicalPath(locatedFile)));
+        }
+    }
+    catch(e) {
+        Program.debugPrint("Cannot open " + sysconfigFile + ": "
+            + e.toString());
+    }
+    return("");
+
+}
+/*
+ *  @(#) xdc.rov; 1, 0, 1,0; 2-9-2020 18:49:04; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

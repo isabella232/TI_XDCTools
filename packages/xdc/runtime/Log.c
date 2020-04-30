@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -49,7 +49,7 @@ Void Log_doPrint(Log_EventRec *er)
     Bits32 hi, lo;
 
     /* print serial number if there is one; 0 isn't a valid serial number */
-    if (er->serial) {
+    if (er->serial != 0U) {
         (void)System_printf(SERIAL, er->serial);
     }
 
@@ -58,7 +58,7 @@ Void Log_doPrint(Log_EventRec *er)
     lo = er->tstamp.lo;
     if (lo != ~0U && hi != ~0U) {
         (void)System_printf("[t=0x");
-        if (hi) {
+        if (hi != 0U) {
             (void)System_printf(HI, hi);
         }
         (void)System_printf(LO, lo);
@@ -94,6 +94,6 @@ Void Log_doPrint(Log_EventRec *er)
     System_putch('\n');
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

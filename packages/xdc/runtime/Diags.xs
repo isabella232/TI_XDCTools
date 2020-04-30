@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -29,9 +29,8 @@ function needsDiagsMask(mod)
     /* The XOR clause only verifies if there are bits that could be ON at the
      * runtime (diagsIncluded), but are not ALWAYS_ON (diagsEnabled), which
      * means they are RUNTIME_ON or RUNTIME_OFF (the 1^0 case).
-     * The 0^1 case, in which a bit can't be ON, but is ALWAYS_ON 
-     * is not possible. The cases 0^0 and 1^1 don't require a mask
-     * at the runtime.
+     * The 0^1 case, in which a bit can't be ON, but is ALWAYS_ON is not
+     * possible. The cases 0^0 and 1^1 don't require a mask at the runtime.
      */
     return (mod.Module__diagsIncluded ^ mod.Module__diagsEnabled);
 }
@@ -58,44 +57,16 @@ function initCategories()
  */
 function module$use()
 {
-    /* We decide if we should load Registry based on the runtime support 
-     * package. If that package is built with the newer version of
-     * 'xdc.runtime', Registry code is available in the runtime support package
-     * and we load Registry.
+    xdc.useModule("xdc.runtime.Registry");
+
+    /* If Diags is used, Logs or Asserts might be required, but we would have
+     * to go through all bits to figure out which of these modules are
+     * needed. It's easier just to include them both because an app that
+     * includes Diags is not being built for minimal footprint, and the linker
+     * will eliminate whatever was not needed.
      */
-    var rts = Program.build.target.rts;
-    if ("rtsName" in Program.build) {
-        rts = Program.build.rtsName;
-    }
-    if (rts) {
-        var rtsPkg = xdc.loadPackage(rts, true);
-        var xml = null;
-        var xmlFile = xdc.findFile(rts.replace(".", "/")
-                                   + "/package/package.rel.xml");
-        if (xmlFile) {
-            xml = xdc.loadXML(xmlFile);
-        }
-        else {
-            xmlFile = xdc.findFile(rts.replace(".", "/") + "/package/rel/"
-                + rts.replace(".", "_") + "/" + rts.replace(".", "/")
-                + "/package/package.rel.xml");
-            if (xmlFile) {
-                xml = xdc.loadXML(xmlFile);
-            }
-        } 
-        if (xml == null) {
-            xdc.useModule('xdc.runtime.Registry');
-            return;
-        }
-        for (var i in xml.references["package"]) {
-            if (xml.references["package"][i].@name == "xdc.runtime") {
-                var vers = xml.references["package"][i].@version;
-                if (vers >= "2, 1, 0") {
-                    xdc.useModule('xdc.runtime.Registry');
-                }
-            }
-        }
-    }
+    xdc.useModule("xdc.runtime.Log");
+    xdc.useModule("xdc.runtime.Assert");
 }
 
 /*
@@ -116,14 +87,14 @@ function module$static$init(obj, params)
         var dmask = 0; /* bits that are ON initially */
 
         for each (var dc in CATEGORIES) {
-            
-            /* 
-             * Deprecate USER7 and USER8 and warn the user appropriately. 
+
+            /*
+             * Deprecate USER7 and USER8 and warn the user appropriately.
              * This API will ensure that INFO == USER7 and ANALYSIS ==
              * USER8 so that we don't have conflicting values.
              */
             deprecateUser7And8(this, mod, dc);
-        
+
             switch (mod.common$['diags_' + dc]) {
                 case this.ALWAYS_OFF:
                     break;
@@ -203,16 +174,16 @@ function deprecateUser7And8(diagsMod, mod, dc)
             var msg = mod.$name + ".common$.diags_USER7 has been modified "
                       + "from its default. Diags.USER7 has been deprecated "
                       + "and is now equivalent to Diags.INFO.";
-            
+
             /* If INFO has been modified, give its value priority. */
             if (mod.common$.diags_INFO != diagsMod.ALWAYS_OFF) {
                 var msg2 = msg + " diags_INFO has also been changed from its "
                            + "default, so the value "
                            + String(mod.common$.diags_INFO) + " from INFO "
                            + "will be used.";
-            
+
                 diagsMod.$logWarning(msg2, mod, "diags_USER7");
-              
+
                 /* Make USER7 equivalent to INFO */
                 mod.common$.diags_USER7 = mod.common$.diags_INFO;
             }
@@ -222,9 +193,9 @@ function deprecateUser7And8(diagsMod, mod, dc)
                            + "default, so the value "
                            + String(mod.common$.diags_USER7) + " from USER7 "
                            + "will be used.";
-                
+
                 diagsMod.$logWarning(msg2, mod, "diags_USER7"); 
-                
+
                 /* Make INFO equivalent to USER7 */
                 mod.common$.diags_INFO = mod.common$.diags_USER7;
             }
@@ -238,20 +209,20 @@ function deprecateUser7And8(diagsMod, mod, dc)
         && mod.common$.diags_USER8 != mod.common$.diags_ANALYSIS) {
         /* If the user has modified USER8 independently of ANALYSIS */
         if (mod.common$.diags_USER8 != diagsMod.ALWAYS_OFF) {
-            
+
             var msg = mod.$name + ".common$.diags_USER8 has been modified "
                       + "from its default. Diags.USER8 has been deprecated "
                       + "and is now equivalent to Diags.ANALYSIS.";
-            
+
             /* If ANALYSIS has also been modified, give its value priority. */
             if (mod.common$.diags_ANALYSIS != diagsMod.ALWAYS_OFF) {
                 var msg2 = msg + " diags_ANALYSIS has also been changed from "
                            + "its default, so the value "
                            + String(mod.common$.diags_ANALYSIS)
                            + " from ANALYSIS will be used.";
-                
+
                 diagsMod.$logWarning(msg2, mod, "diags_USER8");
-              
+
                 /* Make USER8 equivalent to ANALYSIS */
                 mod.common$.diags_USER8 = mod.common$.diags_ANALYSIS;
             }
@@ -261,9 +232,9 @@ function deprecateUser7And8(diagsMod, mod, dc)
                            + "its default, so the value "
                            + String(mod.common$.diags_USER8) + " from USER8 "
                            + "will be used.";
-                
-                diagsMod.$logWarning(msg2, mod, "diags_USER8"); 
-                
+
+                diagsMod.$logWarning(msg2, mod, "diags_USER8");
+
                 /* Make ANALYSIS equivalent to USER8 */
                 mod.common$.diags_ANALYSIS = mod.common$.diags_USER8;
             }
@@ -588,6 +559,6 @@ function addRuntimeMaskView(pkgNode, maskView, mod, mask)
     pkgNode.properties[pkgNode.properties.length++] = maskView;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

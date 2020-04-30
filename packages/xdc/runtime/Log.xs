@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -24,7 +24,7 @@ var Diags = xdc.module('xdc.runtime.Diags');
 function lookupEventMessage(eventId)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
+
     /* Get the Log module's configuration object. */
     var cfg = Program.getModuleConfig('xdc.runtime.Log');
 
@@ -52,7 +52,7 @@ function getTargetArgSize()
 function lookupEventName(eventId)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
+
     /* Get the Log module's configuration object. */
     var cfg = Program.getModuleConfig('xdc.runtime.Log');
 
@@ -104,6 +104,13 @@ function Event$encode(desc)
     var encodedDesc = "0";
 
     if (desc) {
+        /* If Log calls are eliminated from the source code in case of custom
+         * builds, we don't need Log events.
+         */
+        if (desc.$private.id == $$NOGEN) {
+            return($$NOGEN);
+        }
+
         /*
          * Determine the event's priority. If none is specified, give it the
          * max priority so that it isn't inadvertently filtered out.
@@ -141,6 +148,14 @@ function Event$sizeof()
 }
 
 /*
+ *  ======== module$use ========
+ */
+function module$use() 
+{
+    xdc.useModule('xdc.runtime.Diags');
+}
+
+/*
  *  ======== module$static$init ========
  */
 function module$static$init(obj, params)
@@ -161,7 +176,7 @@ function module$static$init(obj, params)
             for each (var cn in mod.$$logEvtCfgs) {
                 var desc = mod[cn];
                 /* If Text is disabled, there are no strings in Text to manage
-                 * and we don't want anything in 'idToInfo' and no warning about 
+                 * and we don't want anything in 'idToInfo' and no warning about
                  * the same ids.
                  */
                 if (Text.isLoaded) {
@@ -190,39 +205,12 @@ function module$static$init(obj, params)
         /* "inherit" the default logger */
         mod.Module__loggerObj = mod.common$.logger;
 
-        /* If the module's header file was built with a version of XDCtools
-         * prior to 3.20, we don't want to generate objects for new ILogger
-         * functions because the original header files do not define the
-         * required types. We have to do it for all modules even if they do
-         * not have loggers.
-         */
-        
-	var origVers = pkgVers[mod.$package.$name];
-        if (origVers === undefined) {
-	    /* get xdc version used to build mod.$package */
-	    origVers = Packages.xdc.services.global.Vers.getXdcString(
-		mod.$package.packageBase + "/package/package.defs.h");
-	    pkgVers[mod.$package.$name] = origVers;
-	}
-        if (!origVers || (origVers < "xdc-v14" && origVers >= "xdc-a00")) {
-            if (mod.$sealed("Module__loggerFxn0")) {
-                mod.$unseal("Module__loggerFxn0");
-                mod.$unseal("Module__loggerFxn1");
-                mod.$unseal("Module__loggerFxn2");
-            }
-            mod.Module__loggerFxn0 = $$NOGEN;
-            mod.Module__loggerFxn1 = $$NOGEN;
-            mod.Module__loggerFxn2 = $$NOGEN;
-        }
-
         if (mod.common$.logger) {
             var cn = mod.common$.logger.$orig.$module.$name;
 
-            if (mod.Module__loggerFxn0 != "$$NOGEN") {
-                mod.Module__loggerFxn0 = $externModFxn(cn + '.write0');
-                mod.Module__loggerFxn1 = $externModFxn(cn + '.write1');
-                mod.Module__loggerFxn2 = $externModFxn(cn + '.write2');
-            }
+            mod.Module__loggerFxn0 = $externModFxn(cn + '.write0');
+            mod.Module__loggerFxn1 = $externModFxn(cn + '.write1');
+            mod.Module__loggerFxn2 = $externModFxn(cn + '.write2');
             mod.Module__loggerFxn4 = $externModFxn(cn + '.write4');
             mod.Module__loggerFxn8 = $externModFxn(cn + '.write8');
             mod.Module__loggerDefined = true;
@@ -360,6 +348,6 @@ function validate()
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

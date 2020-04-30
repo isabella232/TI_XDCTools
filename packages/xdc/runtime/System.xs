@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -52,32 +52,41 @@ function module$use()
         xdc.useModule(this.SupportProxy.delegate$.$name);
     }
 
-    xdc.useModule('xdc.runtime.Assert');
     xdc.useModule('xdc.runtime.Core');
     xdc.useModule('xdc.runtime.Defaults');
-    xdc.useModule('xdc.runtime.Diags');
     xdc.useModule('xdc.runtime.Error');
     xdc.useModule('xdc.runtime.Gate');
-    xdc.useModule('xdc.runtime.Log');
     xdc.useModule('xdc.runtime.Main');
     xdc.useModule('xdc.runtime.Startup');
-    xdc.useModule('xdc.runtime.Text');
-    
+    /* One reason to use Text is if namedInstance == TRUE for at least one
+     * module. However, adding that check, and even this check below don't
+     * have any effect because Error will unconditionally bring Text. Only if
+     * that changes, the if statement below should be uncommented.
+     */
+//    if (this.extendedFormats &&
+//        (this.extendedFormats.search(/\$L/) != -1
+//        || this.extendedFormats.search(/\$F/) != -1)) {
+//        xdc.useModule('xdc.runtime.Text');
+//    }
+    if (this.extendedFormats && (this.extendedFormats.search(/f/) != -1)) {
+        xdc.useModule('xdc.runtime.Assert');
+    }
+
     Program.exportModule('xdc.runtime.Startup');
 
     Program.symbol["xdc_runtime_Startup__EXECFXN__C"] = 1;
     Program.symbol["xdc_runtime_Startup__RESETFXN__C"] = 1;
-    
+
     this.$package.Types.$used = false;
 
     this.$$bind('$$scope', 1);
- 
+
     /* if it is a native target add the lastFxn */
     if (!(Program.build.target.os === undefined)) {
-        /* 
+        /*
          * Don't call atexit() until all modules have been initialized.
          * atexit() needs malloc(), and malloc() needs heaps, which aren't
-         * necessarily initialized until all module startups are done. 
+         * necessarily initialized until all module startups are done.
          */
         var Startup = xdc.useModule('xdc.runtime.Startup');
         Startup.lastFxns.$add(this.lastFxn);
@@ -90,18 +99,18 @@ function module$use()
 function module$static$init(mod, params)
 {
     mod.numAtexitHandlers = this.exitFxns.length;
-    
+
     /* Create only if there will be handlers */
     if (params.maxAtexitHandlers != 0) {
         mod.atexitHandlers.length = params.maxAtexitHandlers;
         xdc.module('xdc.runtime.Memory').staticPlace(mod.atexitHandlers,
             0, null);
     }
-    
+
     for (var i = 0; i < this.exitFxns.length; i++) {
         mod.atexitHandlers[i] = this.exitFxns[i];
     }
-    
+
     /* Need to null out the rest */
     for (var i = this.exitFxns.length; i < mod.atexitHandlers.length; i++) {
         mod.atexitHandlers[i] = null;
@@ -186,7 +195,7 @@ function formatNum(num, base)
 function module$view$init(view, mod)
 {
     var Model = xdc.useModule("xdc.rov.Model");
-    
+
     /* TODO: fetch atexithandlers and get symbols for them */
     view.numAtexitHandlers = mod.numAtexitHandlers;
 }
@@ -200,31 +209,31 @@ function viewInitXdcRoot(view)
     var Program = xdc.useModule('xdc.rov.Program');
 
     var elements = new Array();
-    
-    /* 
+
+    /*
      * Create a view element to hold a note about the purpose of this view.
-     * It deserves clarification that this is the path used to run ROV, not 
+     * It deserves clarification that this is the path used to run ROV, not
      * necessarily what was used to build the application.
      */
     var elem = Program.newViewStruct('xdc.runtime.System', 'XDCROOT');
     elem.entry = "The path to the version of XDCtools which is currently " +
                  "being used to run ROV.";
-    elements[elements.length] = elem;    
-    
+    elements[elements.length] = elem;
+
     /* Add a blank line to create separation from the note. */
     elem = Program.newViewStruct('xdc.runtime.System', 'XDCROOT');
     elem.entry = "";
     elements[elements.length] = elem;
-    
+
     /* Create a view element to hold the path. */
     elem = Program.newViewStruct('xdc.runtime.System', 'XDCROOT');
 
-    /* 
-     * Retrieve the xdc root path from the 'xdc.root' property set when the 
+    /*
+     * Retrieve the xdc root path from the 'xdc.root' property set when the
      * ROV server was created.
      */
     elem.entry = xdc.jre.java.lang.System.getProperty("xdc.root");
-    
+
     /* Add the view element to the display. */
     elements[elements.length] = elem;
     view.elements = elements;
@@ -241,8 +250,8 @@ function viewInitXdcPath(view)
 
     var elements = new Array();
 
-    /* 
-     * Create a view element to hold a note about the purpose of this view. 
+    /*
+     * Create a view element to hold a note about the purpose of this view.
      * It's important to clarify that these paths are used to run ROV, and not
      * necessarily used to build the application.
      */
@@ -250,17 +259,17 @@ function viewInitXdcPath(view)
     elem.entry = "The paths to the repositories which are currently being " +
                  "used to run ROV.";
     elements[elements.length] = elem; 
-    
+
     /* Add a blank line to create separation from the note. */
     elem = Program.newViewStruct('xdc.runtime.System', 'XDCPATH');
     elem.entry = "";
     elements[elements.length] = elem;
-    
-    /* 
+
+    /*
      * Retrieve the entire XDC path from the 'xdc.path' property set when
      * the ROV server was created.
      */
-    var xdcPath = String(xdc.jre.java.lang.System.getProperty("xdc.path")); 
+    var xdcPath = String(xdc.jre.java.lang.System.getProperty("xdc.path"));
     
     /* Split the xdc path into an array of path entries, delimited by ';'. */
     var entries = xdcPath.split(';');
@@ -278,8 +287,8 @@ function viewInitXdcPath(view)
         
         /* Add the path entry to the view. */
         elem.entry = entry;
-        elements[elements.length] = elem;    
-    }   
+        elements[elements.length] = elem;
+    }
     
     view.elements = elements;
 }
@@ -320,8 +329,7 @@ function validate()
                        this, "abortFxn");
     }
 }
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

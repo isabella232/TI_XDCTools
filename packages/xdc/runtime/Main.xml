@@ -18,7 +18,7 @@ Contributors:
 <page name="Module" title="Module Settings">
 <html><body>
   <table>
-  <tr><td colspan="2">  <form><p>The options provided by the Main module apply to any code that is not part of a module's implementation, in other words, all "ordinary" application code.  This allows any new or existing C code to take advantage of runtime diagnostics by simply including the appropriate xdc.runtime header and referencing the API's provided. </p><p>For a simple example that uses the Log API's, see the Log <a href="http://rtsc.eclipse.org/docs-tip/Using_xdc.runtime_Logging/Example_1">"hello world" example</a> maintained in the <a href="http://rtsc.eclipse.org/docs">RTSCpedia.</a></p><p></p></form></td></tr>
+  <tr><td colspan="2">  <form><p>The options provided by the Main module apply to any code that is not part of a module's implementation, in other words, all "ordinary" application code.  This allows any new or existing C code to take advantage of runtime diagnostics by simply including the appropriate xdc.runtime header and referencing the API's provided. </p><p>For a simple example that uses the Log API's, see the Log <a href="http://rtsc.eclipseprojects.io/docs-tip/Using_xdc.runtime_Logging/Example_1">"hello world" example</a> maintained in the <a href="http://rtsc.eclipseprojects.io/docs">RTSCpedia.</a></p><p></p></form></td></tr>
 
   <tr><td colspan="2">
     <control type="checkbox" label="Add Main to my configuration" value="value:this.$used" bold="true"/></td>
@@ -97,7 +97,7 @@ Contributors:
 
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

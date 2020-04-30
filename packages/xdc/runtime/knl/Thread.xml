@@ -7,9 +7,9 @@
   <tr>
       <td><form>
         <p>This module manages threads through a proxy which inherits from
-		   <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/IThreadSupport.html"> IThreadSupport </a>         
+		   <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/IThreadSupport.html"> IThreadSupport </a>         
            interface. It has a module wide config parameter 
-		   <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/Thread.html#.Proxy"> Proxy </a> 
+		   <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/Thread.html#.Proxy"> Proxy </a> 
            which needs to be bound to an OS specific delegate before this module can be used.</p>
         <p> </p>
       </form></td>
@@ -109,7 +109,7 @@
 
 <!--
 /*
- * @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

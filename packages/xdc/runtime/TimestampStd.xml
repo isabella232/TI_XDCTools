@@ -18,7 +18,7 @@ Contributors:
 <page>
 <html><body>
   <table>
-    <tr><td colspan="2">  <form><p>This module provides time values for the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/Timestamp.html">Timestamp</a> module.  In this case, the value from the ANSI C standard clock() function is always returned.</p><p></p></form></td></tr>
+    <tr><td colspan="2">  <form><p>This module provides time values for the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/Timestamp.html">Timestamp</a> module.  In this case, the value from the ANSI C standard clock() function is always returned.</p><p></p></form></td></tr>
 
     <tr><td colspan="2">
       <control type="checkbox" label="Add TimestampStd to my configuration" value="value:this.$used" bold="true"/></td>
@@ -30,7 +30,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

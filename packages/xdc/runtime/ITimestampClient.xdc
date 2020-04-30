@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -31,11 +31,12 @@ interface ITimestampClient {
      *  Return a 32-bit timestamp
      *
      *  @a(returns)
-     *  Returns a 32-bit timestamp value.  
+     *  Returns a 32-bit timestamp value.
      *  Use `{@link #getFreq}` to convert this value into units of real time.
      *
      *  @see #get64
      */
+    /* REQ_TAG(SYSBIOS-883) */
     Bits32 get32();
 
     /*!
@@ -49,15 +50,16 @@ interface ITimestampClient {
      *
      *      If the underlying hardware does not support 64-bit resolution, the
      *      `hi` field of `result` is always set to 0; see
-     *      `{@link xdc.runtime.Types#Timestamp64}`.  So, it is possible for 
+     *      `{@link xdc.runtime.Types#Timestamp64}`.  So, it is possible for
      *      the `lo` field to wrap around without any change to the `hi` field.
-     *      Use `{@link #getFreq}` to convert this value into units of real 
+     *      Use `{@link #getFreq}` to convert this value into units of real
      *      time.
      *
      *  @see #get32
      */
+    /* REQ_TAG(SYSBIOS-884) */
     Void get64(Types.Timestamp64 *result);
-    
+
     /*!
      *  ======== getFreq ========
      *  Get the timestamp timer's frequency (in Hz)
@@ -73,9 +75,10 @@ interface ITimestampClient {
      *  @see #get32
      *  @see #get64
      */
+    /* REQ_TAG(SYSBIOS-885) */
     Void getFreq(Types.FreqHz *freq);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

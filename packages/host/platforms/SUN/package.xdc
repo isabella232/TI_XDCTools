@@ -23,6 +23,6 @@ package host.platforms.SUN [1,0,0,1] {
     module SunSparc7;
 }
 /*
- *  @(#) host.platforms.SUN; 1, 0, 0, 1,0; 5-15-2019 11:20:14; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) host.platforms.SUN; 1, 0, 0, 1,0; 2-9-2020 18:48:25; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

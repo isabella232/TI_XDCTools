@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -38,10 +38,12 @@
 #define xdc_runtime_knl_SemProcess__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_SemProcess___VERS 200
@@ -343,45 +345,45 @@ __extern void xdc_runtime_knl_SemProcess_destruct(xdc_runtime_knl_SemProcess_Str
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Handle__label__S, "xdc_runtime_knl_SemProcess_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_knl_SemProcess_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_knl_SemProcess_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Module__startupDone__S, "xdc_runtime_knl_SemProcess_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_SemProcess_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_SemProcess_Module__startupDone__S( void);
 
 /* Object__create__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Object__create__S, "xdc_runtime_knl_SemProcess_Object__create__S")
-__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb);
 
 /* Object__delete__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Object__delete__S, "xdc_runtime_knl_SemProcess_Object__delete__S")
-__extern xdc_Void xdc_runtime_knl_SemProcess_Object__delete__S( xdc_Ptr instp );
+__extern xdc_Void xdc_runtime_knl_SemProcess_Object__delete__S( xdc_Ptr instp);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Object__get__S, "xdc_runtime_knl_SemProcess_Object__get__S")
-__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Object__first__S, "xdc_runtime_knl_SemProcess_Object__first__S")
-__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Object__next__S, "xdc_runtime_knl_SemProcess_Object__next__S")
-__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_knl_SemProcess_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_knl_SemProcess_Params__init__S, "xdc_runtime_knl_SemProcess_Params__init__S")
-__extern xdc_Void xdc_runtime_knl_SemProcess_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_knl_SemProcess_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* pend__E */
 #define xdc_runtime_knl_SemProcess_pend xdc_runtime_knl_SemProcess_pend__E
 xdc__CODESECT(xdc_runtime_knl_SemProcess_pend__E, "xdc_runtime_knl_SemProcess_pend")
-__extern xdc_Int xdc_runtime_knl_SemProcess_pend__E( xdc_runtime_knl_SemProcess_Handle __inst, xdc_UInt timeout, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_SemProcess_pend__E( xdc_runtime_knl_SemProcess_Handle instp, xdc_UInt timeout, xdc_runtime_Error_Block *eb);
 
 /* post__E */
 #define xdc_runtime_knl_SemProcess_post xdc_runtime_knl_SemProcess_post__E
 xdc__CODESECT(xdc_runtime_knl_SemProcess_post__E, "xdc_runtime_knl_SemProcess_post")
-__extern xdc_Bool xdc_runtime_knl_SemProcess_post__E( xdc_runtime_knl_SemProcess_Handle __inst, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_SemProcess_post__E( xdc_runtime_knl_SemProcess_Handle instp, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -488,8 +490,8 @@ static inline void xdc_runtime_knl_SemProcess_Params_copy(xdc_runtime_knl_SemPro
 #define xdc_runtime_knl_SemProcess_Object_sizeof() xdc_runtime_knl_SemProcess_Object__sizeof__C
 
 /* Object_get */
-static inline xdc_runtime_knl_SemProcess_Handle xdc_runtime_knl_SemProcess_Object_get(xdc_runtime_knl_SemProcess_Instance_State *oarr, int i);
-static inline xdc_runtime_knl_SemProcess_Handle xdc_runtime_knl_SemProcess_Object_get(xdc_runtime_knl_SemProcess_Instance_State *oarr, int i) 
+static inline xdc_runtime_knl_SemProcess_Handle xdc_runtime_knl_SemProcess_Object_get(xdc_runtime_knl_SemProcess_Object *oarr, int i);
+static inline xdc_runtime_knl_SemProcess_Handle xdc_runtime_knl_SemProcess_Object_get(xdc_runtime_knl_SemProcess_Object *oarr, int i) 
 {
     return (xdc_runtime_knl_SemProcess_Handle)xdc_runtime_knl_SemProcess_Object__get__S(oarr, i);
 }
@@ -635,6 +637,6 @@ struct xdc_runtime_knl_SemProcess_Object {
 #endif /* xdc_runtime_knl_SemProcess__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

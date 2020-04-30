@@ -30,22 +30,11 @@
     }
 %%}
 /*
- * Startup_reset__I is an internal entry point called by target/platform
- * boot code. Boot code is not brought into a partial-link assembly. So,
- * without this pragma, whole program optimizers would otherwise optimize-out
- * this function.
+ * Startup_reset__I is an internal entry point called by target/platform boot
+ * code. Boot code is not brought into a partial-link assembly. So, without this
+ * pragma, whole program optimizers would otherwise optimize-out this function.
  */
-#ifdef __ti__
-#pragma FUNC_EXT_CALLED(xdc_runtime_Startup_reset__I);
-#endif
-
-#ifdef __GNUC__
-#if defined(__clang__) && defined (__ti__)
 xdc_Void xdc_runtime_Startup_reset__I(void) __attribute__ ((used));
-#else
-xdc_Void xdc_runtime_Startup_reset__I(void) __attribute__ ((externally_visible));
-#endif
-#endif
 
 %for (var i = 0; i < cnames.length; i++) {
 extern xdc_Void `cnames[i]`(void);  /* user defined reset function */
@@ -65,7 +54,7 @@ xdc_Void xdc_runtime_Startup_reset__I(void)
 }
 %%{
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 
 %%}

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -12,12 +12,12 @@
 
 /*
  *  ======== Program ========
- *  This module is structured such that all of the work of fetching and 
+ *  This module is structured such that all of the work of fetching and
  *  decoding structures is handled by the decoder, and all processing of view
  *  init code is done by Program.
  *
  *  The caching policy is that caching is done by the callee, so Program may
- *  request data from the decoder and expect that if the data is already 
+ *  request data from the decoder and expect that if the data is already
  *  available the decoder will return immediately.
  */
 
@@ -33,12 +33,12 @@ var Model = xdc.module("xdc.rov.Model");
 /*
  *  ======== getSupportedTabs ========
  *  Functions of the form view$init$instance$* and view$init$module$* define
- *  the set of tabs supported by the module. 
+ *  the set of tabs supported by the module.
  */
 function getSupportedTabs(modName)
 {
     /*
-     * Don't use getModuleDesc in order to avoid running useModule. 
+     * Don't use getModuleDesc in order to avoid running useModule.
      * The initial call of useModule will take the longest, so put it off
      * until we have to.
      */
@@ -58,7 +58,7 @@ function getSupportedTabs(modName)
         tabs[tabs.length] = tab;
         return (tabs);
     }
-    
+
     /* Find the supported tabs in the module's view map */
     if (mod.viewInfo != null) {
         for each (var viewName in mod.viewInfo.viewMap.$keys) {
@@ -67,20 +67,20 @@ function getSupportedTabs(modName)
             tab.type = Program.getViewType(modName, viewName);
             tabs[tabs.length] = tab;
         }
-        
+
         /* Don't add the raw tab if showRawTab is false */
         if (mod.viewInfo.showRawTab == false) {
             return (tabs);
         }
     }
-    
+
     /* if mod.viewInfo.showRawTab is true, add the Raw tab */
     var ViewInfo = xdc.useModule('xdc.rov.ViewInfo');
     var tab = new Program.Tab();
     tab.name = "Raw";
     tab.type = String(ViewInfo.RAW);
     tabs[tabs.length] = tab;
-    
+
     return (tabs);
 }
 
@@ -96,10 +96,10 @@ function getViewType(modName, tabName)
         var ViewInfo = xdc.useModule('xdc.rov.ViewInfo');
         return (String(ViewInfo.RAW));
     }
-    
+
     var mod = this.getModuleDesc(modName);
 
-    /* 
+    /*
      * If the load failed, there is only one tab, which will display
      * an error message.
      */
@@ -107,15 +107,15 @@ function getViewType(modName, tabName)
         var ViewInfo = xdc.useModule('xdc.rov.ViewInfo');
         return (String(ViewInfo.RAW));
     }
-    
-    /* Throw an error if the module does not support the tab */   
-    if ((mod.viewInfo == null) || 
+
+    /* Throw an error if the module does not support the tab */
+    if ((mod.viewInfo == null) ||
         !(tabName in mod.viewInfo.viewMap)) {
         throw (new Error("Tab " + tabName + " not in module " + modName));
     }
     return  String(mod.viewInfo.viewMap[tabName].type);
 }
- 
+
 /*
  *  ======== scanModuleView ========
  *  Processes the specified module-level view of the specified module.
@@ -128,13 +128,13 @@ function scanModuleView(modName, args)
     var tabArgs = _getTabArgs(args);
 
     var modDesc = this.getModuleDesc(modName);
-    
+
     /* Verify the module supports the requested tab */
     if (!modSupportsTab(modName, tabName)) {
-        throw (new Error(modName + " does not support the tab '" 
+        throw (new Error(modName + " does not support the tab '"
                          + tabName + "'"));
     }
-    
+
     /* Check if the requested view has already been scanned */
     if (modDesc.viewMap[tabName] != undefined) {
         /* Before returning it, check if there were any problems */
@@ -142,8 +142,8 @@ function scanModuleView(modName, args)
         if (throwScanErrors) {
             for (var field in view.$status) {
                 if (view.$status[field]) {
-                    throw (new Error("ROV detected errors in scan of '" 
-                                     + tabName 
+                    throw (new Error("ROV detected errors in scan of '"
+                                     + tabName
                                      + "' tab for module " + modName + "."));
                 }
             }
@@ -151,30 +151,30 @@ function scanModuleView(modName, args)
         return (view);
     }
 
-    /*  
+    /*
      *  Make sure the module state is read in. Returns immediately if
      *  the state is already scanned, sets modDesc.state = null if there is no
      *  module state.
      */
     this.stateReader.fetchModuleState(modDesc);
-        
+
     /* Run the view function */
     var noErrors = runViewInit(modDesc, modDesc, tabName, "module", tabArgs);
-    
-    /* 
+
+    /*
      * If there were errors, throw an exception, so that it must be caught and
      * handled if the caller wants to continue.
      */
     if (throwScanErrors && !noErrors) {
-        throw (new Error("ROV detected errors in scan of '" + tabName + 
+        throw (new Error("ROV detected errors in scan of '" + tabName +
                          "' tab for module " + modName + "."));
     }
-    
+
     /* Return the view */
     return (modDesc.viewMap[tabName]);
 }
 
-/* 
+/*
  *  ======== scanInstanceView ========
  *  Checks to see if the particular instance view has already been scanned.
  *  If it has, it simply returns. Otherwise, it calls in to the decoder as
@@ -185,15 +185,16 @@ function scanModuleView(modName, args)
  *  }
  */
 function scanInstanceView(modName, args)
-{   
+{
     var tabName = _getTabName(args);
     var tabArgs = _getTabArgs(args);
 
-    debugPrint("xdc.rov.Program: Scanning instance views for " + modName + " " + tabName);
-    
+    debugPrint("xdc.rov.Program: Scanning instance views for " + modName + " "
+        + tabName);
+
     /* Get the module from cache or useModule */
     var mod = this.getModuleDesc(modName);
-    
+
     /* Verify the module supports the requested tab */
     if (!modSupportsTab(modName, tabName)) {
         throw (new Error("Module does not support the requested view level"));
@@ -201,22 +202,22 @@ function scanInstanceView(modName, args)
     if (!('Instance_State' in mod.useMod)) {
         throw (new Error("Calling scanInstance on module that does not support instances"));
     }
-    
-    /* 
-     * Scan in the instance state structures. 
-     * Returns immediately if they were already scanned. 
+
+    /*
+     * Scan in the instance state structures.
+     * Returns immediately if they were already scanned.
      */
     this.stateReader.fetchAllInstStates(mod);
-       
+
     /* If there are no instances, return an empty array */
     if (mod.instances.length == 0) {
         return (new Array());
     }
-    
+
     /* If we come across any problems, we'll throw an exception at the end */
     var error = false;
-    
-    /* 
+
+    /*
      * At this point, we have the instance states, but may not
      * have the requested view.
      *
@@ -224,33 +225,33 @@ function scanInstanceView(modName, args)
      * by tabName, then add the resulting view to the instance's $viewMap.
      */
     debugPrint("xdc.rov.Program: Number of instances = " + mod.instances.length);
-    for each (var instDesc in mod.instances) {        
-        debugPrint("xdc.rov.Program: Running view init on inst = 0x" 
+    for each (var instDesc in mod.instances) {
+        debugPrint("xdc.rov.Program: Running view init on inst = 0x"
                    + Number(instDesc.state.$addr).toString(16));
- 
+
         var res = runViewInit(mod, instDesc, tabName, "instance", tabArgs);
-        
+
         /* Set the error flag true if even a single instance had errors */
         if (!res) {
             error = true;
         }
     }
-    
-    /* 
+
+    /*
      * If there were errors, throw an exception, so that it must be caught and
      * handled if the caller wants to continue.
      */
     if (throwScanErrors && error) {
-        throw (new Error("ROV detected errors in scan of '" + tabName + 
+        throw (new Error("ROV detected errors in scan of '" + tabName +
                          "' tab for module " + modName + "."));
     }
-    
+
     /* Create an array of the requested instance views to return */
     var instArr = new Array();
     for each (var inst in mod.instances) {
         instArr[instArr.length] = inst.viewMap[tabName];
     }
-    
+
     return (instArr);
 }
 
@@ -261,12 +262,12 @@ function newViewStruct(modName, tabName)
 {
     /* Verify the module and tab names are valid */
     if (!modSupportsTab(modName, tabName)) {
-        throw (new Error("Module " + modName + " does not support tab " + 
+        throw (new Error("Module " + modName + " does not support tab " +
                          tabName + "."));
     }
 
     var modDesc = this.getModuleDesc(modName);
-    
+
     var structName = modDesc.viewInfo.viewMap[tabName].structName;
 
     /* Verify the specified structure exists in the module */
@@ -274,9 +275,9 @@ function newViewStruct(modName, tabName)
         throw (new Error("Module " + modName + " does not contain the " +
                          "view structure " + structName));
     }
-    
+
     var struct = new modDesc.useMod[structName];
-    
+
     /* Create the status map and bind it to the struct */
     var status = new Object();
 
@@ -285,9 +286,9 @@ function newViewStruct(modName, tabName)
     }
     struct.$$bind('$status', status);
 
-    // TODO: Seal the map's domain? Would need to add address field before 
+    // TODO: Seal the map's domain? Would need to add address field before
     // sealing.
-    
+
     return (struct);
 }
 
@@ -302,7 +303,7 @@ function scanInstanceDataView(modName, args)
 
     /* Get the module from cache or useModule */
     var modDesc = this.getModuleDesc(modName);
-    
+
     /* Verify the module supports the requested tab */
     if (!modSupportsTab(modName, tabName)) {
         throw (new Error("Module does not support the requested view level"));
@@ -313,50 +314,59 @@ function scanInstanceDataView(modName, args)
         /* TODO: Before returning check for errors; throw exception if found */
         return (modDesc.viewMap[tabName]);
     }
-    
+
     var Program = xdc.useModule('xdc.rov.Program');
-    
-    /* 
+
+    /*
      * If there is any problem reading any of the state structures,
      * the scan will throw an exception.
      */
     var rawView = Program.scanRawView(modName);
-   
+
     var viewInitFunc = getViewInitFunc(modDesc, tabName);
 
     var dataArr = new Array();
 
     /* Track whether any errors were encountered */
     var error = false;
-    
-    /* 
-     * If the module doesn't actually have instances, just call the view 
-     * function once without passing in anything.
-     *
-     * This feature was added to support the BIOS 5 LOG view. It has been
-     * replaced by 'scanTreeTableView' and should be deprecated.
+
+    /*
+     * If the module doesn't actually have RTSC instances, as is the case for
+     * C modules just call the view function once without passing in anything.
      */
-    if (!('Instance_State' in modDesc.useMod)) {
+    if (modDesc.cfg == null) {
         try {
             dataArr = viewInitFunc.call(modDesc.userPrivate, tabArgs);
         }
         catch (e) {
-            /* 
-             * Since there are no instances, there's nowhere to report 
-             * the exception. 
+            /*
+             * Since there are no instances, there's nowhere to report
+             * the exception.
              */
             debugPrint("xdc.rov.Program: Caught exception from view init: " +
                        Program.exToString(e));
         }
-        
-        /* 
+        for (var i = 0; i < dataArr.length; i++) {
+            var viewPage = dataArr[i];
+            for (var j = 0; j < viewPage.elements.length; j++) {
+                if (viewPage.elements[j].constructor.name !=
+                    modDesc.viewInfo.viewMap[tabName].structName) {
+                        throw new Error("The view '" + tabName + "' returned "
+                            + "an object whose type is different from '"
+                            + modDesc.viewInfo.viewMap[tabName].structName
+                            + "' on the page " + i + ", row " + j + ".");
+                    }
+            }
+        }
+
+        /*
          * Check abort flag again in case the view function caught the
          * abort signal.
          */
         if (Model.getICallBackInst().getAbortFlag()) {
             throw (new Error("abort"));
         }
-        
+
         /* Add the view to the module's viewMap */
         modDesc.viewMap[tabName] = dataArr;
     }
@@ -366,43 +376,43 @@ function scanInstanceDataView(modName, args)
      */
     else {
         for each (var instDesc in modDesc.instances) {
-            
+
             var instDataView = new Program.InstDataView;
-            
+
             /* Run the view init function for this instance */
             try {
                 viewInitFunc.call(modDesc.userPrivate, instDataView, instDesc.state, tabArgs);
             }
             catch (e) {
                 var exception = "Caught exception in view init code: " + e.toString();
-                
+
                 /* Add the exception to the error map to display */
                 instDesc.errorMap[tabName] = exception;
-                
+
                 debugPrint("xdc.rov.Program: " + exception);
-                
+
                 /* Record the exception in the status table for reference */
                 addStatusEntry(modName, tabName, instDataView.label, "N/A", exception);
             }
-            
-            /* 
+
+            /*
              * Check abort flag again in case the view function caught the
              * abort signal.
              */
             if (Model.getICallBackInst().getAbortFlag()) {
                 throw (new Error("abort"));
             }
-            
+
             /* Add the view to the array to return */
             dataArr[dataArr.length] = instDataView;
-            
+
             /* Add the view to the instance's viewMap */
             instDesc.viewMap[tabName] = instDataView;
-            
-            /* 
+
+            /*
              * Check if there were any errors reported on any fields.
              * Add any errors to the status table.
-             */            
+             */
             for each (var view in instDataView.elements) {
                 for (var p in view.$status) {
                     if (view.$status[p]) {
@@ -456,24 +466,46 @@ function scanModuleDataView(modName, args)
 
     var modDataView = new Program.ModDataView;
 
-    /*
-     * If the view code throws an exception, let it propogate up and be
+    /* If the view code throws an exception, let it propagate up and be
      * displayed to the user. This means the user won't see any partial data
      * if there is any, but there's no other logical place to display the
      * exception message.
-     * C-ROV modules return a view instead of filling up 'modDataView'.
+     * C-ROV modules return a view instead of filling up 'modDataView', so we
+     * don't even pass 'modDataView'.
      */
-    var dataView = viewInitFunc.call(modDesc.userPrivate, modDataView, tabArgs);
+    var dataView;
     if (modDesc.cfg == null) {
-        /* Translate dataView into modDataView */
+        dataView = viewInitFunc.call(modDesc.userPrivate, tabArgs);
+        /* Translate dataView into modDataView. If the function did not return
+         * the right type of objects, we need to report an error because the
+         * returned object needs to have $status property for each cell. If a
+         * user invokes Program.displayError() on a view of a wrong type,
+         * there will be an assignment to an undefined property.
+         */
         if (dataView instanceof Array) {
+            if (dataView.length > 0
+                && (dataView[0].constructor.name !=
+                    modDesc.viewInfo.viewMap[tabName].structName)) {
+                throw new Error("The function '" + viewInitFunc.name + "' is "
+                    + "not returning objects of the type '"
+                    + modDesc.viewInfo.viewMap[tabName].structName + "'.");
+            }
             modDataView.elements = dataView;
         }
         else {
+            if (dataView.constructor.name !=
+                modDesc.viewInfo.viewMap[tabName].structName) {
+                throw new Error("The function '" + viewInitFunc.name + "' is "
+                    + "not returning objects of the type '"
+                    + modDesc.viewInfo.viewMap[tabName].structName + "'.");
+            }
             var ar = new Array();
             ar[0] = dataView;
             modDataView.elements = ar;
         }
+    }
+    else {
+        dataView = viewInitFunc.call(modDesc.userPrivate, modDataView, tabArgs);
     }
     /* Add the view to the module's viewMap */
     modDesc.viewMap[tabName] = modDataView;
@@ -481,7 +513,7 @@ function scanModuleDataView(modName, args)
     /* TODO - check for any errors and throw exception */
     /*
     if (error) {
-        throw (new Error("ROV detected errors in scan of '" + tabName + 
+        throw (new Error("ROV detected errors in scan of '" + tabName +
                          "' tab for module " + modName + "."));
     }
     */
@@ -502,7 +534,7 @@ function runViewInit(mod, desc, tabName, type, tabArgs)
     if (Model.getICallBackInst().getAbortFlag()) {
         throw (new Error("abort"));
     }
-    
+
     /* Check if the view has already been scanned by scanHandle */
     if (desc.viewMap[tabName] != undefined) {
         var view = desc.viewMap[tabName];
@@ -513,23 +545,23 @@ function runViewInit(mod, desc, tabName, type, tabArgs)
         }
         return (true);
     }
-    
+
     /* Create an empty view */
     var view = newViewStruct(mod.name, tabName);
-    
+
     /* Add the address field to the view structure */
     view.$$bind("address", String(desc.addr));
     view.$status["address"] = null;
-    
+
     /* Get the view$init function from the capsule */
     var viewInitFunc = getViewInitFunc(mod, tabName);
 
     try {
-        /* 
-         * Run from the context of an object the module writer can assign 
+        /*
+         * Run from the context of an object the module writer can assign
          * stuff to.
          */
-	var state = desc.state == null ? {} : desc.state;
+        var state = desc.state == null ? {} : desc.state;
         viewInitFunc.call(mod.userPrivate, view, state, tabArgs);
     }
     catch (e) {
@@ -537,27 +569,27 @@ function runViewInit(mod, desc, tabName, type, tabArgs)
 
         /* Add the exception to the descriptor so that it can be displayed */
         desc.errorMap[tabName] = exception;
-        
+
         debugPrint("xdc.rov.Program: " + exception);
 
         /* Record the exception in the status table for reference */
         addStatusEntry(mod.name, tabName, getInstLabel(desc, view), "N/A", exception);
     }
-    
-    /* 
+
+    /*
      * Check abort flag again in case the view function caught the
      * abort signal.
      */
     if (Model.getICallBackInst().getAbortFlag()) {
         throw (new Error("abort"));
     }
-    
+
     /* Add the view to the descriptor's viewMap */
     desc.viewMap[tabName] = view;
-    
-    /* 
+
+    /*
      * Check if there were any errors reported on any fields.
-     * Add any errors to the status table, and return 'false' to indicate 
+     * Add any errors to the status table, and return 'false' to indicate
      * errors are present.
      */
     var noErrors = true;
@@ -565,7 +597,7 @@ function runViewInit(mod, desc, tabName, type, tabArgs)
         if (view.$status[p]) {
             /* Record the status in the status table for reference */
             addStatusEntry(mod.name, tabName, getInstLabel(desc, view), p, view.$status[p]);
-            
+
             noErrors = false;
         }
     }
@@ -574,7 +606,7 @@ function runViewInit(mod, desc, tabName, type, tabArgs)
 
 /*
  *  ======== scanHandleView ========
- *  This function is called to scan a module from a different module's 
+ *  This function is called to scan a module from a different module's
  *  view$init code.
  *  Returns the instance object with the attached $viewMap.
  */
@@ -586,14 +618,14 @@ function scanHandleView(modName, instAddr, args)
 
     /* Read in the handle's instance state */
     var inst = this.stateReader.fetchHandleState(mod, Number(instAddr));
-        
+
     /* Check if the view has already been scanned */
     if (inst.viewMap[tabName] != undefined) {
         return (inst.viewMap[tabName]);
     }
-    
+
     runViewInit(mod, inst, tabName, "instance", tabArgs);
-    
+
     /* Return the inst object since they would have to go find it otherwise */
     return (inst.viewMap[tabName]);
 }
@@ -605,44 +637,44 @@ function scanRawView(modName)
 {
     /* Get the module from cache or useModule */
     var mod = this.getModuleDesc(modName);
-    
+
     /* Move the state data into a RawView structure to return */
     var Program = xdc.useModule('xdc.rov.Program');
     var rawView = new Program.RawView;
-    
-    /* 
-     * Make sure the module state is read in. 
+
+    /*
+     * Make sure the module state is read in.
      * Returns immediately if the state is already scanned, and returns null
      * if the module does not have module state.
      */
     this.stateReader.fetchModuleState(mod);
-        
-    rawView.modState = mod.state;   
-    
-    /* 
+
+    rawView.modState = mod.state;
+
+    /*
      * Scan in the instance state structures. Returns immediately
-     * if they were already scanned. 
+     * if they were already scanned.
      */
     if ('Instance_State' in mod.useMod) {
-        this.stateReader.fetchAllInstStates(mod);   
-        
+        this.stateReader.fetchAllInstStates(mod);
+
         var instStates = new Array();
         /* Add all of the instances... */
         for each (var inst in mod.instances) {
             instStates[instStates.length] = inst.state;
         }
-        
+
         rawView.instStates = instStates;
     }
-        
+
     rawView.modCfg = mod.cfg;
-    
+
     return (rawView);
 }
 
 /*
  *  ======== scanObjectView ========
- *  When this function returns, the object that was passed in will now have 
+ *  When this function returns, the object that was passed in will now have
  *  a $viewMap field attached where the view can be accessed.
  */
 function scanObjectView(modName, obj, args)
@@ -817,7 +849,7 @@ function getViewInitFunc(mod, tabName)
     var funcName = mod.viewInfo.viewMap[tabName].viewInitFxn;
 
     if (!(funcName in mod.useMod.$capsule)) {
-        throw (new Error("The viewInitFxn '" + funcName 
+        throw (new Error("The viewInitFxn '" + funcName
                          + "' specified for " + mod.name
                          + " - " + tabName + " does not exist."));
     }
@@ -843,12 +875,33 @@ function addCMod(cmod)
         for (var i = 0; i < cmod.viewMap.length; i++) {
             var vMap = new Array();
             //var vMap = {};
-            vMap["type"] = ViewInfo.MODULE_DATA;
+            if (cmod.viewMap[i].viewType == undefined) {
+                vMap["type"] = ViewInfo.MODULE_DATA;
+            }
+            else if (cmod.viewMap[i].viewType == "Table") {
+                vMap["type"] = ViewInfo.MODULE_DATA;
+            }
+            else if (cmod.viewMap[i].viewType == "Pages") {
+                vMap["type"] = ViewInfo.INSTANCE_DATA;
+            }
+            else {
+                throw new Error("The property viewType for the view '"
+                    + cmod.viewMap[i].name + "' in '" + cmod.capsule.$path
+                    + "' must be either 'Table' or 'Pages'.");
+            }
             vMap["viewInitFxn"] = cmod.viewMap[i].fxn;
             vMap["structName"] = cmod.viewMap[i].structName;
+            vMap["argsName"] = cmod.viewMap[i].argsName;
             mod.viewInfo.viewMap[cmod.viewMap[i].name] = vMap;
-            mod.useMod[cmod.viewMap[i].structName] =
-                cmod.capsule[cmod.viewMap[i].structName];
+            if (cmod.viewMap[i].structName in cmod.capsule) {
+                mod.useMod[cmod.viewMap[i].structName] =
+                    cmod.capsule[cmod.viewMap[i].structName];
+            }
+            else {
+                throw new Error(
+                  "The definition for " + cmod.viewMap[i].structName
+                  + " is not found in " + cmod.capsule.$path);
+            }
             /* Create the status map and bind it to the struct */
             var status = new Object();
             for (var p in new mod.useMod[cmod.viewMap[i].structName]()) {
@@ -860,6 +913,12 @@ function addCMod(cmod)
              * a column later.
              */
             Object.defineProperty(prot, "$status", {enumerable: false});
+        }
+    }
+    if (cmod.argsMap && cmod.argsMap.length > 0) {
+        for (var ki = 0; ki < cmod.argsMap.length; ki++) {
+            var args = cmod.argsMap[ki];
+            mod.viewInfo.argsMap[args.name] = {description: args.description, args: args.args};
         }
     }
     cmodTab[mod.name] = mod;
@@ -890,7 +949,7 @@ function getModuleDesc(modName)
     var modCfg = Program.$modules[modName];
     if (!modCfg) {
         throw (new Error("Module " + modName
-            + " does not exist in this configuration"));
+            + " does not exist in the application's configuration"));
     }
 
     var mod = new Program.ROVModuleDesc;
@@ -930,7 +989,7 @@ function getModuleDesc(modName)
      * has named instances. This should only be done once, so check
      * allModsRead.
      */
-    if (!this.$private.allModsRead 
+    if (!this.$private.allModsRead
             && ('Instance_State' in mod.useMod)
             && modCfg.common$.namedInstance
             && !("__name" in xdc.om[modName + '$$Instance_State'])) {
@@ -985,8 +1044,8 @@ function getModuleDesc(modName)
  */
 function fetchStruct(desc, addr, addrCheck)
 {
-    return (Program.strDec.fetchStruct(xdc.om[desc.type], Number(addr), 
-                                       addrCheck)); 
+    return (Program.strDec.fetchStruct(xdc.om[desc.type], Number(addr),
+                                       addrCheck));
 }
 
 /*
@@ -1002,8 +1061,6 @@ function fetchArray(desc, addr, len, addrCheck)
 /*
  *  ======== readMemory ========
  *  Reads primitive values from the target.
- *
- *  Assumes unsigned ints for now.
  */
 function readMemory(addr, len, encoding)
 {
@@ -1042,7 +1099,12 @@ function readMemory(addr, len, encoding)
  */
 function fetchVariableByPtr(varName)
 {
-    var typespec = Program.ofReader.getPtrType(varName);
+    var javaType = Program.ofReader.getPtrType(varName);
+    if (javaType == null) {
+        throw new Error("'" + varName + "' is not found, or its type is "
+            + "not a pointer type.");
+    }
+    var typespec = _convertType(javaType);
     var addr = Program.lookupSymbolValue(varName);
     var ptrSize = Model.$private.recap.build.target.stdTypes.t_Ptr.size;
     var ptdLocation = readMemory(addr, ptrSize, 1);
@@ -1060,7 +1122,17 @@ function fetchFromAddr(addr, typeName, count)
 {
     var typespec = Program.lookupType(typeName);
     if (typespec == null) {
-        throw new Error("Type " + typeName + " can't be found");
+        throw new Error("Type '" + typeName + "' can't be found");
+    }
+    if (count != null && count > 1) {
+        var newAr = [];
+        for (var i = 0; i < count; i++) {
+            var newObj = {};
+            Program.createObject(addr + i * typespec.size, typespec, newObj,
+                "top");
+            newAr.push(newObj["top"]);
+        }
+        return (newAr);
     }
     var newObj = {};
     Program.createObject(addr, typespec, newObj, "top");
@@ -1080,18 +1152,6 @@ function fetchVariable(varName)
     }
     var addr = Program.lookupSymbolValue(varName);
     var newObj = {};
-    /* TO DO
-     * We are passing an instance of a Java class TypeSpec as an argument of
-     * type Any. Rhino complains with the following warning:
-     * "Rhino runtime detected object
-     * ti.targets.omf.elf.Dwarf32$TypeSpec@47b29c of class
-     * ti.targets.omf.elf.Dwarf32$TypeSpec where it expected String, Number,
-     * Boolean or Scriptable instance. Please check your code for missing
-     * Context.javaToJS() call." Need to check how to fix it, if needed.
-     * None of the following two solutions is working:
-     * org.mozilla.javascript.Context.toObject(typespec, xdc.global)
-     * org.mozilla.javascript.Context.javaToJS(typespec, xdc.global)
-     */
     Program.createObject(addr, typespec, newObj, "top");
     return (newObj["top"]);
 }
@@ -1100,25 +1160,23 @@ function fetchVariable(varName)
  *  ======== createObject ========
  *  Creates a new object by reading memory and typespec
  *
- *  Typespec is a Java object.
+ *  Typespec is a JavaScript object.
  */
  function createObject(addr, typespec, prnt, name)
 {
-    if (typespec.members == null) {
+    if (typespec.member == null) {
         prnt[name] = readMemory(addr, typespec.size, typespec.encoding);
     }
     else if (typespec.elnum == null || typespec.elnum == 0) {
         prnt[name] = {};
-        var entrySet = typespec.members.entrySet().toArray();
-        for (var i = 0; i < entrySet.length; i++) {
-            var fld = entrySet[i].getValue();
-            createObject(addr + fld.offset, fld, prnt[name],
-                         entrySet[i].getKey());
+        for (var prop in typespec.member) {
+            var val = typespec.member[prop];
+            createObject(addr + val.offset, val, prnt[name], prop);
         }
     }
     else if (typespec.elnum > 0) {
         prnt[name] = [];
-        var elemspec = typespec.members.get("0");
+        var elemspec = typespec.member[0];
         if (elemspec.encoding != 0) {
             for (var i = 0; i < typespec.elnum; i++) {
                 prnt[name][i] = readMemory(addr + i * elemspec.offset,
@@ -1135,44 +1193,6 @@ function fetchVariable(varName)
         }
     }
 }
-
-/*
- *  ======== readObject ========
- *  Creates a new object by reading memory and typespec
- *
- *  Typespec is a JavaScript object.
-function readObject(addr, typespec, prnt, name)
-{
-    if (typespec.members == null) {
-        prnt[name] = readMemory(addr, typespec.size, typespec.encoding);
-    }
-    else if (typespec.elnum == null || typespec.elnum == 0) {
-        prnt[name] = {};
-        for (var prop in typespec.members) {
-            var fld = typespec.members[prop];
-            readObject(addr + fld.offset, fld, prnt[name], prop);
-        }
-    }
-    else if (typespec.elnum > 0) {
-        prnt[name] = [];
-        var elemspec = typespec.members[0];
-        if (elemspec.encoding != 0) {
-            for (var i = 0; i < typespec.elnum; i++) {
-                prnt[name][i] = readMemory(addr + i * elemspec.offset,
-                    elemspec.size, elemspec.encoding);
-            }
-        }
-        else {
-            for (i = 0; i < typespec.elnum; i++) {
-                readObject(addr + i * elemspec.offset, elemspec, prnt[name],
-                    "temp");
-                prnt[name][i] = prnt[name].temp;
-                delete prnt[name].temp;
-            }
-        }
-    }
-}
-*/
 
 /*
  *  ======== fetchString ========
@@ -1235,11 +1255,61 @@ function lookupDataSymbol(addr)
 }
 
 /*
+ *  ======== _convertType ========
+ *  Converts a Java representation of a type (with HashMaps and inherited Java
+ *  properties) to a simple JavaScript representation.
+ *
+ *  'javaType' is always a TypeSpec Java object.
+ */
+function _convertType(javaType) {
+    var jsType = {};
+    for (var prop in javaType) {
+        /* these are the only properties, other than 'members', that we need
+         * to copy from Java to JavaScript. They are all integers of various
+         * sizes, and they can be easily copied to the JavaScript object.
+         */
+        if (prop == "elnum" || prop == "offset" || prop == "size"
+            || prop == "encoding") {
+            jsType[prop] = javaType[prop];
+        }
+        else if (prop == "members" && javaType.members != null) {
+            var entrySet = javaType.members.entrySet().toArray();
+            if (javaType.elnum != 0) {
+                /* It's an array type, which means the only element in the map
+                 * is a description of the array's element type.
+                 */
+                jsType.member = [];
+                jsType.member[0] = _convertType(entrySet[0].getValue());
+            }
+            else {
+                /* It's a structure, we need to copy each type description
+                 * from 'members'.
+                 */
+                jsType.member = {};
+                for (var i = 0; i < entrySet.length; i++) {
+                    jsType.member[entrySet[i].getKey()]
+                        = _convertType(entrySet[i].getValue());
+                }
+            }
+        }
+        else if (prop == "members") {
+            jsType.member = null;
+        }
+    }
+    return (jsType);
+}
+/*
  *  ======== lookupType ========
  */
 function lookupType(type)
 {
-    return (Program.ofReader.getType(type));
+    var javaType = Program.ofReader.getType(type);
+    if (javaType == null) {
+        return null;
+    }
+    else {
+        return (_convertType(javaType));
+    }
 }
 
 /*
@@ -1248,7 +1318,11 @@ function lookupType(type)
 function lookupTypeByVariable(name)
 {
     var javaType = Program.ofReader.getTypeByVariable(name);
-    return (javaType);
+    if (javaType == null) {
+        throw new Error("The variable '" + name + "' can't be found.");
+    }
+    var jsType = _convertType(javaType);
+    return (jsType);
 }
 
 /*
@@ -1366,14 +1440,34 @@ var traceEnable;
 /*
  *  ======== debugPrint ========
  */
-function debugPrint(msg) {
+function debugPrint(msg)
+{
     if (traceEnable === undefined) {
         traceEnable = xdc.jre.java.lang.System.getProperty("xdc.rov.traceEnable");
+        if (traceEnable == null) {
+            traceEnable = xdc.jre.java.lang.System.getenv("XDC_ROV_TRACE");
+        }
     }
 
     if (traceEnable == "true") {
         print("[Server    ] " + msg);
     }
+}
+
+/*
+ *  ======== print ========
+ */
+function print(msg)
+{
+    try {
+        var Monitor = xdc.module("xdc.rov.runtime.Monitor");
+        Monitor.println(msg);
+    }
+    catch (e) {
+        ; /* ignore missing Monitor */
+    }
+
+    xdc.global.print(msg);
 }
 
 /*
@@ -1396,7 +1490,7 @@ function setTimestampFunc(func)
 {
     timestampFunc = func;
 }
- 
+
 /*
  *  ======== resetMods ========
  */
@@ -1494,8 +1588,8 @@ function getInstLabel(desc, view)
 
     /* If a 'label' was specified, just return that */
     if (('label' in view) &&
-        (view.label != null) && 
-        (view.label != undefined) && 
+        (view.label != null) &&
+        (view.label != undefined) &&
         (view.label != "")) {
         return (view.label);
     }
@@ -1524,6 +1618,6 @@ function _getTabName(args)
     return (k < 0 ? args : args.substr(0, k));
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 5-15-2019 11:21:43; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 2-9-2020 18:49:04; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

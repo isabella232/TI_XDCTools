@@ -14,12 +14,6 @@ requires xdc.rta;
 
 /*
  *  ======== xdc.rov.monserver ========
- *
- *  Alternative serial port approaches:
- *      o https://github.com/nyholku/purejavacomm
- *      o https://github.com/NeuronRobotics/nrjavaserial
- *      o use RXTX 2.2pre to get it working on 64-bit Linux:
- *        http://rxtx.qbang.org/pub/rxtx/rxtx-2.2pre2-bins.zip
  */
 package xdc.rov.monserver {
     module Main;

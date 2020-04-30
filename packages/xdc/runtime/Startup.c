@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -20,6 +20,7 @@
 /*
  *  ======== Startup_exec ========
  */
+/* REQ_TAG(SYSBIOS-950) */
 Void Startup_exec(Void)
 {
     Int i;
@@ -28,12 +29,14 @@ Void Startup_exec(Void)
         module->execFlag = TRUE;
 
         for (i = 0; i < Startup_firstFxns.length; i++) {
+            /* REQ_TAG(SYSBIOS-955) */
             Startup_firstFxns.elem[i]();
         }
 
         (Startup_execImpl)();
 
         for (i = 0; i < Startup_lastFxns.length; i++) {
+            /* REQ_TAG(SYSBIOS-956) */
             Startup_lastFxns.elem[i]();
         }
     }
@@ -42,6 +45,7 @@ Void Startup_exec(Void)
 /*
  *  ======== Startup_rtsDone ========
  */
+/* REQ_TAG(SYSBIOS-954) */
 Bool Startup_rtsDone(Void)
 {
     return (module->rtsDoneFlag);
@@ -50,6 +54,7 @@ Bool Startup_rtsDone(Void)
 /*
  *  ======== Startup_startMods ========
  */
+/* REQ_TAG(SYSBIOS-949) */
 Void Startup_startMods(Int state[], Int len)
 {
     Int curPass;
@@ -68,13 +73,14 @@ Void Startup_startMods(Int state[], Int len)
     module->stateTab = state;
 
     for (i = 0; i < len; i++) {
-        if (Startup_sfxnRts[i]) {
+        if (Startup_sfxnRts[i] != FALSE) {
             state[i] = Startup_sfxnTab[i](Startup_NOTDONE);
         }
     }
 
     module->rtsDoneFlag = TRUE;
 
+    /* REQ_TAG(SYSBIOS-952) */
     for (curPass = 0; curPass < Startup_maxPasses; curPass++) {
         done = TRUE;
         for (i = 0; i < len; i++) {
@@ -87,7 +93,7 @@ Void Startup_startMods(Int state[], Int len)
              */
             done &= (Bool)(state[i] == Startup_DONE);
         }
-        if (done) {
+        if (done == TRUE) {
             break;
         }
     }
@@ -99,6 +105,6 @@ Void Startup_startMods(Int state[], Int len)
     module->stateTab = NULL;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

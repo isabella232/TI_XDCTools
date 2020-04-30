@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -13,6 +13,22 @@
 /*
  *  ======== Error.xs ========
  */
+
+/*
+ *  ======== module$use ========
+ */
+function module$use()
+{
+    xdc.useModule('xdc.runtime.Text');
+    /* Old versions of Error also needed Log and Diags. But, they will come in
+     * later unless Core.noAsserts is 'true' (see package.xs). If
+     * Core.noAsserts is 'true', it means xdc.runtime is rebuilt so the new
+     * version of Error.c, without Log and Assert references, is used.
+     * We could still examine these conditions here, but it might be too early,
+     * Core.noAssert might be set later, so it's better to postpone this
+     * decision until close() in package.xs.
+     */
+}
 
 /*
  *  ======== validate ========
@@ -36,19 +52,18 @@ function validate()
             for each (var cn in mod.$$errorDescCfgs) {
                 var desc = mod[cn];
 
-		/* if %$S is not suported by System, check that no error
-		 * uses this format.  If it does, trigger a warning.
-		 */
-		if (noBigS) {
-		    if (desc.msg.indexOf('%$S') != -1) {
-			this.$logWarning("the message for this error (= '"
-                            + desc.msg
-                            + "') requires %$S support but xdc.runtime.System.extendedFormats (= '"
+                /* if %$S is not suported by System, check that no error
+                 * uses this format.  If it does, trigger a warning.
+                 */
+                if (noBigS) {
+                    if (desc.msg.indexOf('%$S') != -1) {
+                        this.$logWarning("the message for this error (= '"
+                            + desc.msg + "') requires %$S support but "
+                            + "xdc.runtime.System.extendedFormats (= '"
                             + System.extendedFormats
-                            + "') does not include '%$S'", 
-					 mod, cn);
-		    }
-		}
+                            + "') does not include '%$S'", mod, cn);
+                    }
+                }
 
                 /* if desc.code is undefined, no problem */
                 if (desc.code === undefined) {
@@ -88,6 +103,7 @@ function module$static$init(obj, params)
         var mod = xdc.om.$modules[i];
 
         /* create an Id for all Error_Desc's declared in the module */
+        /* REQ_TAG(SYSBIOS-861) */
         if ('$$errorDescCfgs' in mod && mod.$$errorDescCfgs.length > 0) {
             for each (var cn in mod.$$errorDescCfgs) {
                 var desc = mod[cn];
@@ -129,12 +145,13 @@ function Id$alignof()
  *  ======== Id$encode ========
  *  Return a C expression that evaluates to the encoded value of a Desc
  */
+/* REQ_TAG(SYSBIOS-858) */
 function Id$encode(desc)
 {
     var encodedDesc = "0";
     if (desc) {
         encodedDesc = "(((xdc_runtime_Error_Id)" + desc.$private.id
-            + ") << 16 | " + (desc.code & 0xFFFF) + ")";
+            + ") << 16 | " + (desc.code & 0xFFFF) + "U)";
     }
     return (encodedDesc);
 }
@@ -147,8 +164,7 @@ function Id$sizeof()
 {
     return (Program.build.target.stdTypes.t_Int32.size);
 }
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -117,9 +117,9 @@ Void Rta_writeMask(Rta_ResponsePacket *resp, UArg addr, UArg val)
  *  ======== Rta_enableLog ========
  *  TODO - Currently not supported for all ILoggers.
  */
-Void Rta_enableLog(Rta_ResponsePacket *resp, UArg log)
+Void Rta_enableLog(Rta_ResponsePacket *resp, UArg logNum)
 {
-    /* UInt32 logNum = (UInt32) log; */
+    /* UInt32 logId = (UInt32) logNum; */
 
     /* TODO - Enable the log */
 
@@ -131,9 +131,9 @@ Void Rta_enableLog(Rta_ResponsePacket *resp, UArg log)
  *  ======== Rta_disableLog ========
  *  TODO - Currently not supported for all ILoggers.
  */
-Void Rta_disableLog(Rta_ResponsePacket *resp, UArg log)
+Void Rta_disableLog(Rta_ResponsePacket *resp, UArg logNum)
 {
-    /* UInt32 logNum = (UInt32) log; */
+    /* UInt32 logId = (UInt32) logNum; */
 
     /* TODO - Disable the log */
 
@@ -145,9 +145,9 @@ Void Rta_disableLog(Rta_ResponsePacket *resp, UArg log)
  *  ======== Rta_resetLog ========
  *  TODO - Currently not supported for all ILoggers.
  */
-Void Rta_resetLog(Rta_ResponsePacket *resp, UArg log)
+Void Rta_resetLog(Rta_ResponsePacket *resp, UArg logNum)
 {
-    /* UInt32 logNum = (UInt32) log; */
+    /* UInt32 logId = (UInt32) logNum; */
 
     /* TODO - Reset the log */
 
@@ -169,7 +169,7 @@ Void Rta_changePeriod(Rta_ResponsePacket *resp, UArg period)
     /* Acknowledge the command. */
     Rta_acknowledgeCmd(resp);
 }
- 
+
 /*
  *  ======== Rta_getCpuSpeed ========
  */
@@ -184,6 +184,6 @@ Void Rta_getCpuSpeed(Rta_ResponsePacket *resp)
     resp->resp1 = freq.lo;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

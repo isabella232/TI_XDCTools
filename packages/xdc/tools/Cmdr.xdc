@@ -185,6 +185,6 @@ instance:
     function write(s);
 }
 /*
- *  @(#) xdc.tools; 1, 0, 0,0; 5-15-2019 11:24:02; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.tools; 1, 0, 0,0; 2-9-2020 18:50:07; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

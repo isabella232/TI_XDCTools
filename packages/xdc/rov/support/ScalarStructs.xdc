@@ -9,7 +9,32 @@
  *      Texas Instruments - initial implementation
  * 
  * */
-/*! @_nodoc */
+/*! @_nodoc
+ *  ======== ScalarStructs ========
+ *  Structures used to read scalar types from an arbitrary address
+ *
+ *  The first field of a structure is guarenteed to be at
+ *  a zero offset from the address of the structure itself.
+ *
+ *  From C99 Section 6.7.2.1 bullet point 13:
+ *  @p(blist)
+ *  - Within a structure object, the non-bit-field members and the units in
+ *  which bit-fields reside have addresses that increase in the order in
+ *  which they are declared. A pointer to a structure object, suitably
+ *  converted, points to its initial member (or if that member is a bit-field,
+ *  then to the unit in which it resides), and vice versa. There may be
+ *  unnamed padding within a structure object, but not at its beginning.
+ *  @p
+ *  
+ *  As a result, it's possible to use the structures below together with
+ *  `Program.fetchStruct()` to fetch scalar values; e.g., the following can
+ *  be used to read a 32-bit value from address `addr`:
+ *
+ *  @p(code)
+ *      var v; // value located at address specified by addr 
+ *      v = Program.fetchStruct(ScalarStructs.S_Bits32$fetchDesc, addr, false)
+ *  @p
+ */
 module ScalarStructs {
 	
     /*! @_nodoc */
@@ -159,6 +184,6 @@ module ScalarStructs {
 
 }
 /*
- *  @(#) xdc.rov.support; 1, 0, 0,0; 5-15-2019 11:21:48; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.rov.support; 1, 0, 0,0; 2-9-2020 18:49:07; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

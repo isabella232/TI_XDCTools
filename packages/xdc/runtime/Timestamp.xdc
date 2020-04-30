@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -20,10 +20,9 @@ package xdc.runtime;
  *  ======== Timestamp ========
  *  Timestamp services
  *
- *  This module provides `{@link xdc.runtime.ITimestampClient}` APIs for
- *  the xdc Runtime Support Library. Calls to these APIs are forwarded
- *  to a platform specific `{@link xdc.runtime.ITimestampProvider}`
- *  implementation.
+ *  This module provides `{@link xdc.runtime.ITimestampClient}` APIs for the xdc
+ *  Runtime Support Library. Calls to these APIs are forwarded to a platform
+ *  specific `{@link xdc.runtime.ITimestampProvider}` implementation.
  *
  *  A user can attach their own ITimestampProvider module
  *  using the following config file command:
@@ -36,10 +35,9 @@ package xdc.runtime;
  *  which provides null stubs for the APIs, will be attached by default.
  *
  *  If the user is developing code using CCS, the
- *  `{@link xdc.runtime.TimestampStd}`
- *  ITimestampProvider implementation, which uses the ANSI C clock()
- *  function, may provide a satisfactory timestamp source (remember to
- *  enable the profile clock in CCS).
+ *  `{@link xdc.runtime.TimestampStd}` ITimestampProvider implementation, which
+ *  uses the ANSI C clock() function, may provide a satisfactory timestamp
+ *  source (remember to enable the profile clock in CCS).
  *
  *  To use the TimestampStd implementation, add the following to
  *  your config script:
@@ -54,17 +52,17 @@ module Timestamp inherits ITimestampClient {
      *  ======== SupportProxy ========
      *  User supplied time stamp provider module.
      *
-     *  The SupportProxy module provides application/platform
-     *  specific implementations of the 
-     *  `{@link xdc.runtime.ITimestampProvider}` APIs.
+     *  The SupportProxy module provides application/platform specific 
+     *  implementations of the `{@link xdc.runtime.ITimestampProvider}` APIs.
      *
      *  If not explicitly supplied by the user, this proxy defaults to
      *  `{@link xdc.runtime.TimestampNull}`, 
      *  which provides null stubs for all of the ITimestampProvider APIs.
      */
+    /* REQ_TAG(SYSBIOS-881), REQ_TAG(SYSBIOS-882) */
     proxy SupportProxy inherits ITimestampProvider;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

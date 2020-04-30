@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -56,6 +56,7 @@
  *  argPrmsSize is not used but we can't remove it until ROM images that have
  *  Core_constructObject embedded are not supported anymore.
  */
+/* REQ_TAG(SYSBIOS-873), REQ_TAG(SYSBIOS-878) */
 Ptr Core_constructObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
                          CPtr argPrms, SizeT argPrmsSize, Error_Block *eb)
 {
@@ -70,8 +71,9 @@ Ptr Core_constructObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
     prmsHdr->self = prmsHdr;    /* mark resParms as initialized */
 
     /* use params passed from client, if any */
-    if (argPrms) {
-        Assert_isTrue(((const Types_PrmsHdr *)argPrms)->self == (Ptr)argPrms,
+    if (argPrms != NULL) {
+        /* REQ_TAG(SYSBIOS-879) */
+        Assert_isTrue(((const Types_PrmsHdr *)argPrms)->self == argPrms,
             Core_A_initializedParams);
 
         Core_assignParams(resPrms, argPrms, od->prmsSize,
@@ -92,7 +94,7 @@ Ptr Core_constructObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
     }
 
     /* initialize instance name (if this module supports named instances) */
-    if (od->objName) {
+    if (od->objName != 0U) {
         *((CPtr *)((Char *)resObj + od->objName)) = instPrms->name;
     }
 
@@ -102,6 +104,7 @@ Ptr Core_constructObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
 /*
  *  ======== Core_destructObject ========
  */
+/* REQ_TAG(SYSBIOS-874) */
 Void Core_destructObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
     Int istat, Bool consFlg)
 {
@@ -113,7 +116,7 @@ Void Core_destructObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
     }
 
     if (finalFxn != (Fxn)NULL) {
-        if (istat == -1) {
+        if (istat == Core_NOSTATE) {
             ((FinalFxn1)finalFxn)(curObj);
         }
         else {
@@ -122,6 +125,6 @@ Void Core_destructObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

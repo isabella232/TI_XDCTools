@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Types__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Types___VERS 200
@@ -365,7 +367,7 @@ __extern __FAR__ const CT__xdc_runtime_Types_Object__table xdc_runtime_Types_Obj
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Types_Module__startupDone__S, "xdc_runtime_Types_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Types_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Types_Module__startupDone__S( void);
 
 
 /*
@@ -499,6 +501,6 @@ static inline xdc_Void xdc_runtime_Types_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_Types__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -1,14 +1,14 @@
 %%{
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
  *  http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  *  Contributors:
  *      Texas Instruments - initial implementation
- * 
+ *
  * */
     var base = $args[0];        /* base name of config files */
     var noasm = $args[1];       /* true for exes, false for assemblies */
@@ -19,7 +19,7 @@
     /* create the build object to pass to the configuration domain */
     var build = {};
     for (var i in prog.attrs) {
-	build[i] = prog.attrs[i];
+        build[i] = prog.attrs[i];
     }
 
     /*
@@ -78,7 +78,7 @@
                         }
                         if (typeof obj[prop][i] == "object") {
                             newArray[i] = {};
-                            /* The first call forces obj[prop][i] to get 
+                            /* The first call forces obj[prop][i] to get
                              * attached to newArray anyway. If only one element
                              * in the array is different, we replace the whole
                              * array at the config time.
@@ -162,9 +162,8 @@
                 if (proto == undefined || !(prop in proto)
                     || proto[prop] == undefined || obj[prop] != proto[prop]) {
                     /* this covers a case where 'obj' defines a primitive type
-                     * that's left undefined in the prototype, and also a
-                     * case where values for a property of a primitive type
-                     * differ.
+                     * that's left undefined in the prototype, and also a case
+                     * where values for a property of a primitive type differ.
                      */
                     newObj[prop] = obj[prop];
                     added = true;
@@ -684,7 +683,7 @@ function _genSourceDirMak(cfgBase, cfgName)
 }
 %%{
 /*
- * @(#) xdc.bld; 1, 0, 2,0; 5-15-2019 11:20:50; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.bld; 1, 0, 2,0; 2-9-2020 18:48:43; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 
 %%}

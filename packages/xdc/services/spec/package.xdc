@@ -25,12 +25,12 @@ requires xdc.shelf;
  *  @p(dlist)
  *      - `{@link ./doc-files/javadoc/xdc/services/spec/Pkg.html [Pkg]}`
  *        Package related information available from a package's
- *        `{@link http://rtsc.eclipse.org/docs/XDCscript_-_Package-Object.%24spec $spec}`
+ *        `{@link http://rtsc.eclipseprojects.io/docs/XDCscript_-_Package-Object.%24spec $spec}`
  *        property.
  *      - `{@link ./doc-files/javadoc/xdc/services/spec/Unit.html [Unit]}`
  *        Module (or interface) related information available from a
  *        module's (or interface's)
- *        `{@link http://rtsc.eclipse.org/docs/XDCscript_-_Module-Object.%24spec $spec}`
+ *        `{@link http://rtsc.eclipseprojects.io/docs/XDCscript_-_Module-Object.%24spec $spec}`
  *        property.
  *  @p
  *
@@ -59,6 +59,6 @@ requires xdc.shelf;
 package xdc.services.spec [1, 0, 0] {
 }
 /*
- *  @(#) xdc.services.spec; 1, 0, 0,0; 5-15-2019 11:23:18; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.services.spec; 1, 0, 0,0; 2-9-2020 18:49:48; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -36,10 +36,12 @@
 #define xdc_runtime_SysStd__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_SysStd___VERS 200
@@ -259,32 +261,32 @@ __extern const xdc_runtime_SysStd_Fxns__ xdc_runtime_SysStd_Module__FXNS__C;
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_SysStd_Module__startupDone__S, "xdc_runtime_SysStd_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_SysStd_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_SysStd_Module__startupDone__S( void);
 
 /* abort__E */
 #define xdc_runtime_SysStd_abort xdc_runtime_SysStd_abort__E
 xdc__CODESECT(xdc_runtime_SysStd_abort__E, "xdc_runtime_SysStd_abort")
-__extern xdc_Void xdc_runtime_SysStd_abort__E( xdc_CString str );
+__extern xdc_Void xdc_runtime_SysStd_abort__E( xdc_CString str);
 
 /* exit__E */
 #define xdc_runtime_SysStd_exit xdc_runtime_SysStd_exit__E
 xdc__CODESECT(xdc_runtime_SysStd_exit__E, "xdc_runtime_SysStd_exit")
-__extern xdc_Void xdc_runtime_SysStd_exit__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_SysStd_exit__E( xdc_Int stat);
 
 /* flush__E */
 #define xdc_runtime_SysStd_flush xdc_runtime_SysStd_flush__E
 xdc__CODESECT(xdc_runtime_SysStd_flush__E, "xdc_runtime_SysStd_flush")
-__extern xdc_Void xdc_runtime_SysStd_flush__E( void );
+__extern xdc_Void xdc_runtime_SysStd_flush__E( void);
 
 /* putch__E */
 #define xdc_runtime_SysStd_putch xdc_runtime_SysStd_putch__E
 xdc__CODESECT(xdc_runtime_SysStd_putch__E, "xdc_runtime_SysStd_putch")
-__extern xdc_Void xdc_runtime_SysStd_putch__E( xdc_Char ch );
+__extern xdc_Void xdc_runtime_SysStd_putch__E( xdc_Char ch);
 
 /* ready__E */
 #define xdc_runtime_SysStd_ready xdc_runtime_SysStd_ready__E
 xdc__CODESECT(xdc_runtime_SysStd_ready__E, "xdc_runtime_SysStd_ready")
-__extern xdc_Bool xdc_runtime_SysStd_ready__E( void );
+__extern xdc_Bool xdc_runtime_SysStd_ready__E( void);
 
 
 /*
@@ -401,6 +403,6 @@ static inline xdc_Void xdc_runtime_SysStd_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_SysStd__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

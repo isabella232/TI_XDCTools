@@ -17,7 +17,7 @@ Contributors:
 
 <page name="Module" title="Module Settings">
 <html><body><table>
-    <tr><td colspan="2">  <form><p>Instances of this module provide basic synchronization between threads calling the wait() and signal() functions define by the  <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/Sync.html">Sync</a> module.</p><p></p></form></td></tr>
+    <tr><td colspan="2">  <form><p>Instances of this module provide basic synchronization between threads calling the wait() and signal() functions define by the  <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/Sync.html">Sync</a> module.</p><p></p></form></td></tr>
     <tr><td colspan="2">
       <control type="checkbox" label="Add SyncGeneric to my configuration" value="value:this.$used" bold="true"/></td>
     </tr>
@@ -86,7 +86,7 @@ Contributors:
 
 <!--
 /*
- * @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -65,6 +65,7 @@
  *  curObj and argPrmsSize are not used but we can't remove them until
  *  ROM images that have Core_createObject embedded are not supported anymore.
  */
+/* REQ_TAG(SYSBIOS-871), REQ_TAG(SYSBIOS-878) */
 Ptr Core_createObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
                       CPtr argPrms, SizeT argPrmsSize, Error_Block *eb)
 {
@@ -81,7 +82,8 @@ Ptr Core_createObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
 
     /* use params passed from client, if any */
     if (argPrms != (CPtr)NULL) {
-        Assert_isTrue(((const Types_PrmsHdr *)argPrms)->self == (Ptr)argPrms,
+        /* REQ_TAG(SYSBIOS-879) */
+        Assert_isTrue(((const Types_PrmsHdr *)argPrms)->self == argPrms,
             Core_A_initializedParams);
 
         Core_assignParams(resPrms, argPrms, od->prmsSize,
@@ -121,50 +123,9 @@ Ptr Core_createObject(const Core_ObjDesc *od, Ptr curObj, Ptr resPrms,
 }
 
 /*
- *  ======== Core_allocObject ========
- *  Allocate space for instance object and add it to the list of instances
- *
- *  Input parameters:
- *    od          - pointer to a config generated object "descriptor"
- *                  structure (in cfg/.c)
- *
- *  Output parameters:
- *    resObj      - pointer to an uninitialized instance
- */
-Ptr Core_allocObject(const Core_ObjDesc *od, Error_Block *eb)
-{
-    Types_InstHdr *instHdr;
-    Ptr resObj;
-    IArg gateKey;
-
-    /* create object and add to list of dynamically created instances */
-    instHdr = (Types_InstHdr *)
-        Memory_calloc(od->objHeap, od->objSize, od->objAlign, eb);
-    if (instHdr == NULL) {
-        return (NULL);
-    }
-
-    resObj = instHdr + 1;
-
-    /* atomically insert instance on list of all runtime instances */
-    gateKey = Gate_enterSystem();
-        instHdr->link.next = od->modLink;
-        instHdr->link.prev = od->modLink->prev;
-        od->modLink->prev->next = &instHdr->link;
-        od->modLink->prev = &instHdr->link;
-    Gate_leaveSystem(gateKey);
-
-    /* initialize fxns (if the field is present) */
-    if (od->fxnTab != (CPtr)-1) {
-        *((CPtr *)resObj) = od->fxnTab;
-    }
-
-    return (resObj);
-}
-
-/*
  *  ======== Core_deleteObject ========
  */
+/* REQ_TAG(SYSBIOS-872) */
 Void Core_deleteObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
     Int istat, Bool consFlg)
 {
@@ -194,7 +155,7 @@ Void Core_deleteObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
     }
 
     if (finalFxn != (Fxn)NULL) {
-        if (istat == -1) {
+        if (istat == Core_NOSTATE) {
             ((FinalFxn1)finalFxn)(curObj);
         }
         else {
@@ -206,35 +167,7 @@ Void Core_deleteObject(const Core_ObjDesc *od, Ptr curObj, Fxn finalFxn,
         Memory_free(od->objHeap, instHdr, od->objSize);
     }
 }
-
 /*
- *  ======== Core_delistObject ========
- */
-Void Core_delistObject(const Core_ObjDesc *od, Ptr curObj)
-{
-    Types_InstHdr *instHdr;
-    IArg gateKey;
-
-    if (curObj == (Ptr)NULL) {
-        return;     /* silently ignore NULL object references */
-    }
-
-    instHdr = ((Types_InstHdr *)curObj) - 1;
-
-    gateKey = Gate_enterSystem();
-        instHdr->link.prev->next = instHdr->link.next;
-        instHdr->link.next->prev = instHdr->link.prev;
-
-        /* Zeroing pointers in instHdr, so that anyone pointing at this
-         * instance can notice that the instance is invalid (CQ10402).
-         */
-        instHdr->link.prev = NULL;
-        instHdr->link.next = NULL;
-    Gate_leaveSystem(gateKey);
-
-    Memory_free(od->objHeap, instHdr, od->objSize);
-}
-/*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -36,10 +36,12 @@
 #define xdc_runtime_TimestampStd__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_TimestampStd___VERS 200
@@ -257,22 +259,22 @@ __extern const xdc_runtime_TimestampStd_Fxns__ xdc_runtime_TimestampStd_Module__
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_TimestampStd_Module__startupDone__S, "xdc_runtime_TimestampStd_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_TimestampStd_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_TimestampStd_Module__startupDone__S( void);
 
 /* get32__E */
 #define xdc_runtime_TimestampStd_get32 xdc_runtime_TimestampStd_get32__E
 xdc__CODESECT(xdc_runtime_TimestampStd_get32__E, "xdc_runtime_TimestampStd_get32")
-__extern xdc_Bits32 xdc_runtime_TimestampStd_get32__E( void );
+__extern xdc_Bits32 xdc_runtime_TimestampStd_get32__E( void);
 
 /* get64__E */
 #define xdc_runtime_TimestampStd_get64 xdc_runtime_TimestampStd_get64__E
 xdc__CODESECT(xdc_runtime_TimestampStd_get64__E, "xdc_runtime_TimestampStd_get64")
-__extern xdc_Void xdc_runtime_TimestampStd_get64__E( xdc_runtime_Types_Timestamp64 *result );
+__extern xdc_Void xdc_runtime_TimestampStd_get64__E( xdc_runtime_Types_Timestamp64 *result);
 
 /* getFreq__E */
 #define xdc_runtime_TimestampStd_getFreq xdc_runtime_TimestampStd_getFreq__E
 xdc__CODESECT(xdc_runtime_TimestampStd_getFreq__E, "xdc_runtime_TimestampStd_getFreq")
-__extern xdc_Void xdc_runtime_TimestampStd_getFreq__E( xdc_runtime_Types_FreqHz *freq );
+__extern xdc_Void xdc_runtime_TimestampStd_getFreq__E( xdc_runtime_Types_FreqHz *freq);
 
 
 /*
@@ -399,6 +401,6 @@ static inline xdc_Void xdc_runtime_TimestampStd_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_TimestampStd__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

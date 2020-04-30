@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 #ifndef xdc_runtime_knl__
@@ -28,7 +28,6 @@ typedef struct xdc_runtime_knl_Thread_Params xdc_runtime_knl_Thread_Params;
 typedef struct xdc_runtime_knl_Thread_Object xdc_runtime_knl_Thread_Object;
 typedef struct xdc_runtime_knl_Thread_Struct xdc_runtime_knl_Thread_Struct;
 typedef xdc_runtime_knl_Thread_Object* xdc_runtime_knl_Thread_Handle;
-typedef struct xdc_runtime_knl_Thread_Object__ xdc_runtime_knl_Thread_Instance_State;
 typedef xdc_runtime_knl_Thread_Object* xdc_runtime_knl_Thread_Instance;
 
 /*
@@ -46,7 +45,6 @@ typedef struct xdc_runtime_knl_GateThread_Params xdc_runtime_knl_GateThread_Para
 typedef struct xdc_runtime_knl_GateThread_Object xdc_runtime_knl_GateThread_Object;
 typedef struct xdc_runtime_knl_GateThread_Struct xdc_runtime_knl_GateThread_Struct;
 typedef xdc_runtime_knl_GateThread_Object* xdc_runtime_knl_GateThread_Handle;
-typedef struct xdc_runtime_knl_GateThread_Object__ xdc_runtime_knl_GateThread_Instance_State;
 typedef xdc_runtime_knl_GateThread_Object* xdc_runtime_knl_GateThread_Instance;
 
 /*
@@ -59,7 +57,6 @@ typedef struct xdc_runtime_knl_GateProcess_Params xdc_runtime_knl_GateProcess_Pa
 typedef struct xdc_runtime_knl_GateProcess_Object xdc_runtime_knl_GateProcess_Object;
 typedef struct xdc_runtime_knl_GateProcess_Struct xdc_runtime_knl_GateProcess_Struct;
 typedef xdc_runtime_knl_GateProcess_Object* xdc_runtime_knl_GateProcess_Handle;
-typedef struct xdc_runtime_knl_GateProcess_Object__ xdc_runtime_knl_GateProcess_Instance_State;
 typedef xdc_runtime_knl_GateProcess_Object* xdc_runtime_knl_GateProcess_Instance;
 
 /*
@@ -81,7 +78,6 @@ typedef struct xdc_runtime_knl_SemThread_Params xdc_runtime_knl_SemThread_Params
 typedef struct xdc_runtime_knl_SemThread_Object xdc_runtime_knl_SemThread_Object;
 typedef struct xdc_runtime_knl_SemThread_Struct xdc_runtime_knl_SemThread_Struct;
 typedef xdc_runtime_knl_SemThread_Object* xdc_runtime_knl_SemThread_Handle;
-typedef struct xdc_runtime_knl_SemThread_Object__ xdc_runtime_knl_SemThread_Instance_State;
 typedef xdc_runtime_knl_SemThread_Object* xdc_runtime_knl_SemThread_Instance;
 
 /*
@@ -94,7 +90,6 @@ typedef struct xdc_runtime_knl_SemProcess_Params xdc_runtime_knl_SemProcess_Para
 typedef struct xdc_runtime_knl_SemProcess_Object xdc_runtime_knl_SemProcess_Object;
 typedef struct xdc_runtime_knl_SemProcess_Struct xdc_runtime_knl_SemProcess_Struct;
 typedef xdc_runtime_knl_SemProcess_Object* xdc_runtime_knl_SemProcess_Handle;
-typedef struct xdc_runtime_knl_SemProcess_Object__ xdc_runtime_knl_SemProcess_Instance_State;
 typedef xdc_runtime_knl_SemProcess_Object* xdc_runtime_knl_SemProcess_Instance;
 
 /*
@@ -116,7 +111,6 @@ typedef struct xdc_runtime_knl_SyncGeneric_Params xdc_runtime_knl_SyncGeneric_Pa
 typedef struct xdc_runtime_knl_SyncGeneric_Object xdc_runtime_knl_SyncGeneric_Object;
 typedef struct xdc_runtime_knl_SyncGeneric_Struct xdc_runtime_knl_SyncGeneric_Struct;
 typedef xdc_runtime_knl_SyncGeneric_Object* xdc_runtime_knl_SyncGeneric_Handle;
-typedef struct xdc_runtime_knl_SyncGeneric_Object__ xdc_runtime_knl_SyncGeneric_Instance_State;
 typedef xdc_runtime_knl_SyncGeneric_Object* xdc_runtime_knl_SyncGeneric_Instance;
 
 /*
@@ -129,7 +123,6 @@ typedef struct xdc_runtime_knl_SyncNull_Params xdc_runtime_knl_SyncNull_Params;
 typedef struct xdc_runtime_knl_SyncNull_Object xdc_runtime_knl_SyncNull_Object;
 typedef struct xdc_runtime_knl_SyncNull_Struct xdc_runtime_knl_SyncNull_Struct;
 typedef xdc_runtime_knl_SyncNull_Object* xdc_runtime_knl_SyncNull_Handle;
-typedef struct xdc_runtime_knl_SyncNull_Object__ xdc_runtime_knl_SyncNull_Instance_State;
 typedef xdc_runtime_knl_SyncNull_Object* xdc_runtime_knl_SyncNull_Instance;
 
 /*
@@ -142,7 +135,6 @@ typedef struct xdc_runtime_knl_SyncSemThread_Params xdc_runtime_knl_SyncSemThrea
 typedef struct xdc_runtime_knl_SyncSemThread_Object xdc_runtime_knl_SyncSemThread_Object;
 typedef struct xdc_runtime_knl_SyncSemThread_Struct xdc_runtime_knl_SyncSemThread_Struct;
 typedef xdc_runtime_knl_SyncSemThread_Object* xdc_runtime_knl_SyncSemThread_Handle;
-typedef struct xdc_runtime_knl_SyncSemThread_Object__ xdc_runtime_knl_SyncSemThread_Instance_State;
 typedef xdc_runtime_knl_SyncSemThread_Object* xdc_runtime_knl_SyncSemThread_Instance;
 
 /*
@@ -183,7 +175,6 @@ typedef struct xdc_runtime_knl_GateThreadSupportNull_Params xdc_runtime_knl_Gate
 typedef struct xdc_runtime_knl_GateThreadSupportNull_Object xdc_runtime_knl_GateThreadSupportNull_Object;
 typedef struct xdc_runtime_knl_GateThreadSupportNull_Struct xdc_runtime_knl_GateThreadSupportNull_Struct;
 typedef xdc_runtime_knl_GateThreadSupportNull_Object* xdc_runtime_knl_GateThreadSupportNull_Handle;
-typedef struct xdc_runtime_knl_GateThreadSupportNull_Object__ xdc_runtime_knl_GateThreadSupportNull_Instance_State;
 typedef xdc_runtime_knl_GateThreadSupportNull_Object* xdc_runtime_knl_GateThreadSupportNull_Instance;
 
 /*
@@ -205,7 +196,6 @@ typedef struct xdc_runtime_knl_GateProcessSupportNull_Params xdc_runtime_knl_Gat
 typedef struct xdc_runtime_knl_GateProcessSupportNull_Object xdc_runtime_knl_GateProcessSupportNull_Object;
 typedef struct xdc_runtime_knl_GateProcessSupportNull_Struct xdc_runtime_knl_GateProcessSupportNull_Struct;
 typedef xdc_runtime_knl_GateProcessSupportNull_Object* xdc_runtime_knl_GateProcessSupportNull_Handle;
-typedef struct xdc_runtime_knl_GateProcessSupportNull_Object__ xdc_runtime_knl_GateProcessSupportNull_Instance_State;
 typedef xdc_runtime_knl_GateProcessSupportNull_Object* xdc_runtime_knl_GateProcessSupportNull_Instance;
 
 /*

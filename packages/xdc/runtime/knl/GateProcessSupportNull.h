@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -37,10 +37,12 @@
 #define xdc_runtime_knl_GateProcessSupportNull__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_GateProcessSupportNull___VERS 200
@@ -310,55 +312,55 @@ __extern void xdc_runtime_knl_GateProcessSupportNull_destruct(xdc_runtime_knl_Ga
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Handle__label__S, "xdc_runtime_knl_GateProcessSupportNull_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_knl_GateProcessSupportNull_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_knl_GateProcessSupportNull_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Module__startupDone__S, "xdc_runtime_knl_GateProcessSupportNull_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_GateProcessSupportNull_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_GateProcessSupportNull_Module__startupDone__S( void);
 
 /* Object__create__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Object__create__S, "xdc_runtime_knl_GateProcessSupportNull_Object__create__S")
-__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb);
 
 /* Object__delete__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Object__delete__S, "xdc_runtime_knl_GateProcessSupportNull_Object__delete__S")
-__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_Object__delete__S( xdc_Ptr instp );
+__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_Object__delete__S( xdc_Ptr instp);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Object__get__S, "xdc_runtime_knl_GateProcessSupportNull_Object__get__S")
-__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Object__first__S, "xdc_runtime_knl_GateProcessSupportNull_Object__first__S")
-__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Object__next__S, "xdc_runtime_knl_GateProcessSupportNull_Object__next__S")
-__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_knl_GateProcessSupportNull_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_Params__init__S, "xdc_runtime_knl_GateProcessSupportNull_Params__init__S")
-__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* query__E */
 #define xdc_runtime_knl_GateProcessSupportNull_query xdc_runtime_knl_GateProcessSupportNull_query__E
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_query__E, "xdc_runtime_knl_GateProcessSupportNull_query")
-__extern xdc_Bool xdc_runtime_knl_GateProcessSupportNull_query__E( xdc_Int qual );
+__extern xdc_Bool xdc_runtime_knl_GateProcessSupportNull_query__E( xdc_Int qual);
 
 /* enter__E */
 #define xdc_runtime_knl_GateProcessSupportNull_enter xdc_runtime_knl_GateProcessSupportNull_enter__E
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_enter__E, "xdc_runtime_knl_GateProcessSupportNull_enter")
-__extern xdc_IArg xdc_runtime_knl_GateProcessSupportNull_enter__E( xdc_runtime_knl_GateProcessSupportNull_Handle __inst );
+__extern xdc_IArg xdc_runtime_knl_GateProcessSupportNull_enter__E( xdc_runtime_knl_GateProcessSupportNull_Handle instp);
 
 /* leave__E */
 #define xdc_runtime_knl_GateProcessSupportNull_leave xdc_runtime_knl_GateProcessSupportNull_leave__E
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_leave__E, "xdc_runtime_knl_GateProcessSupportNull_leave")
-__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_leave__E( xdc_runtime_knl_GateProcessSupportNull_Handle __inst, xdc_IArg key );
+__extern xdc_Void xdc_runtime_knl_GateProcessSupportNull_leave__E( xdc_runtime_knl_GateProcessSupportNull_Handle instp, xdc_IArg key);
 
 /* getReferenceCount__E */
 #define xdc_runtime_knl_GateProcessSupportNull_getReferenceCount xdc_runtime_knl_GateProcessSupportNull_getReferenceCount__E
 xdc__CODESECT(xdc_runtime_knl_GateProcessSupportNull_getReferenceCount__E, "xdc_runtime_knl_GateProcessSupportNull_getReferenceCount")
-__extern xdc_Int xdc_runtime_knl_GateProcessSupportNull_getReferenceCount__E( xdc_runtime_knl_GateProcessSupportNull_Handle __inst, xdc_runtime_Error_Block *err );
+__extern xdc_Int xdc_runtime_knl_GateProcessSupportNull_getReferenceCount__E( xdc_runtime_knl_GateProcessSupportNull_Handle instp, xdc_runtime_Error_Block *err);
 
 
 /*
@@ -527,8 +529,8 @@ static inline void xdc_runtime_knl_GateProcessSupportNull_Params_copy(xdc_runtim
 #define xdc_runtime_knl_GateProcessSupportNull_Object_sizeof() xdc_runtime_knl_GateProcessSupportNull_Object__sizeof__C
 
 /* Object_get */
-static inline xdc_runtime_knl_GateProcessSupportNull_Handle xdc_runtime_knl_GateProcessSupportNull_Object_get(xdc_runtime_knl_GateProcessSupportNull_Instance_State *oarr, int i);
-static inline xdc_runtime_knl_GateProcessSupportNull_Handle xdc_runtime_knl_GateProcessSupportNull_Object_get(xdc_runtime_knl_GateProcessSupportNull_Instance_State *oarr, int i) 
+static inline xdc_runtime_knl_GateProcessSupportNull_Handle xdc_runtime_knl_GateProcessSupportNull_Object_get(xdc_runtime_knl_GateProcessSupportNull_Object *oarr, int i);
+static inline xdc_runtime_knl_GateProcessSupportNull_Handle xdc_runtime_knl_GateProcessSupportNull_Object_get(xdc_runtime_knl_GateProcessSupportNull_Object *oarr, int i) 
 {
     return (xdc_runtime_knl_GateProcessSupportNull_Handle)xdc_runtime_knl_GateProcessSupportNull_Object__get__S(oarr, i);
 }
@@ -654,7 +656,6 @@ struct xdc_runtime_knl_GateProcessSupportNull_Object {
 #define GateProcessSupportNull_Object_sizeof xdc_runtime_knl_GateProcessSupportNull_Object_sizeof
 #define GateProcessSupportNull_Params_copy xdc_runtime_knl_GateProcessSupportNull_Params_copy
 #define GateProcessSupportNull_Params_init xdc_runtime_knl_GateProcessSupportNull_Params_init
-#define GateProcessSupportNull_Instance_State xdc_runtime_knl_GateProcessSupportNull_Instance_State
 #define GateProcessSupportNull_delete xdc_runtime_knl_GateProcessSupportNull_delete
 #define GateProcessSupportNull_destruct xdc_runtime_knl_GateProcessSupportNull_destruct
 #define GateProcessSupportNull_Module_upCast xdc_runtime_knl_GateProcessSupportNull_Module_upCast
@@ -679,6 +680,6 @@ struct xdc_runtime_knl_GateProcessSupportNull_Object {
 #endif /* xdc_runtime_knl_GateProcessSupportNull__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:05; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

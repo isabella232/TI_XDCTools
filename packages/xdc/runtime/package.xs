@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -57,19 +57,7 @@ function close()
 
     for (var i = 0; i < xdc.om.$modules.length; i++) {
         var mod = xdc.om.$modules[i];
-        var needsRts;
-        if ("$$nortsflag" in mod) {
-            needsRts = !mod.$$nortsflag;
-        }
-        /* else clause can be removed after we increment the schema number 
-         * from 170. Before then, we will still have schemas that will not be
-         * rebuilt, but they will not have $$nortsflag.
-         */
-        else {
-            needsRts = mod.$spec.needsRuntime();
-        }
-        
-        if (mod.$used && !mod.$hostonly && needsRts) {
+        if (mod.$used && !mod.$hostonly && !mod.$$nortsflag) {
             targMod = mod;
             break;
         }
@@ -98,6 +86,7 @@ function close()
 
         if (Startup.resetFxn != null || Reset.fxns.length > 0) {
             /* define RESETFXN so reset function will be called from boot */
+            /* REQ_TAG(SYSBIOS-951) */
             Program.symbol["xdc_runtime_Startup__RESETFXN__C"] = 1;
 
             /* ensure Reset.xdt template will be expanded */
@@ -110,6 +99,13 @@ function close()
         }
         Program.symbol["xdc_runtime_Startup__EXECFXN__C"] = 0;
         Program.symbol["xdc_runtime_Startup_exec__E"] = 0;
+    }
+
+    /* This would normally happen in Core.module$use, but we need to do it as
+     * late as possible to be sure that Core.noAsserts will not change anymore.
+     */
+    if (this.Core.$used && this.Core.noAsserts == false) {
+        xdc.useModule('xdc.runtime.Assert');
     }
 
     var Types = xdc.module('xdc.runtime.Types');
@@ -153,6 +149,54 @@ function close()
         Memory.HeapProxy.abstractInstances$ = true;
     }
 
+    /* In custom builds, where we can eliminate Asserts and Logs from a build,
+     * we don't need module config parameters related to Assert and Log modules.
+     */
+    var Log = this.Log;
+    if (!Log.$used) {
+        for each (var mod in xdc.om.$modules) {
+            if ('$$logEvtCfgs' in mod && mod.$$logEvtCfgs.length > 0) {
+                for each (var cn in mod.$$logEvtCfgs) {
+                    mod[cn].$private.id = $$NOGEN;
+                }
+            }
+
+            if (!mod.$used || mod.$hostonly || mod.PROXY$) {
+                continue;
+            }
+            mod.Module__loggerFxn0 = $$NOGEN;
+            mod.Module__loggerFxn1 = $$NOGEN;
+            mod.Module__loggerFxn2 = $$NOGEN;
+            mod.Module__loggerFxn4 = $$NOGEN;
+            mod.Module__loggerFxn8 = $$NOGEN;
+            //mod.Module__loggerDefined = $$NOGEN;
+            mod.Module__loggerObj = $$NOGEN;
+        }
+    }
+
+    var Assert = this.Assert;
+    if (!Assert.$used) {
+        for each (var mod in xdc.om.$modules) {
+            if ('$$assertDescCfgs' in mod && mod.$$assertDescCfgs.length > 0) {
+                for each (var cn in mod.$$assertDescCfgs) {
+                    mod[cn].$private.id = $$NOGEN;
+                }
+            }
+        }
+    }
+
+    var Diags = this.Diags;
+    if (!Log.$used && !Assert.$used && !Diags.$used) {
+        for each (var mod in xdc.om.$modules) {
+            if (!mod.$used || mod.$hostonly || mod.PROXY$) {
+                continue;
+            }
+            mod.Module__diagsMask = $$NOGEN;
+            mod.Module__diagsIncluded = $$NOGEN;
+            mod.Module__diagsEnabled = $$NOGEN;
+        }
+    }
+
     var LoggerBuf = this.LoggerBuf;
     /* We want to set LoggerBuf default values very late, after all other
      * modules had a chance to set them.
@@ -167,10 +211,9 @@ function close()
 		xdc.useModule(Timestamp.SupportProxy.delegate$.$name, true);
 	}
 
-	/* disable trace on timestamp proxy to prevent recursive callbacks */
-	var Diags = xdc.module("xdc.runtime.Diags");
-	var modName = LoggerBuf.TimestampProxy.delegate$.$name;
-	Diags.setMaskMeta(modName, Diags.ALL_LOGGING, Diags.ALWAYS_OFF);
+        /* disable trace on timestamp proxy to prevent recursive callbacks */
+        var modName = LoggerBuf.TimestampProxy.delegate$.$name;
+        Diags.setMaskMeta(modName, Diags.ALL_LOGGING, Diags.ALWAYS_OFF);
     }
 }
 
@@ -210,8 +253,7 @@ function checkProxies(unit)
 
 /*
  *  ======== finalize ========
- *  Called by the configuration model to initialize all common module
- *  settings
+ *  Called by the configuration model to initialize all common module settings
  */
 function finalize()
 {
@@ -238,17 +280,18 @@ function finalize()
         if (!mod.$used || mod.$hostonly || mod.PROXY$) {
             continue;
         }
-	if (!mod.$spec.attrBool('@Gated')) {
-	    if (mod.common$.gate != undefined
-	        && mod.$name != "xdc.runtime.Defaults") {
-		mod.$logWarning("this module is non-gated but it was assigned "
-		    + "a non-null gate", mod, "common$.gate");
-	    }
-	    continue;
-	}
+        /* REQ_TAG(SYSBIOS-921), REQ_TAG(SYSBIOS-922) */
+        if (!mod.$spec.attrBool('@Gated')) {
+            if (mod.common$.gate != undefined
+                && mod.$name != "xdc.runtime.Defaults") {
+                mod.$logWarning("this module is non-gated but it was assigned "
+                    + "a non-null gate", mod, "common$.gate");
+            }
+            continue;
+        }
 
-        /* TODO: validate gateObj/gatePrms come from same module if former
-         * is non-null
+        /* XDCTOOLS-301:
+         * validate gateObj/gatePrms come from same module if former is non-null
          */
         mod.Module__gateObj = (mod.common$.gate !== undefined) ?
             mod.common$.gate : Defaults.common$.gate;
@@ -266,7 +309,7 @@ function finalize()
         }
 
         checkProxies(mod);
-        
+
         /*  Unless otherwise specified, force some modules to be named.
          *    Main  : This improves the error messages that come from calls to
          *            Error_raise() and Log_print/write in "non module" code.
@@ -280,12 +323,12 @@ function finalize()
             }
         }
 
-	/* prevent unintended logging of loggers (usually a mistake) */
-	if (mod instanceof xdc.om["xdc.runtime.ILogger"].Module) {
-	    if (mod.common$.logger === undefined) {
-		mod.common$.logger = null;
-	    }
-	}
+        /* prevent unintended logging of loggers (usually a mistake) */
+        if (mod instanceof xdc.om["xdc.runtime.ILogger"].Module) {
+            if (mod.common$.logger === undefined) {
+                mod.common$.logger = null;
+            }
+        }
 
         /* propagate Defaults to all used target modules */
         if (mod.$spec.needsRuntime()) {
@@ -309,12 +352,12 @@ function validate()
 
         /* if the module's capsule has a validate function, run it */
         var cap = mod.$capsule;
-        if (cap && "validate" in cap) {
+        if (cap && "validate" in cap && mod.$used) {
             cap.validate.apply(mod, []);
         }
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:22:00; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

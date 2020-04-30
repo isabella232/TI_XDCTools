@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-E07
+ * @(#) xdc-F07
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_rov_monserver
 {
-    static final String VERS = "@(#) xdc-E07\n";
+    static final String VERS = "@(#) xdc-F07\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -400,6 +400,9 @@ public class xdc_rov_monserver
     {
         Proto.Fxn fxn;
 
+        // fxn SymbolTable.whatis
+        fxn = (Proto.Fxn)om.bind("xdc.rov.monserver.SymbolTable$$whatis", new Proto.Fxn(om.findStrict("xdc.rov.monserver.SymbolTable.Instance", "xdc.rov.monserver"), $$T_Str, 1, 1, false));
+                fxn.addArg(0, "addr", Proto.Elm.newCNum("(xdc_ULong)"), $$UNDEF);
     }
 
     void Main$$SIZES()
@@ -642,6 +645,7 @@ public class xdc_rov_monserver
                 if (fxn != null) po.addFxn("getISA", (Proto.Fxn)om.findStrict("xdc.rov.ISymbolTable$$getISA", "xdc.rov.monserver"), fxn);
                 fxn = Global.get(cap, "getJavaImp");
                 if (fxn != null) po.addFxn("getJavaImp", (Proto.Fxn)om.findStrict("xdc.rov.ISymbolTable$$getJavaImp", "xdc.rov.monserver"), fxn);
+                po.addFxn("whatis", (Proto.Fxn)om.findStrict("xdc.rov.monserver.SymbolTable$$whatis", "xdc.rov.monserver"), Global.get(cap, "whatis"));
         po = (Proto.Obj)om.findStrict("xdc.rov.monserver.SymbolTable$$Params", "xdc.rov.monserver");
         po.init("xdc.rov.monserver.SymbolTable.Params", om.findStrict("xdc.rov.ISymbolTable$$Params", "xdc.rov.monserver"));
                 po.addFld("$hostonly", $$T_Num, 1, "r");
@@ -657,6 +661,7 @@ public class xdc_rov_monserver
                 if (fxn != null) po.addFxn("getISA", (Proto.Fxn)om.findStrict("xdc.rov.ISymbolTable$$getISA", "xdc.rov.monserver"), fxn);
                 fxn = Global.get(cap, "getJavaImp");
                 if (fxn != null) po.addFxn("getJavaImp", (Proto.Fxn)om.findStrict("xdc.rov.ISymbolTable$$getJavaImp", "xdc.rov.monserver"), fxn);
+                po.addFxn("whatis", (Proto.Fxn)om.findStrict("xdc.rov.monserver.SymbolTable$$whatis", "xdc.rov.monserver"), Global.get(cap, "whatis"));
     }
 
     void Main$$ROV()

@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -36,13 +36,12 @@
  *  ======== xdc_FILE__ ========
  *  Alternative to __FILE__ which defaults to NULL
  *
- *  We define our own symbol in lieu of the standard __FILE__
- *  so we can avoid embedding lots of static strings in applications
- *  that use Error and Assert.
+ *  We define our own symbol in lieu of the standard __FILE__ so we can avoid
+ *  embedding lots of static strings in applications that use Error and Assert.
  *
  *  Both Error and Assert use xdc_FILE__ and ALL module internal headers
  *  redefine xdc_FILE__ to be NULL, unless xdc_FILE is defined.  If xdc_FILE
- *  is defined, xdc-FILE__ has the same value assigned to xdc_FILE.  So, by
+ *  is defined, xdc_FILE__ has the same value assigned to xdc_FILE.  So, by
  *  default, Error and Asserts in modules do *not* provide a file name.
  *
  *  Since this header is included in all module public headers, "non-module"
@@ -78,13 +77,7 @@
 #endif
 
 #endif /* XDC__ */
-
-
-
-
-
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:22:00; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_knl_Cache_Proxy__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_Cache_Proxy___VERS 200
@@ -251,55 +253,55 @@ __extern const xdc_runtime_knl_Cache_Proxy_Fxns__ xdc_runtime_knl_Cache_Proxy_Mo
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Handle__label__S, "xdc_runtime_knl_Cache_Proxy_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_knl_Cache_Proxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_knl_Cache_Proxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Module__startupDone__S, "xdc_runtime_knl_Cache_Proxy_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_Module__startupDone__S( void);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Object__get__S, "xdc_runtime_knl_Cache_Proxy_Object__get__S")
-__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Object__first__S, "xdc_runtime_knl_Cache_Proxy_Object__first__S")
-__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Object__next__S, "xdc_runtime_knl_Cache_Proxy_Object__next__S")
-__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_knl_Cache_Proxy_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Params__init__S, "xdc_runtime_knl_Cache_Proxy_Params__init__S")
-__extern xdc_Void xdc_runtime_knl_Cache_Proxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_knl_Cache_Proxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* Proxy__abstract__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Proxy__abstract__S, "xdc_runtime_knl_Cache_Proxy_Proxy__abstract__S")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_Proxy__abstract__S( void );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_Proxy__abstract__S( void);
 
 /* Proxy__delegate__S */
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_Proxy__delegate__S, "xdc_runtime_knl_Cache_Proxy_Proxy__delegate__S")
-__extern xdc_CPtr xdc_runtime_knl_Cache_Proxy_Proxy__delegate__S( void );
+__extern xdc_CPtr xdc_runtime_knl_Cache_Proxy_Proxy__delegate__S( void);
 
 /* inv__E */
 #define xdc_runtime_knl_Cache_Proxy_inv xdc_runtime_knl_Cache_Proxy_inv__E
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_inv__E, "xdc_runtime_knl_Cache_Proxy_inv")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_inv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_inv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wb__E */
 #define xdc_runtime_knl_Cache_Proxy_wb xdc_runtime_knl_Cache_Proxy_wb__E
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_wb__E, "xdc_runtime_knl_Cache_Proxy_wb")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wb__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wb__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wbInv__E */
 #define xdc_runtime_knl_Cache_Proxy_wbInv xdc_runtime_knl_Cache_Proxy_wbInv__E
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_wbInv__E, "xdc_runtime_knl_Cache_Proxy_wbInv")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wbInv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wbInv__E( xdc_Ptr blockPtr, xdc_SizeT byteCnt, xdc_Bool wait, xdc_runtime_Error_Block *eb);
 
 /* wait__E */
 #define xdc_runtime_knl_Cache_Proxy_wait xdc_runtime_knl_Cache_Proxy_wait__E
 xdc__CODESECT(xdc_runtime_knl_Cache_Proxy_wait__E, "xdc_runtime_knl_Cache_Proxy_wait")
-__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wait__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Cache_Proxy_wait__E( xdc_runtime_Error_Block *eb);
 
 
 /*

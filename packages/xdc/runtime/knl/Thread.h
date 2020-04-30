@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -36,10 +36,12 @@
 #define xdc_runtime_knl_Thread__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_Thread___VERS 200
@@ -357,105 +359,105 @@ __extern void xdc_runtime_knl_Thread_destruct(xdc_runtime_knl_Thread_Struct *obj
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Handle__label__S, "xdc_runtime_knl_Thread_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_knl_Thread_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_knl_Thread_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Module__startupDone__S, "xdc_runtime_knl_Thread_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_Thread_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_Thread_Module__startupDone__S( void);
 
 /* Object__create__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Object__create__S, "xdc_runtime_knl_Thread_Object__create__S")
-__extern xdc_Ptr xdc_runtime_knl_Thread_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb );
+__extern xdc_Ptr xdc_runtime_knl_Thread_Object__create__S( xdc_CPtr aa, const xdc_UChar *pa, xdc_SizeT psz, xdc_runtime_Error_Block *eb);
 
 /* Object__delete__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Object__delete__S, "xdc_runtime_knl_Thread_Object__delete__S")
-__extern xdc_Void xdc_runtime_knl_Thread_Object__delete__S( xdc_Ptr instp );
+__extern xdc_Void xdc_runtime_knl_Thread_Object__delete__S( xdc_Ptr instp);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Object__get__S, "xdc_runtime_knl_Thread_Object__get__S")
-__extern xdc_Ptr xdc_runtime_knl_Thread_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_knl_Thread_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Object__first__S, "xdc_runtime_knl_Thread_Object__first__S")
-__extern xdc_Ptr xdc_runtime_knl_Thread_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_knl_Thread_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Object__next__S, "xdc_runtime_knl_Thread_Object__next__S")
-__extern xdc_Ptr xdc_runtime_knl_Thread_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_knl_Thread_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_knl_Thread_Params__init__S, "xdc_runtime_knl_Thread_Params__init__S")
-__extern xdc_Void xdc_runtime_knl_Thread_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_knl_Thread_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* self__E */
 #define xdc_runtime_knl_Thread_self xdc_runtime_knl_Thread_self__E
 xdc__CODESECT(xdc_runtime_knl_Thread_self__E, "xdc_runtime_knl_Thread_self")
-__extern xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_self__E( xdc_runtime_Error_Block *eb );
+__extern xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_self__E( xdc_runtime_Error_Block *eb);
 
 /* start__E */
 #define xdc_runtime_knl_Thread_start xdc_runtime_knl_Thread_start__E
 xdc__CODESECT(xdc_runtime_knl_Thread_start__E, "xdc_runtime_knl_Thread_start")
-__extern xdc_Bool xdc_runtime_knl_Thread_start__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_start__E( xdc_runtime_Error_Block *eb);
 
 /* yield__E */
 #define xdc_runtime_knl_Thread_yield xdc_runtime_knl_Thread_yield__E
 xdc__CODESECT(xdc_runtime_knl_Thread_yield__E, "xdc_runtime_knl_Thread_yield")
-__extern xdc_Bool xdc_runtime_knl_Thread_yield__E( xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_yield__E( xdc_runtime_Error_Block *eb);
 
 /* compareOsPriorities__E */
 #define xdc_runtime_knl_Thread_compareOsPriorities xdc_runtime_knl_Thread_compareOsPriorities__E
 xdc__CODESECT(xdc_runtime_knl_Thread_compareOsPriorities__E, "xdc_runtime_knl_Thread_compareOsPriorities")
-__extern xdc_Int xdc_runtime_knl_Thread_compareOsPriorities__E( xdc_Int p1, xdc_Int p2, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_Thread_compareOsPriorities__E( xdc_Int p1, xdc_Int p2, xdc_runtime_Error_Block *eb);
 
 /* sleep__E */
 #define xdc_runtime_knl_Thread_sleep xdc_runtime_knl_Thread_sleep__E
 xdc__CODESECT(xdc_runtime_knl_Thread_sleep__E, "xdc_runtime_knl_Thread_sleep")
-__extern xdc_Bool xdc_runtime_knl_Thread_sleep__E( xdc_UInt timeout, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_sleep__E( xdc_UInt timeout, xdc_runtime_Error_Block *eb);
 
 /* join__E */
 #define xdc_runtime_knl_Thread_join xdc_runtime_knl_Thread_join__E
 xdc__CODESECT(xdc_runtime_knl_Thread_join__E, "xdc_runtime_knl_Thread_join")
-__extern xdc_Bool xdc_runtime_knl_Thread_join__E( xdc_runtime_knl_Thread_Handle __inst, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_join__E( xdc_runtime_knl_Thread_Handle instp, xdc_runtime_Error_Block *eb);
 
 /* getPriority__E */
 #define xdc_runtime_knl_Thread_getPriority xdc_runtime_knl_Thread_getPriority__E
 xdc__CODESECT(xdc_runtime_knl_Thread_getPriority__E, "xdc_runtime_knl_Thread_getPriority")
-__extern xdc_runtime_knl_Thread_Priority xdc_runtime_knl_Thread_getPriority__E( xdc_runtime_knl_Thread_Handle __inst, xdc_runtime_Error_Block *eb );
+__extern xdc_runtime_knl_Thread_Priority xdc_runtime_knl_Thread_getPriority__E( xdc_runtime_knl_Thread_Handle instp, xdc_runtime_Error_Block *eb);
 
 /* setPriority__E */
 #define xdc_runtime_knl_Thread_setPriority xdc_runtime_knl_Thread_setPriority__E
 xdc__CODESECT(xdc_runtime_knl_Thread_setPriority__E, "xdc_runtime_knl_Thread_setPriority")
-__extern xdc_Bool xdc_runtime_knl_Thread_setPriority__E( xdc_runtime_knl_Thread_Handle __inst, xdc_runtime_knl_Thread_Priority newPri, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_setPriority__E( xdc_runtime_knl_Thread_Handle instp, xdc_runtime_knl_Thread_Priority newPri, xdc_runtime_Error_Block *eb);
 
 /* getOsPriority__E */
 #define xdc_runtime_knl_Thread_getOsPriority xdc_runtime_knl_Thread_getOsPriority__E
 xdc__CODESECT(xdc_runtime_knl_Thread_getOsPriority__E, "xdc_runtime_knl_Thread_getOsPriority")
-__extern xdc_Int xdc_runtime_knl_Thread_getOsPriority__E( xdc_runtime_knl_Thread_Handle __inst, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_Thread_getOsPriority__E( xdc_runtime_knl_Thread_Handle instp, xdc_runtime_Error_Block *eb);
 
 /* setOsPriority__E */
 #define xdc_runtime_knl_Thread_setOsPriority xdc_runtime_knl_Thread_setOsPriority__E
 xdc__CODESECT(xdc_runtime_knl_Thread_setOsPriority__E, "xdc_runtime_knl_Thread_setOsPriority")
-__extern xdc_Bool xdc_runtime_knl_Thread_setOsPriority__E( xdc_runtime_knl_Thread_Handle __inst, xdc_Int newPri, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_setOsPriority__E( xdc_runtime_knl_Thread_Handle instp, xdc_Int newPri, xdc_runtime_Error_Block *eb);
 
 /* getOsHandle__E */
 #define xdc_runtime_knl_Thread_getOsHandle xdc_runtime_knl_Thread_getOsHandle__E
 xdc__CODESECT(xdc_runtime_knl_Thread_getOsHandle__E, "xdc_runtime_knl_Thread_getOsHandle")
-__extern xdc_Ptr xdc_runtime_knl_Thread_getOsHandle__E( xdc_runtime_knl_Thread_Handle __inst );
+__extern xdc_Ptr xdc_runtime_knl_Thread_getOsHandle__E( xdc_runtime_knl_Thread_Handle instp);
 
 /* getTls__E */
 #define xdc_runtime_knl_Thread_getTls xdc_runtime_knl_Thread_getTls__E
 xdc__CODESECT(xdc_runtime_knl_Thread_getTls__E, "xdc_runtime_knl_Thread_getTls")
-__extern xdc_Ptr xdc_runtime_knl_Thread_getTls__E( xdc_runtime_knl_Thread_Handle __inst );
+__extern xdc_Ptr xdc_runtime_knl_Thread_getTls__E( xdc_runtime_knl_Thread_Handle instp);
 
 /* setTls__E */
 #define xdc_runtime_knl_Thread_setTls xdc_runtime_knl_Thread_setTls__E
 xdc__CODESECT(xdc_runtime_knl_Thread_setTls__E, "xdc_runtime_knl_Thread_setTls")
-__extern xdc_Void xdc_runtime_knl_Thread_setTls__E( xdc_runtime_knl_Thread_Handle __inst, xdc_Ptr tls );
+__extern xdc_Void xdc_runtime_knl_Thread_setTls__E( xdc_runtime_knl_Thread_Handle instp, xdc_Ptr tls);
 
 /* stat__E */
 #define xdc_runtime_knl_Thread_stat xdc_runtime_knl_Thread_stat__E
 xdc__CODESECT(xdc_runtime_knl_Thread_stat__E, "xdc_runtime_knl_Thread_stat")
-__extern xdc_Bool xdc_runtime_knl_Thread_stat__E( xdc_runtime_knl_Thread_Handle __inst, xdc_runtime_knl_Thread_Stat *buf, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Thread_stat__E( xdc_runtime_knl_Thread_Handle instp, xdc_runtime_knl_Thread_Stat *buf, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -526,8 +528,8 @@ static inline void xdc_runtime_knl_Thread_Params_copy(xdc_runtime_knl_Thread_Par
 #define xdc_runtime_knl_Thread_Object_sizeof() xdc_runtime_knl_Thread_Object__sizeof__C
 
 /* Object_get */
-static inline xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_Object_get(xdc_runtime_knl_Thread_Instance_State *oarr, int i);
-static inline xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_Object_get(xdc_runtime_knl_Thread_Instance_State *oarr, int i) 
+static inline xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_Object_get(xdc_runtime_knl_Thread_Object *oarr, int i);
+static inline xdc_runtime_knl_Thread_Handle xdc_runtime_knl_Thread_Object_get(xdc_runtime_knl_Thread_Object *oarr, int i) 
 {
     return (xdc_runtime_knl_Thread_Handle)xdc_runtime_knl_Thread_Object__get__S(oarr, i);
 }
@@ -689,6 +691,6 @@ struct xdc_runtime_knl_Thread_Object {
 #endif /* xdc_runtime_knl_Thread__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

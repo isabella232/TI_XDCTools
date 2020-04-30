@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -25,11 +25,12 @@ function instance$static$init(obj, params)
         Program.$logFatal(
             "'size' parameter to HeapMin.create() cannot be 0.", this, "size");
     }
-    
+
     /* Verify requested alignment is a power of 2 */
     if ((params.align != 0) &&
         ((params.align - 1) & params.align) != 0) {
-        HeapMin.$logFatal("Requested alignment must be a power of 2.", this, "align");
+        HeapMin.$logFatal("Requested alignment must be a power of 2.", this,
+                          "align");
     }
 
     /* Get default alignment from target */
@@ -41,7 +42,7 @@ function instance$static$init(obj, params)
     obj.buf.length = params.size;
 
     Memory.staticPlace(obj.buf, params.align, params.sectionName);
-    
+
     /* Fill in the remaining instance internal fields */
     obj.remainSize = params.size;
     obj.startSize  = params.size;
@@ -57,6 +58,7 @@ function instance$static$init(obj, params)
  */
 function module$use()
 {
+    xdc.useModule('xdc.runtime.Assert');
     xdc.useModule('xdc.runtime.Memory');
 }
 
@@ -72,8 +74,7 @@ function viewInitBasic(view, obj)
     view.remainSize = obj.remainSize;
     view.startSize = obj.startSize;
 }
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

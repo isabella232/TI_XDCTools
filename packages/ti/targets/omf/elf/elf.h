@@ -1,9 +1,4 @@
 /*
- *  Copyright 2019 by Texas Instruments Incorporated.
- *
- */
-
-/*
  *  ======== elf.h ========
  */
 #ifndef ELF_
@@ -213,8 +208,3 @@ extern String Elf32_redefineSect(Elf32_Handle elf, Int sNum, String fileName);
 extern Int Elf32_writeSect(Elf32_Handle elf, Int sNum, Char *buf, Int len);
 
 #endif
-/*
- *  @(#) ti.targets.omf.elf; 1,0,0,0; 3-28-2019 14:39:42; /db/ztree/library/trees/xdctargets/xdctargets-r13/src/ xlibrary
-
- */
-

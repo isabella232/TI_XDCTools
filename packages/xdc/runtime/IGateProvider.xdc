@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -37,14 +37,14 @@ package xdc.runtime
  *  long during periods of high fragmentation.  Searching such a list with
  *  interrupts disabled would cause system latencies to also become unbounded.
  *  In this case, the best solution is to provide a gate that suspends the
- *  execution of  threads that try to enter a gate that has already been
- *  entered; i.e., the gate "blocks" the thread until the thread already in the
- *  gate leaves.  The time required to enter and leave the gate is greater than
- *  simply enabling and restoring interrupts, but since the time spent within
- *  the gate is relatively large, the overhead caused by entering and leaving
- *  gates will not become a significant percentage of overall system time.  More
- *  importantly, threads that do not need to access the shared data structure
- *  are completely unaffected by threads that do access it.
+ *  execution of threads that try to enter a gate that has already been entered;
+ *  i.e., the gate "blocks" the thread until the thread already in the gate
+ *  leaves.  The time required to enter and leave the gate is greater than simply 
+ *  enabling and restoring interrupts, but since the time spent within the gate is
+ *  relatively large, the overhead caused by entering and leaving gates will not
+ *  become a significant percentage of overall system time.  More importantly,
+ *  threads that do not need to access the shared data structure are completely
+ *  unaffected by threads that do access it.
  *
  *  @a(Notes)
  *  Modules inheriting this interface should treat all names beginning with
@@ -60,9 +60,10 @@ interface IGateProvider {
      *  ======== Q_BLOCKING ========
      *  Blocking quality
      *
-     *  Gates with this "quality" may cause the calling thread to block; 
+     *  Gates with this "quality" may cause the calling thread to block;
      *  i.e., suspend execution until another thread leaves the gate.
      */
+    /* REQ_TAG(SYSBIOS-925) */
     const Int Q_BLOCKING = 1;
 
     /*!
@@ -72,6 +73,7 @@ interface IGateProvider {
      *  Gates with this "quality" allow other threads to preempt the thread
      *  that has already entered the gate.
      */
+    /* REQ_TAG(SYSBIOS-926) */
     const Int Q_PREEMPTING = 2;
 
     /*!
@@ -94,6 +96,7 @@ interface IGateProvider {
      *  and `FALSE` otherwise, which includes the case when the gate does not
      *  recognize the constant describing the quality.
      */
+    /* REQ_TAG(SYSBIOS-927) */
     Bool query(Int qual);
 
 instance:
@@ -110,18 +113,18 @@ instance:
      *
      *  Each gate provider can implement mutual exclusion using different
      *  algorithms; e.g., disabling all scheduling, disabling the scheduling
-     *  of all threads below a specified "priority level", suspending the
-     *  caller when the gate has been entered by another thread and
-     *  re-enabling it when the the other thread leaves the gate.  However,
-     *  in all cases, after this method returns that caller has exclusive
-     *  access to the data protected by this gate.
+     *  of all threads below a specified "priority level", suspending the caller
+     *  when the gate has been entered by another thread and re-enabling it when
+     *  the the other thread leaves the gate.  However, in all cases, after this
+     *  method returns that caller has exclusive access to the data protected by
+     *  this gate.
      *
      *  A thread may reenter a gate without blocking or failing.
      *
      *  @a(returns)
-     *  Returns a "key" that is used to `{@link #leave}` this gate; this 
-     *  value is used to restore thread preemption to the state that
-     *  existed just prior to entering this gate.
+     *  Returns a "key" that is used to `{@link #leave}` this gate; this value
+     *  is used to restore thread preemption to the state that existed just
+     *  prior to entering this gate.
      */
     IArg enter();
 
@@ -129,19 +132,17 @@ instance:
      *  ======== leave ========
      *  Leave this gate
      *
-     *  This method is only called by threads that have previously entered 
-     *  this gate via `{@link #enter}`.  After this method returns, the
-     *  caller must not access the data structure protected by this gate
-     *  (unless the caller has entered the gate more than once and other
-     *  calls to `leave` remain to balance the number of previous
-     *  calls to `enter`).
+     *  This method is only called by threads that have previously entered this
+     *  gate via `{@link #enter}`.  After this method returns, the caller must
+     *  not access the data structure protected by this gate (unless the caller
+     *  has entered the gate more than once and other calls to `leave` remain
+     *  to balance the number of previous calls to `enter`).
      *
-     *  @param(key) the value returned by a matching call to
-     *              `{@link #enter}`
+     *  @param(key) the value returned by a matching call to `{@link #enter}`
      */
     Void leave(IArg key);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

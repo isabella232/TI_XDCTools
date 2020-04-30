@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="host.platforms.arm" version="1, 0, 0, 0" producerId="/db/ztree/library/trees/platform/platform-w12/src/">
+<package name="host.platforms.arm" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-I08/src/">
     <units>
         <module name="Platform"/>
+        <module name="Arm"/>
     </units>
     <sources>
     </sources>
@@ -26,9 +27,9 @@
     </tests>
     <releases relDir="package/rel/">
     <release name="host_platforms_arm"
-        pname="../../..//../exports/host_platforms_arm.zip"
+        pname="host_platforms_arm.zip"
         label="default"
-        relScript="tisb/release/copyright/copyright.rel">
+        relScript="xdc/release/filters/what.rel">
         <file name="package/package.bld.xml"/>
         <file name="package/build.cfg"/>
         <file name="package/package.xdc.inc"/>

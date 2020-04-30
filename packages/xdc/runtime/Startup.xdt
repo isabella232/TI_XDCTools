@@ -23,6 +23,7 @@
 /*
  *  ======== MODULE STARTUP DONE FUNCTIONS ========
  */
+/* REQ_TAG(SYSBIOS-953) */
 %var idMap = [];
 %for each (var mod in Program.targetModules()) {
 %   if (!mod.MODULE_STARTUP$) continue;
@@ -34,7 +35,7 @@
 %   var mn = mod.$name.replace(/\./g, '_');
 xdc_Bool `mn`_Module__startupDone__F(void); /* keep GCC prototype warning quiet */
 xdc_Bool `mn`_Module__startupDone__F(void) {
-    return `mobj`->stateTab == 0 || `mobj`->stateTab[`mcnt`] < 0;
+    return (xdc_Bool)(`mobj`->stateTab == NULL || `mobj`->stateTab[`mcnt`] < 0);
 }
 %   mcnt++;
 %}
@@ -63,27 +64,17 @@ xdc_Int xdc_runtime_Startup_getState__I(xdc_runtime_Types_ModuleId id) {
 %}
 
 /*
- * Startup_exec__I is an internal entry point called by target/platform
- * boot code. Boot code is not brought into a partial-link assembly. So,
- * without this pragma, whole program optimizers would otherwise optimize-out
- * this function.
+ * Startup_exec__I is an internal entry point called by target/platform boot
+ * code. Boot code is not brought into a partial-link assembly. So, without this
+ * pragma, whole program optimizers would otherwise optimize-out this function.
  */
-#ifdef __ti__sect
-#pragma FUNC_EXT_CALLED(xdc_runtime_Startup_exec__I);
-#endif
-
-#ifdef __GNUC__
-#if defined(__clang__) && defined(__ti__)
 xdc_Void xdc_runtime_Startup_exec__I(void) __attribute__ ((used));
-#else
-xdc_Void xdc_runtime_Startup_exec__I(void) __attribute__ ((externally_visible));
-#endif
-#endif
 
 /*
  *  ======== xdc_runtime_Startup_exec__I ========
  *  Initialize all used modules that have startup functions
  */
+/* REQ_TAG(SYSBIOS-949) */
 xdc_Void xdc_runtime_Startup_exec__I(void)
 {
     xdc_Int state[`mcnt`];
@@ -91,7 +82,7 @@ xdc_Void xdc_runtime_Startup_exec__I(void)
 }
 %%{
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 
 %%}

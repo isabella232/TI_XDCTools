@@ -20,7 +20,7 @@ Contributors:
   <tr>
     <td>
       <form>
-        <p>The SysStd module provides "back-end" support for the <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/System.html">System</a> module.  This support relies on a small set of ANSI C standard runtime functions, such as putchar() and fflush(), to handle output produced by the System module's functions.
+        <p>The SysStd module provides "back-end" support for the <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/System.html">System</a> module.  This support relies on a small set of ANSI C standard runtime functions, such as putchar() and fflush(), to handle output produced by the System module's functions.
         </p>
         <p> </p>
       </form>
@@ -37,7 +37,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

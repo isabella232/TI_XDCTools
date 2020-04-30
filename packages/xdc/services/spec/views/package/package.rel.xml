@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="xdc_services_spec_views" label="default" date="1557944625083" buildCount="1" producerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+<release name="xdc_services_spec_views" label="default" date="1581216599918" buildCount="1" producerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
 <package name="xdc.services.spec.views"
     version="1, 0, 0"/>
 <imports>
@@ -11,8 +11,8 @@
 </imports>
 <references>
     <package name="xdc"
-        version="1, 1, 1, 1557943686000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+        version="1, 1, 1, 1581215799000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="IPackage.xdc"/>
         <file name="IPackage.xs"/>
         <file name="Warnings.xs"/>
@@ -25,15 +25,15 @@
         <file name="xmlgen2.xs"/>
     </package>
     <package name="xdc.services.global"
-        version="1, 0, 0, 1557943765000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+        version="1, 0, 0, 1581215842000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="Clock.xs"/>
         <file name="Trace.xs"/>
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.bld"
-        version="1, 0, 2, 1557943695000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+        version="1, 0, 2, 1581215804000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="BuildEnvironment.xs"/>
         <file name="Configuration.xs"/>
         <file name="Executable.xs"/>
@@ -51,37 +51,37 @@
         <file name="bld.js"/>
         <file name="package.xs"/>
     </package>
-    <package name="xdc.services.intern.xsr"
-        version="1, 0, 0, 1557943801000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+    <package name="xdc.services.spec"
+        version="1, 0, 0, 1581215874000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.shelf"
-        version="1, 0, 0, 1557943840000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+        version="1, 0, 0, 1581215885000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="java/antlr.jar"/>
         <file name="java/ecj.jar"/>
         <file name="java/js.jar"/>
         <file name="java/tar.jar"/>
     </package>
-    <package name="xdc.services.intern.cmd"
-        version="1, 0, 0, 1557943794000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
-        <file name="java/package.jar"/>
-    </package>
-    <package name="xdc.services.spec"
-        version="1, 0, 0, 1557943816000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+    <package name="xdc.services.intern.xsr"
+        version="1, 0, 0, 1581215865000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.services.intern.gen"
-        version="1, 0, 0, 1557943797000"
-        providerId="/db/ztree/library/trees/xdc/xdc-F14/src/packages">
+        version="1, 0, 0, 1581215864000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
         <file name="java/package.jar"/>
     </package>
-    <xdcRoot base="/db/ztree/library/trees/xdc/xdc-F14/src/">
+    <package name="xdc.services.intern.cmd"
+        version="1, 0, 0, 1581215863000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        <file name="java/package.jar"/>
+    </package>
+    <xdcRoot base="/db/ztree/library/trees/xdc/xdc-I08/src/">
         <file name="/packages/xdc/package.xdc"/>
-        <xdcCorePkg version="16, 0, 2, 1557943714000"/>
+        <xdcCorePkg version="16, 0, 2, 1581215815000"/>
     </xdcRoot>
 </references>
 <orphans>

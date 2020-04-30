@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_knl_Semaphore__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_knl_Semaphore___VERS 200
@@ -248,17 +250,17 @@ __extern __FAR__ const CT__xdc_runtime_knl_Semaphore_Object__table xdc_runtime_k
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_knl_Semaphore_Module__startupDone__S, "xdc_runtime_knl_Semaphore_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_knl_Semaphore_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_knl_Semaphore_Module__startupDone__S( void);
 
 /* pend__E */
 #define xdc_runtime_knl_Semaphore_pend xdc_runtime_knl_Semaphore_pend__E
 xdc__CODESECT(xdc_runtime_knl_Semaphore_pend__E, "xdc_runtime_knl_Semaphore_pend")
-__extern xdc_Int xdc_runtime_knl_Semaphore_pend__E( xdc_runtime_knl_ISemaphore_Handle sem, xdc_UInt timeout, xdc_runtime_Error_Block *eb );
+__extern xdc_Int xdc_runtime_knl_Semaphore_pend__E( xdc_runtime_knl_ISemaphore_Handle sem, xdc_UInt timeout, xdc_runtime_Error_Block *eb);
 
 /* post__E */
 #define xdc_runtime_knl_Semaphore_post xdc_runtime_knl_Semaphore_post__E
 xdc__CODESECT(xdc_runtime_knl_Semaphore_post__E, "xdc_runtime_knl_Semaphore_post")
-__extern xdc_Bool xdc_runtime_knl_Semaphore_post__E( xdc_runtime_knl_ISemaphore_Handle sem, xdc_runtime_Error_Block *eb );
+__extern xdc_Bool xdc_runtime_knl_Semaphore_post__E( xdc_runtime_knl_ISemaphore_Handle sem, xdc_runtime_Error_Block *eb);
 
 
 /*
@@ -363,6 +365,6 @@ static inline xdc_Void xdc_runtime_knl_Semaphore_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_knl_Semaphore__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

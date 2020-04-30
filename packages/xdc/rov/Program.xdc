@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -50,7 +50,7 @@ metaonly module Program {
      *  @field(isScalar) if fetching an array, are the elements of the array
      *                   really just one of the "scalar structs" defined by
      *                   xdc.rov.support.ScalarStructs.
-     *  
+     *
      *  @see #fetchStruct
      *  @see #fetchArray
      */
@@ -58,7 +58,7 @@ metaonly module Program {
         String type;
         Bool   isScalar;
     }
-    
+
     /*!
      *  ======== InstDataView ========
      *  Instance view data returned from a scan
@@ -69,7 +69,7 @@ metaonly module Program {
         String label;
         Any    elements[];
     }
-    
+
     /*!
      *  ======== InstDataViewArr ========
      *  Array of all instance view data objects
@@ -100,11 +100,11 @@ metaonly module Program {
         TreeNode children[];
         Any      properties[];
     }
-    
+
     /*!
      *  ======== TreeNodeArr ========
      *  Array of tree table nodes
-     *  
+     *
      *  @see #scanTreeTableView
      *  @see ViewInfo#TREE_TABLE
      */
@@ -123,14 +123,14 @@ metaonly module Program {
         Any instStates[];
         Any modCfg;
     }
-    
+
     /* -------- Scan Functions -------- */
-    
-    /*! 
+
+    /*!
      *  ======== scanInstanceView ========
      *  Retrieve the instance-type views for a module
      *
-     *  Returns an array of Instance_View structures, each structure 
+     *  Returns an array of Instance_View structures, each structure
      *  representing an instance of the module.
      *
      *  @param(modName)  Full module name to return the views for.
@@ -161,10 +161,10 @@ metaonly module Program {
      *              configured into the current program.
      */
     Any scanModuleView(String modName, String tabName);
-    
+
     /*!
      *  ======== scanInstanceDataView ========
-     *  Retrieve a module's specified INSTANCE_DATA type view 
+     *  Retrieve a module's specified INSTANCE_DATA type view
      *
      *  @param(modName)  Full module name to return the views for.
      *  @param(tabName)  Name of the tab to retrieve the views for.
@@ -179,7 +179,7 @@ metaonly module Program {
 
     /*!
      *  ======== scanModuleDataView ========
-     *  Retrieve a module's specified MODULE_DATA type view 
+     *  Retrieve a module's specified MODULE_DATA type view
      *
      *  @param(modName)  Full module name to return the views for.
      *  @param(tabName)  Name of the tab to retrieve the views for.
@@ -188,9 +188,9 @@ metaonly module Program {
      *              the specified module view fails, the specified `tabName`
      *              isn't recognized, or the module `modName` is not
      *              configured into the current program.
-     */    
+     */
     ModDataView scanModuleDataView(String modName, String tabName);
-    
+
     /*!
      *  ======== scanRawView ========
      *  Retrieve the raw view for a module.
@@ -210,22 +210,22 @@ metaonly module Program {
      *              not configured into the current program.
      */
     RawView scanRawView(String modName);
-    
+
     /*!
      *  ======== scanTreeTableView ========
      */
     TreeNodeArr scanTreeTableView(String modName, String tabName);
-    
+
     /*!
      *  ======== scanTreeView ========
      */
     Any scanTreeView(String modName, String tabName);
-    
+
     /*!
      *  ======== scanHandle ========
      *  Scan single instance of a module
      *
-     *  Used from a view$init function to scan a single instance of a 
+     *  Used from a view$init function to scan a single instance of a
      *  different module given that instance's address.
      *
      *  @param(modName)  Full module name to return the raw view for.
@@ -241,8 +241,8 @@ metaonly module Program {
      *              the current program.
      */
     Any scanHandleView(String modName, Ptr instAddr, String tabName);
-    
-    /*! 
+
+    /*!
      *  ======== scanObjectView ========
      *  Scan view for an embedded object
      *
@@ -250,12 +250,12 @@ metaonly module Program {
      *  an embedded object.
      *
      *  Since XDC has no way of knowing what embedded objects are present in
-     *  a system, embedded objects do not appear in the list of a module's 
-     *  instances until they have been scanned in this way. 
+     *  a system, embedded objects do not appear in the list of a module's
+     *  instances until they have been scanned in this way.
      *
      *  Calling Program.scanObjectView will not read any additional data from
-     *  the target, since the state structure was already read as part of 
-     *  reading it's parent structure.
+     *  the target, since the state structure was already read as part of
+     *  reading its parent structure.
      *
      *  @param(modName) Full module name to return the view for.
      *  @param(obj)     Actual object to retrieve the view for.
@@ -269,7 +269,7 @@ metaonly module Program {
      *              configured into the current program.
      */
     Any scanObjectView(String modName, Any obj, String tabName);
-    
+
 
     /* -------- Fetch Functions -------- */
 
@@ -284,14 +284,14 @@ metaonly module Program {
      *                     memory image should validate the read by comparing
      *                     the address to section information.
      *
-     *  @a(Returns)  Returns the requested structure as a javascript object.
+     *  @a(Returns)  Returns the requested structure as a JavaScript object.
      *
      *  @a(Throws)  Throws an exception in the event that `addr` is not in
      *              the program's memory map or some error occurs that
      *              prevents memory from being read.
      */
     Any fetchStruct(FetchDesc desc, Ptr addr, Bool addrCheck = true);
-    
+
     /*!
      *  ======== fetchArray ========
      *  Retrieve the specified array from the target
@@ -346,7 +346,8 @@ metaonly module Program {
 
     /*!
      *  ======== fetchFromAddr ========
-     *  Returns a JavaScript object from the C object at the supplied address
+     *  Returns a JavaScript object that mirrors the C object at the supplied
+     *  address
      *
      *  The type of the object is also supplied by the user. There is no
      *  checking whether the object at that address is of the supplied type.
@@ -394,23 +395,54 @@ metaonly module Program {
     Any fetchVariableByPtr(String varName);
 
     /*!
+     *  @_nodoc
      *  ======== createObject ========
-     *  Creates a JavaScript object that mirrors an object from memory.
+     *  Internal method to create a JavaScript object representing a C object
+     *
+     *  This method should never be directly called by code outside
+     *  the xdc.rov package; future changes to an executables debug format
+     *  will result is compatibility breaks.
      *
      *  @param(addr)    address of the object in memory
      *  @param(type)    type specification for the object from memory
      *  @param(ret)     already created object to which a new object is added
-     *  @param(name)    name for the new object
+     *  @param(name)    name for the new object within `ret`
      */
     Void createObject(Ptr addr, Any typespec, Any ret, String name);
 
     /*!
+     *  @_nodoc
      *  ======== readMemory ========
-     *  Reads a primitive value from memory.
+     *  Internal method to read a primitive value from memory
+     *
+     *  This method should never be directly called by code outside
+     *  the xdc.rov package; future changes to an executables debug format
+     *  will result is compatibility breaks.
      *
      *  @param(addr)    memory address
      *  @param(size)    size in MAUs
-     *  @param(enc)     encoding (signed or unsigned)
+     *  @param(enc)     one of the following Dwarf encodings (DW_AT_encoding)
+     *                    0x01 DW_ATE_address
+     *                    0x02 DW_ATE_boolean
+     *                    0x05 DW_ATE_signed
+     *                    0x06 DW_ATE_signed_char
+     *                    0x07 DW_ATE_unsigned
+     *                    0x08 DW_ATE_unsigned_char
+     *
+     *                  The following encodings are not supported
+     *                    0x03 DW_ATE_complex_float
+     *                    0x04 DW_ATE_float
+     *                    0x09 DW_ATE_imaginary_float
+     *                    0x0a DW_ATE_packed_decimal
+     *                    0x0b DW_ATE_numeric_string
+     *                    0x0c DW_ATE_edited
+     *                    0x0d DW_ATE_signed_fixed
+     *                    0x0e DW_ATE_unsigned_fixed
+     *                    0x0f DW_ATE_decimal_float
+     *                    0x10 DW_ATE_UTF
+     *                    0x11 DW_ATE_UCS
+     *                    0x12 DW_ATE_ASCII
+     * @a(Returns) a scalor value (via `{@link StructureDecoder StructureDecoder._decodeScalar}`)
      */
     Any readMemory(Ptr addr, UInt size, Int enc);
 
@@ -433,7 +465,7 @@ metaonly module Program {
     /*!
      *  ======== getPrivateData ========
      *  Retrieves module's private ROV data.
-     *  
+     *
      *  This API returns an object which can be used to store private data
      *  across different ROV API calls. The object is reset at every
      *  breakpoint.
@@ -482,7 +514,8 @@ metaonly module Program {
 
     /*!
      *  ======== lookupType ========
-     *  Creates a type specification from the Dwarf data.
+     *  Creates a type specification from the Dwarf data. Returns null if the
+     *  type doesn't exist.
      *
      *  @param(type)    type name
      */
@@ -539,7 +572,7 @@ metaonly module Program {
      *  ======== getShortName ========
      *  Convert canonical instance names to a short name
      *
-     *  Parses the full canonical instance name for the shorter name given 
+     *  Parses the full canonical instance name for the shorter name given
      *  by the user. If there is no shorter name, then it returns an empty
      *  string "".
      *
@@ -552,10 +585,23 @@ metaonly module Program {
 
     /*!
      *  ======== debugPrint ========
-     *  Print API which will only print the message if debug printing is
-     *  enabled.
+     *  Conditional print API
+     *
+     *  Output message if only debug printing is enabled. Output is sent to
+     *  stdout as well as an ROV view.
+     *
+     *  To enable output, either set the environment variable `XDC_ROV_TRACE`
+     *  or the Java property `xdc.rov.traceEnable` to `"true"`.
      */
     Void debugPrint(String msg);
+
+    /*!
+     *  ======== print ========
+     *  Unconditional print API
+     *
+     *  Output is sent to stdout as well as an ROV view.
+     */
+    Void print(String msg);
 
     /*!
      *  ======== timestamp ========
@@ -573,7 +619,7 @@ metaonly module Program {
      *  ======== newViewStruct ========
      *  Creates a new instance of the view structure for the specified view.
      *
-     *  This API is called for views where the view structure is not already 
+     *  This API is called for views where the view structure is not already
      *  passed in as an argument to the view init function.
      *
      *  It is necessary to instantiate a view structure in this way so that ROV
@@ -581,7 +627,7 @@ metaonly module Program {
      *  of the view structure (to support, e.g., Program.displayError).
      */
     Any newViewStruct(String modName, String tabName);
-    
+
     /*!
      *  ======== StatusEntry ========
      *  Single entry in the ROV status table.
@@ -597,7 +643,7 @@ metaonly module Program {
         String field;
         String message;
     }
-    
+
     /*!
      *  ======== getStatusTable ========
      *  Returns the current table of all encountered status messages.
@@ -606,25 +652,25 @@ metaonly module Program {
      *  breakpoint).
      */
     Any getStatusTable();
-    
+
     /* -------- Used By ROV -------- */
-       
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== moduleNames ========
      *  Array of all the module names in the application.
      */
     readonly config String moduleNames[length];
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== getModuleDesc ========
      *  Used to retrieve the module descriptor object for the requested module.
      */
     ROVModuleDesc *getModuleDesc(String modName);
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== getViewType ========
      *  This is a helper method which returns whether a given tabName is a
      *  module-level view, instance-level view, or raw view.
@@ -641,15 +687,15 @@ metaonly module Program {
         String name;
         String type;
     }
-    
+
     /*!
      *  @_nodoc
      *  ======== Tabs ========
      */
     typedef Tab Tabs[];
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== getSupportedTabs ========
      *  Returns a string array of the tab names supported by the module.
      */
@@ -660,24 +706,24 @@ metaonly module Program {
      *  ======== addCMod ========
      */
     Void addCMod(Any mod);
-    
+
     /*!
      *  @_nodoc
      *  ======== getAbortFlag ========
      *  In CCS, indicates whether the abort flag has been set.
      */
     Bool getAbortFlag();
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== resetMods ========
      *  Used to clear the cache of all scanned data and views. Should be called
      *  whenever the target data has changed.
      */
     Void resetMods();
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ======== setThrowViewErrors ========
      *  Used to enable/disable exceptions when views detect errors
      */
@@ -689,16 +735,16 @@ metaonly module Program {
      *  Used by xdc.runtime.Log.decode
      */
     String moduleIdToName(Int mid);
-    
+
     /*!
      *  ======== exToString ========
-     *  Helper function for formatting exceptions into strings with filename 
+     *  Helper function for formatting exceptions into strings with filename
      *  and line number.
      */
     String exToString(Any e);
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ========= ROVModuleDesc ========
      *  Structure containing all ROV-related data about an individual module.
      *
@@ -709,7 +755,7 @@ metaonly module Program {
      *  The structure's fields:
      *    name         The module's name
      *    addr         Address of the state object. Redundant with state.$addr,
-     *                 but available so that address is present even if fetch 
+     *                 but available so that address is present even if fetch
      *                 of state fails.
      *    loadFailed   Indicates that the 'useModule' call on this module threw
      *                 an exception.
@@ -718,10 +764,10 @@ metaonly module Program {
      *    state        Raw module state object
      *    instances    Array of ROVInstanceDesc objects representing the mod's
      *                 instances.
-     *    objects      Array of ROVInstanceDesc objects representing instances 
+     *    objects      Array of ROVInstanceDesc objects representing instances
      *                 of the module which are embedded in other objects.
-     *    viewMap      Contains the module-level views. The key to the map is 
-     *                 the string tab name for the view, and the value is the 
+     *    viewMap      Contains the module-level views. The key to the map is
+     *                 the string tab name for the view, and the value is the
      *                 an instance of Module_View.
      *    errorMap     For each view, contains any error that was encountered
      *                 in processing the view outside of what was reported by
@@ -737,24 +783,24 @@ metaonly module Program {
         Any useMod;
         Any viewInfo;
         Any state;
-        
+
         Any staticInstAddrs[];
         Any dynInstAddrs[];
         Bool readAllAddrs;
-        
+
         ROVInstanceDesc *instances[];
         Any viewMap[string];
         String errorMap[string];
-        
+
         String error; // Deprecated, replaced by errorMap
-        
+
         Any instMap;
-        
+
         Any userPrivate;
     };
-    
+
     /*!
-     *  @_nodoc  
+     *  @_nodoc
      *  ========= ROVInstanceDesc ========
      *  Structure containing all ROV-related data about an individual instance.
      *
@@ -767,7 +813,7 @@ metaonly module Program {
      *              but available so that address is present even if fetch of
      *              statefails.
      *    viewMap   Contains the instance-level views. The key to the map is
-     *              the string tab name for the view, and the value is the 
+     *              the string tab name for the view, and the value is the
      *              an instance of Instance_View.
      *    errorMap  For each view, contains any error that was encountered
      *              in processing the view outside of what was reported by
@@ -779,12 +825,12 @@ metaonly module Program {
         Any    addr;
         Any    viewMap[string];
         String errorMap[string];
-        
+
         String error; // Deprecated, replaced by errorMap
     };
 
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 5-15-2019 11:21:43; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 2-9-2020 18:49:04; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -165,6 +165,7 @@ module System {
      *
      *  @see #printf
      */
+    /* REQ_TAG(SYSBIOS-1072) */
     metaonly config String extendedFormats = "%$L%$S%$F";
 
     /*!
@@ -182,6 +183,7 @@ module System {
      *
      *  If this parameter is not set, it defaults to `{@link SysMin}`.
      */
+    /* REQ_TAG(SYSBIOS-1073) */
     proxy SupportProxy inherits ISystemSupport;
 
     /*!
@@ -192,6 +194,7 @@ module System {
      *  the `{@link System#atexit}` function.
      *
      */
+    /* REQ_TAG(SYSBIOS-1071) */
     config Int maxAtexitHandlers = 8;
 
     /*!
@@ -204,6 +207,7 @@ module System {
      *  plugged which loops infinitely.
      *
      */
+    /* REQ_TAG(SYSBIOS-899) */
     config AbortFxn abortFxn = System.abortStd;
 
     /*!
@@ -216,6 +220,7 @@ module System {
      *  plugged which loops infinitely.
      *
      */
+    /* REQ_TAG(SYSBIOS-906) */
     config ExitFxn exitFxn = System.exitStd;
 
     /*!
@@ -231,6 +236,7 @@ module System {
      *
      *  @param(str) abort message (not a format string)
      */
+    /* REQ_TAG(SYSBIOS-1069) */
     Void abort(CString str);
 
     /*!
@@ -242,6 +248,7 @@ module System {
      *  `{@link #abortFxn}`.
      *
      */
+    /* REQ_TAG(SYSBIOS-901) */
     Void abortStd();
 
     /*!
@@ -249,22 +256,23 @@ module System {
      *  Lightweight implementation of abortFxn function
      *
      *  This functions loops indefinitely. This can used as an alternative
-     *  `{@link #abortFxn}` when a lightweight implementation is 
+     *  `{@link #abortFxn}` when a lightweight implementation is
      *  required instead of the ANSI C Standard `abort()`.
      */
+    /* REQ_TAG(SYSBIOS-900) */
     Void abortSpin();
 
     /*!
      *  ======== atexit ========
      *  Add an exit handler
      *
-     *  `System_atexit` pushes `handler` onto an internal stack of functions 
+     *  `System_atexit` pushes `handler` onto an internal stack of functions
      *  to be executed when system is exiting (e.g. `System_exit` is called).
      *  Up to `{@link #maxAtexitHandlers}` functions can be specified in this
      *  manner.  During the exit processing, the functions are popped off the
      *  internal stack and called until the stack is empty.
      *
-     *  The `System` gate is entered before the `System_atexit` functions 
+     *  The `System` gate is entered before the `System_atexit` functions
      *  are called.
      *
      *  The `SupportProxy`'s `{@link ISystemSupport#exit}` function is called
@@ -277,6 +285,7 @@ module System {
      *  If `FALSE` is returned, the exit handler was not added and it will
      *  not be called during an exit.
      */
+    /* REQ_TAG(SYSBIOS-910) */
     Bool atexit(AtexitHandler handler);
 
     /*!
@@ -290,6 +299,7 @@ module System {
      *  @param(handler) the `AtexitHandler` to invoke during system
      *                  exit processing.
      */
+    /* REQ_TAG(SYSBIOS-910) */
     metaonly Void atexitMeta(AtexitHandler handler);
 
     /*!
@@ -303,6 +313,7 @@ module System {
      *
      *  @param(stat)    exit status to return to calling environment.
      */
+    /* REQ_TAG(SYSBIOS-1070) */
     Void exit(Int stat);
 
     /*!
@@ -315,6 +326,7 @@ module System {
      *
      *  @param(stat)    exit status to return to calling environment.
      */
+    /* REQ_TAG(SYSBIOS-908) */
     Void exitStd(Int stat);
 
     /*!
@@ -327,6 +339,7 @@ module System {
      *
      *  @param(stat)    exit status to return to calling environment.
      */
+    /* REQ_TAG(SYSBIOS-907) */
     Void exitSpin(Int stat);
 
     /*!
@@ -338,9 +351,10 @@ module System {
      *  `atexit` function so that all functions bound via `System_atexit` are
      *  processed when ANSI C standard `exit` function is called.
      *
-     *  @param(stat)    exit status which will passed to all functions 
+     *  @param(stat)    exit status which will be passed to all functions
      *                  processed.
      */
+    /* REQ_TAG(SYSBIOS-911) */
     Void processAtExit(Int stat);
 
     /*!
@@ -352,11 +366,12 @@ module System {
      *
      *  @param(ch) character to be output.
      */
+    /* REQ_TAG(SYSBIOS-912) */
     Void putch(Char ch);
 
     /*!
      *  ======== flush ========
-     *  Flush standard System I/O     
+     *  Flush standard System I/O
      *
      *  This function causes any buffered output characters are "written"
      *  to the output device.
@@ -364,6 +379,7 @@ module System {
      *  The `{@link #SupportProxy}`'s `flush` function is called
      *  by this function.
      */
+    /* REQ_TAG(SYSBIOS-909) */
     Void flush();
 
     /*!
@@ -509,6 +525,7 @@ module System {
      *  @a(returns)
      *  `printf` returns the number of characters printed.
      */
+    /* REQ_TAG(SYSBIOS-902) */
     Int printf(CString fmt, ...);
 
     /*!
@@ -520,6 +537,7 @@ module System {
      *
      *  @see #printf
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903) */
     Int aprintf(CString fmt, ...);
 
     /*!
@@ -537,6 +555,7 @@ module System {
      *  `sprintf` returns the number of characters output not including the
      *  '\0' termination character.
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
     Int sprintf(Char buf[], CString fmt, ...);
 
     /*!
@@ -549,6 +568,7 @@ module System {
      *
      *  @see #sprintf
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903), REQ_TAG(SYSBIOS-904) */
     Int asprintf(Char buf[], CString fmt, ...);
 
     /*!
@@ -565,6 +585,7 @@ module System {
      *  @a(returns)
      *  `vprintf` returns the number of characters output.
      */
+    /* REQ_TAG(SYSBIOS-902) */
     Int vprintf(CString fmt, VaList va);
 
     /*!
@@ -577,6 +598,7 @@ module System {
      *
      *  @see #vprintf
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903) */
     Int avprintf(CString fmt, VaList va);
 
     /*!
@@ -594,6 +616,7 @@ module System {
      *  @a(returns)
      *  `vsprintf` returns the number of characters output.
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
     Int vsprintf(Char buf[], CString fmt, VaList va);
 
     /*!
@@ -608,6 +631,7 @@ module System {
      *
      *  @see #vsprintf
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-903), REQ_TAG(SYSBIOS-904) */
     Int avsprintf(Char buf[], CString fmt, VaList va);
 
     /*!
@@ -633,6 +657,7 @@ module System {
      *  (@see #printf), the return value may be lower than the number of
      *  characters that would be written had `n` been sufficiently large.
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
     Int snprintf(Char buf[], SizeT n, CString fmt, ...);
 
     /*!
@@ -656,6 +681,7 @@ module System {
      *  (@see #printf), the return value may be lower than the number of
      *  characters that would be written had `n` been sufficiently large.
      */
+    /* REQ_TAG(SYSBIOS-902), REQ_TAG(SYSBIOS-904) */
     Int vsnprintf(Char buf[], SizeT n, CString fmt, VaList va);
 
 internal:
@@ -710,7 +736,7 @@ internal:
      *  @_nodoc
      */
     Int doPrint(Char buf[], SizeT n, CString fmt, VaList *pva, Bool aFlag);
-    
+
     /*!
      *  ======== lastFxn ========
      *  @_nodoc
@@ -721,7 +747,7 @@ internal:
      *  initialized.
      */
     Void lastFxn();
-    
+
     /*!
      *  ======== putchar ========
      *  @_nodoc
@@ -730,10 +756,10 @@ internal:
      *  non-`NULL`, update the buffer pointer.
      *
      *  Keeps track of the number of characters written into the buffer by
-     *  modifying bufsize `n`. Atmost, `n` - 1 characters are written.  
+     *  modifying bufsize `n`. Atmost, `n` - 1 characters are written.
      */
     Void putchar(Char **bufp, Char ch, SizeT *n);
-    
+
     /*!
      *  ======== rtsExit ========
      *  @_nodoc
@@ -756,6 +782,6 @@ internal:
     };
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

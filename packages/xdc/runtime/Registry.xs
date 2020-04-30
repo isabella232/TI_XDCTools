@@ -1,3 +1,16 @@
+/* 
+ *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
+ *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
+ *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
+ *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
+ *  Distribution License is available at
+ *  http://www.eclipse.org/org/documents/edl-v10.php.
+ *
+ *  Contributors:
+ *      Texas Instruments - initial implementation
+ * */
+
 /*
  *  ======== Registry.xs ========
  */
@@ -7,21 +20,19 @@ var Text;
 /*
  *  ======== module$use ========
  */
-function module$use() 
+function module$use()
 {
-    xdc.useModule('xdc.runtime.Assert');
     xdc.useModule('xdc.runtime.Types');
-    
     Text = xdc.useModule('xdc.runtime.Text');
 }
 
 /*
  *  ======== module$static$init ========
  */
-function module$static$init(mod) 
+function module$static$init(mod)
 {
     mod.listHead = null;
-    
+
     /* Registry module ids start at the max and count down. */
     // TODO - Does it make more sense for them to count up?
     mod.curId = Text.registryModsLastId;
@@ -35,18 +46,18 @@ function viewInitRegisteredModules(view)
     var Program = xdc.useModule('xdc.rov.Program');
     var Registry = xdc.useModule('xdc.runtime.Registry');
     var Types = xdc.useModule('xdc.runtime.Types');
-    
-    /* 
-     * Retrieve the module's state. 
-     * If this throws an exception, just allow it to propogate up.
+
+    /*
+     * Retrieve the module's state.
+     * If this throws an exception, just allow it to propagate up.
      */
     var rawView = Program.scanRawView('xdc.runtime.Registry');
-    
+
     var elements = new Array();
-    
+
     /* Retrieve the begining of the module list. */
     var curDescAddr = rawView.modState == null ? 0 : rawView.modState.listHead;
-    
+
     /* Walk the list of modules. */
     while (curDescAddr != 0) {
         /* Create a view element to display the descriptor. */
@@ -55,11 +66,11 @@ function viewInitRegisteredModules(view)
 
         /* Retrieve the target Registry Descriptor object. */
         try {
-            var desc = Program.fetchStruct(Types.RegDesc$fetchDesc, 
+            var desc = Program.fetchStruct(Types.RegDesc$fetchDesc,
                                            curDescAddr);
         }
         catch (e) {
-            /* 
+            /*
              * If there was a problem reading the structure, use the element
              * to display the error and return.
              */
@@ -70,13 +81,13 @@ function viewInitRegisteredModules(view)
             view.elements = elements;
             return;
         }
-    
+
         /* Retrieve the registered module's name. */
         try {
             viewElem.modName = Program.fetchStaticString(desc.modName);
         }
         catch (e) {
-            /* 
+            /*
              * If there was a problem retrieving the name string, use the
              * element to display the error and continue.
              */
@@ -84,23 +95,23 @@ function viewInitRegisteredModules(view)
                                  "Problem retrieving the registered " +
                                  "module's name: " + e);
         }
-        
+
         /* Retrieve the registered module's id. */
         viewElem.id = desc.id;
 
         /* Display the diags mask. */
         viewElem.mask = "0x" + Number(desc.mask).toString(16);
-        
+
         /* Store the address of the descriptor. */
-        viewElem.descAddr = curDescAddr;        
-        
+        viewElem.descAddr = curDescAddr;
+
         /* Move to the next module. The list ends in 'null'. */
         curDescAddr = desc.next;
-        
+
         /* Add the view structure to the display. */
         elements[elements.length] = viewElem;
     }
-    
+
     view.elements = elements;
 }
 
@@ -111,43 +122,42 @@ function viewInitRegisteredModules(view)
 function lookupModIdRov(modId)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
-    var view = Program.scanModuleDataView('xdc.runtime.Registry', 
+
+    var view = Program.scanModuleDataView('xdc.runtime.Registry',
                                           'Registered Modules');
-    
+
     /* Look through each of the registered modules. */
     for each (var elem in view.elements) {
         if (elem.id == modId) {
             return (elem.modName);
         }
     }
-    
+
     /* Return an error message if it wasn't found. */
     return("Module " + modId + " not found in Registry!");
 }
 
 /*
  *  ======== isMemberRov ========
- *  At ROV-time, determine whether the given module id is a member of the 
+ *  At ROV-time, determine whether the given module id is a member of the
  *  Registry.
  */
 function isMemberRov(modId)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
-    /* 
+
+    /*
      * The range of acceptable Registry module ids is based on the values of
      * configs in the Text module.
      */
     var TextCfg = Program.getModuleConfig('xdc.runtime.Text');
-    
+
     var MAXMID = TextCfg.registryModsLastId;
     var MINMID = TextCfg.unnamedModsLastId + 1;
-    
+
     return (modId <= MAXMID && modId >= MINMID);
 }
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

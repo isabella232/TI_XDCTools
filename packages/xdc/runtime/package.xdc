@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -18,14 +18,13 @@
  *  RTSC target runtime support library which provides basic system services
  *  required by virtually all applications.
  *
- *  Since this package's services are intended to be available to any
- *  C/C++ client, this package does not contain any pre-compiled libraries.
- *  Instead, this package provides complete sources which are built and
- *  supplied by a target-specific package named by the
- *  `{@link xdc.bld.ITarget#rts rts}` parameter of the target used to build
- *  the client sources.  This "indirection" make it possible for new targets
- *  to be added by interested parties whithout ever having to update this
- *  package.
+ *  Since this package's services are intended to be available to any C/C++
+ *  client, this package does not contain any pre-compiled libraries. Instead,
+ *  this package provides complete sources which are built and supplied by a
+ *  target-specific package named by the `{@link xdc.bld.ITarget#rts rts}`
+ *  parameter of the target used to build the client sources.  This "indirection"
+ *  makes it possible for new targets to be added by interested parties whithout
+ *  ever having to update this package.
  *
  *  The functionality provided by this package can be roughly partitioned
  *  into four categories:
@@ -39,10 +38,10 @@
  *  This package provides for diagnostics with a set of modules that operate
  *  together to configure and implement diagnostics.
  *
- *  The modules can be partitioned into three groups: modules that
- *  generate events, a module that allows precise control over when
- *  (or if) various events are generated, and modules that manage the
- *  output or display of the events.
+ *  The modules can be partitioned into three groups: modules that generate
+ *  events, a module that allows precise control over when (or if) various
+ *  events are generated, and modules that manage the output or display of the
+ *  events.
  *
  *  `{@link Assert}`, `{@link Error}`, and `{@link Log}` provide methods that
  *  are added to source code and generate events. The `{@link Diags}` module
@@ -82,8 +81,8 @@
  *  @a(Concurrency Support)
  *  The concurency support modules include the following:
  *  @p(blist)
- *  - `{@link Gate}`     -  module used by clients to serialize access to
- *                          shared data structures
+ *  - `{@link Gate}`     - module used by clients to serialize access to
+ *                         shared data structures
  *  - `{@link GateNull}` - "null" implementation for applications that
  *                         don't need serialization; e.g., single threaded
  *                         applications
@@ -134,6 +133,6 @@ package xdc.runtime [2, 1, 0] {
     module Types;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:22:00; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

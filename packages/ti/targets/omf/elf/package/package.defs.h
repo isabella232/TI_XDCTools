@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-D21
+ * @(#) xdc-F07
  */
 
 #ifndef ti_targets_omf_elf__

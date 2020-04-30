@@ -18,7 +18,7 @@ Contributors:
 <page>
 <html><body>
   <table>
-    <tr><td colspan="2">  <form><p>Instances of this module provide basic synchronization between threads calling the wait() and signal() functions defined by the  <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/Sync.html">Sync</a> module.  In this case, clients of wait() always timeout.  This module is used to minimize code space and time overhead for configurations which do not need synchronization but use other modules that require some synchronization provider.</p><p></p></form></td></tr>
+    <tr><td colspan="2">  <form><p>Instances of this module provide basic synchronization between threads calling the wait() and signal() functions defined by the  <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/Sync.html">Sync</a> module.  In this case, clients of wait() always timeout.  This module is used to minimize code space and time overhead for configurations which do not need synchronization but use other modules that require some synchronization provider.</p><p></p></form></td></tr>
     <tr><td colspan="2">
       <control type="checkbox" label="Add SyncNull to my configuration" value="value:this.$used" bold="true"/></td>
     </tr>
@@ -28,7 +28,7 @@ Contributors:
 </gep>
 <!--
 /*
- * @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:06; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

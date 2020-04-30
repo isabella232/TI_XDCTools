@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_LoggerBuf_TimestampProxy__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_LoggerBuf_TimestampProxy___VERS 200
@@ -250,50 +252,50 @@ __extern const xdc_runtime_LoggerBuf_TimestampProxy_Fxns__ xdc_runtime_LoggerBuf
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Handle__label__S, "xdc_runtime_LoggerBuf_TimestampProxy_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_LoggerBuf_TimestampProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_LoggerBuf_TimestampProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Module__startupDone__S, "xdc_runtime_LoggerBuf_TimestampProxy_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_LoggerBuf_TimestampProxy_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_LoggerBuf_TimestampProxy_Module__startupDone__S( void);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Object__get__S, "xdc_runtime_LoggerBuf_TimestampProxy_Object__get__S")
-__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Object__first__S, "xdc_runtime_LoggerBuf_TimestampProxy_Object__first__S")
-__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Object__next__S, "xdc_runtime_LoggerBuf_TimestampProxy_Object__next__S")
-__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_LoggerBuf_TimestampProxy_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Params__init__S, "xdc_runtime_LoggerBuf_TimestampProxy_Params__init__S")
-__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* Proxy__abstract__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Proxy__abstract__S, "xdc_runtime_LoggerBuf_TimestampProxy_Proxy__abstract__S")
-__extern xdc_Bool xdc_runtime_LoggerBuf_TimestampProxy_Proxy__abstract__S( void );
+__extern xdc_Bool xdc_runtime_LoggerBuf_TimestampProxy_Proxy__abstract__S( void);
 
 /* Proxy__delegate__S */
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_Proxy__delegate__S, "xdc_runtime_LoggerBuf_TimestampProxy_Proxy__delegate__S")
-__extern xdc_CPtr xdc_runtime_LoggerBuf_TimestampProxy_Proxy__delegate__S( void );
+__extern xdc_CPtr xdc_runtime_LoggerBuf_TimestampProxy_Proxy__delegate__S( void);
 
 /* get32__E */
 #define xdc_runtime_LoggerBuf_TimestampProxy_get32 xdc_runtime_LoggerBuf_TimestampProxy_get32__E
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_get32__E, "xdc_runtime_LoggerBuf_TimestampProxy_get32")
-__extern xdc_Bits32 xdc_runtime_LoggerBuf_TimestampProxy_get32__E( void );
+__extern xdc_Bits32 xdc_runtime_LoggerBuf_TimestampProxy_get32__E( void);
 
 /* get64__E */
 #define xdc_runtime_LoggerBuf_TimestampProxy_get64 xdc_runtime_LoggerBuf_TimestampProxy_get64__E
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_get64__E, "xdc_runtime_LoggerBuf_TimestampProxy_get64")
-__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_get64__E( xdc_runtime_Types_Timestamp64 *result );
+__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_get64__E( xdc_runtime_Types_Timestamp64 *result);
 
 /* getFreq__E */
 #define xdc_runtime_LoggerBuf_TimestampProxy_getFreq xdc_runtime_LoggerBuf_TimestampProxy_getFreq__E
 xdc__CODESECT(xdc_runtime_LoggerBuf_TimestampProxy_getFreq__E, "xdc_runtime_LoggerBuf_TimestampProxy_getFreq")
-__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_getFreq__E( xdc_runtime_Types_FreqHz *freq );
+__extern xdc_Void xdc_runtime_LoggerBuf_TimestampProxy_getFreq__E( xdc_runtime_Types_FreqHz *freq);
 
 
 /*

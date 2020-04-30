@@ -9,9 +9,9 @@
       <td><form>
         <p>An application can isolate itself from IGate implementations by using this module.
 		   The application must first obtain an IGate.Handle. It can get such a handle by directly
-		   calling <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/GateThread.html#per-instance_creation"> GateThread.create </a>
+		   calling <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/GateThread.html#per-instance_creation"> GateThread.create </a>
 		   or
-		   <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/GateProcess.html#per-instance_creation"> GateProcess.create. </a>
+		   <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/GateProcess.html#per-instance_creation"> GateProcess.create. </a>
 		   Then the application can use the generic APIs provided by this module.</p>
         <p> </p>
       </form></td>
@@ -38,7 +38,7 @@
 
 <!--
 /*
- * @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:05; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

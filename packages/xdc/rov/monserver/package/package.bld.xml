@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.rov.monserver" version="" producerId="/db/ztree/library/trees/rov/rov-l28/src/">
+<package name="xdc.rov.monserver" version="" producerId="/db/ztree/library/trees/rov/rov-m13/src/">
     <units>
         <module name="Main"/>
         <module name="CallStack"/>
@@ -43,6 +43,7 @@
         <file name="ROVMonNet.ino"/>
         <file name="ROVMonUART.ino"/>
         <file name="monserver.bat"/>
+        <file name="noruntime.rov.xs"/>
         <file name="package/package.cfg.xdc.inc"/>
     </release>
     <release name="xdc_rov_monserver"
@@ -58,6 +59,7 @@
         <file name="ROVMonNet.ino"/>
         <file name="ROVMonUART.ino"/>
         <file name="monserver.bat"/>
+        <file name="noruntime.rov.xs"/>
         <file name="package/package.cfg.xdc.inc"/>
     </release>
     </releases>

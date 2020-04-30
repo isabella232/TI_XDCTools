@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -154,7 +154,7 @@ function onInit() {
         var nativeName;
         if (this.bld.nativeTarget == null) {
             if (this.bld.hostOSName == "Windows") {
-                nativeName = "microsoft.targets.Win32";
+                nativeName = "microsoft.targets.Win64";
             }
             else if (this.bld.hostOSName == "Linux") {
                 nativeName = "gnu.targets.Linux86_64";
@@ -210,7 +210,7 @@ function onInit() {
                             + otarg.$name + "'";
                     }
                     else {
-                        msg = "The target '" + targ.$name 
+                        msg = "The target '" + targ.$name
                             + "' appears more than once in the Build.targets array";
                     }
                     throw xdc.$$XDCException("xdc.bld.DUPLICATE_TARGET_ERROR",
@@ -318,7 +318,7 @@ function usePlatform(platformName)
         var pkg = xdc.loadPackage(pa[0]);
 
         /* create platform instance */
-	var args = this.platformTable[platformName];
+        var args = this.platformTable[platformName];
         plat = pkg.Platform.create(
             platformName.substring(pa[0].length + 1),
             args == null ? {} : args);
@@ -462,6 +462,6 @@ function _exportTargets(targArray, list, exclude, warnings)
     }
 }
 /*
- *  @(#) xdc.bld; 1, 0, 2,0; 5-15-2019 11:20:50; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.bld; 1, 0, 2,0; 2-9-2020 18:48:42; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

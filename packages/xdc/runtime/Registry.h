@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Registry__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Registry___VERS 200
@@ -247,67 +249,67 @@ __extern __FAR__ const CT__xdc_runtime_Registry_Object__table xdc_runtime_Regist
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Registry_Module__startupDone__S, "xdc_runtime_Registry_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Registry_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Registry_Module__startupDone__S( void);
 
 /* addModule__E */
 #define xdc_runtime_Registry_addModule xdc_runtime_Registry_addModule__E
 xdc__CODESECT(xdc_runtime_Registry_addModule__E, "xdc_runtime_Registry_addModule")
-__extern xdc_runtime_Registry_Result xdc_runtime_Registry_addModule__E( xdc_runtime_Registry_Desc *desc, xdc_CString modName );
+__extern xdc_runtime_Registry_Result xdc_runtime_Registry_addModule__E( xdc_runtime_Registry_Desc *desc, xdc_CString modName);
 
 /* findByName__E */
 #define xdc_runtime_Registry_findByName xdc_runtime_Registry_findByName__E
 xdc__CODESECT(xdc_runtime_Registry_findByName__E, "xdc_runtime_Registry_findByName")
-__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByName__E( xdc_CString modName );
+__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByName__E( xdc_CString modName);
 
 /* findByNamePattern__E */
 #define xdc_runtime_Registry_findByNamePattern xdc_runtime_Registry_findByNamePattern__E
 xdc__CODESECT(xdc_runtime_Registry_findByNamePattern__E, "xdc_runtime_Registry_findByNamePattern")
-__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByNamePattern__E( xdc_CString namePat, xdc_UShort len, xdc_runtime_Registry_Desc *prev );
+__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByNamePattern__E( xdc_CString namePat, xdc_UShort len, xdc_runtime_Registry_Desc *prev);
 
 /* findById__E */
 #define xdc_runtime_Registry_findById xdc_runtime_Registry_findById__E
 xdc__CODESECT(xdc_runtime_Registry_findById__E, "xdc_runtime_Registry_findById")
-__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findById__E( xdc_runtime_Types_ModuleId mid );
+__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findById__E( xdc_runtime_Types_ModuleId mid);
 
 /* getMask__E */
 #define xdc_runtime_Registry_getMask xdc_runtime_Registry_getMask__E
 xdc__CODESECT(xdc_runtime_Registry_getMask__E, "xdc_runtime_Registry_getMask")
-__extern xdc_Bool xdc_runtime_Registry_getMask__E( xdc_CString name, xdc_runtime_Types_DiagsMask *mask );
+__extern xdc_Bool xdc_runtime_Registry_getMask__E( xdc_CString name, xdc_runtime_Types_DiagsMask *mask);
 
 /* isMember__E */
 #define xdc_runtime_Registry_isMember xdc_runtime_Registry_isMember__E
 xdc__CODESECT(xdc_runtime_Registry_isMember__E, "xdc_runtime_Registry_isMember")
-__extern xdc_Bool xdc_runtime_Registry_isMember__E( xdc_runtime_Types_ModuleId mid );
+__extern xdc_Bool xdc_runtime_Registry_isMember__E( xdc_runtime_Types_ModuleId mid);
 
 /* getNextModule__E */
 #define xdc_runtime_Registry_getNextModule xdc_runtime_Registry_getNextModule__E
 xdc__CODESECT(xdc_runtime_Registry_getNextModule__E, "xdc_runtime_Registry_getNextModule")
-__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_getNextModule__E( xdc_runtime_Registry_Desc *desc );
+__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_getNextModule__E( xdc_runtime_Registry_Desc *desc);
 
 /* getModuleName__E */
 #define xdc_runtime_Registry_getModuleName xdc_runtime_Registry_getModuleName__E
 xdc__CODESECT(xdc_runtime_Registry_getModuleName__E, "xdc_runtime_Registry_getModuleName")
-__extern xdc_CString xdc_runtime_Registry_getModuleName__E( xdc_runtime_Registry_Desc *desc );
+__extern xdc_CString xdc_runtime_Registry_getModuleName__E( xdc_runtime_Registry_Desc *desc);
 
 /* getModuleId__E */
 #define xdc_runtime_Registry_getModuleId xdc_runtime_Registry_getModuleId__E
 xdc__CODESECT(xdc_runtime_Registry_getModuleId__E, "xdc_runtime_Registry_getModuleId")
-__extern xdc_runtime_Types_ModuleId xdc_runtime_Registry_getModuleId__E( xdc_runtime_Registry_Desc *desc );
+__extern xdc_runtime_Types_ModuleId xdc_runtime_Registry_getModuleId__E( xdc_runtime_Registry_Desc *desc);
 
 /* findByNameInList__I */
 #define xdc_runtime_Registry_findByNameInList xdc_runtime_Registry_findByNameInList__I
 xdc__CODESECT(xdc_runtime_Registry_findByNameInList__I, "xdc_runtime_Registry_findByNameInList")
-__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByNameInList__I( xdc_CString name, xdc_runtime_Registry_Desc *listHead );
+__extern xdc_runtime_Registry_Desc *xdc_runtime_Registry_findByNameInList__I( xdc_CString name, xdc_runtime_Registry_Desc *listHead);
 
 /* newModule__I */
 #define xdc_runtime_Registry_newModule xdc_runtime_Registry_newModule__I
 xdc__CODESECT(xdc_runtime_Registry_newModule__I, "xdc_runtime_Registry_newModule")
-__extern xdc_Void xdc_runtime_Registry_newModule__I( xdc_runtime_Registry_Desc *desc, xdc_CString modName );
+__extern xdc_Void xdc_runtime_Registry_newModule__I( xdc_runtime_Registry_Desc *desc, xdc_CString modName);
 
 /* matchPattern__I */
 #define xdc_runtime_Registry_matchPattern xdc_runtime_Registry_matchPattern__I
 xdc__CODESECT(xdc_runtime_Registry_matchPattern__I, "xdc_runtime_Registry_matchPattern")
-__extern xdc_Bool xdc_runtime_Registry_matchPattern__I( xdc_CString pattern, xdc_UShort len, xdc_CString modName );
+__extern xdc_Bool xdc_runtime_Registry_matchPattern__I( xdc_CString pattern, xdc_UShort len, xdc_CString modName);
 
 
 /*
@@ -433,6 +435,6 @@ extern struct xdc_runtime_Registry_Module_State__ xdc_runtime_Registry_Module__s
 #endif /* xdc_runtime_Registry__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

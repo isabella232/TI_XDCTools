@@ -1,13 +1,13 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
  *  http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  *  Contributors:
  *      Texas Instruments - initial implementation
- * 
+ *
  * */
 /*
  *  ======== Platform.getCpuDataSheet ========
@@ -95,6 +95,6 @@ function instance$meta$init(name)
 {
 }
 /*
- *  @(#) host.platforms.PC; 1, 0, 0,0; 5-15-2019 11:20:03; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) host.platforms.PC; 1, 0, 0,0; 2-9-2020 18:48:23; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

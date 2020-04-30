@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-z63
+ * @(#) xdc-F07
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_tools_sg_swt_win32
 {
-    static final String VERS = "@(#) xdc-z63\n";
+    static final String VERS = "@(#) xdc-F07\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -76,7 +76,7 @@ public class xdc_tools_sg_swt_win32
         pkgV.bind("$name", "xdc.tools.sg.swt_win32");
         pkgV.bind("$category", "Package");
         pkgV.bind("$$qn", "xdc.tools.sg.swt_win32.");
-        pkgV.bind("$vers", Global.newArray("3, 2, 0"));
+        pkgV.bind("$vers", Global.newArray(3, 2, 0));
         Value.Map atmap = (Value.Map)pkgV.getv("$attr");
         atmap.seal("length");
         imports.clear();
@@ -85,6 +85,10 @@ public class xdc_tools_sg_swt_win32
         sb.append("var pkg = xdc.om['xdc.tools.sg.swt_win32'];\n");
         sb.append("if (pkg.$vers.length >= 3) {\n");
             sb.append("pkg.$vers.push(Packages.xdc.services.global.Vers.getDate(xdc.csd() + '/..'));\n");
+        sb.append("}\n");
+        sb.append("if ('xdc.tools.sg.swt_win32$$stat$base' in xdc.om) {\n");
+            sb.append("pkg.packageBase = xdc.om['xdc.tools.sg.swt_win32$$stat$base'];\n");
+            sb.append("pkg.packageRepository = xdc.om['xdc.tools.sg.swt_win32$$stat$root'];\n");
         sb.append("}\n");
         sb.append("pkg.build.libraries = [\n");
         sb.append("];\n");

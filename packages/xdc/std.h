@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008-2016 Texas Instruments. All rights reserved.
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -83,11 +83,18 @@ typedef const char      *xdc_CString;   /* null terminated immutable string */
 /* if the user did not supply the required xdc_target* definitions, ask well
  * known compiler tool chains to select based on their pre-defined macros
  */
-#ifdef __TI_COMPILER_VERSION__
+#if defined(__TI_COMPILER_VERSION__) || defined(__ti_version__)
 #include <ti/targets/select.h>
 #elif defined(__IAR_SYSTEMS_ICC__)
 #include <iar/targets/select.h>
 #elif defined(__GNUC__)
+/* In SYS/BIOS 6.82, there is a file gnu/targets/arm/select.h. Once we don't
+ * have to support older SYS/BIOS releases, we can add #include for that file
+ * here, and remove the file gnu/targets/select.h from SYS/BIOS.
+ * Another version of gnu/targets/select.h comes with gnu.targets, and that one
+ * will be still referenced here for the rare case of usage of the GNU host
+ * targets.
+ */
 #include <gnu/targets/select.h>
 #else
 /*
@@ -116,7 +123,7 @@ typedef unsigned int xdc_UInt32;
 #endif
 #endif
 
-/* Each modules' internal header file defines 'module' as 
+/* Each modules' internal header file defines 'module' as
  * xdc__MODOBJADDR__(Module__state__V), where Module__state__V is the actual
  * object where the module state is kept. For most targets, the default macro
  * given here results in the construct '(&Module__state__V)->field', when the
@@ -152,9 +159,8 @@ typedef unsigned long           xdc_ULLong;
 
 /* Arg to Ptr and Fxn conversion operators
  *
- * Individual targets may override these definitions in the event
- * that compilers issue warnings about shortening of an Arg to a pointer,
- * for example.
+ * Individual targets may override these definitions in the event that compilers
+ * issue warnings about shortening of an Arg to a pointer, for example.
  */
 #ifndef xdc__ARGTOPTR
 static xdc_Ptr xdc_iargToPtr(xdc_IArg a);
@@ -176,7 +182,7 @@ static inline xdc_Fxn xdc_uargToFxn(xdc_UArg a) { return ((xdc_Fxn)a); }
 /*
  * functions to efficiently convert a single precision float to an IArg
  * and vice-versa while maintaining client type safety
- * 
+ *
  * Here the assumption is that sizeof(Float) <= sizeof(IArg);
  */
 typedef union {
@@ -302,20 +308,6 @@ typedef xdc_Bits64      Bits64;
 #endif /* xdc__nolocalnames */
 
 /* Standard Constants */
-
-/* NULL must be 0 for C++ and is set to 0 in C to allow legacy code to
- * compile without warnings.
- *
- * If xdc__strict is defined, NULL is defined to be a pointer to allow
- * maximal type checking in "modern" C sources
- */
-#undef NULL
-#if defined(__cplusplus) || !defined(xdc__strict)
-#define NULL 0
-#else
-#define NULL ((void *)0)
-#endif
-
 #undef FALSE
 #define FALSE 0U
 
@@ -332,15 +324,13 @@ typedef xdc_Bits64      Bits64;
  *  ======== xdc__CODESECT ========
  *  Code-Section Directive
  *
- *  Targets can optionally #define xdc__CODESECT in their specific
- *  std.h files.  This directive is placed in front of all
- *  "extern" function declarations, and specifies a section-name in
- *  which to place this function.  This approach
- *  provides more control on combining/organizing groups of
- *  related functions into a single named sub-section (e.g.,
- *  "init-code")  If this macro is not defined by the target, an
- *  empty definition is used instead.
- */ 
+ *  Targets can optionally #define xdc__CODESECT in their specific std.h files.
+ *  This directive is placed in front of all "extern" function declarations,
+ *  and specifies a section-name in which to place this function. This approach
+ *  provides more control on combining/organizing groups of related functions
+ *  into a single named sub-section (e.g., "init-code")  If this macro is not
+ *  defined by the target, an empty definition is used instead.
+ */
 #ifndef xdc__CODESECT
 #define xdc__CODESECT(fn, sn)
 #endif
@@ -349,15 +339,14 @@ typedef xdc_Bits64      Bits64;
  *  ======== xdc__META ========
  *  Embed unreferenced string in the current file
  *
- *  Strings emebdded via xdc__META can be placed in a section that is
- *  _not_ loaded on the target but are, nevertheless, part of the
- *  executable and available to loaders.
+ *  Strings emebdded via xdc__META can be placed in a section that is _not_
+ *  loaded on the target but are, nevertheless, part of the executable and
+ *  available to loaders.
  *
- *  Different targets may define this macro in a way that places these
- *  strings in an output section that is not loaded (and therefore does
- *  not takeup space on the target).  Unless the target provides a
- *  definition of xdc__META, the definition below simply defines
- *  as string constant in the current file.
+ *  Different targets may define this macro in a way that places these strings
+ *  in an output section that is not loaded (and therefore does not takeup space
+ *  on the target). Unless the target provides a definition of xdc__META, the
+ *  definition below simply defines as string constant in the current file.
  */
 #ifndef xdc__META
 #define xdc__META(n,s) __FAR__ const char (n)[] = {(s)}
@@ -365,6 +354,6 @@ typedef xdc_Bits64      Bits64;
 
 #endif /* xdc_std__include */
 /*
- *  @(#) xdc; 1, 1, 1,0; 5-15-2019 11:20:40; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc; 1, 1, 1,0; 2-9-2020 18:48:38; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

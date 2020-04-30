@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -16,7 +16,7 @@
 
 /*!
  *  ======== IModule ========
- *  Base interface for all modules 
+ *  Base interface for all modules
  *
  *  All modules share a common set of configuration parameters and methods.
  *
@@ -132,11 +132,10 @@ interface IModule {
      *  ======== common$ ========
      *  Common module configuration parameters
      *
-     *  All modules have this configuration parameter.  Its name
-     *  contains the '$' character to ensure it does not conflict with
-     *  configuration parameters declared by the module.  This allows
-     *  new configuration parameters to be added in the future without
-     *  any chance of breaking existing modules.
+     *  All modules have this configuration parameter. Its name contains the '$'
+     *  character to ensure it does not conflict with configuration parameters
+     *  declared by the module. This allows new configuration parameters to be 
+     *  added in the future without any chance of breaking existing modules.
      */
     metaonly config Types.Common$ common$;
 
@@ -303,10 +302,9 @@ interface IModule {
     @System Bool Proxy__abstract();
 
     /*! @_nodoc */
-    //490928 @System CPtr Proxy__delegate();
     @System CPtr Proxy__delegate();
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

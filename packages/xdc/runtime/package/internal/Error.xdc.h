@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 #ifndef xdc_runtime_Error__INTERNAL__
@@ -72,6 +72,9 @@
 /* setX */
 #undef xdc_runtime_Error_setX
 #define xdc_runtime_Error_setX xdc_runtime_Error_setX__E
+
+/* policyLog */
+#define Error_policyLog xdc_runtime_Error_policyLog__I
 
 /* Module_startup */
 #undef xdc_runtime_Error_Module_startup

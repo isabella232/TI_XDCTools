@@ -78,7 +78,7 @@ metaonly module PackageContents {
      *          that the syntax of this string may be target dependent.
      *
      *  @field(xsopts)  This string contains options passed to the
-     *          `{@link http://rtsc.eclipse.org/docs-tip/Command_-_xs xs}`
+     *          `{@link http://rtsc.eclipseprojects.io/docs-tip/Command_-_xs xs}`
      *          command that's used to run configuration scripts.  This option
      *          can be used, for example, to define name-value pairs accessible
      *          to configuration scripts via the XDCscript global
@@ -86,7 +86,7 @@ metaonly module PackageContents {
      *          `"-DFOO=bar"` enables the configuration script to get the
      *          value of `FOO` via the expression `environment["FOO"]`.  For
      *          more information about XDCscript and `environment` see
-     *          {@link http://rtsc.eclipse.org/docs-tip/The_XDCscript_Language The XDCscript Language}.
+     *          {@link http://rtsc.eclipseprojects.io/docs-tip/The_XDCscript_Language The XDCscript Language}.
      *
      *  @field(exportCfg)  If this field is set to `true`,  configuration
      *          scripts will, by default, be part of the releases created
@@ -814,6 +814,6 @@ metaonly module PackageContents {
     function onInit();
 }
 /*
- *  @(#) xdc.bld; 1, 0, 2,0; 5-15-2019 11:20:50; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.bld; 1, 0, 2,0; 2-9-2020 18:48:43; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

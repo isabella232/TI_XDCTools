@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Assert__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Assert___VERS 200
@@ -246,12 +248,12 @@ __extern __FAR__ const CT__xdc_runtime_Assert_E_assertFailed xdc_runtime_Assert_
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Assert_Module__startupDone__S, "xdc_runtime_Assert_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Assert_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Assert_Module__startupDone__S( void);
 
 /* raise__I */
 #define xdc_runtime_Assert_raise xdc_runtime_Assert_raise__I
 xdc__CODESECT(xdc_runtime_Assert_raise__I, "xdc_runtime_Assert_raise")
-__extern xdc_Void xdc_runtime_Assert_raise__I( xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Assert_Id id );
+__extern xdc_Void xdc_runtime_Assert_raise__I( xdc_runtime_Types_ModuleId mod, xdc_CString file, xdc_Int line, xdc_runtime_Assert_Id id);
 
 
 /*
@@ -351,6 +353,6 @@ static inline xdc_Void xdc_runtime_Assert_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_Assert__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

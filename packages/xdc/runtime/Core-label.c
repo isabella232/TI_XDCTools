@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -14,8 +14,6 @@
  *  ======== Core-label.c ========
  */
 
-#include <string.h>
-
 #include <xdc/runtime/Text.h>
 #include <xdc/runtime/Types.h>
 
@@ -24,21 +22,21 @@
 /*
  *  ======== Core_assignLabel ========
  */
+/* REQ_TAG(SYSBIOS-875), REQ_TAG(SYSBIOS-889) */
 Void Core_assignLabel(Types_Label *lab, Text_CordAddr iname, Bool named)
 {
     String ns;
 
     lab->named = named;
 
-    if (named == FALSE) {
-        ns = Text_nameUnknown;
-    }
-    else if (iname == (Text_CordAddr)NULL) {
+    if (iname == (Text_CordAddr)NULL && Text_isLoaded == TRUE) {
+        /* REQ_TAG(SYSBIOS-890) */
         ns = Text_nameEmpty;
     }
     else {
         ns = Text_cordText(iname);
         if (ns == (String)NULL) {
+            /* REQ_TAG(SYSBIOS-891) */
             ns = Text_nameStatic;
         }
     }
@@ -46,6 +44,6 @@ Void Core_assignLabel(Types_Label *lab, Text_CordAddr iname, Bool named)
     lab->iname = ns;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

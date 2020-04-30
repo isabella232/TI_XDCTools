@@ -6,7 +6,7 @@
 <html><body><table>
   <tr>
       <td><form>
-        <p>Empty <a href="http://rtsc.eclipse.org/cdoc-tip/index.html#xdc/runtime/knl/ICacheSupport.html">ICacheSupport</a> implementation.</p>
+        <p>Empty <a href="http://rtsc.eclipseprojects.io/cdoc-tip/index.html#xdc/runtime/knl/ICacheSupport.html">ICacheSupport</a> implementation.</p>
         <p> </p>
       </form></td>
   </tr>
@@ -19,7 +19,7 @@
 
 <!--
 /*
- * @(#) xdc.runtime.knl; 1, 0, 0,0; 5-15-2019 11:22:05; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ * @(#) xdc.runtime.knl; 1, 0, 0,0; 2-9-2020 18:49:16; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 -->
 

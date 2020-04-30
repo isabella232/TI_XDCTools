@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -20,6 +20,7 @@
 /*
  *  ======== Timestamp_get32 ========
  */
+/* REQ_TAG(SYSBIOS-883) */
 Bits32 Timestamp_get32(Void)
 {
     return (Timestamp_SupportProxy_get32());
@@ -28,6 +29,7 @@ Bits32 Timestamp_get32(Void)
 /*
  *  ======== Timestamp_get64 ========
  */
+/* REQ_TAG(SYSBIOS-884) */
 Void Timestamp_get64(Types_Timestamp64 *result)
 {
     Timestamp_SupportProxy_get64(result);
@@ -36,11 +38,12 @@ Void Timestamp_get64(Types_Timestamp64 *result)
 /*
  *  ======== Timestamp_getFreq ========
  */
+/* REQ_TAG(SYSBIOS-885) */
 Void Timestamp_getFreq(Types_FreqHz *freq)
 {
     Timestamp_SupportProxy_getFreq(freq);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

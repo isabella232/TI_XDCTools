@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_services_io
 {
-    static final String VERS = "@(#) xdc-F14\n";
+    static final String VERS = "@(#) xdc-I08\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -277,7 +277,7 @@ public class xdc_services_io
             sb.append("'release/Doss.lib',\n");
         sb.append("];\n");
         sb.append("pkg.build.libDesc = [\n");
-            sb.append("['release/Doss.lib', {target: 'microsoft.targets.Win32', suffix: '86W'}],\n");
+            sb.append("['release/Doss.lib', {target: 'microsoft.targets.Win64', suffix: '64W'}],\n");
         sb.append("];\n");
         Global.eval(sb.toString());
     }

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -26,6 +26,7 @@
  */
 Int SysMin_Module_startup(Int phase)
 {
+    /* REQ_TAG(SYSBIOS-919) */
     if (SysMin_bufSize != 0U) {
         (void)memset(module->outbuf, 0, SysMin_bufSize);
     }
@@ -35,6 +36,7 @@ Int SysMin_Module_startup(Int phase)
 /*
  *  ======== SysMin_abort ========
  */
+/* REQ_TAG(SYSBIOS-915) */
 Void SysMin_abort(CString str)
 {
     Char ch;
@@ -51,7 +53,8 @@ Void SysMin_abort(CString str)
         }
 
         /* Only flush if configured to do so */
-        if (SysMin_flushAtExit) {
+        /* REQ_TAG(SYSBIOS-920) */
+        if (SysMin_flushAtExit != FALSE) {
             SysMin_flush();
         }
     }
@@ -60,8 +63,10 @@ Void SysMin_abort(CString str)
 /*
  *  ======== SysMin_exit ========
  */
+/* REQ_TAG(SYSBIOS-916) */
 Void SysMin_exit(Int stat)
 {
+    /* REQ_TAG(SYSBIOS-920) */
     if ((SysMin_flushAtExit == TRUE) && (SysMin_bufSize != 0U)) {
         SysMin_flush();
     }
@@ -70,6 +75,7 @@ Void SysMin_exit(Int stat)
 /*
  *  ======== SysMin_putch ========
  */
+/* REQ_TAG(SYSBIOS-917) */
 Void SysMin_putch(Char ch)
 {
     IArg key;
@@ -92,6 +98,7 @@ Void SysMin_putch(Char ch)
 /*
  *  ======== SysMin_ready ========
  */
+/* REQ_TAG(SYSBIOS-918) */
 Bool SysMin_ready(Void)
 {
     return (Bool)(SysMin_bufSize != 0U);
@@ -113,9 +120,10 @@ Void SysMin_flush(Void)
      */
     if (module->wrapped == TRUE) {
         SysMin_outputFunc(module->outbuf + module->outidx,
-                          SysMin_bufSize - module->outidx);
+                          (UInt)(SysMin_bufSize - module->outidx));
     }
 
+    /* REQ_TAG(SYSBIOS-914) */
     SysMin_outputFunc(module->outbuf, module->outidx);
     module->outidx = 0;
     module->wrapped = FALSE;
@@ -123,6 +131,6 @@ Void SysMin_flush(Void)
     Gate_leaveSystem(key);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

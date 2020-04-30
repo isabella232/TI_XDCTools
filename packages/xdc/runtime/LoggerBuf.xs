@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -22,6 +22,7 @@ var Logger = null;
 function module$use()
 {
     var System = xdc.useModule('xdc.runtime.System');
+    xdc.useModule('xdc.runtime.Diags');
     var Defaults = xdc.module('xdc.runtime.Defaults');
     var Types = xdc.module('xdc.runtime.Types');
 
@@ -29,7 +30,7 @@ function module$use()
     if (Logger.enableFlush) {
         System.atexitMeta(Logger.flushAllInternal);
     }
-    
+
     /* Memory module is needed only if memoryPolicy is not STATIC_POLICY. */
     if (Defaults.getCommon(Logger, "memoryPolicy") != Types.STATIC_POLICY) {
         xdc.useModule('xdc.runtime.Memory');
@@ -40,7 +41,7 @@ function module$use()
  *  ======== module$static$init ========
  */
 function module$static$init(obj, params)
-{    
+{
     /* Assign the default filtering levels based on the configuration. */
     obj.level1 = params.level1Mask;
     obj.level2 = params.level2Mask;
@@ -83,13 +84,13 @@ function instance$static$init(obj, prms)
 function getMetaArgs(inst, instNum)
 {
     var LoggerBuf = xdc.module('xdc.runtime.LoggerBuf');
-    
+
     /* Create a new StopModeData structure to populate. */
     var data = new LoggerBuf.StopModeData();
-    data.bufferSymbol = "xdc_runtime_LoggerBuf_Instance_State_" + 
+    data.bufferSymbol = "xdc_runtime_LoggerBuf_Instance_State_" +
                        instNum + "_entryArr__A";
     data.bufferSize = inst.numEntries * LoggerBuf.Entry.$sizeof();
-    
+
     return (data);
 }
  
@@ -100,28 +101,28 @@ function getMetaArgs(inst, instNum)
 function viewInitBasic(view, obj)
 {
     var LoggerBuf = xdc.useModule('xdc.runtime.LoggerBuf');
-    
+
     /* Retrieve the LoggerBuf instance's name */
     view.label = Program.getShortName(obj.$label);
-    
-   /* 
+
+    /*
      * Determine the serial number of the last record, convert it to a
      * sequential number.
      */
     view.lastSerial = ((obj.serial + 1) / 2) - 1;
-    
+
     /* Display the configured number of entries. */
     view.numEntries = obj.numEntries;
-    
+
     /* Determine the type of the LoggerBuf, FIXED or CIRCULAR. */
-    if ((obj.advance == LoggerBuf.FULL) || 
+    if ((obj.advance == LoggerBuf.FULL) ||
         (obj.advance == Number(LoggerBuf.BufType_FIXED))) {
         view.type = "FIXED";
     }
     else {
         view.type = "CIRCULAR";
     }
-    
+
     /* Show whether the LoggerBuf instance is currently enabled. */
     view.enabledFlag = obj.enabled;
 }
@@ -141,8 +142,8 @@ function viewInitRecords(view, obj)
     var Log = xdc.useModule('xdc.runtime.Log');
     var LoggerBuf = xdc.useModule('xdc.runtime.LoggerBuf');
     var Program = xdc.useModule('xdc.rov.Program');
-    
-    /* 
+
+    /*
      * Populate the label first so that at least the label shows up if something
      * goes wrong.
      */
@@ -150,19 +151,19 @@ function viewInitRecords(view, obj)
     if (view.label.equals("")) {
         view.label = String(obj.$addr);
     }
-    
+
     /* Create an array to hold of the event views. */
     var eventViews = new Array();
-    
+
     /* Get the memory reader */
     var memReader = Model.getMemoryImageInst();
-    
-    /* Read the memory. */   
-    
+
+    /* Read the memory. */
+
     /* Calculate the size of a record. */
     var bytesPerMau = Program.build.target.bitsPerChar / 8;
     var recSizeBytes = LoggerBuf.Entry.$sizeof() * bytesPerMau;
-    
+
     /* Calculate the total size of the read. */
     var readSizeBytes = obj.numEntries * recSizeBytes;
 
@@ -178,8 +179,8 @@ function viewInitRecords(view, obj)
         if (e.message.indexOf("java.lang.Exception: ") == 0) {
             msg = msg.substring(21);
         }
-        
-        displayGeneralError(view, "Caught exception reading logger's " + 
+
+        displayGeneralError(view, "Caught exception reading logger's " +
                             "memory buffer: " + msg);
         return;
     }
@@ -202,16 +203,15 @@ function viewInitRecords(view, obj)
     catch (e) {
         displayGeneralError(view, "Caught exception decoding the " +
                             "LoggerBuf's records: " + e);
-        return;        
+        return;
     }
-    
-    /* 
-     * Copy each of the HostEvent objects into a view element 
-     * to be displayed. 
+
+    /*
+     * Copy each of the HostEvent objects into a view element to be displayed.
      */
     for (var i = 0; i < events.length; i++) {
         var evt = events[i];
-        
+
         /* Create a new view element. */
         var evtView = Program.newViewStruct('xdc.runtime.LoggerBuf', 'Records');
 
@@ -431,6 +431,6 @@ function validate()
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

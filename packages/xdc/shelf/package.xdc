@@ -1,5 +1,5 @@
 /* --COPYRIGHT--,EPL
- *  Copyright (c) 2008-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -72,7 +72,7 @@
      </tr>
      <tr>
        <td>J2SE Runtime Environment(JRE)</td>
-       <td>1.7.0_80</td>
+       <td>1.8.0_66</td>
        <td><a href="http://java.com/license">Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX</a></td>
        <td><a href="http://www.oracle.com/technetwork/java/javase/">
            http://www.oracle.com/technetwork/java/javase/</a></td>
@@ -95,7 +95,7 @@
      </tr>
      <tr>
        <td>zip, unzip</td>
-       <td>2.32 and 5.52</td>
+       <td>3.0 and 5.52</td>
        <td><a href="./doc-files/zip/LICENSE.txt">info-zip</a></td>
        <td><a href="http://www.info-zip.org">http://www.info-zip.org</a></td>
        <td>command line utilities to zip and unzip package releases</td>
@@ -110,14 +110,14 @@
      </tr>
      <tr>
        <td>sh, gunzip, gzip, sed</td>
-       <td>cygwin 1.5.25-15</td>
+       <td>cygwin 2.9.0-3</td>
        <td><a href="./doc-files/cygwin/COPYING.txt">GPL v3</a></td>
        <td><a href="http://cygwin.com">http://cygwin.com</a></td>
        <td>(Windows only) korn shell compatible shell used by GNU make</td>
      </tr>
      <tr>
        <td>cat, cp, date, echo, mkdir, mv, pwd, rm, touch</td>
-       <td>cygwin 1.5.25-15 (coreutils 6.10)</td>
+       <td>cygwin 2.9.0-3 (coreutils 8.26)</td>
        <td><a href="./doc-files/coreutils/COPYING.txt">GPL v3</a></td>
        <td><a href="http://cygwin.com">http://cygwin.com</a></td>
        <td>(Windows only) common utilites called from GNU make makefiles</td>

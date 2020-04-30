@@ -2,14 +2,14 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-D21
+ * @(#) xdc-I08
  */
 
 #include <xdc/std.h>
 
 __FAR__ char host_platforms_arm__dummy__;
 
-#define __xdc_PKGVERS 1, 0, 0, 0
+#define __xdc_PKGVERS 1, 0, 0
 #define __xdc_PKGNAME host.platforms.arm
 #define __xdc_PKGPREFIX host_platforms_arm_
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments. All rights reserved.
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -44,11 +44,18 @@ module Core {
      *  detects that the instance parameters have not been properly
      *  initialized (by calling the module's `<Mod>_Params_init()` method).
      */
+    /* REQ_TAG(SYSBIOS-878), REQ_TAG(SYSBIOS-879) */
     config Assert.Id A_initializedParams = {
         msg: "A_initializedParams: uninitialized Params struct"
     };
 
 internal:
+
+    /*
+     *  ======== noAsserts ========
+     *  C calls to Assert are removed through SYS/BIOS macros
+     */
+    metaonly config Bool noAsserts = false;
 
     /*
      *  ======== ObjDesc ========
@@ -70,11 +77,7 @@ internal:
         SizeT           prmsSize;   /* size of these default parameters */
     };
 
-    /*
-     *  ======== allocObject ========
-     *
-     */
-    Ptr allocObject(const ObjDesc *od, Error.Block *eb);
+    const Int NOSTATE = -1;
 
     /*
      *  ======== assignLabel ========
@@ -82,6 +85,7 @@ internal:
      *
      *  If names are disabled, iname == 0, and named == FALSE
      */
+    /* REQ_TAG(SYSBIOS-875) */
     Void assignLabel(Types.Label *lab, Text.CordAddr iname, Bool named);
 
     /*
@@ -94,12 +98,14 @@ internal:
      *  @param(ipsz)    sizeof module's base interface "_IInstance_Params"
      *                  struct
      */
+    /* REQ_TAG(SYSBIOS-876) */
     Void assignParams(Ptr dstPrms, CPtr srcPrms, SizeT mpsz, SizeT ipsz);
 
     /*
      *  ======== createObject ========
      *  Code invoked from Mod_create__S() and Proxy_create() functions
      */
+    /* REQ_TAG(SYSBIOS-871) */
     Ptr createObject(const ObjDesc *od, Ptr curObj, Ptr resPrms, CPtr argPrms,
                      SizeT argPrmsSize, Error.Block *eb);
 
@@ -107,6 +113,7 @@ internal:
      *  ======== constructObject ========
      *  Code for static-only Mod_construct()
      */
+    /* REQ_TAG(SYSBIOS-873) */
     Ptr constructObject(const ObjDesc *od, Ptr curObj, Ptr resPrms,
                         CPtr argPrms, SizeT argPrmsSize, Error.Block *eb);
 
@@ -114,23 +121,19 @@ internal:
      *  ======== deleteObject ========
      *  Common code for all Mod_delete() and Mod_destruct()
      */
+    /* REQ_TAG(SYSBIOS-872) */
     Void deleteObject(const ObjDesc *od, Ptr curObj, Fxn finalFxn,
         Int istat, Bool consFlg);
-
-    /*
-     *  ======== delistObject ========
-     *  Called from Mod_create() to delist already destructed instances
-     */
-    Void delistObject(const ObjDesc *od, Ptr curObj);
 
     /*
      *  ======== destructObject ========
      *  Code for static-only Mod_destruct()
      */
+    /* REQ_TAG(SYSBIOS-874) */
     Void destructObject(const ObjDesc *od, Ptr curObj, Fxn finalFxn,
         Int istat, Bool consFlg);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:58; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

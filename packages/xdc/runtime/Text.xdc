@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -22,14 +22,14 @@ package xdc.runtime;
  *
  *  This module efficiently manages a collection of strings that have common
  *  substrings.  Collections with a high degree of commonality are stored in
- *  much less space than as ordinary table of independent C strings.
+ *  much less space than as an ordinary table of independent C strings.
  *
  *  To further save space, the "compressed" representation need not even
  *  be loaded in the target's memory; see `{@link #isLoaded}`.
  *
  *  The total space available for the compressed representation of text strings
- *  is limited to 64K characters; each string is represented by a 16-bit
- *  "rope id".
+ *  is limited to 32K characters; the lowest 15 bits of a 16-bit "rope id" are
+ *  an index of a storage array.
  */
 @Template("./Text.xdt")
 @DirectCall
@@ -56,6 +56,7 @@ module Text {
      *
      *  The node id 0 represents the empty string "".
      */
+    /* REQ_TAG(SYSBIOS-892) */
     typedef Types.RopeId RopeId;
 
     /*!
@@ -75,6 +76,7 @@ module Text {
      *  The name of an instance if the module's instances are configured to
      *  not have names.
      */
+    /* REQ_TAG(SYSBIOS-889) */
     config String nameUnknown = "{unknown-instance-name}";
 
     /*!
@@ -83,6 +85,7 @@ module Text {
      *
      *  The name used if the instance's name has been set to `NULL`.
      */
+    /* REQ_TAG(SYSBIOS-890) */
     config String nameEmpty = "{empty-instance-name}";
 
     /*!
@@ -92,6 +95,7 @@ module Text {
      *  The name of an instance if the name exists but it's not loaded
      *  on the target.
      */
+    /* REQ_TAG(SYSBIOS-891) */
     config String nameStatic = "{static-instance-name}";
 
     /*!
@@ -101,23 +105,22 @@ module Text {
      *  Character strings managed by this module are allocated together
      *  with other character strings, and loaded to the target, when this
      *  parameter is set to its default value `true`. If this parameter is
-     *  set to `false`, the character strings managed by Text are removed from
-     *  the application.
+     *  set to `false`, the character strings managed by Text are kept in the
+     *  application object file, but they are not loaded to the target.
      *
-     * A consequence of setting this parameter to `false` is that all names 
-     * assigned to static instances are set to NULL, and cannot be displayed by
-     * the code loaded to the target. Also, the Log Events that automatically
-     * print instance names will print NULL for any static instance. The same
-     * code would print the pointers to the names if this parameter is set to
-     * `true` and 'isLoaded` is set to '`false`.
+     *  A consequence of setting this parameter to `false` is that all names
+     *  assigned to static instances are set to NULL, and cannot be displayed by
+     *  the code loaded to the target. Also, the Log Events that automatically
+     *  print instance names will print NULL for any static instance.
      *
-     * ROV is not affected by this parameter and it will also correctly display
-     * names of static instances in their modules' views. ROV detects these
-     * names from the saved configuration files.
+     *  ROV is not affected by this parameter and it will also correctly display
+     *  names of static instances in their modules' views. ROV detects these
+     *  names from the saved configuration files.
      *
-     * Module and event IDs are still unique and Log.Events within one module
-     * have consecutive IDs.
+     *  Module and event IDs are still unique and Log.Events within one module
+     *  have consecutive IDs.
      */
+    /* REQ_TAG(SYSBIOS-888) */
     config Bool isLoaded = true;
 
     /*!
@@ -143,9 +146,14 @@ module Text {
      *  Compare pattern string `pat` to String identified by `rope`.
      *  @_nodoc
      *
+     *  This function is invoked from `{@link Diags#setMask()}`, see the
+     *  documentation for that function to find out how the patterns are
+     *  created.
+     *
      *  @a(pre-conditions)
      *  @p(blist)
      *      - lenp must be less than or equal to the length of pat
+     *      - wildcard '%' is at src[(*lenp) - 1], if it's in the the pattern
      *  @p
 
      *  @a(post-conditions)
@@ -160,6 +168,7 @@ module Text {
      *      - 1   wildcard match
      *  @p
      */
+    /* REQ_TAG(SYSBIOS-893) */
     Int matchRope(RopeId rope, CString pat, UShort *lenp);
 
     /*!
@@ -197,6 +206,7 @@ module Text {
      *
      *  @see Types#Label
      */
+    /* REQ_TAG(SYSBIOS-895), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
     Int putLab(Types.Label *lab, Char **bufp, Int len);
 
     /*!
@@ -228,6 +238,7 @@ module Text {
      *  The return value always reflects the number of characters output,
      *  but it may be less than `len`.
      */
+    /* REQ_TAG(SYSBIOS-894), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
     Int putMod(Types.ModuleId mid, Char **bufp, Int len);
 
     /*!
@@ -258,6 +269,7 @@ module Text {
      *  The return value always reflects the number of characters output,
      *  but it may be less than `len`.
      */
+    /* REQ_TAG(SYSBIOS-896), REQ_TAG(SYSBIOS-897), REQ_TAG(SYSBIOS-898) */
     Int putSite(Types.Site *site, Char **bufp, Int len);
 
 internal:
@@ -313,7 +325,17 @@ internal:
  */
 //    config Int16 unnamedModCnt = 0;
 
-    function defineRopeCord(text); 
+    /*!
+     *  ======== defineRopeCord ========
+     *  Put text in charTab[] and return its offset within charTab
+     */
+    function defineRopeCord(text);
+
+    /*!
+     *  ======== defineRopeNode ========
+     *  Create a new Node structure, add it to nodeTabe, and return nodeId,
+     *  which is an offset within nodeTab with the leftmost bit set.
+     */
     function defineRopeNode(left, right);
 
     function fetchAddr(raddr);
@@ -327,16 +349,33 @@ internal:
     Bool matchVisFxn(Ptr p, CString s);
     Bool printVisFxn(Ptr p, CString s);
 
-    Void visitRope(RopeId rope, Fxn visFxn, Ptr visState);
-    Void visitRope2(RopeId rope, Fxn visFxn, Ptr visState, CString stack[]);
+    Void visitRope(RopeId rope, RopeVisitor visFxn, Ptr visState);
+    Void visitRope2(RopeId rope, RopeVisitor visFxn, Ptr visState,
+                    CString stack[]);
 
-    typedef Void (*VisitRopeFxn)(RopeId, Fxn, Ptr);
-    typedef Void (*VisitRopeFxn2)(RopeId, Fxn, Ptr, CString[]);
+    typedef Void (*VisitRopeFxn)(RopeId, RopeVisitor, Ptr);
+    typedef Void (*VisitRopeFxn2)(RopeId, RopeVisitor, Ptr, CString[]);
 
     config VisitRopeFxn visitRopeFxn = visitRope;
 
     config VisitRopeFxn2 visitRopeFxn2 = visitRope2;
 
+    /*!
+     *  ======== xprintf ========
+     *  @param(bufp)   address of the output buffer pointer or `NULL`
+     *
+     *                 If `bufp` is `NULL`, the site's name characters are
+     *                 output via `{@link System#putch()}`.
+     *
+     *  @param(len)    maximum number of characters to generate
+     *
+     *                 If `len` is negative, the number of characters to be
+     *                 generated is not limited.
+     *
+     *  @a(returns)
+     *  The return value always reflects the number of characters output,
+     *  but it may be less than `len`.
+     */
     Int xprintf(Char **bufp, SizeT len, CString fmt, ...);
 
     struct Module_State {
@@ -345,6 +384,6 @@ internal:
     };
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

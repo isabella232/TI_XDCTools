@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_Rta__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_Rta___VERS 200
@@ -319,52 +321,52 @@ __extern __FAR__ const CT__xdc_runtime_Rta_controlTransportClassName xdc_runtime
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_Rta_Module__startupDone__S, "xdc_runtime_Rta_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_Rta_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_Rta_Module__startupDone__S( void);
 
 /* processCommand__E */
 #define xdc_runtime_Rta_processCommand xdc_runtime_Rta_processCommand__E
 xdc__CODESECT(xdc_runtime_Rta_processCommand__E, "xdc_runtime_Rta_processCommand")
-__extern xdc_Void xdc_runtime_Rta_processCommand__E( xdc_runtime_Rta_CommandPacket *cmd, xdc_runtime_Rta_ResponsePacket *resp );
+__extern xdc_Void xdc_runtime_Rta_processCommand__E( xdc_runtime_Rta_CommandPacket *cmd, xdc_runtime_Rta_ResponsePacket *resp);
 
 /* acknowledgeCmd__E */
 #define xdc_runtime_Rta_acknowledgeCmd xdc_runtime_Rta_acknowledgeCmd__E
 xdc__CODESECT(xdc_runtime_Rta_acknowledgeCmd__E, "xdc_runtime_Rta_acknowledgeCmd")
-__extern xdc_Void xdc_runtime_Rta_acknowledgeCmd__E( xdc_runtime_Rta_ResponsePacket *resp );
+__extern xdc_Void xdc_runtime_Rta_acknowledgeCmd__E( xdc_runtime_Rta_ResponsePacket *resp);
 
 /* readMask__E */
 #define xdc_runtime_Rta_readMask xdc_runtime_Rta_readMask__E
 xdc__CODESECT(xdc_runtime_Rta_readMask__E, "xdc_runtime_Rta_readMask")
-__extern xdc_Void xdc_runtime_Rta_readMask__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg addr );
+__extern xdc_Void xdc_runtime_Rta_readMask__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg addr);
 
 /* writeMask__E */
 #define xdc_runtime_Rta_writeMask xdc_runtime_Rta_writeMask__E
 xdc__CODESECT(xdc_runtime_Rta_writeMask__E, "xdc_runtime_Rta_writeMask")
-__extern xdc_Void xdc_runtime_Rta_writeMask__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg addr, xdc_UArg val );
+__extern xdc_Void xdc_runtime_Rta_writeMask__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg addr, xdc_UArg val);
 
 /* enableLog__E */
 #define xdc_runtime_Rta_enableLog xdc_runtime_Rta_enableLog__E
 xdc__CODESECT(xdc_runtime_Rta_enableLog__E, "xdc_runtime_Rta_enableLog")
-__extern xdc_Void xdc_runtime_Rta_enableLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg log );
+__extern xdc_Void xdc_runtime_Rta_enableLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg logNum);
 
 /* disableLog__E */
 #define xdc_runtime_Rta_disableLog xdc_runtime_Rta_disableLog__E
 xdc__CODESECT(xdc_runtime_Rta_disableLog__E, "xdc_runtime_Rta_disableLog")
-__extern xdc_Void xdc_runtime_Rta_disableLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg log );
+__extern xdc_Void xdc_runtime_Rta_disableLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg logNum);
 
 /* getCpuSpeed__E */
 #define xdc_runtime_Rta_getCpuSpeed xdc_runtime_Rta_getCpuSpeed__E
 xdc__CODESECT(xdc_runtime_Rta_getCpuSpeed__E, "xdc_runtime_Rta_getCpuSpeed")
-__extern xdc_Void xdc_runtime_Rta_getCpuSpeed__E( xdc_runtime_Rta_ResponsePacket *resp );
+__extern xdc_Void xdc_runtime_Rta_getCpuSpeed__E( xdc_runtime_Rta_ResponsePacket *resp);
 
 /* resetLog__E */
 #define xdc_runtime_Rta_resetLog xdc_runtime_Rta_resetLog__E
 xdc__CODESECT(xdc_runtime_Rta_resetLog__E, "xdc_runtime_Rta_resetLog")
-__extern xdc_Void xdc_runtime_Rta_resetLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg log );
+__extern xdc_Void xdc_runtime_Rta_resetLog__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg logNum);
 
 /* changePeriod__E */
 #define xdc_runtime_Rta_changePeriod xdc_runtime_Rta_changePeriod__E
 xdc__CODESECT(xdc_runtime_Rta_changePeriod__E, "xdc_runtime_Rta_changePeriod")
-__extern xdc_Void xdc_runtime_Rta_changePeriod__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg period );
+__extern xdc_Void xdc_runtime_Rta_changePeriod__E( xdc_runtime_Rta_ResponsePacket *resp, xdc_UArg period);
 
 
 /*
@@ -486,6 +488,6 @@ static inline xdc_Void xdc_runtime_Rta_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_runtime_Rta__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

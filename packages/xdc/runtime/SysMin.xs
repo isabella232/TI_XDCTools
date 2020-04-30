@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -22,11 +22,12 @@ function module$static$init(obj, params)
     obj.outbuf.length = params.bufSize;
     if (params.bufSize != 0) {
         var Memory = xdc.module('xdc.runtime.Memory');
+        /* REQ_TAG(SYSBIOS-913) */
         Memory.staticPlace(obj.outbuf, 0, params.sectionName);
     }
 
     obj.outidx = 0;
-    obj.wrapped = false;  
+    obj.wrapped = false;
 }
 
 /*
@@ -54,14 +55,14 @@ function viewInitModule(view, mod)
 function viewInitOutputBuffer(view)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
-    /* 
-     * Retrieve the module's state. 
-     * If this throws an exception, just allow it to propogate up.
+
+    /*
+     * Retrieve the module's state.
+     * If this throws an exception, just allow it to propagate up.
      */
     var rawView = Program.scanRawView('xdc.runtime.SysMin');
-    
-    /* 
+
+    /*
      * If the buffer has not wrapped and the index of the next character to
      * write is 0, then the buffer is empty, and we can just return.
      */
@@ -140,7 +141,7 @@ function readChars(leftover, buffer, begin, end, elements)
         
         /* Add the character to the current string. */
         str += ch;
-                
+
         /* 
          * If a string ends in a newline, create a separate table entry for it.
          */
@@ -153,7 +154,7 @@ function readChars(leftover, buffer, begin, end, elements)
                                              'OutputBuffer');
             elem.entry = str;           
             elements[elements.length] = elem;
-            
+
             /* Reset the string */
             str = "";
         }
@@ -162,8 +163,7 @@ function readChars(leftover, buffer, begin, end, elements)
     /* Return any unfinished string characters. */
     return (str);
 }
-
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -36,10 +36,12 @@
 #define xdc_runtime_SysMin__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_SysMin___VERS 200
@@ -316,37 +318,37 @@ __extern xdc_Int xdc_runtime_SysMin_Module_startup__F( xdc_Int state );
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_SysMin_Module__startupDone__S, "xdc_runtime_SysMin_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_SysMin_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_SysMin_Module__startupDone__S( void);
 
 /* abort__E */
 #define xdc_runtime_SysMin_abort xdc_runtime_SysMin_abort__E
 xdc__CODESECT(xdc_runtime_SysMin_abort__E, "xdc_runtime_SysMin_abort")
-__extern xdc_Void xdc_runtime_SysMin_abort__E( xdc_CString str );
+__extern xdc_Void xdc_runtime_SysMin_abort__E( xdc_CString str);
 
 /* exit__E */
 #define xdc_runtime_SysMin_exit xdc_runtime_SysMin_exit__E
 xdc__CODESECT(xdc_runtime_SysMin_exit__E, "xdc_runtime_SysMin_exit")
-__extern xdc_Void xdc_runtime_SysMin_exit__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_SysMin_exit__E( xdc_Int stat);
 
 /* flush__E */
 #define xdc_runtime_SysMin_flush xdc_runtime_SysMin_flush__E
 xdc__CODESECT(xdc_runtime_SysMin_flush__E, "xdc_runtime_SysMin_flush")
-__extern xdc_Void xdc_runtime_SysMin_flush__E( void );
+__extern xdc_Void xdc_runtime_SysMin_flush__E( void);
 
 /* putch__E */
 #define xdc_runtime_SysMin_putch xdc_runtime_SysMin_putch__E
 xdc__CODESECT(xdc_runtime_SysMin_putch__E, "xdc_runtime_SysMin_putch")
-__extern xdc_Void xdc_runtime_SysMin_putch__E( xdc_Char ch );
+__extern xdc_Void xdc_runtime_SysMin_putch__E( xdc_Char ch);
 
 /* ready__E */
 #define xdc_runtime_SysMin_ready xdc_runtime_SysMin_ready__E
 xdc__CODESECT(xdc_runtime_SysMin_ready__E, "xdc_runtime_SysMin_ready")
-__extern xdc_Bool xdc_runtime_SysMin_ready__E( void );
+__extern xdc_Bool xdc_runtime_SysMin_ready__E( void);
 
 /* output__I */
 #define xdc_runtime_SysMin_output xdc_runtime_SysMin_output__I
 xdc__CODESECT(xdc_runtime_SysMin_output__I, "xdc_runtime_SysMin_output")
-__extern xdc_Void xdc_runtime_SysMin_output__I( xdc_Char *buf, xdc_UInt size );
+__extern xdc_Void xdc_runtime_SysMin_output__I( xdc_Char *buf, xdc_UInt size);
 
 
 /*
@@ -483,6 +485,6 @@ extern struct xdc_runtime_SysMin_Module_State__ xdc_runtime_SysMin_Module__state
 #endif /* xdc_runtime_SysMin__localnames__done */
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2019 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -27,7 +27,7 @@ package xdc.runtime;
  *
  *  In addition to configuration parameters that allow the user to add custom
  *  startup functions, this module also provides services that allow modules
- *  to automatically add initialiazation functions to the startup sequence.
+ *  to automatically add initialization functions to the startup sequence.
  *
  *  @a(Startup Sequence)
  *  The following list defines the startup sequence and, in particular, when
@@ -41,7 +41,7 @@ package xdc.runtime;
  *     Microsoft targets.
  *   - C runtime initialization is performed.
  *   - Functions from the array `Startup.firstFxns` are called.
- *   - All `Mod_Module_startup` functions (see Module Initialization below) 
+ *   - All `Mod_Module_startup` functions (see Module Initialization below)
  *     are called in a loop until all such functions return
  *     `{@link #Startup_DONE}` or the `{@link #maxPasses}` threshold is
  *     reached.
@@ -183,6 +183,7 @@ module Startup {
      *  ======== maxPasses ========
      *  Max number of iterations over the set of startup functions
      */
+    /* REQ_TAG(SYSBIOS-952) */
     config Int maxPasses = 32;
 
     /*!
@@ -195,18 +196,20 @@ module Startup {
      *  ======== firstFxns ========
      *  List of functions called before module startup
      *
-     *  @see 
+     *  @see
      *      #xdoc-sect-2 Startup Sequence
      */
+    /* REQ_TAG(SYSBIOS-955) */
     config InitFxn firstFxns[length] = [];
 
     /*!
      *  ======== lastFxns ========
      *  List of functions called after module startup
      *
-     *  @see 
+     *  @see
      *      #xdoc-sect-2 Startup Sequence
      */
+    /* REQ_TAG(SYSBIOS-956) */
     config InitFxn lastFxns[length] = [];
 
     /*!
@@ -224,6 +227,7 @@ module Startup {
      *  @see
      *      #xdoc-sect-2 Startup Sequence
      */
+    /* REQ_TAG(SYSBIOS-951) */
     metaonly config InitFxn resetFxn = null;
 
     /*!
@@ -239,22 +243,23 @@ module Startup {
      *  called at least once prior to using any `xdc.runtime` modules.
      *  Simply call this function at the very beginning of `main()`.
      */
+    /* REQ_TAG(SYSBIOS-950) */
     Void exec();
 
     /*!
      *  ======== rtsDone ========
      *  Query the state of the `xdc.runtime` package
      *
-     *  This function is used by module startup functions to determine
-     *  when it is possible to use the `xdc.runtime` modules; e.g. to
-     *  allocate memory, create instances managed by some module (even
-     *  those outside the `xdc.runtime` package), call a `Log` function,
-     *  etc.
+     *  This function is used by module startup functions to determine when it
+     *  is possible to use the `xdc.runtime` modules; e.g. to allocate memory,
+     *  create instances managed by some module (even those outside the
+     *  `xdc.runtime` package), call a `Log` function, etc.
      *
      *  @a(returns)
      *  Returns `TRUE` when all `xdc.runtime` modules have completed
      *  initialization.
      */
+    /* REQ_TAG(SYSBIOS-954) */
     Bool rtsDone();
 
 internal:
@@ -264,12 +269,12 @@ internal:
      *  Application-specific reset function
      *
      *  This function is defined in `Startup.xdt`
-     *  (`xdc_runtime_Startup_reset__I`) and is called as early as
-     *  possible in the {@link #xdoc-sect-2 program initialization}
-     *  process; for many platforms, it is called prior the the
-     *  initialization of the C runtime environment.
+     *  (`xdc_runtime_Startup_reset__I`) and is called as early as possible in
+     *  the {@link #xdoc-sect-2 program initialization} process; for many
+     *  platforms, it is called prior the the initialization of the C
+     *  runtime environment.
      *
-     *  @see 
+     *  @see
      *      #xdoc-sect-2 Startup Sequence
      */
     Void reset();
@@ -282,17 +287,18 @@ internal:
     readonly config Void (*execImpl)() = execImplFxn;
 
     typedef Int (*SFxn)(Int);
+    /* REQ_TAG(SYSBIOS-949), REQ_TAG(SYSBIOS-953) */
     config SFxn sfxnTab[];
 
     /*!
      *  ======== sfxnRts ========
-     *  Array of runtime modules' startup functions 
+     *  Array of runtime modules' startup functions
      *
      *  This array also contains startup functions of the modules that inherit
      *  from interfaces in `xdc.runtime`. Functions added to this array are
      *  called only once before the startup procedure for all modules begins.
      *
-     *  @see 
+     *  @see
      *      #xdoc-sect-2 Startup Sequence
      */
     config Bool sfxnRts[];
@@ -303,7 +309,7 @@ internal:
      *
      *  Modules for which the config C code is generated separately, and
      *  possibly before the configuration step is run, must call a function
-     *  to get their startup state. They cannot reach into the state array 
+     *  to get their startup state. They cannot reach into the state array
      *  directly because they don't know their indices in that array.
      */
     Int getState(Types.ModuleId id);
@@ -326,6 +332,6 @@ internal:
 
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 5-15-2019 11:21:59; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

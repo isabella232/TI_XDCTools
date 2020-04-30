@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_runtime_System_SupportProxy__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_runtime_System_SupportProxy___VERS 200
@@ -252,60 +254,60 @@ __extern const xdc_runtime_System_SupportProxy_Fxns__ xdc_runtime_System_Support
 
 /* Handle__label__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Handle__label__S, "xdc_runtime_System_SupportProxy_Handle__label__S")
-__extern xdc_runtime_Types_Label *xdc_runtime_System_SupportProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab );
+__extern xdc_runtime_Types_Label *xdc_runtime_System_SupportProxy_Handle__label__S( xdc_Ptr obj, xdc_runtime_Types_Label *lab);
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Module__startupDone__S, "xdc_runtime_System_SupportProxy_Module__startupDone__S")
-__extern xdc_Bool xdc_runtime_System_SupportProxy_Module__startupDone__S( void );
+__extern xdc_Bool xdc_runtime_System_SupportProxy_Module__startupDone__S( void);
 
 /* Object__get__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Object__get__S, "xdc_runtime_System_SupportProxy_Object__get__S")
-__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i );
+__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__get__S( xdc_Ptr oarr, xdc_Int i);
 
 /* Object__first__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Object__first__S, "xdc_runtime_System_SupportProxy_Object__first__S")
-__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__first__S( void );
+__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__first__S( void);
 
 /* Object__next__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Object__next__S, "xdc_runtime_System_SupportProxy_Object__next__S")
-__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__next__S( xdc_Ptr obj );
+__extern xdc_Ptr xdc_runtime_System_SupportProxy_Object__next__S( xdc_Ptr obj);
 
 /* Params__init__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Params__init__S, "xdc_runtime_System_SupportProxy_Params__init__S")
-__extern xdc_Void xdc_runtime_System_SupportProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz );
+__extern xdc_Void xdc_runtime_System_SupportProxy_Params__init__S( xdc_Ptr dst, const xdc_Void *src, xdc_SizeT psz, xdc_SizeT isz);
 
 /* Proxy__abstract__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Proxy__abstract__S, "xdc_runtime_System_SupportProxy_Proxy__abstract__S")
-__extern xdc_Bool xdc_runtime_System_SupportProxy_Proxy__abstract__S( void );
+__extern xdc_Bool xdc_runtime_System_SupportProxy_Proxy__abstract__S( void);
 
 /* Proxy__delegate__S */
 xdc__CODESECT(xdc_runtime_System_SupportProxy_Proxy__delegate__S, "xdc_runtime_System_SupportProxy_Proxy__delegate__S")
-__extern xdc_CPtr xdc_runtime_System_SupportProxy_Proxy__delegate__S( void );
+__extern xdc_CPtr xdc_runtime_System_SupportProxy_Proxy__delegate__S( void);
 
 /* abort__E */
 #define xdc_runtime_System_SupportProxy_abort xdc_runtime_System_SupportProxy_abort__E
 xdc__CODESECT(xdc_runtime_System_SupportProxy_abort__E, "xdc_runtime_System_SupportProxy_abort")
-__extern xdc_Void xdc_runtime_System_SupportProxy_abort__E( xdc_CString str );
+__extern xdc_Void xdc_runtime_System_SupportProxy_abort__E( xdc_CString str);
 
 /* exit__E */
 #define xdc_runtime_System_SupportProxy_exit xdc_runtime_System_SupportProxy_exit__E
 xdc__CODESECT(xdc_runtime_System_SupportProxy_exit__E, "xdc_runtime_System_SupportProxy_exit")
-__extern xdc_Void xdc_runtime_System_SupportProxy_exit__E( xdc_Int stat );
+__extern xdc_Void xdc_runtime_System_SupportProxy_exit__E( xdc_Int stat);
 
 /* flush__E */
 #define xdc_runtime_System_SupportProxy_flush xdc_runtime_System_SupportProxy_flush__E
 xdc__CODESECT(xdc_runtime_System_SupportProxy_flush__E, "xdc_runtime_System_SupportProxy_flush")
-__extern xdc_Void xdc_runtime_System_SupportProxy_flush__E( void );
+__extern xdc_Void xdc_runtime_System_SupportProxy_flush__E( void);
 
 /* putch__E */
 #define xdc_runtime_System_SupportProxy_putch xdc_runtime_System_SupportProxy_putch__E
 xdc__CODESECT(xdc_runtime_System_SupportProxy_putch__E, "xdc_runtime_System_SupportProxy_putch")
-__extern xdc_Void xdc_runtime_System_SupportProxy_putch__E( xdc_Char ch );
+__extern xdc_Void xdc_runtime_System_SupportProxy_putch__E( xdc_Char ch);
 
 /* ready__E */
 #define xdc_runtime_System_SupportProxy_ready xdc_runtime_System_SupportProxy_ready__E
 xdc__CODESECT(xdc_runtime_System_SupportProxy_ready__E, "xdc_runtime_System_SupportProxy_ready")
-__extern xdc_Bool xdc_runtime_System_SupportProxy_ready__E( void );
+__extern xdc_Bool xdc_runtime_System_SupportProxy_ready__E( void);
 
 
 /*

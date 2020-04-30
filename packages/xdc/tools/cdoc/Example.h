@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-F14
+ * @(#) xdc-I08
  */
 
 /*
@@ -34,10 +34,12 @@
 #define xdc_tools_cdoc_Example__top__
 #endif
 
+#ifndef __extern
 #ifdef __cplusplus
 #define __extern extern "C"
 #else
 #define __extern extern
+#endif
 #endif
 
 #define xdc_tools_cdoc_Example___VERS 200
@@ -288,14 +290,14 @@ __extern __FAR__ const CT__xdc_tools_cdoc_Example_u xdc_tools_cdoc_Example_u__C;
 
 /* Module__startupDone__S */
 xdc__CODESECT(xdc_tools_cdoc_Example_Module__startupDone__S, "xdc_tools_cdoc_Example_Module__startupDone__S")
-__extern xdc_Bool xdc_tools_cdoc_Example_Module__startupDone__S( void );
+__extern xdc_Bool xdc_tools_cdoc_Example_Module__startupDone__S( void);
 
 /* aFunction__E */
 #define xdc_tools_cdoc_Example_aFunction xdc_tools_cdoc_Example_aFunction__E
 xdc__CODESECT(xdc_tools_cdoc_Example_aFunction__E, "xdc_tools_cdoc_Example_aFunction")
-__extern xdc_Void xdc_tools_cdoc_Example_aFunction__E( xdc_Int aParam );
+__extern xdc_Void xdc_tools_cdoc_Example_aFunction__E( xdc_Int aParam);
 xdc__CODESECT(xdc_tools_cdoc_Example_aFunction__F, "xdc_tools_cdoc_Example_aFunction")
-__extern xdc_Void xdc_tools_cdoc_Example_aFunction__F( xdc_Int aParam );
+__extern xdc_Void xdc_tools_cdoc_Example_aFunction__F( xdc_Int aParam);
 
 
 /*
@@ -403,6 +405,6 @@ static inline xdc_Void xdc_tools_cdoc_Example_Module_setMask(xdc_Bits16 mask)
 #endif /* xdc_tools_cdoc_Example__localnames__done */
 #endif
 /*
- *  @(#) xdc.tools.cdoc; 1, 0, 0,0; 5-15-2019 11:24:11; /db/ztree/library/trees/xdc/xdc-F14/src/packages/
+ *  @(#) xdc.tools.cdoc; 1, 0, 0,0; 2-9-2020 18:50:11; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
  */
 

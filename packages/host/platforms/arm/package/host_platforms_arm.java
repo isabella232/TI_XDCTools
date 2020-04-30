@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-D21
+ * @(#) xdc-I08
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class host_platforms_arm
 {
-    static final String VERS = "@(#) xdc-D21\n";
+    static final String VERS = "@(#) xdc-I08\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -88,9 +88,31 @@ public class host_platforms_arm
         om.bind("host.platforms.arm.Platform.Params", new Proto.Str(po, true));
     }
 
+    void Arm$$OBJECTS()
+    {
+        Proto.Obj po, spo;
+        Value.Obj vo;
+
+        po = (Proto.Obj)om.bind("host.platforms.arm.Arm.Module", new Proto.Obj());
+        vo = (Value.Obj)om.bind("host.platforms.arm.Arm", new Value.Obj("host.platforms.arm.Arm", po));
+        pkgV.bind("Arm", vo);
+        // decls 
+        // insts 
+        Object insP = om.bind("host.platforms.arm.Arm.Instance", new Proto.Obj());
+        po = (Proto.Obj)om.bind("host.platforms.arm.Arm$$Object", new Proto.Obj());
+        om.bind("host.platforms.arm.Arm.Object", new Proto.Str(po, true));
+        po = (Proto.Obj)om.bind("host.platforms.arm.Arm$$Params", new Proto.Obj());
+        om.bind("host.platforms.arm.Arm.Params", new Proto.Str(po, true));
+    }
+
     void Platform$$CONSTS()
     {
         // module Platform
+    }
+
+    void Arm$$CONSTS()
+    {
+        // module Arm
     }
 
     void Platform$$CREATES()
@@ -154,13 +176,82 @@ public class host_platforms_arm
         Global.eval(sb.toString());
     }
 
+    void Arm$$CREATES()
+    {
+        Proto.Fxn fxn;
+        StringBuilder sb;
+
+        fxn = (Proto.Fxn)om.bind("host.platforms.arm.Arm$$create", new Proto.Fxn(om.findStrict("host.platforms.arm.Arm.Module", "host.platforms.arm"), om.findStrict("host.platforms.arm.Arm.Instance", "host.platforms.arm"), 2, 1, false));
+                fxn.addArg(0, "revision", $$T_Str, $$UNDEF);
+                fxn.addArg(1, "__params", (Proto)om.findStrict("host.platforms.arm.Arm.Params", "host.platforms.arm"), Global.newObject());
+        sb = new StringBuilder();
+        sb.append("host$platforms$arm$Arm$$create = function( revision, __params ) {\n");
+            sb.append("var __mod = xdc.om['host.platforms.arm.Arm'];\n");
+            sb.append("var __inst = xdc.om['host.platforms.arm.Arm.Instance'].$$make();\n");
+            sb.append("__inst.$$bind('$package', xdc.om['host.platforms.arm']);\n");
+            sb.append("__inst.$$bind('$index', __mod.$instances.length);\n");
+            sb.append("__inst.$$bind('$category', 'Instance');\n");
+            sb.append("__inst.$$bind('$args', {revision:revision});\n");
+            sb.append("__inst.$$bind('$module', __mod);\n");
+            sb.append("__mod.$instances.$add(__inst);\n");
+            sb.append("__inst.cpuCore = __mod.PARAMS.cpuCore;\n");
+            sb.append("__inst.cpuCoreRevision = __mod.PARAMS.cpuCoreRevision;\n");
+            sb.append("__inst.minProgUnitSize = __mod.PARAMS.minProgUnitSize;\n");
+            sb.append("__inst.minDataUnitSize = __mod.PARAMS.minDataUnitSize;\n");
+            sb.append("__inst.dataWordSize = __mod.PARAMS.dataWordSize;\n");
+            sb.append("__inst.peripherals = __mod.PARAMS.peripherals;\n");
+            sb.append("__inst.deviceHeader = __mod.PARAMS.deviceHeader;\n");
+            sb.append("for (var __p in __params) __inst[__p] = __params[__p];\n");
+            sb.append("var save = xdc.om.$curpkg;\n");
+            sb.append("xdc.om.$$bind('$curpkg', __mod.$package.$name);\n");
+            sb.append("__mod.instance$meta$init.$fxn.apply(__inst, [revision]);\n");
+            sb.append("xdc.om.$$bind('$curpkg', save);\n");
+            sb.append("__inst.$$bless();\n");
+            sb.append("return __inst;\n");
+        sb.append("}\n");
+        Global.eval(sb.toString());
+        fxn = (Proto.Fxn)om.bind("host.platforms.arm.Arm$$construct", new Proto.Fxn(om.findStrict("host.platforms.arm.Arm.Module", "host.platforms.arm"), null, 3, 1, false));
+                fxn.addArg(0, "__obj", (Proto)om.findStrict("host.platforms.arm.Arm$$Object", "host.platforms.arm"), null);
+                fxn.addArg(1, "revision", $$T_Str, $$UNDEF);
+                fxn.addArg(2, "__params", (Proto)om.findStrict("host.platforms.arm.Arm.Params", "host.platforms.arm"), Global.newObject());
+        sb = new StringBuilder();
+        sb.append("host$platforms$arm$Arm$$construct = function( __obj, revision, __params ) {\n");
+            sb.append("var __mod = xdc.om['host.platforms.arm.Arm'];\n");
+            sb.append("var __inst = __obj;\n");
+            sb.append("__inst.$$bind('$args', {revision:revision});\n");
+            sb.append("__inst.$$bind('$module', __mod);\n");
+            sb.append("__mod.$objects.$add(__inst);\n");
+            sb.append("__inst.cpuCore = __mod.PARAMS.cpuCore;\n");
+            sb.append("__inst.cpuCoreRevision = __mod.PARAMS.cpuCoreRevision;\n");
+            sb.append("__inst.minProgUnitSize = __mod.PARAMS.minProgUnitSize;\n");
+            sb.append("__inst.minDataUnitSize = __mod.PARAMS.minDataUnitSize;\n");
+            sb.append("__inst.dataWordSize = __mod.PARAMS.dataWordSize;\n");
+            sb.append("__inst.peripherals = __mod.PARAMS.peripherals;\n");
+            sb.append("__inst.deviceHeader = __mod.PARAMS.deviceHeader;\n");
+            sb.append("for (var __p in __params) __inst[__p] = __params[__p];\n");
+            sb.append("__inst.$$bless();\n");
+            sb.append("return null;\n");
+        sb.append("}\n");
+        Global.eval(sb.toString());
+    }
+
     void Platform$$FUNCTIONS()
     {
         Proto.Fxn fxn;
 
     }
 
+    void Arm$$FUNCTIONS()
+    {
+        Proto.Fxn fxn;
+
+    }
+
     void Platform$$SIZES()
+    {
+    }
+
+    void Arm$$SIZES()
     {
     }
 
@@ -178,6 +269,7 @@ public class host_platforms_arm
         po.init("host.platforms.arm.Platform.Module", om.findStrict("xdc.platform.IPlatform.Module", "host.platforms.arm"));
                 po.addFld("$hostonly", $$T_Num, 1, "r");
         po.addFld("BOARD", (Proto)om.findStrict("xdc.platform.IPlatform.Board", "host.platforms.arm"), Global.newObject("id", "0", "boardName", "ARM", "boardFamily", "ARM", "boardRevision", null), "rh");
+        po.addFld("CPU", (Proto)om.findStrict("xdc.platform.IExeContext.Cpu", "host.platforms.arm"), Global.newObject("id", "0", "clockRate", 1000.0, "catalogName", "host.platforms.arm", "deviceName", "Arm", "revision", ""), "rh");
                 po.addFxn("create", (Proto.Fxn)om.findStrict("host.platforms.arm.Platform$$create", "host.platforms.arm"), Global.get("host$platforms$arm$Platform$$create"));
                 po.addFxn("construct", (Proto.Fxn)om.findStrict("host.platforms.arm.Platform$$construct", "host.platforms.arm"), Global.get("host$platforms$arm$Platform$$construct"));
         fxn = Global.get(cap, "module$use");
@@ -195,8 +287,8 @@ public class host_platforms_arm
         po = (Proto.Obj)om.findStrict("host.platforms.arm.Platform.Instance", "host.platforms.arm");
         po.init("host.platforms.arm.Platform.Instance", om.findStrict("xdc.platform.IPlatform.Instance", "host.platforms.arm"));
                 po.addFld("$hostonly", $$T_Num, 1, "r");
-        po.addFld("deviceName", $$T_Str, "TMS320CDM6446", "wh");
-        po.addFld("catalogName", $$T_Str, "ti.catalog.arm", "wh");
+        po.addFld("deviceName", $$T_Str, "Arm", "wh");
+        po.addFld("catalogName", $$T_Str, "host.platforms.arm", "wh");
                 fxn = Global.get(cap, "getCpuDataSheet");
                 if (fxn != null) po.addFxn("getCpuDataSheet", (Proto.Fxn)om.findStrict("xdc.platform.IPlatform$$getCpuDataSheet", "host.platforms.arm"), fxn);
                 fxn = Global.get(cap, "getCreateArgs");
@@ -210,8 +302,8 @@ public class host_platforms_arm
         po = (Proto.Obj)om.findStrict("host.platforms.arm.Platform$$Params", "host.platforms.arm");
         po.init("host.platforms.arm.Platform.Params", om.findStrict("xdc.platform.IPlatform$$Params", "host.platforms.arm"));
                 po.addFld("$hostonly", $$T_Num, 1, "r");
-        po.addFld("deviceName", $$T_Str, "TMS320CDM6446", "wh");
-        po.addFld("catalogName", $$T_Str, "ti.catalog.arm", "wh");
+        po.addFld("deviceName", $$T_Str, "Arm", "wh");
+        po.addFld("catalogName", $$T_Str, "host.platforms.arm", "wh");
         po = (Proto.Obj)om.findStrict("host.platforms.arm.Platform$$Object", "host.platforms.arm");
         po.init("host.platforms.arm.Platform.Object", om.findStrict("host.platforms.arm.Platform.Instance", "host.platforms.arm"));
                 fxn = Global.get(cap, "getCpuDataSheet");
@@ -226,7 +318,50 @@ public class host_platforms_arm
                 if (fxn != null) po.addFxn("getLinkTemplate", (Proto.Fxn)om.findStrict("xdc.platform.IPlatform$$getLinkTemplate", "host.platforms.arm"), fxn);
     }
 
+    void Arm$$TYPES()
+    {
+        Scriptable cap;
+        Proto.Obj po;
+        Proto.Str ps;
+        Proto.Typedef pt;
+        Object fxn;
+
+        po = (Proto.Obj)om.findStrict("host.platforms.arm.Arm.Module", "host.platforms.arm");
+        po.init("host.platforms.arm.Arm.Module", om.findStrict("xdc.platform.ICpuDataSheet.Module", "host.platforms.arm"));
+                po.addFld("$hostonly", $$T_Num, 1, "r");
+                po.addFxn("create", (Proto.Fxn)om.findStrict("host.platforms.arm.Arm$$create", "host.platforms.arm"), Global.get("host$platforms$arm$Arm$$create"));
+                po.addFxn("construct", (Proto.Fxn)om.findStrict("host.platforms.arm.Arm$$construct", "host.platforms.arm"), Global.get("host$platforms$arm$Arm$$construct"));
+        po = (Proto.Obj)om.findStrict("host.platforms.arm.Arm.Instance", "host.platforms.arm");
+        po.init("host.platforms.arm.Arm.Instance", om.findStrict("xdc.platform.ICpuDataSheet.Instance", "host.platforms.arm"));
+                po.addFld("$hostonly", $$T_Num, 1, "r");
+        po.addFld("cpuCore", $$T_Str, "v7A", "wh");
+        po.addFld("cpuCoreRevision", $$T_Str, "1.0", "wh");
+        po.addFld("minProgUnitSize", Proto.Elm.newCNum("(xdc_Int)"), 1L, "wh");
+        po.addFld("minDataUnitSize", Proto.Elm.newCNum("(xdc_Int)"), 1L, "wh");
+        po.addFld("dataWordSize", Proto.Elm.newCNum("(xdc_Int)"), 4L, "wh");
+        po.addFld("memMap", new Proto.Map((Proto)om.findStrict("xdc.platform.IPlatform.Memory", "host.platforms.arm")), Global.newArray(new Object[]{}), "wh");
+                po.addFxn("getMemoryMap", (Proto.Fxn)om.findStrict("xdc.platform.ICpuDataSheet$$getMemoryMap", "host.platforms.arm"), $$UNDEF);
+                po.addFxn("getRegisterSet", (Proto.Fxn)om.findStrict("xdc.platform.ICpuDataSheet$$getRegisterSet", "host.platforms.arm"), $$UNDEF);
+        po = (Proto.Obj)om.findStrict("host.platforms.arm.Arm$$Params", "host.platforms.arm");
+        po.init("host.platforms.arm.Arm.Params", om.findStrict("xdc.platform.ICpuDataSheet$$Params", "host.platforms.arm"));
+                po.addFld("$hostonly", $$T_Num, 1, "r");
+        po.addFld("cpuCore", $$T_Str, "v7A", "wh");
+        po.addFld("cpuCoreRevision", $$T_Str, "1.0", "wh");
+        po.addFld("minProgUnitSize", Proto.Elm.newCNum("(xdc_Int)"), 1L, "wh");
+        po.addFld("minDataUnitSize", Proto.Elm.newCNum("(xdc_Int)"), 1L, "wh");
+        po.addFld("dataWordSize", Proto.Elm.newCNum("(xdc_Int)"), 4L, "wh");
+        po.addFld("memMap", new Proto.Map((Proto)om.findStrict("xdc.platform.IPlatform.Memory", "host.platforms.arm")), Global.newArray(new Object[]{}), "wh");
+        po = (Proto.Obj)om.findStrict("host.platforms.arm.Arm$$Object", "host.platforms.arm");
+        po.init("host.platforms.arm.Arm.Object", om.findStrict("host.platforms.arm.Arm.Instance", "host.platforms.arm"));
+                po.addFxn("getMemoryMap", (Proto.Fxn)om.findStrict("xdc.platform.ICpuDataSheet$$getMemoryMap", "host.platforms.arm"), $$UNDEF);
+                po.addFxn("getRegisterSet", (Proto.Fxn)om.findStrict("xdc.platform.ICpuDataSheet$$getRegisterSet", "host.platforms.arm"), $$UNDEF);
+    }
+
     void Platform$$ROV()
+    {
+    }
+
+    void Arm$$ROV()
     {
     }
 
@@ -253,7 +388,7 @@ public class host_platforms_arm
         pkgV.bind("$name", "host.platforms.arm");
         pkgV.bind("$category", "Package");
         pkgV.bind("$$qn", "host.platforms.arm.");
-        pkgV.bind("$vers", Global.newArray(1, 0, 0, 0));
+        pkgV.bind("$vers", Global.newArray(1, 0, 0));
         Value.Map atmap = (Value.Map)pkgV.getv("$attr");
         atmap.seal("length");
         imports.clear();
@@ -329,6 +464,55 @@ public class host_platforms_arm
         ((Value.Arr)pkgV.getv("$unitNames")).add("Platform");
     }
 
+    void Arm$$SINGLETONS()
+    {
+        Proto.Obj po;
+        Value.Obj vo;
+
+        vo = (Value.Obj)om.findStrict("host.platforms.arm.Arm", "host.platforms.arm");
+        po = (Proto.Obj)om.findStrict("host.platforms.arm.Arm.Module", "host.platforms.arm");
+        vo.init2(po, "host.platforms.arm.Arm", $$DEFAULT, false);
+        vo.bind("Module", po);
+        vo.bind("$category", "Module");
+        vo.bind("$capsule", $$UNDEF);
+        vo.bind("Instance", om.findStrict("host.platforms.arm.Arm.Instance", "host.platforms.arm"));
+        vo.bind("Params", om.findStrict("host.platforms.arm.Arm.Params", "host.platforms.arm"));
+        vo.bind("PARAMS", ((Proto.Str)om.findStrict("host.platforms.arm.Arm.Params", "host.platforms.arm")).newInstance());
+        vo.bind("$package", om.findStrict("host.platforms.arm", "host.platforms.arm"));
+        tdefs.clear();
+        proxies.clear();
+        mcfgs.clear();
+        icfgs.clear();
+        inherits.clear();
+        vo.bind("$$tdefs", Global.newArray(tdefs.toArray()));
+        vo.bind("$$proxies", Global.newArray(proxies.toArray()));
+        vo.bind("$$mcfgs", Global.newArray(mcfgs.toArray()));
+        vo.bind("$$icfgs", Global.newArray(icfgs.toArray()));
+        inherits.add("xdc.platform");
+        vo.bind("$$inherits", Global.newArray(inherits.toArray()));
+        ((Value.Arr)pkgV.getv("$modules")).add(vo);
+        ((Value.Arr)om.findStrict("$modules", "host.platforms.arm")).add(vo);
+        vo.bind("$$instflag", 1);
+        vo.bind("$$iobjflag", 1);
+        vo.bind("$$sizeflag", 1);
+        vo.bind("$$dlgflag", 0);
+        vo.bind("$$iflag", 1);
+        vo.bind("$$romcfgs", "|");
+        vo.bind("$$nortsflag", 0);
+        Proto.Str ps = (Proto.Str)vo.find("Module_State");
+        if (ps != null) vo.bind("$object", ps.newInstance());
+        vo.bind("$$meta_iobj", om.has("host.platforms.arm.Arm$$instance$static$init", null) ? 1 : 0);
+        vo.bind("$$fxntab", Global.newArray());
+        vo.bind("$$logEvtCfgs", Global.newArray());
+        vo.bind("$$errorDescCfgs", Global.newArray());
+        vo.bind("$$assertDescCfgs", Global.newArray());
+        Value.Map atmap = (Value.Map)vo.getv("$attr");
+        atmap.seal("length");
+        vo.bind("Object", om.findStrict("host.platforms.arm.Arm.Object", "host.platforms.arm"));
+        pkgV.bind("Arm", vo);
+        ((Value.Arr)pkgV.getv("$unitNames")).add("Arm");
+    }
+
     void $$INITIALIZATION()
     {
         Value.Obj vo;
@@ -336,8 +520,10 @@ public class host_platforms_arm
         if (isCFG) {
         }//isCFG
         Global.callFxn("module$meta$init", (Scriptable)om.findStrict("host.platforms.arm.Platform", "host.platforms.arm"));
+        Global.callFxn("module$meta$init", (Scriptable)om.findStrict("host.platforms.arm.Arm", "host.platforms.arm"));
         Global.callFxn("init", pkgV);
         ((Value.Obj)om.getv("host.platforms.arm.Platform")).bless();
+        ((Value.Obj)om.getv("host.platforms.arm.Arm")).bless();
         ((Value.Arr)om.findStrict("$packages", "host.platforms.arm")).add(pkgV);
     }
 
@@ -355,16 +541,24 @@ public class host_platforms_arm
         $$IMPORTS();
         $$OBJECTS();
         Platform$$OBJECTS();
+        Arm$$OBJECTS();
         Platform$$CONSTS();
+        Arm$$CONSTS();
         Platform$$CREATES();
+        Arm$$CREATES();
         Platform$$FUNCTIONS();
+        Arm$$FUNCTIONS();
         Platform$$SIZES();
+        Arm$$SIZES();
         Platform$$TYPES();
+        Arm$$TYPES();
         if (isROV) {
             Platform$$ROV();
+            Arm$$ROV();
         }//isROV
         $$SINGLETONS();
         Platform$$SINGLETONS();
+        Arm$$SINGLETONS();
         $$INITIALIZATION();
     }
 }

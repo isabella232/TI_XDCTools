@@ -51,6 +51,24 @@ function getISA()
 }
 
 /*
+ *  ======== whatis ========
+ */
+function whatis(addr)
+{
+    var Program = xdc.useModule('xdc.rov.Program');
+
+    var nm = "";
+    try {
+        nm = String(this.$symTab.whatis(addr));
+    }
+    catch (e) {
+        Program.debugPrint(this.$name + ".whatis error: " + e);
+    }
+
+    return (nm);
+}
+
+/*
  *  ======== getJavaImp ========
  */
 function getJavaImp()
