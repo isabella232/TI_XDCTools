@@ -96,6 +96,6 @@ function BTN( tb, style, icon, tip, eflg )
     return but;
 }
 /*
- *  @(#) xdc.tools.sg.widgets; 1,0,0,3; 2-18-2019 11:04:23; /db/ztree/library/trees/xdctools/xdctools-h03/src/
+ *  @(#) xdc.tools.sg.widgets; 1,0,0,0; 4-14-2020 17:02:08; /db/ztree/library/trees/xdctools/xdctools-h04/src/
  */
 

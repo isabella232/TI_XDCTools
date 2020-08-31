@@ -1,6 +1,6 @@
 %%{
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -41,15 +41,6 @@ xdc_Bool `mn`_Module__startupDone__F(void) {
 %}
 
 %if (idMap.length > 0) {
-%//xdc_runtime_Startup_IdMap xdc_runtime_Startup_idMapBase[] = {
-%    for (var i = 0; i < idMap.length; i++) {
-%        if (idMap[i] != null) {
-%//    {`i`, `mod.Module__id`},
-%        }
-%    }
-%//    {0, 0}
-%//};
-
 xdc_Int xdc_runtime_Startup_getState__I(xdc_runtime_Types_ModuleId id) {
     switch (id) {
 %    for (var i = 0; i < idMap.length; i++) {
@@ -66,7 +57,8 @@ xdc_Int xdc_runtime_Startup_getState__I(xdc_runtime_Types_ModuleId id) {
 /*
  * Startup_exec__I is an internal entry point called by target/platform boot
  * code. Boot code is not brought into a partial-link assembly. So, without this
- * pragma, whole program optimizers would otherwise optimize-out this function.
+ * attribute, whole program optimizers would otherwise optimize-out this
+ * function.
  */
 xdc_Void xdc_runtime_Startup_exec__I(void) __attribute__ ((used));
 
@@ -82,7 +74,7 @@ xdc_Void xdc_runtime_Startup_exec__I(void)
 }
 %%{
 /*
- * @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ * @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 
 %%}

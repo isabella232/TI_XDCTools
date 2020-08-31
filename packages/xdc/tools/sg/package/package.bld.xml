@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.tools.sg" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-I08/src/">
+<package name="xdc.tools.sg" version="1, 0, 0" producerId="/db/ztree/library/trees/xdcutils/xdcutils-i02/src/">
     <units>
     </units>
     <sources>
@@ -25,7 +25,7 @@
     </tests>
     <releases relDir="package/rel/">
     <release name="xdc_tools_sg"
-        pname="xdc_tools_sg.zip"
+        pname="../../..//../exports/xdc_tools_sg.zip"
         label="default"
         relScript="xdc/release/filters/what.rel">
         <file name="package/package.bld.xml"/>

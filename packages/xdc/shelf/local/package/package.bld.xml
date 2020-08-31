@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.shelf.local" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+<package name="xdc.shelf.local" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
     <units>
     </units>
     <sources>

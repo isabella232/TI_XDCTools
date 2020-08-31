@@ -1,5 +1,5 @@
 /* 
- *Copyright (c) 2008 Texas Instruments and others.
+ * Copyright (c) 2008 Texas Instruments and others.
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -27,6 +27,6 @@ package xdc.tools.closure [1, 0, 0] {
 }
 
 /*
- *  @(#) xdc.tools.closure; 1, 0, 0,3; 2-18-2019 11:03:12; /db/ztree/library/trees/xdctools/xdctools-h03/src/
+ *  @(#) xdc.tools.closure; 1, 0, 0,0; 4-14-2020 17:00:57; /db/ztree/library/trees/xdctools/xdctools-h04/src/
  */
 

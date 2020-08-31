@@ -12,7 +12,7 @@ requires internal xdc.tools.configuro;
 requires internal xdc.tools.mkpkg;
 requires internal xdc.tools.sg;
 requires internal xdc.tools.sg.swt_linux;
-requires internal xdc.tools.sg.swt_win32;
+requires internal xdc.tools.sg.swt_win64;
 requires internal xdc.tools.sg.swt_macos;
 requires internal xdc.cfg;
 requires internal xdc.bld;

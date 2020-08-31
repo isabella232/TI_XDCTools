@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2016 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2016-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -59,7 +59,7 @@ metaonly module Reset
      *  function `myReset()` to this array.
      *  @p(code)
      *      var Reset = xdc.useModule("xdc.runtime.Reset");
-     *      Reset.fxns[Reset.fxns.length++] = "&myReset";
+     *      Reset.fxns.$add("&myReset");
      *  @p
      *
      *  @a(Warning)
@@ -74,6 +74,6 @@ metaonly module Reset
     metaonly config xdc.runtime.Startup.InitFxn fxns[] = [];
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

@@ -1,5 +1,5 @@
 /* --COPYRIGHT--,EPL
- *  Copyright (c) 2016-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2016-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -259,6 +259,7 @@ function loadRecap(execPath, progress)
             }
         }
         recap.$modules = modules;
+        recap.noRuntime = noRuntime;
     }
     progress("Loaded the executable's configuration data: " + recapFile);
     return (recap);

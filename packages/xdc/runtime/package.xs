@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -290,15 +290,23 @@ function finalize()
             continue;
         }
 
-        /* XDCTOOLS-301:
-         * validate gateObj/gatePrms come from same module if former is non-null
-         */
         mod.Module__gateObj = (mod.common$.gate !== undefined) ?
             mod.common$.gate : Defaults.common$.gate;
         mod.Module__gatePrms = (mod.common$.gateParams !== undefined) ?
             mod.common$.gateParams : Defaults.common$.gateParams;
         mod.Module_GateProxy = mod.Module__gateObj ?
             mod.Module__gateObj.$module : xdc.useModule('xdc.runtime.GateNull');
+        if (mod.common$.gate != null && mod.common$.gateParams != null) {
+            var modName = mod.common$.gate.$module.$name;
+            var prmName = mod.common$.gateParams.$name.substr(0,
+                mod.common$.gateParams.$name.lastIndexOf(".Params#"));
+            if (modName != prmName) {
+                mod.$logError("Module '" + mod.$name + "' uses '" + modName
+                    + "' for mod.common$.gate, and '" + prmName + "' for "
+                    + "mod.common$gateParams. They both have to originate "
+                    + "from the same module.", mod, "common$.gate");
+            }
+        }
     }
 
     /* for all used target module in the configuration ... */
@@ -358,6 +366,6 @@ function validate()
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

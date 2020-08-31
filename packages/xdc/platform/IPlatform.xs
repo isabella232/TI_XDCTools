@@ -71,6 +71,6 @@ function getExecCmd (prog, platPath) {
    return ("$(ECHO) don't know how to execute '" + prog.name + "'\nexit 1");
 }
 /*
- *  @(#) xdc.platform; 1, 0, 1,0; 2-9-2020 18:48:55; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.platform; 1, 0, 1,0; 4-17-2020 14:55:18; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

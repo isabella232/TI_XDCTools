@@ -6,6 +6,8 @@ var consoleLines = [""];
 var firstLine = 0;
 var maxLines = 1000;
 
+var ScalarStructs = xdc.useModule('xdc.rov.support.ScalarStructs');
+
 /*
  *  ======== print ========
  */
@@ -409,6 +411,9 @@ function viewInitVariable(view, obj, args)
         val = Number(buffer[0].elem);
         view.uint32_t = String(val);
         view.int32_t = String((val & 0x80000000) ? (val - 4294967296) : val);
+
+        buffer = Program.fetchArray(ScalarStructs.S_Float$fetchDesc, addr, 1, check);
+        view.float32 = String(buffer[0].elem);
     }
     catch (x) {
         Program.displayError(view, "address", String(x));

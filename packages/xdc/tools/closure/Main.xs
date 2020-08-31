@@ -586,7 +586,12 @@ function _replaceLink(of, nf, reps, exePath, srcDir, tname)
     var inputFlag = false;
     var line;
     while ((line = oldFile.readLine()) != null) {
-        var newLine = line;
+        var newLine = String(line);
+        /* ignore blank lines */
+        if (String(line).match(/^\s*$/)) {
+            newFile.writeLine(newLine);
+            continue;
+        }
 
         /* srcDir always goes first because it should never match the name of
          * any other repository. But, the case where another repository is a
@@ -730,6 +735,6 @@ function _copy(of, nf)
     outs.close();
 }
 /*
- *  @(#) xdc.tools.closure; 1, 0, 0,3; 2-18-2019 11:03:12; /db/ztree/library/trees/xdctools/xdctools-h03/src/
+ *  @(#) xdc.tools.closure; 1, 0, 0,0; 4-14-2020 17:00:57; /db/ztree/library/trees/xdctools/xdctools-h04/src/
  */
 

@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="xdctools" label="default" date="1550516669795" buildCount="4" producerId="/db/ztree/library/trees/xdctools/xdctools-h03/src/bundles/xdctools/">
+<release name="xdctools" label="default" date="1586822534872" buildCount="1" producerId="/db/ztree/library/trees/xdctools/xdctools-h04/src/bundles/xdctools/">
 <package name="xdctools"
     version="1, 0, 0"/>
 <imports>
@@ -81,22 +81,22 @@
     </xdcRoot>
 </references>
 <orphans>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_check.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_echo.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_echo_sg.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_configuro_sg.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_path.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_path_sg.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_product.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_product_plugingen.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_product_trexgen.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_repoman.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_repoman_sg.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_platformWizard.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_platformWizard_memoryMap.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_loader.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_sg_eclipse.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_sg_widgets.zip"/>
-    <file name="/db/ztree/library/trees/xdctools/xdctools-h03/exports/xdc_tools_gbl.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_check.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_echo.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_echo_sg.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_configuro_sg.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_path.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_path_sg.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_product.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_product_plugingen.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_product_trexgen.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_repoman.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_repoman_sg.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_platformWizard.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_platformWizard_memoryMap.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_loader.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_sg_eclipse.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_sg_widgets.zip"/>
+    <file name="/db/ztree/library/trees/xdctools/xdctools-h04/exports/xdc_tools_gbl.zip"/>
 </orphans>
 </release>

@@ -458,12 +458,13 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
                 parse.len = (UInt)diff;
             }
             else if (c == 'u' || c == 'x' || c == 'o') {
-                UIntMax val =
+                UIntMax val;
+
+                base = (c == 'u') ? 10 : ((c == 'x') ? 16 : 8);
+                val =
                     (parse.aFlag == TRUE) ? (UIntMax)va_arg(*pva, IArg) :
                     (parse.lFlag == TRUE) ? (UIntMax)va_arg(*pva, unsigned long)
                         : (UIntMax)va_arg(*pva, unsigned);
-
-                base = (c == 'u') ? 10 : ((c == 'x') ? 16 : 8);
                 if (parse.precis > parse.zpad) {
                     parse.zpad = parse.precis;
                 }
@@ -669,6 +670,6 @@ Void System_putchar(Char **bufp, Char c, SizeT *n)
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -29,7 +29,7 @@ function module$static$init(obj, params)
 
     for each (var mod in Program.targetModules()) {
         if (mod.MODULE_STARTUP$) {
-            this.sfxnTab.$add('&' + mod.$name.replace(/\./g, '_') + 
+            this.sfxnTab.$add('&' + mod.$name.replace(/\./g, '_') +
                 '_Module_startup__E');
             var rtsFxn = false;
             if (mod.$package.$name == 'xdc.runtime') {
@@ -60,36 +60,53 @@ function module$static$init(obj, params)
 }
 
 /*
+ *  ======== validate ========
+ */
+function validate()
+{
+    /* Only process during "cfg" phase */
+    if (xdc.om.$name != "cfg" || !this.$used) {
+        return;
+    }
+
+    if (this.maxPasses < 0) {
+        this.$logError(
+            "The configuration parameter 'maxPasses' cannot be negative.",
+            this, "maxPasses");
+    }
+}
+
+/*
  *  ======== viewInitModule ========
  *  ROV module-level view.
  */
 function viewInitModule(view, mod)
 {
     var Program = xdc.useModule('xdc.rov.Program');
-    
+
     /* Indicate whether the runtime modules have completed startup. */
     view.rtsStartupDone = mod.rtsDoneFlag;
-    
-    /* 
+
+    /*
      * Indicate whether processing of the module startup functions has
      * begun.
      */
     view.startupBegun = mod.execFlag;
-    
-    /* 
+
+    /*
      * Retrieve the Startup module's configuration to get at the rest and
      * first and last functions.
      */
     var modCfg = Program.getModuleConfig('xdc.runtime.Startup');
-    
+
     /* Display the reset function. */
     view.resetFxn = modCfg.resetFxn;
-    
+
     /* Display the functions which run before module startup. */
     view.firstFxns = modCfg.firstFxns;
-    
+
     /* Display the functions which run after module startup. */
-    view.lastFxns = modCfg.lastFxns;    
+    view.lastFxns = modCfg.lastFxns;
 }
 
 /*
@@ -255,6 +272,6 @@ function getStartupStateView(order, modName, state)
 }
 
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

@@ -247,6 +247,7 @@ public class xdc_rov_runtime
                 po.addFld("uint8_t", $$T_Str, $$UNDEF, "w");
                 po.addFld("uint16_t", $$T_Str, $$UNDEF, "w");
                 po.addFld("uint32_t", $$T_Str, $$UNDEF, "w");
+                po.addFld("float32", $$T_Str, $$UNDEF, "w");
         // struct Monitor.Bits16View
         po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$Bits16View", "xdc.rov.runtime");
         po.init("xdc.rov.runtime.Monitor.Bits16View", null);

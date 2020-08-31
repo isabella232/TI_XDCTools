@@ -216,6 +216,7 @@ module Monitor
         String uint8_t;   /* variable as a uint8_t */
         String uint16_t;  /* variable as a uint16_t */
         String uint32_t;  /* variable as a uint32_t */
+        String float32;   /* variable as 32-bit binary IEEE 754 */
     }
 
     /*!
@@ -265,28 +266,31 @@ module Monitor
         UChar byte7;
     };
 
-    /*
+    /*!
      *  ======== ConsoleEntryView ========
      *  Each line in the console output is an entry
+     *  @_nodoc
      */
     metaonly struct ConsoleEntryView {
         Bits32 lineId;
         String entry;
     }
 
-    /*
+    /*!
      *  ======== print ========
      *  Append string to the end of the console buffer
      *
-     *  Lines are separated by new lines: '\n'
+     *  Output is displayed via this module's ROV "Console" view.
+     *
+     *  Separate lines are identified by a trailing '\n' character.
      */
     metaonly void print(String str, ...);
 
-    /*
+    /*!
      *  ======== println ========
      *  Append string plus a trailing new line to the console buffer
      *
-     *  Lines are separated by new lines: '\n'
+     *  Output is displayed via this module's ROV "Console" view.
      */
     metaonly void println(String str, ...);
 

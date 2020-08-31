@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -85,13 +85,13 @@ package xdc.runtime;
  *  @p(code)
  *      Bool Mod_Module_startupDone();
  *  @p
- *  where "Mod" is the name of some module or proxy.  These predicates can
- *  be used as guards inside of a startup function to probe whether a
- *  particular module has completed its own startup processing.  As a
- *  convenience, the function `Startup_rtsDone()` probes the necessary set of
- *  `xdc.runtime` modules required to support instance `create()` functions, and
- *  should be called before any startup-time instance creation and/or
- *  memory allocation is performed.
+ *  where "Mod" is the name of some module or proxy. These predicates can be
+ *  used as guards inside of a startup function to probe whether a particular
+ *  module has completed its own startup processing. As a convenience, the
+ *  function `Startup_rtsDone()` probes the necessary set of `xdc.runtime`
+ *  modules required to support instance `create()` functions, and should be
+ *  called before any startup-time instance creation and/or memory allocation
+ *  is performed.
  *  @p(code)
  *      Int Mod_Module_startup(Int state)
  *      {
@@ -110,8 +110,8 @@ package xdc.runtime;
  *  @p(code)
  *      var Startup = xdc.useModule('xdc.runtime.Startup');
  *      Startup.resetFxn = "&myResetFxn";
- *      Startup.firstFxns[Startup.firstFxns.length++] = "&myFirst";
- *      Startup.lastFxns[Startup.lastFxns.length++] = "&myLast";
+ *      Startup.firstFxns.$add("&myFirst");
+ *      Startup.lastFxns.$add("&myLast");
  *  @p
  *
  */
@@ -214,7 +214,7 @@ module Startup {
 
     /*!
      *  ======== resetFxn ========
-     *  Function to be called by during initialization
+     *  Function to be called during initialization
      *
      *  This function is called only on platforms where reset is performed
      *  before running the program. The purpose of this function is to set up
@@ -222,7 +222,11 @@ module Startup {
      *  any other code executes.
      *
      *  This function is called as early as possible in the
-     *  {@link #xdoc-sect-2 program initialization} process.
+     *  {@link #xdoc-sect-2 program initialization} process. For some targets,
+     *  it is called before the C environment is fully initialized and static
+     *  and global variables may not be fully initialized. To maximize
+     *  portability, reset functions should only assume that a C stack is
+     *  initialized.
      *
      *  @see
      *      #xdoc-sect-2 Startup Sequence
@@ -268,10 +272,10 @@ internal:
      *  ======== reset ========
      *  Application-specific reset function
      *
-     *  This function is defined in `Startup.xdt`
+     *  This function is defined in `Reset.xdt`
      *  (`xdc_runtime_Startup_reset__I`) and is called as early as possible in
      *  the {@link #xdoc-sect-2 program initialization} process; for many
-     *  platforms, it is called prior the the initialization of the C
+     *  platforms, it is called prior to the initialization of the C
      *  runtime environment.
      *
      *  @see
@@ -332,6 +336,6 @@ internal:
 
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

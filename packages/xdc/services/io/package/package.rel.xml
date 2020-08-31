@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="xdc_services_io" label="default" date="1581216581888" buildCount="1" producerId="/db/ztree/library/trees/xdc/xdc-I08/src/">
+<release name="xdc_services_io" label="default" date="1587160567940" buildCount="1" producerId="/db/ztree/library/trees/xdc/xdc-I11/src/">
 <package name="xdc.services.io"
     version="1, 0, 0"/>
 <imports>
 </imports>
 <references>
     <package name="xdc"
-        version="1, 1, 1, 1581215799000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 1, 1, 1587159910000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="IPackage.xdc"/>
         <file name="IPackage.xs"/>
@@ -23,16 +23,16 @@
         <file name="xmlgen2.xs"/>
     </package>
     <package name="xdc.services.global"
-        version="1, 0, 0, 1581215842000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587159954000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="Clock.xs"/>
         <file name="Trace.xs"/>
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.bld"
-        version="1, 0, 2, 1581215804000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 2, 1587159916000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="BuildEnvironment.xs"/>
         <file name="Configuration.xs"/>
@@ -52,8 +52,8 @@
         <file name="package.xs"/>
     </package>
     <package name="gnu.targets"
-        version="1, 0, 1, 1581215207000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/targets">
+        version="1, 0, 1, 1587159414000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/targets">
         <file name="ITarget.xs"/>
         <file name="Linux86.xs"/>
         <file name="Mingw.xs"/>
@@ -62,10 +62,11 @@
         <file name="select.h"/>
     </package>
     <package name="gnu.targets.arm"
-        version="1, 0, 0, 1578696005370"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/imports">
+        version="1, 0, 0, 1586375421691"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/imports">
         <file name="A15F.xs"/>
         <file name="A53F.xs"/>
+        <file name="A72F.xs"/>
         <file name="A8F.xs"/>
         <file name="A9F.xs"/>
         <file name="GCArmv6.xs"/>
@@ -77,8 +78,8 @@
         <file name="package.xs"/>
     </package>
     <package name="microsoft.targets"
-        version="1, 0, 2, 0, 1581215209000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/targets">
+        version="1, 0, 2, 0, 1587159416000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/targets">
         <file name=".interfaces"/>
         <file name="ITarget.xs"/>
         <file name="Win32.xs"/>
@@ -88,50 +89,50 @@
         <file name="package.xs"/>
         <file name="std.h"/>
     </package>
-    <package name="xdc.services.spec"
-        version="1, 0, 0, 1581215874000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
-        <file name=".interfaces"/>
-        <file name="java/package.jar"/>
-    </package>
     <package name="xdc.shelf"
-        version="1, 0, 0, 1581215885000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587160006000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="java/antlr.jar"/>
         <file name="java/ecj.jar"/>
         <file name="java/js.jar"/>
         <file name="java/tar.jar"/>
     </package>
+    <package name="xdc.services.spec"
+        version="1, 0, 0, 1587159995000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
+        <file name=".interfaces"/>
+        <file name="java/package.jar"/>
+    </package>
     <package name="xdc.services.intern.xsr"
-        version="1, 0, 0, 1581215865000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587159986000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.services.intern.gen"
-        version="1, 0, 0, 1581215864000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587159985000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="java/package.jar"/>
     </package>
     <package name="xdc.services.intern.cmd"
-        version="1, 0, 0, 1581215863000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587159983000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="java/package.jar"/>
     </package>
     <package name="host.platforms.PC"
-        version="1, 0, 0, 1581215789000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 0, 1587159900000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="Intel80586.xs"/>
         <file name="Platform.xs"/>
         <file name="package.xs"/>
     </package>
     <package name="xdc.cfg"
-        version="1, 0, 2, 1581215814000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 2, 1587159925000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="Main.xs"/>
         <file name="Program.xdt"/>
@@ -139,8 +140,8 @@
         <file name="SourceDir.xs"/>
     </package>
     <package name="xdc.platform"
-        version="1, 0, 1, 1581215817000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 1, 1587159929000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="ExeContext.xs"/>
         <file name="IPeripheral.xs"/>
@@ -149,8 +150,8 @@
         <file name="package.xs"/>
     </package>
     <package name="xdc.rov"
-        version="1, 0, 1, 1581215823000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="1, 0, 1, 1587159935000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="CallStack.xs"/>
         <file name="Model.xs"/>
@@ -160,8 +161,8 @@
         <file name="ViewXml.xs"/>
     </package>
     <package name="xdc.runtime"
-        version="2, 1, 0, 1581215829000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="2, 1, 0, 1587159940000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
         <file name="Assert.xs"/>
         <file name="Defaults.xs"/>
@@ -188,20 +189,20 @@
         <file name="package.xs"/>
     </package>
     <package name="microsoft.targets.rts"
-        version="1, 0, 0, 1581215215000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/targets">
+        version="1, 0, 0, 1587159423000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/targets">
         <file name=".interfaces"/>
         <file name="lib/microsoft.targets.rts.a64W"/>
     </package>
     <package name="xdc.corevers"
-        version="16, 0, 2, 1581215815000"
-        providerId="/db/ztree/library/trees/xdc/xdc-I08/src/packages">
+        version="16, 0, 2, 1587159927000"
+        providerId="/db/ztree/library/trees/xdc/xdc-I11/src/packages">
         <file name=".interfaces"/>
     </package>
-    <xdcRoot base="/db/ztree/library/trees/xdc/xdc-I08/src/">
+    <xdcRoot base="/db/ztree/library/trees/xdc/xdc-I11/src/">
         <file name="/packages/xdc/package.xdc"/>
         <file name="config.bld"/>
-        <xdcCorePkg version="16, 0, 2, 1581215815000"/>
+        <xdcCorePkg version="16, 0, 2, 1587159927000"/>
     </xdcRoot>
 </references>
 <orphans>

@@ -69,6 +69,6 @@ function run(cmdr, args)
     java.lang.System.out.print(execStat.output);
 }
 /*
- *  @(#) xdc.tools.loader; 1, 0, 0,3; 2-18-2019 11:03:35; /db/ztree/library/trees/xdctools/xdctools-h03/src/
+ *  @(#) xdc.tools.loader; 1, 0, 0,0; 4-14-2020 17:01:20; /db/ztree/library/trees/xdctools/xdctools-h04/src/
  */
 

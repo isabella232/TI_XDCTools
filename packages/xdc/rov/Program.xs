@@ -1068,8 +1068,8 @@ function readMemory(addr, len, encoding)
         throw new Error("unsupported encoding for the location 0x" +
             Number(addr).toString(16));
     }
-    if (encoding == 3 || encoding == 4) {
-        throw new Error("real numbers are not supported - location 0x" +
+    if (encoding == 3) {
+        throw new Error("complex numbers are not supported - location 0x" +
             Number(addr).toString(16));
     }
 
@@ -1089,6 +1089,14 @@ function readMemory(addr, len, encoding)
         type.isAddr = true;
     }
     type.isEnum = false;
+    if (encoding == 4) {
+        if (type.size == 8) {
+            type.fldType = "TDouble";
+        }
+        else if (type.size == 4) {
+            type.fldType = "TFloat";
+        }
+    }
     return (Program.strDec._decodeScalar(type, buf));
 }
 
@@ -1443,6 +1451,10 @@ var traceEnable;
 function debugPrint(msg)
 {
     if (traceEnable === undefined) {
+        /* XDC_ROV_TRACE has to be set outside of CCS for ROV to get its
+         * value. Anything else will work for classic ROV but not for the
+         * current version.
+         */
         traceEnable = xdc.jre.java.lang.System.getProperty("xdc.rov.traceEnable");
         if (traceEnable == null) {
             traceEnable = xdc.jre.java.lang.System.getenv("XDC_ROV_TRACE");
@@ -1618,6 +1630,6 @@ function _getTabName(args)
     return (k < 0 ? args : args.substr(0, k));
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 2-9-2020 18:49:04; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

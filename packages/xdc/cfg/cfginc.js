@@ -60,6 +60,6 @@ xdc.loadPackage(arguments[0]);
 /* generate the include file and the make dependencies */
 utils.genDep("package/package.cfg", arguments[0], utils.loadedFiles);
 /*
- *  @(#) xdc.cfg; 1, 0, 2,0; 2-9-2020 18:48:50; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.cfg; 1, 0, 2,0; 4-17-2020 14:55:14; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

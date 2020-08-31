@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -56,10 +56,10 @@ module System {
      *
      *  When the program exits by calling {@link #exit System_exit()} the
      *  `System`'s `atexit` functions are passed the status value passed to
-     *  `System_exit()`.  However, if the program exits using 
-     *  the ANSI C Standard Library `exit()` function, the `System`'s `atexit`
-     *  functions are passed `System_STATUS_UNKNOWN`; ANSI C `atexit`
-     *  functions are not passed the exit status.
+     *  `System_exit()`.  However, if the program exits using the ANSI C
+     *  Standard Library `exit()` function, the `System`'s `atexit` functions
+     *  are passed `System_STATUS_UNKNOWN`; ANSI C `atexit` functions are not
+     *  passed the exit status.
      */
     const Int STATUS_UNKNOWN = 0xCAFE;
 
@@ -67,7 +67,7 @@ module System {
      *  ======== AbortFxn ========
      *  System abort function prototype.
      *
-     *  Functions of this type can be plugged into `System`'s abort function 
+     *  Functions of this type can be plugged into `System`'s abort function
      *  that will be executed during abnormal application termination.
      *
      *  @see #abort
@@ -102,7 +102,7 @@ module System {
      *  @_nodoc
      */
     @Facet
-    metaonly config xdc.rov.ViewInfo.Instance rovViewInfo = 
+    metaonly config xdc.rov.ViewInfo.Instance rovViewInfo =
         xdc.rov.ViewInfo.create({
             viewMap: [
                 ['XDCROOT',
@@ -141,16 +141,15 @@ module System {
      *  This string specifies the set of optional argument conversion
      *  specifiers required by the application.  By reducing the number of
      *  optional conversions understood by the `System {@link #printf}`
-     *  methods, it is possible to significantly reduce the code size
-     *  footprint of the `System` module.  This configuration parameter
-     *  enables one to balance `printf` functionality against code size
-     *  footprint.
+     *  methods, it is possible to significantly reduce the code size footprint
+     *  of the `System` module.  This configuration parameter enables one to
+     *  balance `printf` functionality against code size footprint.
      *
      *  The format of this string is simply a concatenated list of the desired
      *  conversion specifiers (with the leading `%` character).  For example,
      *  to support both `%f` and `%$L` set `extendedFormats` to `"%$L%f"`.
      *
-     *  To disable all optional converstions, set `extendedFormats` to `null`
+     *  To disable all optional conversions, set `extendedFormats` to `null`
      *  or the empty string ("").
      *
      *  For a complete list of supported extensions, see the
@@ -173,8 +172,7 @@ module System {
      *  The implementation module of the low-level system functions.
      *
      *  This configuration parameter allows one to "bind" a different
-     *  implementation of the low-level services required to implement
-     *  `System`.
+     *  implementation of the low-level services required to implement `System`.
      *  @p(code)
      *      var System = xdc.useModule("xdc.runtime.System");
      *      var SysStd = xdc.useModule("xdc.runtime.SysStd");
@@ -228,9 +226,8 @@ module System {
      *  Print a message and abort currently running executable.
      *
      *  This is called when an executable abnormally terminates.
-     *  The `System` gate is entered, the
-     *  `{@link #SupportProxy}`'s `abort` function is called
-     *  and then `{@link #abortFxn}` is called.
+     *  The `System` gate is entered, the `{@link #SupportProxy}`'s `abort`
+     *  function is called and then `{@link #abortFxn}` is called.
      *  No exit functions bound via `System_atexit()` or the ANSI C Standard
      *  Library `atexit()` functions are executed.
      *
@@ -255,7 +252,7 @@ module System {
      *  ======== abortSpin ========
      *  Lightweight implementation of abortFxn function
      *
-     *  This functions loops indefinitely. This can used as an alternative
+     *  This function loops indefinitely. It can be used as an alternative
      *  `{@link #abortFxn}` when a lightweight implementation is
      *  required instead of the ANSI C Standard `abort()`.
      */
@@ -267,10 +264,10 @@ module System {
      *  Add an exit handler
      *
      *  `System_atexit` pushes `handler` onto an internal stack of functions
-     *  to be executed when system is exiting (e.g. `System_exit` is called).
-     *  Up to `{@link #maxAtexitHandlers}` functions can be specified in this
-     *  manner.  During the exit processing, the functions are popped off the
-     *  internal stack and called until the stack is empty.
+     *  to be executed when the system is exiting (e.g. `System_exit` is
+     *  called). Up to `{@link #maxAtexitHandlers}` functions can be specified
+     *  in this manner.  During the exit processing, the functions are popped
+     *  off the internal stack and called until the stack is empty.
      *
      *  The `System` gate is entered before the `System_atexit` functions
      *  are called.
@@ -306,10 +303,10 @@ module System {
      *  ======== exit ========
      *  Exit currently running executable.
      *
-     *  This function is called when an executable needs to terminate
-     *  normally.  This function processes all functions bound via
-     *  `System_atexit` and then calls `{@link #exitFxn}`. The
-     *  `{@link #SupportProxy}`'s `exit` function is called during this time.
+     *  This function is called when an executable needs to terminate normally.
+     *  This function processes all functions bound via `System_atexit` and then
+     *  calls `{@link #exitFxn}`. The `{@link #SupportProxy}`'s `exit` function
+     *  is called during this time.
      *
      *  @param(stat)    exit status to return to calling environment.
      */
@@ -333,9 +330,9 @@ module System {
      *  ======== exitSpin ========
      *  Implements an `exitFxn` function
      *
-     *  This functions loops indefinitely. This can used as an alternative
-     *  `{@link #exitFxn}` when a light weight implementation is
-     *  required instead of the ANSI C Standard `exit()`.
+     *  This function loops indefinitely. It can be used as an alternative
+     *  `{@link #exitFxn}` when a light weight implementation is required
+     *  instead of the ANSI C Standard `exit()`.
      *
      *  @param(stat)    exit status to return to calling environment.
      */
@@ -361,8 +358,7 @@ module System {
      *  ======== putch ========
      *  Output a single character
      *
-     *  The `{@link #SupportProxy}`'s `putch` function is called
-     *  by this function.
+     *  This function calls `{@link #SupportProxy}`'s `putch` function.
      *
      *  @param(ch) character to be output.
      */
@@ -376,8 +372,7 @@ module System {
      *  This function causes any buffered output characters are "written"
      *  to the output device.
      *
-     *  The `{@link #SupportProxy}`'s `flush` function is called
-     *  by this function.
+     *  This function calls `{@link #SupportProxy}`'s `flush` function.
      */
     /* REQ_TAG(SYSBIOS-909) */
     Void flush();
@@ -386,20 +381,20 @@ module System {
      *  ======== printf ========
      *  A smaller faster printf
      *
-     *  This function behaves much like the ANSI C Standard `printf`
-     *  but does not support the full range of format strings specified by
-     *  the C Standard.  In addition, several non-standard format specifiers
+     *  This function behaves much like the ANSI C Standard `printf`, but does
+     *  not support the full range of format strings specified by the C
+     *  Standard.  In addition, several non-standard format specifiers
      *  are recognized.
      *
      *  @a(Format Strings)
-     *  The format string is a character string composed of zero or
-     *  more directives: ordinary characters (not %), which are copied
-     *  unchanged to the output stream; and conversion specifications, each of
-     *  which results in fetching zero or more subsequent arguments.  Each
-     *  conversion specification is introduced by the character %, and ends
-     *  with a conversion specifier.  In between there may be (in this order)
-     *  zero or more flags, an optional minimum field width, an optional
-     *  precision and an optional length modifier.
+     *  The format string is a character string composed of zero or more
+     *  directives: ordinary characters (not %), which are copied unchanged to
+     *  the output stream; and conversion specifications, each of which results
+     *  in fetching zero or more subsequent arguments. Each conversion
+     *  specification is introduced by the character %, and ends with a
+     *  conversion specifier. In between there may be (in this order) zero or
+     *  more flags, an optional minimum field width, an optional precision and
+     *  an optional length modifier.
      *
      *  @a(Flags)
      *  The following flags are supported:
@@ -416,24 +411,22 @@ module System {
      *  @a(Field Width)
      *  The optional field width specifier is a decimal digit string (with
      *  nonzero first digit) specifying a minimum field width. If the
-     *  converted value has fewer characters than the field width, it will
-     *  be padded with spaces on the left (or right, if the left-adjustment
-     *  flag has been given).  Instead of a decimal digit string one may
-     *  write `*` to specify that the field width is given in the next
-     *  argument.  A negative field width is taken as a '-' flag followed
-     *  by a positive field width.
+     *  converted value has fewer characters than the field width, it will be
+     *  padded with spaces on the left (or right, if the left-adjustment flag
+     *  has been given). Instead of a decimal digit string one may write `*` to
+     *  specify that the field width is given in the next argument. A negative
+     *  field width is taken as a '-' flag followed by a positive field width.
      *
      *  @a(Precision)
      *  The optional precision specifier is a period ('.') followed by an
      *  optional decimal digit string.  Instead of a decimal digit string
-     *  one may write `*` to specify that the precision is given in the 
+     *  one may write `*` to specify that the precision is given in the
      *  next argument which must be of type int.
      *
-     *  If the precision is given as just '.', or the precision is
-     *  negative, the precision is taken to be zero.  This gives the
-     *  minimum number of digits to appear for d, i, o, u, and x
-     *  conversions, or the maximum number of characters to be printed from
-     *  a string for s conversions.
+     *  If the precision is given as just '.', or the precision is negative, the
+     *  precision is taken to be zero. This gives the minimum number of digits
+     *  to appear for d, i, o, u, and x conversions, or the maximum number of
+     *  characters to be printed from a string for s conversions.
      *
      *  @a(Length Modifiers)
      *  The optional length modifier is a single character from the following
@@ -496,7 +489,7 @@ module System {
      *      - '$S'
      *          The argument is treated as a format string, and is recursively
      *          formatted using any following arguments. This specifier does
-     *          not support the use of the "precision" field for specifying
+     *          not support the use of the `precision` field for specifying
      *          maximum string length.
      *  @p
      *
@@ -509,7 +502,7 @@ module System {
      *  @p
      *  This call outputs, for example,
      *  @p(code)
-     *  "MyCode.c", line 35: 
+     *  "MyCode.c", line 35:
      *  @p
      *  Here is an example using %$S, passing a recursive format string.
      *  @p(code)
@@ -523,7 +516,13 @@ module System {
      *  @param(fmt) a 'printf-style' format string
      *
      *  @a(returns)
-     *  `printf` returns the number of characters printed.
+     *  This function returns the number of characters that would be printed if
+     *  the underlying `{@link #SupportProxy}` implementation succesfully
+     *  printed each character. If the underlying `SupportProxy` implementation
+     *  is not ready to accept a character, that character is silently dropped,
+     *  but the returned value is still incremented. If `SupportProxy` is not
+     *  ready for the first character, `printf` exits immediately and returns
+     *  -1.
      */
     /* REQ_TAG(SYSBIOS-902) */
     Int printf(CString fmt, ...);
@@ -782,6 +781,6 @@ internal:
     };
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 2-9-2020 18:49:12; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

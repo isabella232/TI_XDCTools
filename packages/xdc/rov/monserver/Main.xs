@@ -227,7 +227,7 @@ function run(cmdr, args)
  *              list = load(<root>/addons.json);
  *              for (all objs in list) {
  *                  if (obj.id and obj.path are globally unique) {
- *                      var addon = {path: obj.path, name: obj.name, root:root}
+ *                      var addon = {path: obj.path, name: obj.name, id: obj.id, root:root}
  *                      result.push(addon);
  *                  }
  *              }
@@ -265,7 +265,7 @@ function discoverAddons()
                 if (ids[addon.id] == null && paths[addon.path] == null) {
                     ids[addon.id] = 1;
                     paths[addon.path] = 1;
-                    result.push({path: addon.path, name: addon.name, root: root});
+                    result.push({path: addon.path, name: addon.name, id: addon.id, root: root});
                     //result.push(addon.path);
                 }
             }

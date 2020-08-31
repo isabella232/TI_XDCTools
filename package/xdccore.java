@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-I08
+ * @(#) xdc-I11
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdccore
 {
-    static final String VERS = "@(#) xdc-I08\n";
+    static final String VERS = "@(#) xdc-I11\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -94,7 +94,7 @@ public class xdccore
         imports.add(Global.newArray("*xdc.tools.mkpkg", Global.newArray()));
         imports.add(Global.newArray("*xdc.tools.sg", Global.newArray()));
         imports.add(Global.newArray("*xdc.tools.sg.swt_linux", Global.newArray()));
-        imports.add(Global.newArray("*xdc.tools.sg.swt_win32", Global.newArray()));
+        imports.add(Global.newArray("*xdc.tools.sg.swt_win64", Global.newArray()));
         imports.add(Global.newArray("*xdc.tools.sg.swt_macos", Global.newArray()));
         imports.add(Global.newArray("*xdc.cfg", Global.newArray()));
         imports.add(Global.newArray("*xdc.bld", Global.newArray()));

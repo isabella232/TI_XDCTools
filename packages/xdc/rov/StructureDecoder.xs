@@ -1,22 +1,23 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
  *  http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  *  Contributors:
  *      Texas Instruments - initial implementation
- * 
+ *
  * 
  */
- /*
+
+/*
  *  ======== StructureDecoder.xs ========
  *  The StructureDecoder is organized into 'fetch' and 'decode' APIs. The
  *  'fetch' APIs are intended as the real interface to the StructureDecoder,
  *  and they in turn call down to the appropriate decode API.
  *
- *  Of the 'decode' APIs, there are two categories, those that take a type 
+ *  Of the 'decode' APIs, there are two categories, those that take a type
  *  object (an object from the XDC object model):
  *    decodeStruct
  *    decodeStructArray
@@ -26,13 +27,13 @@
  *    _decodeArray
  *
  *  The StructureDecoder only decodes structures and arrays of structures. To
- *  handle scalars, the xdc.rov.support.ScalarStructs module defines structure 
+ *  handle scalars, the xdc.rov.support.ScalarStructs module defines structure
  *  types for each of the scalar types.
  *
  *  The 'fetch' APIs call down to either decodeStruct or decodeStructArray.
  *  These APIs decode the structures by retrieving the list of fields from the
  *  type object. Each field has a specially formatted type string. These
- *  strings are then passed down to the other decode APIs to do the actual 
+ *  strings are then passed down to the other decode APIs to do the actual
  *  decoding.
  *
  *  The decode APIs are made slightly more complicated by some optimizations
@@ -41,7 +42,7 @@
  *  stored in a StructureDecoder.FieldType object, then this object is used
  *  to decode all of the array elements.
  */
- 
+
 /*
  *  ======== instance$meta$init ========
  *  Initialize the StructureDecoder instance.
@@ -431,13 +432,13 @@ function _decodeArray(fieldType, buffer, length)
         return (this.decodeStructArray(type.strType, buffer, length));
     }
     /* Array of scalars. */
-    else if (type.isScalarType) {               
+    else if (type.isScalarType) {
         /* Decode each of the scalar values. */
         for (var i = 0; i < length; i++) {
             arr[i] = this._decodeScalar(type, buffer);
             buffer.off += type.size;
         }
- 
+
         return (arr);
     }
 
@@ -451,7 +452,7 @@ function _decodeArray(fieldType, buffer, length)
  */
 function _decodeScalar(type, buffer)
 {
-    /* 
+    /*
      * Adjust the offset of the field within the structure based on the
      * target's required alignment of the field type. 
      */
@@ -459,18 +460,18 @@ function _decodeScalar(type, buffer)
     if (d > 0) {
         buffer.off += type.align - d;
     }
-    
+
     /* Decode the value */
-    var val = this.$private.targDec.decodeMAUs(buffer.buffer, buffer.off, 
+    var val = this.$private.targDec.decodeMAUs(buffer.buffer, buffer.off,
                                                type.size, type.signed);
-    
+
     decoderPrint("      Value " + val + " at offset: " + buffer.off + 
                  ", size: " + type.size);
-    
-    /* 
-     * Use address type for pointers and functions. Also use it for
-     * UArgs so that these are displayed in hex by default (since
-     * they are often pointers).
+
+    /*
+     * Use address type for pointers and functions.
+     * Also use it for UArgs so that these are displayed in hex by default
+     * (since they are often pointers).
      */
     if (type.isAddr) {
         val = $addr(Number(val));
@@ -478,10 +479,10 @@ function _decodeScalar(type, buffer)
 
     /* Can't catch Java exception, so check for too large Integer */
     if (type.isEnum && val > java.lang.Integer.MAX_VALUE) {
-        throw (new Error("Value " + val 
+        throw (new Error("Value " + val
             + " is too large to convert to Java Integer"));
     }
-    
+
     /* For Enums, return an Enum object. */
     if (type.isEnum) {
         /* First, parse the type string for the name of the enum. */
@@ -493,8 +494,14 @@ function _decodeScalar(type, buffer)
         else {
             enumName = type.fldType.substring(1, index);
         }
-        
+
         return ($$Enum(xdc.om[enumName], null, val));
+    }
+    if (type.fldType == "TFloat") {
+        val = java.lang.Float.intBitsToFloat(val & 0xFFFFFFFF);
+    }
+    else if (type.fldType == "TDouble") {
+        val = java.lang.Double.longBitsToDouble(val);
     }
 
     return (val);
@@ -505,7 +512,7 @@ function _decodeScalar(type, buffer)
  *      Fetch APIs
  *  ==================
  */
- 
+
 /*
  *  ======== fetchStruct ========
  *  Reads and decodes a structure from the target, given its type and address.
@@ -513,7 +520,7 @@ function _decodeScalar(type, buffer)
 function fetchStruct(structType, addr, addrCheck)
 {
     var StructureDecoder = xdc.useModule('xdc.rov.StructureDecoder');
-    
+
     /* Read the structure's raw bytes from the target. */
     var buf = this.$private.memReader.readMaus(Number(addr),
                                                structType.$sizeof(),
@@ -575,6 +582,6 @@ function decoderPrint(msg)
     //print(msg);
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 2-9-2020 18:49:05; /db/ztree/library/trees/xdc/xdc-I08/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
  */
 

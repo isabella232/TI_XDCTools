@@ -1,5 +1,5 @@
 /*
- *  Copyright 2019 by Texas Instruments Incorporated.
+ *  Copyright 2020 by Texas Instruments Incorporated.
  *
  */
 
@@ -27,6 +27,6 @@ instance:
 
 }
 /*
- *  @(#) xdc.tools.platformWizard.memoryMap; 1,0,0,3; 2-18-2019 11:03:57; /db/ztree/library/trees/xdctools/xdctools-h03/src/
+ *  @(#) xdc.tools.platformWizard.memoryMap; 1,0,0,0; 4-14-2020 17:01:43; /db/ztree/library/trees/xdctools/xdctools-h04/src/
  */
 
