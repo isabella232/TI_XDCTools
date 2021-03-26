@@ -14,6 +14,8 @@
  *  ======== CallStack ========
  */
 
+/* global xdc, print */
+
 var init = false;
 var callStackInst;      /* call stack parser support proxy */
 
@@ -100,6 +102,6 @@ function _init(mod)
     init = true;
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:48; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

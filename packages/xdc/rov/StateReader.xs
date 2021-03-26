@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2017 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -15,6 +15,8 @@
  *  These APIs are all designed so that they will not re-read data that has
  *  already been read in.
  */
+
+/* global xdc, Program, $addr */
 
 var symTable;
 var strDec;
@@ -124,26 +126,27 @@ function fetchAllInstAddrs(mod)
         var instArrAddr = symTable.getSymbolValue(instArrSym);
 
         if (instArrAddr == -1) {
-            // TODO - What should they do if they encounter this?
-            throw (new Error("There are " + mod.name + " static instances in"
-                + " the app configuration, but ROV could not find them in the"
-                + " app executable (required symbol '" + instArrSym
-                + "' is missing). The instances might have been removed by the"
-                + " linker because they weren't referenced."));
+            xdc.module("xdc.rov.runtime.Monitor").println("There are "
+                + mod.name + " static instances in the app configuration, but "
+                + "ROV could not find them in the app executable (required "
+                + "symbol '" + instArrSym + "' is missing). The instances "
+                + "might have been removed by the linker because they weren't "
+                + "referenced.");
         }
+        else {
+            /* Determine the number and size of the instance objects
+             * from the config */
+            var instSize = mod.useMod.Instance_State.$sizeof();
 
-        /* Determine number and size of the instance objects from the config */
-        var instSize = mod.useMod.Instance_State.$sizeof();
-
-        /* Add the address of each of the static instances. */
-        for (var i = 0; i < numInsts; i++) {
-            mod.staticInstAddrs.$add(instArrAddr + (i * instSize));
+            /* Add the address of each of the static instances. */
+            for (var i = 0; i < numInsts; i++) {
+                mod.staticInstAddrs.$add(instArrAddr + (i * instSize));
+            }
         }
     }
 
-    /* Create an array of the addresses of all of the dynamic instances.
-     * A JavaScript array is used initially, so we can sort instances by
-     * address.
+    /* Create an array of the addresses of all of the dynamic instances. A
+     * JavaScript array is used initially, so we can sort instances by address.
      */
     var tempArray = [];
     /* Add all of the dynamically constructed instances. */
@@ -243,8 +246,7 @@ function fetchAllInstAddrs(mod)
 
 /*
  *  ======== getKey ========
- *  Makes a key out of the instance's address for the module's
- *  instMap.
+ *  Makes a key out of the instance's address for the module's instMap.
  */
 function getKey(addr)
 {
@@ -356,8 +358,9 @@ function getLabel(mod, obj, staticIndex)
     var label = mod.name + "@" + Number(obj.$addr).toString(16);
 
     /* If this is a static instance, get the instance name from the capsule. */
+    var givenName;
     if (staticIndex != -1) {
-        var givenName =
+        givenName =
             Program.$modules[mod.name].$instances[staticIndex].instance.name;
         if (givenName != null) {
             label += (":" + givenName);
@@ -370,7 +373,7 @@ function getLabel(mod, obj, staticIndex)
         /* If the __name field is null, no name was given. */
         if (Number(obj.__name) != 0) {
             try {
-                var givenName =
+                givenName =
                     xdc.module('xdc.runtime.Text').fetchAddr(Number(obj.__name));
             }
             catch (e) {
@@ -381,7 +384,7 @@ function getLabel(mod, obj, staticIndex)
                  * Need a way to report error to user. Just display
                  * error instead of name.
                  */
-                var givenName = "Error retrieving given name at 0x" +
+                givenName = "Error retrieving given name at 0x" +
                             Number(obj.__name).toString(16) + ": " +
                             e.toString();
             }
@@ -422,6 +425,6 @@ function fetchHandleState(mod, instAddr)
     return (inst);
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:48; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

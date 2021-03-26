@@ -44,6 +44,6 @@ extern "C" int_least32_t  __xdc__init(void)
  */
 static __FAR__ volatile int_least32_t __dummy = __xdc__init();
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:57; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

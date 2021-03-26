@@ -13,7 +13,10 @@
  *  ======== Model.xs ========
  */
 
-var cmodules = {};  /* map of C modules with ROV code */
+/* global print, Packages Program, xdc */
+
+var noRuntime = false; /* keeps track if no RTSC runtime */
+var cmodules = {};     /* map of C modules with ROV code */
 
 /*
  *  ======== start ========
@@ -24,23 +27,33 @@ function start(vers, executable, recap, sym, mem, callBack)
     xdc.global.Program = xdc.useModule('xdc.rov.Program');
 
     /* Check Model compatibility. */
-    if (vers != this.vers) {
-        Program.debugPrint("Incompatible version of ROV Model. Model version " +
-                           this.vers + ", client version " + vers + ".");
-        throw (new Error("Incompatible version of ROV Model. Model version " +
-                         this.vers + ", client version " + vers + "."));
+    if (!(vers == 4 && this.vers == 5) && vers != this.vers) {
+        Program.debugPrint("Incompatible version of ROV Model. Model version "
+                           + this.vers + ", client version " + vers + ".");
+        throw (new Error("Incompatible version of ROV Model. Model version "
+                         + this.vers + ", client version " + vers + "."));
     }
 
     /* Store off the objects passed in */
     this.$private.sym = sym;
     this.$private.mem = mem;
     this.$private.callBack = callBack;
-    this.$private.recap = recap;
+    if (recap != null) {
+        this.$private.recap = recap;
+    }
+    this.$private.files = [executable];
+    if (this.$private.recap) {
+        var path = this.$private.recap.$path;
+        if (path.indexOf("xdc/rov/noruntime.rov.xs") == -1) {
+            this.$private.files.push(path);
+        }
+    }
 
     xdc.useModule('xdc.rov.support.ScalarStructs');
 
     /* Read the ROV config file and/or sysconfig ROV file */
-    readConfig(executable);
+    var files = readConfig(executable);
+    this.$private.files = this.$private.files.concat(files);
 
     /* Store off the list of all modules in the recap file */
     var mnames = [];
@@ -217,7 +230,10 @@ function initStringReader()
 
 /*
  *  ======== initOFReader ========
- *  Creates and initializes the object file reader.
+ *  A private function that creates and initializes the object file reader.
+ *
+ *  Model.private.$recap must be already defined. It is not enforced in the
+ *  code because this can only be invoked from within this module.
  *
  *  The StringReader should be initialized first; if anything goes wrong
  *  creating the object file reader, we fall back on the string reader.
@@ -226,17 +242,29 @@ function initOFReader(executable)
 {
     var Model = xdc.useModule('xdc.rov.Model');
 
-    /* Retrieve the class name of the binary parser to use */
-    var binaryParser = Model.$private.recap.build.target.binaryParser;
+    if (Model.$private.ofReader != null) {
+        return (Model.$private.ofReader);
+    }
 
+    /* Retrieve the class name of the binary parser to use */
+    var binaryParser = "xdc.targets.omf.Elf";
+
+    if (noRuntime == false) {
+        binaryParser = Model.$private.recap.build.target.binaryParser;
+    }
     var ofReader;
 
     /* Make sure the target defines a binary parser. */
     if (binaryParser != undefined) {
         try {
-            if (binaryParser == "ti.targets.omf.elf.Elf") {
+            if (binaryParser == "ti.targets.omf.elf.Elf"
+                || binaryParser == "ti.targets.omf.elf.Elf32") {
+                /* This if-block will be removed when we don't need to support
+                 * products that still reference ti.targets.omf.elf.
+                 */
                 binaryParser = "xdc.targets.omf.Elf";
             }
+
             /* Parse the package name from the class name so we can load it. */
             var parserPackage =
                 binaryParser.substring(0, binaryParser.lastIndexOf('.'));
@@ -244,7 +272,7 @@ function initOFReader(executable)
             /* Load the parser's package */
             xdc.loadPackage(parserPackage);
 
-            /* Get the parser class */
+            /* Get the parser's Java class */
             var binaryParserClass = Packages[binaryParser];
 
             /* Create an instance of the ofReader */
@@ -252,6 +280,7 @@ function initOFReader(executable)
 
             /* Initialize the OFReader */
             ofReader.parse(executable);
+            ofReader.parseSymbols();
 
             /*
              * Close the reader to release the file handle. The reader will
@@ -264,8 +293,8 @@ function initOFReader(executable)
          * StringReader instead.
          */
         catch (e) {
-            print("Caught an exception while initializing the object " +
-                  "file reader:\n" + e);
+            print("Caught an exception while initializing the object "
+                  + "file reader:\n" + e);
             ofReader = Model.$private.strReader;
         }
     }
@@ -274,8 +303,8 @@ function initOFReader(executable)
      * string reader.
      */
     else {
-        print("The target does not specify an object file reader; using the " +
-              "dynamic string reader instead.");
+        print("The target does not specify an object file reader; using the "
+              + "dynamic string reader instead.");
         ofReader = Model.$private.strReader;
     }
 
@@ -339,6 +368,118 @@ function getICallStackInst()
 }
 
 /*
+ *  ======== getRecap ========
+ */
+function getRecap(execPath)
+{
+    var rInst = new Packages.xdc.rta.Recap();
+    var recapFile;
+    noRuntime = false;
+    try {
+        recapFile = rInst.locateRecap(execPath, ".rov.xs");
+        noRuntime = false;
+    }
+    catch (e) {
+        recapFile = "xdc/rov/noruntime.rov.xs";
+        noRuntime = true;
+    }
+
+    var recap = xdc.loadCapsule(recapFile);
+    if (noRuntime) {
+        var modules = {};
+        for (var mname in recap.$modules) {
+            if (mname == "xdc.runtime.System"
+                || mname == "xdc.rov.runtime.Monitor") {
+                modules[mname] = recap.$modules[mname];
+            }
+        }
+        recap.$modules = modules;
+    }
+    this.$private.recap = recap;
+
+    initOFReader(execPath);
+
+    if (noRuntime == true) {
+        var build = {};
+        var elfTarget = this.$private.ofReader.getTarget();
+        var targ = {
+            binaryParser: "xdc.targets.omf.Elf",
+            bitsPerChar: elfTarget.charsize * 8,
+            model: {
+                endian: "little",
+                shortEnums: null,
+                dataModel: null,
+                codeModel: null
+            }
+        };
+        targ.vendor = elfTarget.vendor;
+        if (elfTarget.bigendian == true) {
+            targ.model.endian = "big";
+        }
+        if (elfTarget.architecture != undefined) {
+            switch (elfTarget.architecture) {
+                case 4:
+                    targ.isa = "v5T";
+                    break;
+                case 10:
+                    if (elfTarget.profile == 77) {
+                        targ.isa = "v7M";
+                    }
+                    else if (elfTarget.profile == 65) {
+                        targ.isa = "v7A";
+                    }
+                    else if (elfTarget.profile == 82) {
+                        targ.isa = "v7R";
+                    }
+                    break;
+                case 13:
+                    targ.isa = "v7M4";
+                    break;
+                case 17:
+                    targ.isa = "v8M";
+                    break;
+            }
+            if (elfTarget.FP != undefined && elfTarget.FP != 0) {
+                targ.hardFP = 1;
+                switch (elfTarget.FP) {
+                    case 3:
+                        targ.FP = "fpv3";
+                        break;
+                    case 4:
+                        targ.FP = "fpv3-sp-d16";
+                        break;
+                    case 6:
+                        targ.FP = "fpv4-sp-d16";
+                        break;
+                    case 8:
+                        targ.FP = "fpv5-sp-d16";
+                        break;
+                    default:
+                        targ.FP = "" + elfTarget.FP;
+                        break;
+                }
+            }
+            if (elfTarget.shortEnums == 1) {
+                targ.model.shortEnums = true;
+            }
+            else if (elfTarget.shortEnums == 2 || elfTarget.shortEnums == 3) {
+                targ.model.shortEnums = false;
+            }
+        }
+        var stdTypes = recap.stdTypes[elfTarget.machine];
+        if (stdTypes == null) {
+            throw new Error("ROV cannot detect target architecture for the "
+                + "executable " + execPath);
+        }
+        targ.stdTypes = stdTypes;
+        build.target = targ;
+        recap.build = build;
+    }
+
+    return (recap);
+}
+
+/*
  *  ======== getIOFReaderInst ========
  */
 function getIOFReaderInst()
@@ -348,8 +489,6 @@ function getIOFReaderInst()
 
 /*
  * ======== getModuleList ========
- * This function returns a JavaScript object representing the package
- * hierarchy and the modules, including the views they support.
  */
 function getModuleList()
 {
@@ -435,7 +574,15 @@ function getFullName(names, index)
     return (pkgName);
 }
 
-/*!
+/*
+ *  ======== getStartFileList ========
+ */
+function getStartFileList()
+{
+    return (this.$private.files);
+}
+
+/*
  *  ======== setICallStackInst ========
  *  Called only during Model initialization
  *
@@ -498,14 +645,22 @@ function setFullName(fullname) {
  */
 function readConfig(executable)
 {
+    var files = [];
     var sysConfig = locateSysconfigFile(executable);
     if (sysConfig != "") {
         var sconfig = xdc.loadCapsule(sysConfig);
+        files.push(sconfig.$path);
         var list = sconfig.crovFiles;
         for (var k = 0; k < list.length; k++) {
             var modCaps = {};
             if (xdc.findFile(list[k]) != null) {
-                modCaps = xdc.loadCapsule(list[k]);
+                try {
+                    modCaps = xdc.loadCapsule(list[k]);
+                }
+                catch (e) {
+                   throw new Error("Error in " + xdc.findFile(list[k])
+                       + ": " + e);
+                }
             }
             else {
                 /* ignore missing capsules; proceed with what's possible */
@@ -529,6 +684,7 @@ function readConfig(executable)
     if (rovConfig != "") {
         //try {
             var config = xdc.loadCapsule(rovConfig);
+            files.push(config.$path);
             /* This code reads an array of declared constructed objects from
              * a ROV configuration file with the .rov.js extension.
              *  Example:
@@ -605,6 +761,7 @@ function readConfig(executable)
             Program.debugPrint("Cannot load " + rovConfig);
         //}
     }
+    return (files);
 }
 
 /*
@@ -731,6 +888,18 @@ function locateSysconfigFile(mainExec) {
         else if (File.exists(fPath + "syscfg/" + sysconfigFile)) {
             locatedFile = fPath + "syscfg/" + sysconfigFile;
         }
+        else if (File.exists(fPath + "/../" + sysconfigFile)) {
+            locatedFile = fPath + "/../" + sysconfigFile;
+        }
+        else if (File.exists(fPath + "/../syscfg/" + sysconfigFile)) {
+            locatedFile = fPath + "/../syscfg/" + sysconfigFile;
+        }
+        else if (File.exists(fPath + "/../../" + sysconfigFile)) {
+            locatedFile = fPath + "/../../" + sysconfigFile;
+        }
+        else if (File.exists(fPath + "/../../syscfg/" + sysconfigFile)) {
+            locatedFile = fPath + "/../../syscfg/" + sysconfigFile;
+        }
         if (locatedFile != "") {
             return (String(File.getCanonicalPath(locatedFile)));
         }
@@ -743,6 +912,6 @@ function locateSysconfigFile(mainExec) {
 
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:48; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

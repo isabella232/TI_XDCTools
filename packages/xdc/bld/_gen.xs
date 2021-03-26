@@ -1538,7 +1538,7 @@ function _mkVerbatim(pkg, release, fileName)
  *  compiling objects in the package.  This is ensured by making ".interfaces"
  *  a "order-only" prerequisite of all objects.
  */
-function _mkObjs(objs, target, makeFileName, objListGoal, pkg, srcRels)
+function _mkObjs(objs, target, makeFileName, objListGoal, pkg, srcRels, cfgBase)
 {
     debug("_mkObjs(..., " + makeFileName + ", " + objListGoal + ", ...)");
     
@@ -1668,8 +1668,9 @@ function _mkObjs(objs, target, makeFileName, objListGoal, pkg, srcRels)
             out.write("-include " + dep + "\n");
             out.write(dep + ": ;\n");
             out.write("endif\n\n");
+            var cfgHeader = cfgBase != null ? (cfgBase + ".h") : "";
             out.write(goalFile + ": | .interfaces\n");
-            out.write(goalFile + ": " + srcFile + " " + makeFileName + "\n");
+            out.write(goalFile + ": " + srcFile + " " + makeFileName + " " + cfgHeader + "\n");
             out.write("\t@$(RM) $@.dep\n");
 
             /*
@@ -2104,7 +2105,7 @@ function _mkExe(pkg, aexe, sharedCfg, out)
     /* generate rules to compile the added objects */
     var makeFileName = (pkg.cfgDir + aexe.$private.name + ".mak").replace(/\/\/+/g, '/');
     out.write("-include " + makeFileName + "\n");
-    var objList = _mkObjs(objs, aexe.target, makeFileName, goal, pkg, srcRels);
+    var objList = _mkObjs(objs, aexe.target, makeFileName, goal, pkg, srcRels, cfgBase);
 
     /* create rule to link the program executable */
     if (sharedCfg.pkgName != pkg.name) {
@@ -3161,6 +3162,6 @@ function _findReleaseBase(pkg)
     return (result.replace(/\/$/, "")); 
 }
 /*
- *  @(#) xdc.bld; 1, 0, 2,0; 4-17-2020 14:55:06; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.bld; 1, 0, 2,0; 10-3-2020 15:24:26; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

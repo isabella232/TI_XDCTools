@@ -96,6 +96,6 @@ metaonly interface IProductView
     ProductElemDesc getProductDescriptor();
 }
 /*
- *  @(#) xdc.tools.product; 1, 0, 0,0; 4-14-2020 17:01:46; /db/ztree/library/trees/xdctools/xdctools-h04/src/
+ *  @(#) xdc.tools.product; 1, 0, 0,0; 7-9-2020 13:57:52; /db/ztree/library/trees/xdctools/xdctools-h05/src/
  */
 

@@ -30,6 +30,7 @@ function module$meta$init()
 /*
  *  ======== module$use ========
  */
+/* REQ_TAG(SYSBIOS-1073) */
 function module$use()
 {
     /* If Program.system is set, it has to be a module that inherits from
@@ -96,6 +97,7 @@ function module$use()
 /*
  *  ======== module$static$init ========
  */
+/* REQ_TAG(SYSBIOS-1071) */
 function module$static$init(mod, params)
 {
     mod.numAtexitHandlers = this.exitFxns.length;
@@ -330,6 +332,6 @@ function validate()
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

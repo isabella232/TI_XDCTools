@@ -1,5 +1,5 @@
 /* --COPYRIGHT--,EPL
- *  Copyright (c) 2016-2018 Texas Instruments Incorporated
+ *  Copyright (c) 2016-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
@@ -76,49 +76,18 @@ function startModel(execPath, urlArgs, logger, progress)
     stopModel();
 
     model = {};
+    var RovModel = xdc.useModule("xdc.rov.Model");
 
     /* load recap file */
-    var rInst = new Packages.xdc.rta.Recap();
-    var recapFile = rInst.locateRecap(execPath, ".rov.xs");
-    var recap = xdc.loadCapsule(recapFile);
-    progress("Loaded the executable's configuration data: " + recapFile);
+    var recap = RovModel.getRecap(execPath);
+    model.elf = RovModel.getIOFReaderInst();
 
     /* check to make sure exe is a supported format */
-    var parser = recap.build.target.binaryParser;
-    if (parser && parser != "ti.targets.omf.elf.Elf32"
-        && parser != "ti.targets.omf.elf.Elf"
-        && parser != "xdc.targets.omf.Elf") {
-        /* ti.targets packages should be removed from the if-clause once we
-         * switch all targets to xdc.targets.omf and we don't need to support
-         * products that still reference ti.targets.omf.elf. */
+    if (model.elf.getClass().getName() != "xdc.targets.omf.Elf") {
         throw (new Error("ROV only supports Elf object files"));
     }
 
-    xdc.loadPackage("ti.targets.omf.elf");
-    xdc.loadPackage("xdc.targets.omf");
-
-    /* parse exe for symbols */
-    if (parser == "ti.targets.omf.elf.Elf32") {
-        model.elf = new Packages.ti.targets.omf.elf.Elf32();
-    }
-    else {
-        model.elf = new Packages.xdc.targets.omf.Elf();
-    }
-
-    try {
-        var err = model.elf.parse(execPath);
-        if (err != null && err != "") {
-            throw (err);
-        }
-        model.elf.parseSymbols();
-    }
-    catch (e) {
-        var msg = "Elf reader failed while reading '"
-            + execPath + "' " + String(e).replace(/Error:/g, ':');
-        debug.println(msg);
-        throw (new Error(msg));
-    }
-    progress("Loaded the executable's symbols");
+    debug.println("Loaded the executable's configuration data: " + recap);
 
     var sym = xdc.module('xdc.rov.testserver.SymbolTable').create(model.elf);
 
@@ -128,9 +97,9 @@ function startModel(execPath, urlArgs, logger, progress)
     if (ip.indexOf("DSLite") == 0) {
         /* We have to know in advance DSLite's WebSocket port. This value may
          * be specified in the ip string, otherwise it must match the
-         * environment variable TI_DS_WEBSOCKET_PORT, which is
-         * defined either in System environment or in ticloudagent.bat in the
-         * TI Cloud Agent installation.
+         * environment variable TI_DS_WEBSOCKET_PORT, which is defined either in
+         * System environment or in ticloudagent.bat in the TI Cloud Agent
+         * installation.
          */
         var coreId = 0;
         var dslitePort = ip.split(":", 3)[2];
@@ -191,8 +160,7 @@ function startModel(execPath, urlArgs, logger, progress)
         }
 
         /* start ROV model */
-        var Model = xdc.useModule("xdc.rov.Model");
-        Model.start(4, execPath, recap, sym, mem, dummyCB);
+        RovModel.start(5, execPath, recap, sym, mem, dummyCB);
 
         /* close elf file to avoid file conflicts with external apps */
         model.elf.close();
@@ -201,7 +169,7 @@ function startModel(execPath, urlArgs, logger, progress)
             /* model.reader is a DSMemoryReader instance */
             var callStack = xdc.module("xdc.rov.testserver.CallStack").create(
                 model.reader);
-            Model.setICallStackInst(callStack);
+            RovModel.setICallStackInst(callStack);
         }
 
         if ("setThrowViewErrors" in Program) {

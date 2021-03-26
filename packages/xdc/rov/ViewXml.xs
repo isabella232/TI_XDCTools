@@ -10,6 +10,8 @@
  * 
  * */
 
+/* global xdc, Program, XML */
+
 /*
  * ======== processCommand ========
  * Accepts a string command line and services the request.
@@ -23,14 +25,15 @@ function processCommand(input) {
         return("<Exception>ROV Model not initialized</Exception>");
     }
     
+    var result;
     try {
-        var result = pCmd(input);
+        result = pCmd(input);
     }
     catch (e) {
         var exception = Program.exToString(e);
         Program.debugPrint("rov/server/main.xs caught exception while " +
                            "processing command: " + exception);
-        var result = "<Exception>" + xmlQuote(exception) + "</Exception>";
+        result = "<Exception>" + xmlQuote(exception) + "</Exception>";
     }
     
     return (result);
@@ -590,6 +593,6 @@ function appendProperty(sb, pad, field, value)
     sb.append(pad + '<property name="' + encode(field) + '">' + encode(value) + '</property>\n');
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:49; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

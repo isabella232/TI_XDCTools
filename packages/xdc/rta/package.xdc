@@ -18,6 +18,6 @@ requires xdc.rov;
 package xdc.rta [1, 0, 0] {
 }
 /*
- *  @(#) xdc.rta; 1, 0, 0,0; 4-17-2020 14:55:34; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rta; 1, 0, 0,0; 10-3-2020 15:24:53; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

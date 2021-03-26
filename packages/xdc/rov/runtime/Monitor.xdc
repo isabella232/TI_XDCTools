@@ -309,6 +309,12 @@ module Monitor
         Bits32 elem;
     };
 
+    /*! @_nodoc - target datatype used to fetch data for Variable */
+    struct Float32Buffer {
+        Float elem;
+    };
+
+
     /*! @_nodoc - matches Mon command size */
     config Int MAXCMDSIZE = 128;
 

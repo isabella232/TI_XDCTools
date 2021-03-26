@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.tools.repoman" version="1, 0, 0" producerId="/db/ztree/library/trees/xdctools/xdctools-h04/src/">
+<package name="xdc.tools.repoman" version="1, 0, 0" producerId="/db/ztree/library/trees/xdctools/xdctools-h05/src/">
     <units>
         <module name="Main"/>
     </units>

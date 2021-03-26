@@ -1,5 +1,5 @@
 %%{
-    
+
     /*
      *  ======== copyFile ========
      */
@@ -19,7 +19,7 @@
         instr.close();
         outstr.close();
    }
-    
+
     /*
      *  ======== copyDirectory ========
      */
@@ -27,7 +27,7 @@
     {
         var srcElem = new java.io.File(src);
         var dstElem = new java.io.File(dst);
-        
+
         if (srcElem.isDirectory()) {
             for each(var e in srcElem.list()) {
                 copyDirectory(src + "/" + e, dst + "/" + e);
@@ -38,10 +38,9 @@
             //print("src = " + srcElem.getCanonicalPath());
             //print("dst = " + dstElem.getCanonicalPath());
         }
-        
+
     }
-    
-    
+
     /*
      *  ======== contains ========
      */
@@ -291,10 +290,10 @@
 
     /* Copy external plugins */
     copyExternalPlugins(opts, opts.outDir + "/plugins/");
-    
+
     this.productId = this.productSchema.exclusive ? 
                        this.productSchema.id + ".product" :
-                       this.productSchema.id + ".product" + "_" + 
+                       this.productSchema.id + ".product" + "_" +
                            this.productSchema.version;
 
 %%}

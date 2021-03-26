@@ -23,7 +23,7 @@
 #include "package/internal/Gate.xdc.h"
 
 /*
- *  ======== enterSystem ========
+ *  ======== Gate_enterSystem ========
  *  Enter the "System" gate
  *
  *  This method enters the gate specified by
@@ -43,7 +43,7 @@ IArg Gate_enterSystem(Void)
 }
 
 /*
- *  ======== leaveSystem ========
+ *  ======== Gate_leaveSystem ========
  */
 /* REQ_TAG(SYSBIOS-929) */
 Void Gate_leaveSystem(IArg key)
@@ -52,6 +52,6 @@ Void Gate_leaveSystem(IArg key)
         xdc_runtime_System_Module__gateObj__C, key);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

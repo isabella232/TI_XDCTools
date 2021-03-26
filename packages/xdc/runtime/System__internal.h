@@ -1,10 +1,10 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments. All rights reserved. 
- *  This program and the accompanying materials are made available under the 
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
+ *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
  *  available at http://www.eclipse.org/legal/epl-v10.html and the Eclipse
- *  Distribution License is available at 
+ *  Distribution License is available at
  *  http://www.eclipse.org/org/documents/edl-v10.php.
  *
  *  Contributors:
@@ -25,8 +25,8 @@ extern "C" {
  *  files.  The declarations in this file are subject to incompatible
  *  changes in any release; only clients of System.h are kept compatible.
  *
- *  Note: because this header is included in the generated .c file, we must 
- *  be careful to only use fully qualified names (e.g., xdc_UInt32 rather 
+ *  Note: because this header is included in the generated .c file, we must
+ *  be careful to only use fully qualified names (e.g., xdc_UInt32 rather
  *  than just UInt32)
  */
 
@@ -36,11 +36,12 @@ extern "C" {
  *
  *  {I|U}Arg can't be used because we need to be able to handle a long or
  *  a pointer (not just an int or a pointer).
- *  
- *  These internal declarations are here rather than in System.h to ensure 
+ *
+ *  These internal declarations are here rather than in System.h to ensure
  *  that targets _without_ 64-bit support can still use System
  */
-#if ((xdc_target__bitsPerChar * xdc_target__sizeof_Ptr) > 32)
+#if ((xdc_target__bitsPerChar * xdc_target__sizeof_Ptr) > 32) \
+    || ((xdc_target__bitsPerChar * xdc_target__sizeof_Long) > 32)
 typedef xdc_UInt64      xdc_runtime_System_UNum;
 typedef xdc_Int64       xdc_runtime_System_INum;
 #else
@@ -63,6 +64,6 @@ extern xdc_Char *xdc_runtime_System_formatNum__I(xdc_Char *ptr,
 
 #endif
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

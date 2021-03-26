@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -46,8 +46,8 @@ Bool Error_check(Error_Block *eb)
      * the same type. MISRA requires that two operands in a comparison be of
      * the same type.
      */
-    return (Bool)((UInt)Error_policy == (UInt)Error_UNWIND && eb != NULL
-                  && eb->id != 0U);
+    return ((Bool)((UInt)Error_policy == (UInt)Error_UNWIND && eb != NULL
+                  && eb->id != 0U));
 }
 
 /*
@@ -182,11 +182,10 @@ Void Error_policyMin(Error_Block *eb, Types_ModuleId mod, CString file,
         for(;;) {
         }
     }
-    else if (eb != &xdc_runtime_Error_IgnoreBlock) {
-        eb->id = id;
-    }
     else {
-        return;
+        if (eb != &xdc_runtime_Error_IgnoreBlock) {
+            eb->id = id;
+        }
     }
 }
 
@@ -222,6 +221,6 @@ Void Error_setX(Error_Block *eb, Types_ModuleId mod, CString file,
     eb->site.line = line;
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

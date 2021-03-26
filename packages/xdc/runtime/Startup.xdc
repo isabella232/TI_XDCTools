@@ -85,7 +85,7 @@ package xdc.runtime;
  *  @p(code)
  *      Bool Mod_Module_startupDone();
  *  @p
- *  where "Mod" is the name of some module or proxy. These predicates can be
+ *  where "Mod" is the name of a module or a proxy. These predicates can be
  *  used as guards inside of a startup function to probe whether a particular
  *  module has completed its own startup processing. As a convenience, the
  *  function `Startup_rtsDone()` probes the necessary set of `xdc.runtime`
@@ -336,6 +336,6 @@ internal:
 
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

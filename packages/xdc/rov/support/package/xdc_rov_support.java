@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-I11
+ * @(#) xdc-K04
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_rov_support
 {
-    static final String VERS = "@(#) xdc-I11\n";
+    static final String VERS = "@(#) xdc-K04\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -682,7 +682,22 @@ public class xdc_rov_support
     void $$SINGLETONS()
     {
         pkgP.init("xdc.rov.support.Package", (Proto.Obj)om.findStrict("xdc.IPackage.Module", "xdc.rov.support"));
-        pkgP.bind("$capsule", $$UNDEF);
+        Scriptable cap = (Scriptable)Global.callFxn("loadCapsule", xdcO, "xdc/rov/support/package.xs");
+        om.bind("xdc.IPackage$$capsule", cap);
+        Object fxn;
+                fxn = Global.get(cap, "init");
+                if (fxn != null) pkgP.addFxn("init", (Proto.Fxn)om.findStrict("xdc.IPackage$$init", "xdc.rov.support"), fxn);
+                fxn = Global.get(cap, "close");
+                if (fxn != null) pkgP.addFxn("close", (Proto.Fxn)om.findStrict("xdc.IPackage$$close", "xdc.rov.support"), fxn);
+                fxn = Global.get(cap, "validate");
+                if (fxn != null) pkgP.addFxn("validate", (Proto.Fxn)om.findStrict("xdc.IPackage$$validate", "xdc.rov.support"), fxn);
+                fxn = Global.get(cap, "exit");
+                if (fxn != null) pkgP.addFxn("exit", (Proto.Fxn)om.findStrict("xdc.IPackage$$exit", "xdc.rov.support"), fxn);
+                fxn = Global.get(cap, "getLibs");
+                if (fxn != null) pkgP.addFxn("getLibs", (Proto.Fxn)om.findStrict("xdc.IPackage$$getLibs", "xdc.rov.support"), fxn);
+                fxn = Global.get(cap, "getSects");
+                if (fxn != null) pkgP.addFxn("getSects", (Proto.Fxn)om.findStrict("xdc.IPackage$$getSects", "xdc.rov.support"), fxn);
+        pkgP.bind("$capsule", cap);
         pkgV.init2(pkgP, "xdc.rov.support", Value.DEFAULT, false);
         pkgV.bind("$name", "xdc.rov.support");
         pkgV.bind("$category", "Package");

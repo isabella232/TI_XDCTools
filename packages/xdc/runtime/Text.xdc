@@ -139,6 +139,7 @@ module Text {
      *
      *  @_nodoc
      */
+    /* REQ_TAG(SYSBIOS-886) */
     CString ropeText(RopeId rope);
 
     /*!
@@ -301,6 +302,7 @@ internal:
     config Char charTab[] = [0];
     config Node nodeTab[] = [{left: 0, right: 0}];
 
+    /* REQ_TAG(SYSBIOS-887) */
     config Int16 charCnt = 1;
     config Int16 nodeCnt = 1;
 
@@ -384,6 +386,6 @@ internal:
     };
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

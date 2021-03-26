@@ -2,7 +2,7 @@
  *  Do not modify this file; it is automatically 
  *  generated and any modifications will be overwritten.
  *
- * @(#) xdc-I11
+ * @(#) xdc-K04
  */
 import java.util.*;
 import org.mozilla.javascript.*;
@@ -11,7 +11,7 @@ import xdc.services.spec.Session;
 
 public class xdc_rov
 {
-    static final String VERS = "@(#) xdc-I11\n";
+    static final String VERS = "@(#) xdc-K04\n";
 
     static final Proto.Elm $$T_Bool = Proto.Elm.newBool();
     static final Proto.Elm $$T_Num = Proto.Elm.newNum();
@@ -517,6 +517,10 @@ public class xdc_rov
         fxn = (Proto.Fxn)om.bind("xdc.rov.Model$$getIOFReaderInst", new Proto.Fxn(om.findStrict("xdc.rov.Model.Module", "xdc.rov"), null, 0, -1, false));
         // fxn Model.getModuleList
         fxn = (Proto.Fxn)om.bind("xdc.rov.Model$$getModuleList", new Proto.Fxn(om.findStrict("xdc.rov.Model.Module", "xdc.rov"), $$T_Obj, 0, 0, false));
+        // fxn Model.getRecap
+        fxn = (Proto.Fxn)om.bind("xdc.rov.Model$$getRecap", new Proto.Fxn(om.findStrict("xdc.rov.Model.Module", "xdc.rov"), null, 0, -1, false));
+        // fxn Model.getStartFileList
+        fxn = (Proto.Fxn)om.bind("xdc.rov.Model$$getStartFileList", new Proto.Fxn(om.findStrict("xdc.rov.Model.Module", "xdc.rov"), $$T_Obj, 0, 0, false));
     }
 
     void Program$$FUNCTIONS()
@@ -589,17 +593,6 @@ public class xdc_rov
         // fxn Program.fetchVariableByPtr
         fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$fetchVariableByPtr", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), $$T_Obj, 1, 1, false));
                 fxn.addArg(0, "varName", $$T_Str, $$UNDEF);
-        // fxn Program.createObject
-        fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$createObject", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), null, 4, 4, false));
-                fxn.addArg(0, "addr", new Proto.Adr("xdc_Ptr", "Pv"), $$UNDEF);
-                fxn.addArg(1, "typespec", $$T_Obj, $$UNDEF);
-                fxn.addArg(2, "ret", $$T_Obj, $$UNDEF);
-                fxn.addArg(3, "name", $$T_Str, $$UNDEF);
-        // fxn Program.readMemory
-        fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$readMemory", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), $$T_Obj, 3, 3, false));
-                fxn.addArg(0, "addr", new Proto.Adr("xdc_Ptr", "Pv"), $$UNDEF);
-                fxn.addArg(1, "size", Proto.Elm.newCNum("(xdc_UInt)"), $$UNDEF);
-                fxn.addArg(2, "enc", Proto.Elm.newCNum("(xdc_Int)"), $$UNDEF);
         // fxn Program.getModuleConfig
         fxn = (Proto.Fxn)om.bind("xdc.rov.Program$$getModuleConfig", new Proto.Fxn(om.findStrict("xdc.rov.Program.Module", "xdc.rov"), $$T_Obj, 1, 1, false));
                 fxn.addArg(0, "modName", $$T_Str, $$UNDEF);
@@ -892,7 +885,7 @@ public class xdc_rov
         po = (Proto.Obj)om.findStrict("xdc.rov.Model.Module", "xdc.rov");
         po.init("xdc.rov.Model.Module", $$Module);
                 po.addFld("$hostonly", $$T_Num, 1, "r");
-        po.addFld("vers", Proto.Elm.newCNum("(xdc_Int)"), 4L, "wh");
+        po.addFld("vers", Proto.Elm.newCNum("(xdc_Int)"), 5L, "wh");
         fxn = Global.get(cap, "module$use");
         if (fxn != null) om.bind("xdc.rov.Model$$module$use", true);
         if (fxn != null) po.addFxn("module$use", $$T_Met, fxn);
@@ -910,6 +903,8 @@ public class xdc_rov
                 po.addFxn("getICallBackInst", (Proto.Fxn)om.findStrict("xdc.rov.Model$$getICallBackInst", "xdc.rov"), Global.get(cap, "getICallBackInst"));
                 po.addFxn("getIOFReaderInst", (Proto.Fxn)om.findStrict("xdc.rov.Model$$getIOFReaderInst", "xdc.rov"), Global.get(cap, "getIOFReaderInst"));
                 po.addFxn("getModuleList", (Proto.Fxn)om.findStrict("xdc.rov.Model$$getModuleList", "xdc.rov"), Global.get(cap, "getModuleList"));
+                po.addFxn("getRecap", (Proto.Fxn)om.findStrict("xdc.rov.Model$$getRecap", "xdc.rov"), Global.get(cap, "getRecap"));
+                po.addFxn("getStartFileList", (Proto.Fxn)om.findStrict("xdc.rov.Model$$getStartFileList", "xdc.rov"), Global.get(cap, "getStartFileList"));
     }
 
     void Program$$TYPES()
@@ -951,8 +946,6 @@ public class xdc_rov
                 po.addFxn("fetchFromAddr", (Proto.Fxn)om.findStrict("xdc.rov.Program$$fetchFromAddr", "xdc.rov"), Global.get(cap, "fetchFromAddr"));
                 po.addFxn("fetchVariable", (Proto.Fxn)om.findStrict("xdc.rov.Program$$fetchVariable", "xdc.rov"), Global.get(cap, "fetchVariable"));
                 po.addFxn("fetchVariableByPtr", (Proto.Fxn)om.findStrict("xdc.rov.Program$$fetchVariableByPtr", "xdc.rov"), Global.get(cap, "fetchVariableByPtr"));
-                po.addFxn("createObject", (Proto.Fxn)om.findStrict("xdc.rov.Program$$createObject", "xdc.rov"), Global.get(cap, "createObject"));
-                po.addFxn("readMemory", (Proto.Fxn)om.findStrict("xdc.rov.Program$$readMemory", "xdc.rov"), Global.get(cap, "readMemory"));
                 po.addFxn("getModuleConfig", (Proto.Fxn)om.findStrict("xdc.rov.Program$$getModuleConfig", "xdc.rov"), Global.get(cap, "getModuleConfig"));
                 po.addFxn("getPrivateData", (Proto.Fxn)om.findStrict("xdc.rov.Program$$getPrivateData", "xdc.rov"), Global.get(cap, "getPrivateData"));
                 po.addFxn("lookupDataSymbol", (Proto.Fxn)om.findStrict("xdc.rov.Program$$lookupDataSymbol", "xdc.rov"), Global.get(cap, "lookupDataSymbol"));

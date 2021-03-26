@@ -37,6 +37,21 @@
 %    }
 %}
 
+/*
+ * symbolic aliases for numeric constants or static instance objects
+ */
+%for (var sym in Program.symbol) {
+    %var inst = Program.symbol[sym];
+    %if (typeof(inst) == 'number') {
+`this.build.target.asmName(sym)` = `inst`;
+    %}
+    %else {
+        %var objTab = inst.$module.$name.replace(/\./g, '_') + '_Object__table__V';
+        %var off = Program.$capsule.instSize(inst) * inst.$index;
+`this.build.target.asmName(sym)` = `this.build.target.asmName(objTab)` + `off`;
+    %}
+%}
+
 %if ($args.length > 0) {
 /* input libraries */
 INPUT(
@@ -70,7 +85,7 @@ ASSERT(ADDR(xdc.noload) + SIZEOF(xdc.noload) < ADDR(.rodata)
 
 %%{
 /*
- * @(#) gnu.targets; 1, 0, 1,0; 4-17-2020 14:57:02; /db/ztree/library/trees/xdc/xdc-I11/src/targets/
+ * @(#) gnu.targets; 1, 0, 1,0; 10-3-2020 15:26:16; /db/ztree/library/trees/xdc/xdc-K04/src/targets/
  */
 
 %%}

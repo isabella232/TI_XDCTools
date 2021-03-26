@@ -108,6 +108,6 @@ function getStatus() {
     return this.$private.status;
 }
 /*
- *  @(#) xdc.tools.sg.widgets; 1,0,0,0; 4-14-2020 17:02:09; /db/ztree/library/trees/xdctools/xdctools-h04/src/
+ *  @(#) xdc.tools.sg.widgets; 1,0,0,0; 7-9-2020 13:58:15; /db/ztree/library/trees/xdctools/xdctools-h05/src/
  */
 

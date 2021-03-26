@@ -702,6 +702,16 @@ module Error {
      *  the `{@link #policyFxn}`. It processes the error and logs it before
      *  returning to the caller or aborting - depending on the error policy
      *  `{@link #policy}`.
+     *
+     *  @a(Warning)
+     *  If this function is used as `{@link #policyFxn}`, interrupts may get
+     *  enabled when `{@link #raise Error_raise}` is called.  For example, that
+     *  could happen for the purpose of flushing a text buffer containing an
+     *  error message to a console. To avoid re-enabling of interrupts within
+     *  `Error_raise`, either `{@link #policyMin Error_policyMin}` or
+     *  `{@link #policySpin Error_policySpin}` can be used as
+     *  `{@link #policyFxn}` instead.
+
      */
     /* REQ_TAG(SYSBIOS-853), REQ_TAG(SYSBIOS-865) */
     Void policyDefault(Block *eb, Types.ModuleId mod, CString file, Int line,
@@ -806,6 +816,6 @@ internal:
 
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

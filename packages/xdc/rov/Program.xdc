@@ -354,6 +354,8 @@ metaonly module Program {
      *  By default, only one instance of the specified type will be fetched
      *  from the address.
      *
+     *  If the type `typename` is not found, an exception is raised.
+     *
      *  @param(addr)     Address of the C object
      *  @param(typeName) Name of the C type read from the address
      *  @param(count)    Number of C objects read from the address
@@ -388,63 +390,11 @@ metaonly module Program {
      *  by the supplied pointer variable.
      *
      *  This API first checks if there is such a variable, and if it is of a
-     *  pointer type. If any of these checks fails, 'null' is returned.
+     *  pointer type. If any of these checks fails, an exception is raised.
      *  Otherwise, the pointer variable is dereferenced, and the memory content
      *  is interpreted as a pointed-to type.
      */
     Any fetchVariableByPtr(String varName);
-
-    /*!
-     *  @_nodoc
-     *  ======== createObject ========
-     *  Internal method to create a JavaScript object representing a C object
-     *
-     *  This method should never be directly called by code outside
-     *  the xdc.rov package; future changes to an executables debug format
-     *  will result is compatibility breaks.
-     *
-     *  @param(addr)    address of the object in memory
-     *  @param(type)    type specification for the object from memory
-     *  @param(ret)     already created object to which a new object is added
-     *  @param(name)    name for the new object within `ret`
-     */
-    Void createObject(Ptr addr, Any typespec, Any ret, String name);
-
-    /*!
-     *  @_nodoc
-     *  ======== readMemory ========
-     *  Internal method to read a primitive value from memory
-     *
-     *  This method should never be directly called by code outside
-     *  the xdc.rov package; future changes to an executables debug format
-     *  will result is compatibility breaks.
-     *
-     *  @param(addr)    memory address
-     *  @param(size)    size in MAUs
-     *  @param(enc)     one of the following Dwarf encodings (DW_AT_encoding)
-     *                    0x01 DW_ATE_address
-     *                    0x02 DW_ATE_boolean
-     *                    0x05 DW_ATE_signed
-     *                    0x06 DW_ATE_signed_char
-     *                    0x07 DW_ATE_unsigned
-     *                    0x08 DW_ATE_unsigned_char
-     *
-     *                  The following encodings are not supported
-     *                    0x03 DW_ATE_complex_float
-     *                    0x04 DW_ATE_float
-     *                    0x09 DW_ATE_imaginary_float
-     *                    0x0a DW_ATE_packed_decimal
-     *                    0x0b DW_ATE_numeric_string
-     *                    0x0c DW_ATE_edited
-     *                    0x0d DW_ATE_signed_fixed
-     *                    0x0e DW_ATE_unsigned_fixed
-     *                    0x0f DW_ATE_decimal_float
-     *                    0x10 DW_ATE_UTF
-     *                    0x11 DW_ATE_UCS
-     *                    0x12 DW_ATE_ASCII
-     * @a(Returns) a scalor value (via `{@link StructureDecoder StructureDecoder._decodeScalar}`)
-     */
-    Any readMemory(Ptr addr, UInt size, Int enc);
 
     /*!
      *  ======== getModuleConfig ========
@@ -514,8 +464,9 @@ metaonly module Program {
 
     /*!
      *  ======== lookupType ========
-     *  Creates a type specification from the Dwarf data. Returns null if the
-     *  type doesn't exist.
+     *  Creates a type specification from the Dwarf data.
+     *
+     *  Returns null if the type doesn't exist.
      *
      *  @param(type)    type name
      */
@@ -524,6 +475,8 @@ metaonly module Program {
     /*!
      *  ======== lookupTypeByVariable ========
      *  Creates a type specification from the Dwarf data for a variable.
+     *
+     *  Returns null if the variable cannot be found.
      *
      *  @param(varName)  variable name
      */
@@ -831,6 +784,6 @@ metaonly module Program {
 
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:48; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

@@ -101,6 +101,8 @@ public class xdc_rov_runtime
         om.bind("xdc.rov.runtime.Monitor.Bits16Buffer", new Proto.Str(spo, false));
         spo = (Proto.Obj)om.bind("xdc.rov.runtime.Monitor$$Bits32Buffer", new Proto.Obj());
         om.bind("xdc.rov.runtime.Monitor.Bits32Buffer", new Proto.Str(spo, false));
+        spo = (Proto.Obj)om.bind("xdc.rov.runtime.Monitor$$Float32Buffer", new Proto.Obj());
+        om.bind("xdc.rov.runtime.Monitor.Float32Buffer", new Proto.Str(spo, false));
         spo = (Proto.Obj)om.bind("xdc.rov.runtime.Monitor$$MonState", new Proto.Obj());
         om.bind("xdc.rov.runtime.Monitor.MonState", new Proto.Str(spo, false));
     }
@@ -163,6 +165,16 @@ public class xdc_rov_runtime
         fxn = Global.eval("function() { return $$alignof(xdc.om['xdc.rov.runtime.Monitor.Bits32Buffer']); }");
         so.bind("$alignof", fxn);
         fxn = Global.eval("function(fld) { return $$offsetof(xdc.om['xdc.rov.runtime.Monitor.Bits32Buffer'], fld); }");
+        so.bind("$offsetof", fxn);
+        so = (Proto.Str)om.findStrict("xdc.rov.runtime.Monitor.Float32Buffer", "xdc.rov.runtime");
+        sizes.clear();
+        sizes.add(Global.newArray("elem", "TFloat"));
+        so.bind("$$sizes", Global.newArray(sizes.toArray()));
+        fxn = Global.eval("function() { return $$sizeof(xdc.om['xdc.rov.runtime.Monitor.Float32Buffer']); }");
+        so.bind("$sizeof", fxn);
+        fxn = Global.eval("function() { return $$alignof(xdc.om['xdc.rov.runtime.Monitor.Float32Buffer']); }");
+        so.bind("$alignof", fxn);
+        fxn = Global.eval("function(fld) { return $$offsetof(xdc.om['xdc.rov.runtime.Monitor.Float32Buffer'], fld); }");
         so.bind("$offsetof", fxn);
         so = (Proto.Str)om.findStrict("xdc.rov.runtime.Monitor.MonState", "xdc.rov.runtime");
         sizes.clear();
@@ -304,6 +316,11 @@ public class xdc_rov_runtime
         po.init("xdc.rov.runtime.Monitor.Bits32Buffer", null);
                 po.addFld("$hostonly", $$T_Num, 0, "r");
                 po.addFld("elem", Proto.Elm.newCNum("(xdc_Bits32)"), $$UNDEF, "w");
+        // struct Monitor.Float32Buffer
+        po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$Float32Buffer", "xdc.rov.runtime");
+        po.init("xdc.rov.runtime.Monitor.Float32Buffer", null);
+                po.addFld("$hostonly", $$T_Num, 0, "r");
+                po.addFld("elem", Proto.Elm.newCNum("(xdc_Float)"), $$UNDEF, "w");
         // struct Monitor.MonState
         po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$MonState", "xdc.rov.runtime");
         po.init("xdc.rov.runtime.Monitor.MonState", null);
@@ -325,6 +342,8 @@ public class xdc_rov_runtime
         po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$Bits16Buffer", "xdc.rov.runtime");
         vo.bind("Bits32Buffer$fetchDesc", Global.newObject("type", "xdc.rov.runtime.Monitor.Bits32Buffer", "isScalar", false));
         po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$Bits32Buffer", "xdc.rov.runtime");
+        vo.bind("Float32Buffer$fetchDesc", Global.newObject("type", "xdc.rov.runtime.Monitor.Float32Buffer", "isScalar", false));
+        po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$Float32Buffer", "xdc.rov.runtime");
         vo.bind("MonState$fetchDesc", Global.newObject("type", "xdc.rov.runtime.Monitor.MonState", "isScalar", false));
         po = (Proto.Obj)om.findStrict("xdc.rov.runtime.Monitor$$MonState", "xdc.rov.runtime");
     }
@@ -352,7 +371,7 @@ public class xdc_rov_runtime
         pkgV.bind("$name", "xdc.rov.runtime");
         pkgV.bind("$category", "Package");
         pkgV.bind("$$qn", "xdc.rov.runtime.");
-        pkgV.bind("$vers", Global.newArray());
+        pkgV.bind("$vers", Global.newArray(1, 0, 0));
         Value.Map atmap = (Value.Map)pkgV.getv("$attr");
         atmap.seal("length");
         imports.clear();
@@ -458,6 +477,8 @@ public class xdc_rov_runtime
         tdefs.add(om.findStrict("xdc.rov.runtime.Monitor.Bits16Buffer", "xdc.rov.runtime"));
         vo.bind("Bits32Buffer", om.findStrict("xdc.rov.runtime.Monitor.Bits32Buffer", "xdc.rov.runtime"));
         tdefs.add(om.findStrict("xdc.rov.runtime.Monitor.Bits32Buffer", "xdc.rov.runtime"));
+        vo.bind("Float32Buffer", om.findStrict("xdc.rov.runtime.Monitor.Float32Buffer", "xdc.rov.runtime"));
+        tdefs.add(om.findStrict("xdc.rov.runtime.Monitor.Float32Buffer", "xdc.rov.runtime"));
         mcfgs.add("MAXCMDSIZE");
         mcfgs.add("STATEADDR");
         vo.bind("MonState", om.findStrict("xdc.rov.runtime.Monitor.MonState", "xdc.rov.runtime"));

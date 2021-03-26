@@ -10,6 +10,6 @@
  *  The file `Board_serialMon.txt` (contained in this package) illustrates
  *  how to use the runtime monitor with a TI-RTOS UART driver.
  */
-package xdc.rov.runtime {
+package xdc.rov.runtime [1,0,0] {
     module Monitor;
 }

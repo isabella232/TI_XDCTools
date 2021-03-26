@@ -6,8 +6,6 @@ var consoleLines = [""];
 var firstLine = 0;
 var maxLines = 1000;
 
-var ScalarStructs = xdc.useModule('xdc.rov.support.ScalarStructs');
-
 /*
  *  ======== print ========
  */
@@ -150,7 +148,7 @@ function viewInitBits32(view, args)
 function viewInitConsole(view, args)
 {
     if (args == null) {
-        return;
+        args = "'',false,5000";
     }
 
     var Program = xdc.useModule('xdc.rov.Program');
@@ -162,7 +160,7 @@ function viewInitConsole(view, args)
     var nargs = {
         filter: ((tokens[0] == "''" || tokens[0] == '""') ? "" : tokens[0]),
         regexp: (tokens[1] == "true" ? true : false),
-        max: ((isFinite(max) && (max <= 0x0ffff)) ? max : 1000)
+        max: ((isFinite(max) && (max <= 0x0ffff)) ? max : 5000)
     };
 
     /* set maxLines to the max value specified by any call */
@@ -412,7 +410,8 @@ function viewInitVariable(view, obj, args)
         view.uint32_t = String(val);
         view.int32_t = String((val & 0x80000000) ? (val - 4294967296) : val);
 
-        buffer = Program.fetchArray(ScalarStructs.S_Float$fetchDesc, addr, 1, check);
+        buffer = Program.fetchArray(Monitor["Float32Buffer$fetchDesc"],
+                                    addr, 1, check);
         view.float32 = String(buffer[0].elem);
     }
     catch (x) {

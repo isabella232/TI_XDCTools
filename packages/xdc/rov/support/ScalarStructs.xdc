@@ -1,13 +1,13 @@
 /* 
- *  Copyright (c) 2008 Texas Instruments and others.
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  All rights reserved. This program and the accompanying materials
  *  are made available under the terms of the Eclipse Public License v1.0
  *  which accompanies this distribution, and is available at
  *  http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  *  Contributors:
  *      Texas Instruments - initial implementation
- * 
+ *
  * */
 /*! @_nodoc
  *  ======== ScalarStructs ========
@@ -25,165 +25,165 @@
  *  then to the unit in which it resides), and vice versa. There may be
  *  unnamed padding within a structure object, but not at its beginning.
  *  @p
- *  
+ *
  *  As a result, it's possible to use the structures below together with
  *  `Program.fetchStruct()` to fetch scalar values; e.g., the following can
  *  be used to read a 32-bit value from address `addr`:
  *
  *  @p(code)
- *      var v; // value located at address specified by addr 
+ *      var v; // value located at address specified by addr
  *      v = Program.fetchStruct(ScalarStructs.S_Bits32$fetchDesc, addr, false)
  *  @p
  */
 module ScalarStructs {
-	
+
     /*! @_nodoc */
     struct S_Bits8 {
-	Bits8 elem;
+        Bits8 elem;
     };
 
     /*! @_nodoc */
     struct S_Bits16 {
-	Bits16 elem;
+        Bits16 elem;
     };
 
     /*! @_nodoc */
     struct S_Bits32 {
-	Bits32 elem;
+        Bits32 elem;
     };
 
     /*! @_nodoc */
     struct S_Char {
-	Char elem;
+        Char elem;
     };
 
     /*! @_nodoc */
     struct S_UChar {
-	UChar elem;
+        UChar elem;
     };
 
     /*! @_nodoc */
     struct S_Double {
-	Double elem;
+        Double elem;
     };
 
     /*! @_nodoc */
     struct S_Float {
-	Float elem;
+        Float elem;
     };
 
     /*! @_nodoc */
     struct S_Fxn {
-	Fxn elem;
+        Fxn elem;
     };
 
     /*! @_nodoc */
     struct S_IArg {
-	IArg elem;
+        IArg elem;
     };
 
     /*! @_nodoc */
     struct S_UArg {
-	UArg elem;
+        UArg elem;
     };
 
     /*! @_nodoc */
     struct S_Int {
-	Int elem;
+        Int elem;
     };
 
     /*! @_nodoc */
     struct S_UInt {
-	UInt elem;
+        UInt elem;
     };
 
     /*! @_nodoc */
     struct S_Int8 {
-	Int8 elem;
+        Int8 elem;
     };
 
     /*! @_nodoc */
     struct S_UInt8 {
-	UInt8 elem;
+        UInt8 elem;
     };
 
     /*! @_nodoc */
     struct S_Int16 {
-	Int16 elem;
+        Int16 elem;
     };
 
     /*! @_nodoc */
     struct S_UInt16 {
-	UInt16 elem;
+        UInt16 elem;
     };
 
     /*! @_nodoc */
     struct S_Int32 {
-	Int32 elem;
+        Int32 elem;
     };
 
     /*! @_nodoc */
     struct S_UInt32 {
-	UInt32 elem;
+        UInt32 elem;
     };
 
     /*! @_nodoc */
     struct S_Long {
-	Long elem;
+        Long elem;
     };
 
     /*! @_nodoc */
     struct S_ULong {
-	ULong elem;
+        ULong elem;
     };
 
     /*! @_nodoc */
     struct S_LLong {
-	LLong elem;
+        LLong elem;
     };
 
     /*! @_nodoc */
     struct S_ULLong {
-	ULLong elem;
+        ULLong elem;
     };
 
     /*! @_nodoc */
     struct S_LDouble {
-	LDouble elem;
+        LDouble elem;
     };
 
     /*! @_nodoc */
     struct S_Ptr {
-	Ptr elem;
+        Ptr elem;
     };
 
     /*! @_nodoc */
     struct S_SizeT {
-	SizeT elem;
+        SizeT elem;
     };
 
     /*! @_nodoc */
     struct S_Short {
-	Short elem;
+        Short elem;
     };
 
     /*! @_nodoc */
     struct S_UShort {
-	UShort elem;
+        UShort elem;
     };
 
     /*! @_nodoc */
     struct S_String {
-	String elem;
+        String elem;
     };
 
     /*! @_nodoc */
     struct S_VaList {
-	VaList elem;
+        VaList elem;
     };
 
 }
 /*
- *  @(#) xdc.rov.support; 1, 0, 0,0; 4-17-2020 14:55:31; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov.support; 1, 0, 0,0; 10-3-2020 15:24:51; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

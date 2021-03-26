@@ -28,6 +28,6 @@ package xdc.corevers [16, 0, 2] {
 
 }
 /*
- *  @(#) xdc.corevers; 16, 0, 2,0; 4-17-2020 14:55:16; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.corevers; 16, 0, 2,0; 10-3-2020 15:24:36; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

@@ -464,6 +464,9 @@ module System {
      *  @p(dlist)
      *      - `f`
      *          decimal floating point.
+     *          The support for floating point numbers is limited to the
+     *          range [-LONG_MAX, LONG_MAX]. For all the numbers outside of
+     *          that range, the string "(error)" is displayed instead.
      *      - `$`
      *          non-ANSI conversion prefix.  This prefix indicates that the
      *          next character identifies a non-ANSI standard conversion. See
@@ -781,6 +784,6 @@ internal:
     };
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

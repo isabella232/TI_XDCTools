@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="host.platforms.macos" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-I11/src/">
+<package name="host.platforms.macos" version="1, 0, 0" producerId="/db/ztree/library/trees/xdc/xdc-K04/src/">
     <units>
         <module name="Platform"/>
         <module name="Intel80586"/>

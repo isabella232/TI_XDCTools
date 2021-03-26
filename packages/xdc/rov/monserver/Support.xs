@@ -71,50 +71,36 @@ function startModel(execPath, urlArgs, logger, progress)
     }
 
     var ip = ("comm" in args) ? args["comm"] : "UART:COM14";
+    var extraSyms = ("symbols" in args) ? args["symbols"].split(';') : [];
 
     /* shutdown any previously open model state */
     stopModel();
 
     model = {};
+    var RovModel = xdc.useModule("xdc.rov.Model");
 
     /* load recap file */
-    var recap = loadRecap(execPath, progress);
+    var recap = RovModel.getRecap(execPath);
+    model.elf = RovModel.getIOFReaderInst();
 
-     /* check to make sure exe is a supported format */
-    var parser = recap.build.target.binaryParser;
-    if (parser && parser != "ti.targets.omf.elf.Elf32"
-        && parser != "ti.targets.omf.elf.Elf"
-        && parser != "xdc.targets.omf.Elf") {
-        /* ti.targets packages should be removed from the if-clause once we
-         * switch all targets to xdc.targets.omf and we don't need to support
-         * products that still reference ti.targets.omf.elf. */
+    /* check to make sure exe is a supported format */
+    if (model.elf.getClass().getName() != "xdc.targets.omf.Elf") {
         throw (new Error("ROV only supports Elf object files"));
     }
-
-    xdc.loadPackage("ti.targets.omf.elf");
-    xdc.loadPackage("xdc.targets.omf");
-
-    /* parse exe for symbols */
-    if (parser == "ti.targets.omf.elf.Elf32") {
-        model.elf = new Packages.ti.targets.omf.elf.Elf32();
-    }
-    else {
-        model.elf = new Packages.xdc.targets.omf.Elf();
-    }
-
     try {
-        var err = model.elf.parse(execPath);
-        if (err != null && err != "") {
-            throw (err);
+        var Elf = Packages["xdc.targets.omf.Elf"];
+        for (var i = 0; i < extraSyms.length; i++) {
+            var extra = new Elf();
+            extra.parse(extraSyms[i]);
+            extra.parseSymbols();
+            model.elf.addSymbols(extra);
+            extra.close();
         }
-        model.elf.parseSymbols();
     }
     catch (e) {
-        var msg = "Elf reader failed while reading '"
-            + execPath + "' " + String(e).replace(/Error:/g, ':');
-        debug.println(msg);
-        throw (new Error(msg));
+        throw (new Error(e));
     }
+
     progress("Loaded the executable's symbols");
 
     var sym = xdc.module('xdc.rov.monserver.SymbolTable').create(model.elf);
@@ -198,8 +184,7 @@ function startModel(execPath, urlArgs, logger, progress)
         }
 
         /* start ROV model */
-        var Model = xdc.useModule("xdc.rov.Model");
-        Model.start(4, execPath, recap, sym, mem, progressCB);
+        RovModel.start(5, execPath, recap, sym, mem, progressCB);
 
         /* close elf file to avoid file conflicts with external apps */
         model.elf.close();
@@ -208,7 +193,7 @@ function startModel(execPath, urlArgs, logger, progress)
             /* model.reader is a DSMemoryReader instance */
             var callStack = xdc.module("xdc.rov.monserver.CallStack").create(
                 model.reader);
-            Model.setICallStackInst(callStack);
+            RovModel.setICallStackInst(callStack);
         }
 
         if ("setThrowViewErrors" in Program) {
@@ -231,38 +216,6 @@ function startModel(execPath, urlArgs, logger, progress)
     //sections.addSection(0x20000000, 0x20040000);
 
     return;
-}
-
-/*
- *  ======== loadRecap ========
- */
-function loadRecap(execPath, progress)
-{
-    var rInst = new Packages.xdc.rta.Recap();
-    var recapFile;
-    var noRuntime = false;
-    try {
-        recapFile = rInst.locateRecap(execPath, ".rov.xs");
-    }
-    catch (e) {
-        recapFile = "xdc/rov/monserver/noruntime.rov.xs";
-        noRuntime = true;
-    }
-
-    var recap = xdc.loadCapsule(recapFile);
-    if (noRuntime) {
-        var modules = {};
-        for (var mname in recap.$modules) {
-            if (mname == "xdc.runtime.System"
-                || mname == "xdc.rov.runtime.Monitor") {
-                modules[mname] = recap.$modules[mname];
-            }
-        }
-        recap.$modules = modules;
-        recap.noRuntime = noRuntime;
-    }
-    progress("Loaded the executable's configuration data: " + recapFile);
-    return (recap);
 }
 
 /*

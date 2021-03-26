@@ -21,6 +21,8 @@
  *  available the decoder will return immediately.
  */
 
+/* global xdc, Program */
+
 var cmodTab = [];
 var modTab = [];
 var statusTab = new Array();
@@ -109,8 +111,8 @@ function getViewType(modName, tabName)
     }
 
     /* Throw an error if the module does not support the tab */
-    if ((mod.viewInfo == null) ||
-        !(tabName in mod.viewInfo.viewMap)) {
+    if (mod.viewInfo == null ||
+        mod.viewInfo.viewMap[tabName] == null) {
         throw (new Error("Tab " + tabName + " not in module " + modName));
     }
     return  String(mod.viewInfo.viewMap[tabName].type);
@@ -369,6 +371,25 @@ function scanInstanceDataView(modName, args)
 
         /* Add the view to the module's viewMap */
         modDesc.viewMap[tabName] = dataArr;
+
+        /*
+         * Check if there were any errors reported on any fields.
+         * Add any errors to the status table.
+         */
+        for (var i = 0; i < dataArr.length; i++) {
+            var view = dataArr[i];
+            for (var j = 0; j < view.elements.length; j++) {
+                for (var p in view.elements[j]) {
+                    if (view.elements[j].$status[p]) {
+                        /* Record status in the status table for reference */
+                        addStatusEntry(modName, tabName, view.label, p,
+                                       view.elements[j].$status[p]);
+
+                        error = true;
+                    }
+                }
+            }
+        }
     }
     /*
      * Otherwise, if the module does have instances, call the view function
@@ -510,9 +531,21 @@ function scanModuleDataView(modName, args)
     /* Add the view to the module's viewMap */
     modDesc.viewMap[tabName] = modDataView;
 
+    var error = false;
+
     /* TODO - check for any errors and throw exception */
+    for (var i = 0; i < modDataView.elements.length; i++) {
+        var view = modDataView.elements[i];
+        for (var p in view) {
+            if (view.$status[p]) {
+                /* Record status in the status table for reference */
+                addStatusEntry(modName, tabName, "N/A", p, view.$status[p]);
+                error = true;
+            }
+        }
+    }
     /*
-    if (error) {
+    if (throwScanErrors && error && !tabName.match("Scan for")) {
         throw (new Error("ROV detected errors in scan of '" + tabName +
                          "' tab for module " + modName + "."));
     }
@@ -902,17 +935,31 @@ function addCMod(cmod)
                   "The definition for " + cmod.viewMap[i].structName
                   + " is not found in " + cmod.capsule.$path);
             }
-            /* Create the status map and bind it to the struct */
-            var status = new Object();
-            for (var p in new mod.useMod[cmod.viewMap[i].structName]()) {
-                status[p] = null;
-            }
-            var prot = mod.useMod[cmod.viewMap[i].structName].prototype;
-            prot.$status = status;
-            /* $status is intentionally not enumerable to prevent adding it as
-             * a column later.
+
+            /* Check if we already encountered this structure. Nothing is
+             * stopping two different views sharing the same view structure.
              */
-            Object.defineProperty(prot, "$status", {enumerable: false});
+            var pt = mod.useMod[cmod.viewMap[i].structName].prototype;
+            if (!("$status" in pt)) {
+                /* Create the status map and bind it to the struct */
+                var status = new Object();
+                for (var p in new mod.useMod[cmod.viewMap[i].structName]()) {
+                    status[p] = null;
+                }
+
+                Object.freeze(status);
+                /* $status is intentionally not enumerable and not writable to
+                 * prevent adding it as a column later. Object.freeze() above
+                 * was added because to prevent changing values in '$status',
+                 * while 'writable' prevents assigning something else to
+                 * '$status'.
+                 * The property $status is added to the prototype to serve as a
+                 * default that is used only if no error was reported by calling 
+                 * Program.displayError().
+                 */
+                Object.defineProperty(pt, "$status",
+                    {enumerable: false, writable: false, value: status});
+            }
         }
     }
     if (cmod.argsMap && cmod.argsMap.length > 0) {
@@ -1059,24 +1106,53 @@ function fetchArray(desc, addr, len, addrCheck)
 }
 
 /*
- *  ======== readMemory ========
- *  Reads primitive values from the target.
+ *  ======== _decodeBuffer ========
+ *  Internal method to decode a primitive value from buffer
+ *
+ *  This method should never be directly called by code outside the xdc.rov
+ *  package; future changes to an executables debug format will result in 
+ *  compatibility breaks.
+ *
+ *  @param(buffer)     buffer with each element containing one MAU from memory
+ *  @param(offset)     location in buffer where a primitive value starts
+ *  @param(len)        size in MAUs
+ *  @param(encoding)   one of the following Dwarf encodings (DW_AT_encoding)
+ *                     0x01 DW_ATE_address
+ *                     0x02 DW_ATE_boolean
+ *                     0x04 DW_ATE_float
+ *                     0x05 DW_ATE_signed
+ *                     0x06 DW_ATE_signed_char
+ *                     0x07 DW_ATE_unsigned
+ *                     0x08 DW_ATE_unsigned_char
+ *
+ *                     The following encodings are not supported
+ *                     0x03 DW_ATE_complex_float
+ *                     0x09 DW_ATE_imaginary_float
+ *                     0x0a DW_ATE_packed_decimal
+ *                     0x0b DW_ATE_numeric_string
+ *                     0x0c DW_ATE_edited
+ *                     0x0d DW_ATE_signed_fixed
+ *                     0x0e DW_ATE_unsigned_fixed
+ *                     0x0f DW_ATE_decimal_float
+ *                     0x10 DW_ATE_UTF
+ *                     0x11 DW_ATE_UCS
+ *                     0x12 DW_ATE_ASCII
+ * @a(Returns) a scalor value (via `{@link StructureDecoder StructureDecoder._decodeScalar}`)
  */
-function readMemory(addr, len, encoding)
+function _decodeBuffer(buffer, offset, len, encoding)
 {
     if (encoding < 1 || encoding > 8) {
         throw new Error("unsupported encoding for the location 0x" +
-            Number(addr).toString(16));
+            Number(buffer).toString(16));
     }
     if (encoding == 3) {
         throw new Error("complex numbers are not supported - location 0x" +
-            Number(addr).toString(16));
+            Number(buffer).toString(16));
     }
 
-    var buffer = Model.getMemoryImageInst().readMaus(addr, len, false);
     var buf = {};
     buf.buffer = buffer;
-    buf.off = 0;
+    buf.off = offset;
     var type = {};
     type.align = 1;
     type.size = len;
@@ -1109,15 +1185,21 @@ function fetchVariableByPtr(varName)
 {
     var javaType = Program.ofReader.getPtrType(varName);
     if (javaType == null) {
-        throw new Error("'" + varName + "' is not found, or its type is "
-            + "not a pointer type.");
+        throw new Error("'" + varName + "' is not a global variable, or its "
+            + "type is not a pointer type.");
     }
     var typespec = _convertType(javaType);
     var addr = Program.lookupSymbolValue(varName);
+    if (addr == -1) {
+        throw new Error("Cannot determine the address for '" + varName + "'.");
+    }
     var ptrSize = Model.$private.recap.build.target.stdTypes.t_Ptr.size;
-    var ptdLocation = readMemory(addr, ptrSize, 1);
+    var ptdBuf = Model.getMemoryImageInst().readMaus(addr, ptrSize, false);
+    var ptdLocation = _decodeBuffer(ptdBuf, 0, ptrSize, 1);
     var newObj = {};
-    Program.createObject(ptdLocation, typespec, newObj, "top");
+    var buf = Model.getMemoryImageInst().readMaus(ptdLocation, typespec.size,
+                                                  false);
+    _createObject(buf, 0, typespec, newObj, "top");
     return (newObj["top"]);
 }
 
@@ -1134,16 +1216,18 @@ function fetchFromAddr(addr, typeName, count)
     }
     if (count != null && count > 1) {
         var newAr = [];
+        var buf = Model.getMemoryImageInst().readMaus(addr,
+            typespec.size * count, false);
         for (var i = 0; i < count; i++) {
             var newObj = {};
-            Program.createObject(addr + i * typespec.size, typespec, newObj,
-                "top");
+            _createObject(buf, i * typespec.size, typespec, newObj, "top");
             newAr.push(newObj["top"]);
         }
         return (newAr);
     }
+    var buf = Model.getMemoryImageInst().readMaus(addr, typespec.size, false);
     var newObj = {};
-    Program.createObject(addr, typespec, newObj, "top");
+    _createObject(buf, 0, typespec, newObj, "top");
     return (newObj["top"]);
 }
 
@@ -1156,30 +1240,47 @@ function fetchVariable(varName)
 {
     var typespec = Program.lookupTypeByVariable(varName);
     if (typespec == null) {
-        throw new Error("Variable " + varName + " can't be found");
+        throw new Error("Variable '" + varName + "' does not exist, or it is "
+            + "not a global variable.");
     }
+
     var addr = Program.lookupSymbolValue(varName);
+    if (addr == -1) {
+        throw new Error("Cannot determine the address for '" + varName + "'.");
+    }
+    var buf = Model.getMemoryImageInst().readMaus(addr, typespec.size, false);
     var newObj = {};
-    Program.createObject(addr, typespec, newObj, "top");
+    _createObject(buf, 0, typespec, newObj, "top");
     return (newObj["top"]);
 }
 
 /*
- *  ======== createObject ========
- *  Creates a new object by reading memory and typespec
+ *  ======== _createObject ========
+ *  Internal method to create a JavaScript object representing a C object
+ *
+ *  This method should never be directly called by code outside
+ *  the xdc.rov package; future changes to an executables debug format
+ *  will result is compatibility breaks.
+ *
+ *  @param(buf)      buffer with each element containing one MAU from memory
+ *  @param(offset)   offset in buffer of MAUs to be interpreted
+ *  @param(typespec) type specification for the object from memory
+ *  @param(prnt)     already created object to which a new object is added
+ *  @param(name)     name for the new object within `prnt`
  *
  *  Typespec is a JavaScript object.
  */
- function createObject(addr, typespec, prnt, name)
+ function _createObject(buf, offset, typespec, prnt, name)
 {
     if (typespec.member == null) {
-        prnt[name] = readMemory(addr, typespec.size, typespec.encoding);
+        prnt[name] = _decodeBuffer(buf, offset, typespec.size,
+                                   typespec.encoding);
     }
     else if (typespec.elnum == null || typespec.elnum == 0) {
         prnt[name] = {};
         for (var prop in typespec.member) {
             var val = typespec.member[prop];
-            createObject(addr + val.offset, val, prnt[name], prop);
+            _createObject(buf, offset + val.offset, val, prnt[name], prop);
         }
     }
     else if (typespec.elnum > 0) {
@@ -1187,14 +1288,14 @@ function fetchVariable(varName)
         var elemspec = typespec.member[0];
         if (elemspec.encoding != 0) {
             for (var i = 0; i < typespec.elnum; i++) {
-                prnt[name][i] = readMemory(addr + i * elemspec.offset,
+                prnt[name][i] = _decodeBuffer(buf, offset + i * elemspec.offset,
                     elemspec.size, elemspec.encoding);
             }
         }
         else {
             for (i = 0; i < typespec.elnum; i++) {
-                createObject(addr + i * elemspec.offset, elemspec, prnt[name],
-                    "temp");
+                _createObject(buf, offset + i * elemspec.offset, elemspec,
+                             prnt[name], "temp");
                 prnt[name][i] = prnt[name].temp;
                 delete prnt[name].temp;
             }
@@ -1306,14 +1407,23 @@ function _convertType(javaType) {
     }
     return (jsType);
 }
+
 /*
  *  ======== lookupType ========
  */
-function lookupType(type)
+function lookupType(typename)
 {
-    var javaType = Program.ofReader.getType(type);
+    var javaType = Program.ofReader.getType(typename);
     if (javaType == null) {
-        return null;
+        /* try one of the standard C99 types */
+        var typespec = _c99Type(typename);
+        if (typespec == null) {
+            return null;
+        }
+        /* typespec is already a native JavaScript object, no need to call
+         * _convertType.
+         */
+        return (typespec)
     }
     else {
         return (_convertType(javaType));
@@ -1327,7 +1437,7 @@ function lookupTypeByVariable(name)
 {
     var javaType = Program.ofReader.getTypeByVariable(name);
     if (javaType == null) {
-        throw new Error("The variable '" + name + "' can't be found.");
+        return (null);
     }
     var jsType = _convertType(javaType);
     return (jsType);
@@ -1416,6 +1526,14 @@ function displayError(view, fieldName, errorMsg)
                          "message was: " + errorMsg));
     }
 
+    if ("hasOwnProperty" in view && view.hasOwnProperty("$status") != true) {
+        var status = new Object();
+        for (var p in view) {
+            status[p] = null;
+        }
+        Object.defineProperty(view, "$status",
+                {enumerable: false, value: status, writable: true});
+    }
     view.$status[fieldName] = errorMsg;
 }
 
@@ -1514,8 +1632,8 @@ function resetMods()
      * rov.js files available to recreate it. Instead, we delete these modules'
      * views from cache.
      */
-    for (cmod in cmodTab) {
-        for (prop in cmodTab[cmod].viewMap) {
+    for (var cmod in cmodTab) {
+        for (var prop in cmodTab[cmod].viewMap) {
             delete cmodTab[cmod].viewMap[prop];
         }
     }
@@ -1611,6 +1729,176 @@ function getInstLabel(desc, view)
 }
 
 /*
+ *  ======== _c99Type ========
+ *  Returns a typespec for most of the standard C99 types. This function is
+ *  called if the description of the type is not available in .dwarf_info.
+ */
+function _c99Type(typename) {
+    var spec = {
+        size: null,
+        encoding: null,
+        member: null,
+        offset: null,
+        elnum: null
+    };
+
+    var elfTarget = Program.ofReader.getTarget();
+    var stdTypes = Program.build.target.stdTypes;
+    switch (typename) {
+        case "uint8_t":
+            if (elfTarget.charsize > 1) {
+                return (null);
+            }
+            spec.encoding = 7;
+            spec.size = 1;
+            return (spec);
+        case "int8_t":
+            if (elfTarget.charsize > 1) {
+                return (null);
+            }
+            spec.encoding = 5;
+            spec.size = 1;
+            return (spec);
+        case "uint16_t":
+            spec.encoding = 7;
+            spec.size = 16/(elfTarget.charsize * 8);
+            return (spec);
+        case "int16_t":
+            spec.encoding = 5;
+            spec.size = 16/(elfTarget.charsize * 8);
+            return (spec);
+        case "uint32_t":
+            spec.encoding = 7;
+            spec.size = 32/(elfTarget.charsize * 8);
+            return (spec);
+        case "int32_t":
+            spec.encoding = 5;
+            spec.size = 32/(elfTarget.charsize * 8);
+            return (spec);
+        case "uint64_t":
+            spec.encoding = 7;
+            spec.size = 64/(elfTarget.charsize * 8);
+            return (spec);
+        case "int64_t":
+            spec.encoding = 5;
+            spec.size = 64/(elfTarget.charsize * 8);
+            return (spec);
+
+        case "uint_least8_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Int8.size;;
+            return (spec);
+        case "int_least8_t":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Int8.size;
+            return (spec);
+        case "uint_least16_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Int16.size;
+            return (spec);
+        case "int_least16_t":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Int16.size;
+            return (spec);
+        case "uint_least32_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Int32.size;
+            return (spec);
+        case "int_least32_t":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Int32.size;
+            return (spec);
+        case "uint_least64_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Int64.size;
+            return (spec);
+        case "int_least64_t":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Int64.size;
+            return (spec);
+        case "unsigned char":
+        case "char":
+            /* This is implementation specific for "char". It is an unsigned
+             * encoding because that's how it is on Arm.
+             */
+            spec.encoding = 8;
+            spec.size = stdTypes.t_Char.size;
+            return (spec);
+        case "signed char":
+            spec.encoding = 6;
+            spec.size = stdTypes.t_Char.size;
+            return (spec);
+        case "unsigned short":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Short.size;
+            return (spec);
+        case "signed short":
+        case "short":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Short.size;
+            return (spec);
+        case "unsigned":
+        case "unsigned int":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Int.size;
+            return (spec);
+        case "signed int":
+        case "int":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Int.size;
+            return (spec);
+        case "unsigned long":
+        case "unsigned long int":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_Long.size;
+            return (spec);
+        case "signed long":
+        case "long":
+        case "long int":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_Long.size;
+            return (spec);
+        case "unsigned long long":
+        case "unsigned long long int":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_LLong.size;
+            return (spec);
+        case "signed long long":
+        case "long long":
+        case "long long int":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_LLong.size;
+            return (spec);
+        case "float":
+            spec.encoding = 4;
+            spec.size = stdTypes.t_Float.size;
+            return (spec);
+        case "double":
+            spec.encoding = 4;
+            spec.size = stdTypes.t_Double.size;
+            return (spec);
+        case "long double":
+            spec.encoding = 4;
+            spec.size = stdTypes.t_LDouble.size;
+            return (spec);
+        case "uintptr_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_IArg.size;
+            return (spec);
+        case "intptr_t":
+            spec.encoding = 5;
+            spec.size = stdTypes.t_IArg.size;
+            return (spec);
+        case "size_t":
+            spec.encoding = 7;
+            spec.size = stdTypes.t_SizeT.size;
+            return (spec);
+        default:
+            return (null);
+    }
+}
+
+/*
  *  ======== _getTabArgs ========
  *  Extract optional arguments from parameters passed to get a view
  */
@@ -1630,6 +1918,6 @@ function _getTabName(args)
     return (k < 0 ? args : args.substr(0, k));
 }
 /*
- *  @(#) xdc.rov; 1, 0, 1,0; 4-17-2020 14:55:29; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.rov; 1, 0, 1,0; 10-3-2020 15:24:48; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

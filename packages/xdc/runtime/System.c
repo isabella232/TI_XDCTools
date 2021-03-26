@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -32,11 +32,12 @@
  *  plus 5 to accomodate the decimal point and 4 digits after the decimal
  *  point.
  */
-#if ((xdc_target__bitsPerChar * xdc_target__sizeof_Ptr) > 32)
-#define OUTMAX      ((64 + 2) / 3) + 5
+#if ((xdc_target__bitsPerChar * xdc_target__sizeof_Ptr) > 32) \
+    || ((xdc_target__bitsPerChar * xdc_target__sizeof_Long) > 32)
+#define OUTMAX      (((64 + 2) / 3) + 5)
 #define PTRZPAD     16
 #else
-#define OUTMAX      ((32 + 2) / 3) + 5
+#define OUTMAX      (((32 + 2) / 3) + 5)
 #define PTRZPAD     8
 #endif
 
@@ -50,11 +51,11 @@ typedef xdc_runtime_System_INum IntMax;
  *  Return the address of a VaList (aka va_list)
  *
  *  If va_list is an array type, taking the address of the va_list va simply
- *  returns va itself.  Moreover, when such a va_list is passed to a
- *  function, C implicitly passes the address rather than the va_list array
- *  "value" itself.  Taken together, this means we can "safely" cast a
- *  va_list value passed to a function as a (va_list *) when passing it on
- *  to functions expecting a (va_list *).
+ *  returns va itself. Moreover, when such a va_list is passed to a function,
+ *  C implicitly passes the address rather than the va_list array "value"
+ *  itself. Taken together, this means we can "safely" cast a va_list value
+ *  passed to a function as a (va_list *) when passing it on to functions
+ *  expecting a (va_list *).
  *
  *  Ignoring performance concerns, we can be squeaky clean and copy the
  *  va_list value to a local variable and pass the address of this local
@@ -318,9 +319,9 @@ Int System_vsnprintf(Char buf[], SizeT n, CString fmt, VaList va)
  *  otherwise, they are written into buf. Atmost `n` - 1 characters are written
  *  excluding '\0'.
  *
- *  The return value is the number of characters that would have
- *  been written had `n` been sufficiently large, not counting the terminating
- *  '\0' character.
+ *  The return value is the number of characters that would have been written
+ *  had `n` been sufficiently large, not counting the terminating '\0'
+ *  character.
  */
 Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
 {
@@ -590,7 +591,7 @@ Int System_doPrint(Char *buf, SizeT n, CString fmt, VaList *pva, Bool aFlag)
  *  ptr  - Pointer to the end of the working buffer where the string version
  *         of the number will be placed.
  *  un   - The unsigned number to be formated
- *  base - The base to format the number into. TODO - signed?
+ *  base - The base to format the number into.
  */
 Char *formatNum(Char *ptr, UIntMax un, Int zpad, Int base)
 {
@@ -670,6 +671,6 @@ Void System_putchar(Char **bufp, Char c, SizeT *n)
     }
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:37; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments. All rights reserved.
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -20,9 +20,8 @@ package xdc.runtime;
  *  ======== Core ========
  *  Core instance lifecycle support
  *
- *  The methods defined in this module are called by code that is
- *  generated at configuration time by the `xdc.services.internal.gen`
- *  package.
+ *  The methods defined in this module are called by code that is generated at
+ *  the configuration time by the `xdc.services.internal.gen` package.
  *
  *  For every module that supports instance objects, the generated .c
  *  file contains the body of the constructors and destructors for all
@@ -101,39 +100,80 @@ internal:
     /* REQ_TAG(SYSBIOS-876) */
     Void assignParams(Ptr dstPrms, CPtr srcPrms, SizeT mpsz, SizeT ipsz);
 
-    /*
+    /*!
      *  ======== createObject ========
-     *  Code invoked from Mod_create__S() and Proxy_create() functions
+     *  Code invoked from Mod_create() and Proxy_create() functions
+     *
+     *  @param(od)        non-NULL pointer to a Mod-specific object "descriptor"
+     *  @param(curObj)    unused - retained for backward compatibility
+     *  @param(resPrms)   pointer to an uninitialized Mod_Params structure
+     *  @param(argPrms)   pointer to a caller initialized Mod_Params structure
+     *  @param(argPrmsSize)    unused - retained for backward compatibility
+     *  @param(eb)        error block pointer
+     *
+     *  The caller must ensure that `od` is not a NULL pointer. Otherwise, this
+     *  function may cause memory access violation.
+     *
+     *  The caller must ensure that either the parameter structure pointed to by
+     *  `argPrms` is initialized by calling `Mod_Params_init()` method or that
+     *  `argPrms` is set to NULL to request default parameter values. Otherwise,
+     *  the assert `{@link #A_initializedParams}` will be raised.
      */
     /* REQ_TAG(SYSBIOS-871) */
     Ptr createObject(const ObjDesc *od, Ptr curObj, Ptr resPrms, CPtr argPrms,
                      SizeT argPrmsSize, Error.Block *eb);
 
-    /*
+    /*!
      *  ======== constructObject ========
      *  Code for static-only Mod_construct()
+     *
+     *  @param(od)        non-NULL pointer to a Mod-specific object "descriptor"
+     *  @param(curObj)    non-NULL pointer to object to initialize
+     *  @param(resPrms)   pointer to an uninitialized Mod_Params structure
+     *  @param(argPrms)   pointer to a caller initialized Mod_Params structure
+     *  @param(argPrmsSize)    unused - retained for backward compatibility
+     *  @param(eb)        error block pointer
+     *
+     *  The caller must ensure that `od` and `curObj` are not NULL pointers.
+     *  Otherwise, this function may cause memory access violation.
+     *
+     *  The caller must ensure that either the parameter structure pointed to by
+     *  `argPrms` is initialized by calling `Mod_Params_init()` method or that
+     *  `argPrms` is set to NULL to request default parameter values. Otherwise,
+     *  the assert `{@link #A_initializedParams}` will be raised.
      */
     /* REQ_TAG(SYSBIOS-873) */
     Ptr constructObject(const ObjDesc *od, Ptr curObj, Ptr resPrms,
                         CPtr argPrms, SizeT argPrmsSize, Error.Block *eb);
 
-    /*
+    /*!
      *  ======== deleteObject ========
      *  Common code for all Mod_delete() and Mod_destruct()
+     *
+     *  This function can be called for both - objects initialized by
+     *  `{@link #constructObject}` and objects created by
+     *  `{@link #createObject}`. However, for the objects initialized by
+     *  `{@link #constructObject}`, the parameter `consFlg` must be set to
+     *  `TRUE`. Calling this function for such objects with `consFlg` set to
+     *  `FALSE` will result in undefined behavior.
      */
     /* REQ_TAG(SYSBIOS-872) */
     Void deleteObject(const ObjDesc *od, Ptr curObj, Fxn finalFxn,
         Int istat, Bool consFlg);
 
-    /*
+    /*!
      *  ======== destructObject ========
      *  Code for static-only Mod_destruct()
+     *
+     *  This function must be called only for objects initialized by
+     *  `{@link #constructObject}`. Calling this function for the objects
+     *  created by `{@link #createObject}` will result in undefined behavior.
      */
     /* REQ_TAG(SYSBIOS-874) */
     Void destructObject(const ObjDesc *od, Ptr curObj, Fxn finalFxn,
         Int istat, Bool consFlg);
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

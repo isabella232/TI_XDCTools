@@ -1,5 +1,5 @@
 /* 
- *  Copyright (c) 2008-2019 Texas Instruments Incorporated
+ *  Copyright (c) 2008-2020 Texas Instruments Incorporated
  *  This program and the accompanying materials are made available under the
  *  terms of the Eclipse Public License v1.0 and Eclipse Distribution License
  *  v. 1.0 which accompanies this distribution. The Eclipse Public License is
@@ -86,6 +86,24 @@
  *      // Returns NULL if the conversion is not valid
  *      IMod_Handle Mod_Handle_upCast(Mod_Module_Handle handle);
  *
+ *  // methods that create and destruct runtime Mod instances
+ *
+ *      // create a heap-based runtime instance
+ *      // The number and type of other parameters is module-specific
+ *      Mod_Handle Mod_create( ..., Mod_Params *prms, Error_Block *eb)
+ *
+ *      // destroy a heap-based runtime instance
+ *      // Can be safely called only for instances created by Mod_create()
+ *      Void Mod_delete(Mod_Handle *hPtr)
+ *
+ *      // create a stack-based or a static runtime instance
+ *      // The number and type of other parameters is module-specific
+ *      Void Mod_construct(Mod_Struct *obj, ..., Mod_Params *prms, Error_Block *eb)
+ *
+ *      // destroy a stack-based or a static runtime instance
+ *      // Can be safely called only for instances created by Mod_construct()
+ *      Void Mod_destruct(Mod_Struct *obj)
+ *
  *  // methods to access the instances managed by Mod
  *
  *      // return heap used to create instances
@@ -134,7 +152,7 @@ interface IModule {
      *
      *  All modules have this configuration parameter. Its name contains the '$'
      *  character to ensure it does not conflict with configuration parameters
-     *  declared by the module. This allows new configuration parameters to be 
+     *  declared by the module. This allows new configuration parameters to be
      *  added in the future without any chance of breaking existing modules.
      */
     metaonly config Types.Common$ common$;
@@ -305,6 +323,6 @@ interface IModule {
     @System CPtr Proxy__delegate();
 }
 /*
- *  @(#) xdc.runtime; 2, 1, 0,0; 4-17-2020 14:55:36; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.runtime; 2, 1, 0,0; 10-3-2020 15:24:56; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

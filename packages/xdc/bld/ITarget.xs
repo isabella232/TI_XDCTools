@@ -153,6 +153,6 @@ function selectSuffix(list)
     return (null);
 }
 /*
- *  @(#) xdc.bld; 1, 0, 2,0; 4-17-2020 14:55:06; /db/ztree/library/trees/xdc/xdc-I11/src/packages/
+ *  @(#) xdc.bld; 1, 0, 2,0; 10-3-2020 15:24:26; /db/ztree/library/trees/xdc/xdc-K04/src/packages/
  */
 

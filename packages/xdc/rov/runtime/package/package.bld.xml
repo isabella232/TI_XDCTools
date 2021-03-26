@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="US-ASCII"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.rov.runtime" version="" producerId="/db/ztree/library/trees/rov/rov-m21/src/xdc/rov/runtime/">
+<package name="xdc.rov.runtime" version="1, 0, 0" producerId="/db/ztree/library/trees/rov/rov-m40/src/xdc/rov/runtime/">
     <units>
         <module name="Monitor"/>
     </units>
@@ -49,12 +49,12 @@
                 dataModel="undefined"/>
         </target>
         <target name="ti.targets.arm.elf.M4"
-            version="ti.targets.arm.elf.M4{1,0,16.9,0"
-            rawVersion="16.9.0"
+            version="ti.targets.arm.elf.M4{1,0,20.2,1"
+            rawVersion="20.2.1"
             platform="ti.platforms.tiva:TM4C1294NCPDT:1"
             isa="v7M4"
             suffix="em4"
-            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/16.9.0/Linux"
+            rootDir="/db/vendors/ti/arm/20.2.1.LTS/Linux"
             os="undefined"
             rts="ti.targets.arm.rtsarm">
             <model endian="little"
@@ -75,12 +75,12 @@
                 dataModel="undefined"/>
         </target>
         <target name="ti.targets.arm.elf.M4F"
-            version="ti.targets.arm.elf.M4F{1,0,16.9,0"
-            rawVersion="16.9.0"
+            version="ti.targets.arm.elf.M4F{1,0,20.2,1"
+            rawVersion="20.2.1"
             platform="ti.platforms.tiva:TM4C1294NCPDT:1"
             isa="v7M4"
             suffix="em4f"
-            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/16.9.0/Linux"
+            rootDir="/db/vendors/ti/arm/20.2.1.LTS/Linux"
             os="undefined"
             rts="ti.targets.arm.rtsarm">
             <model endian="little"
@@ -101,12 +101,12 @@
                 dataModel="undefined"/>
         </target>
         <target name="ti.targets.arm.elf.M3"
-            version="ti.targets.arm.elf.M3{1,0,16.9,0"
-            rawVersion="16.9.0"
+            version="ti.targets.arm.elf.M3{1,0,20.2,1"
+            rawVersion="20.2.1"
             platform="ti.platforms.simCM3"
             isa="v7M"
             suffix="em3"
-            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/16.9.0/Linux"
+            rootDir="/db/vendors/ti/arm/20.2.1.LTS/Linux"
             os="undefined"
             rts="ti.targets.arm.rtsarm">
             <model endian="little"

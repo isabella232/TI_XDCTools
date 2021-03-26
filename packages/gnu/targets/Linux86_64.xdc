@@ -95,6 +95,6 @@ metaonly module Linux86_64 inherits gnu.targets.ITarget {
     };
 }
 /*
- *  @(#) gnu.targets; 1, 0, 1,0; 4-17-2020 14:57:02; /db/ztree/library/trees/xdc/xdc-I11/src/targets/
+ *  @(#) gnu.targets; 1, 0, 1,0; 10-3-2020 15:26:16; /db/ztree/library/trees/xdc/xdc-K04/src/targets/
  */
 

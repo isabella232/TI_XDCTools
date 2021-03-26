@@ -29,5 +29,3 @@ function getLinkTemplate(prog)
 {
     return this.$module.CPU.getLinkTemplate(prog);
 }
-
-

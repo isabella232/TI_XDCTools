@@ -9,7 +9,7 @@
 
 __FAR__ char xdc_rov_runtime__dummy__;
 
-#define __xdc_PKGVERS null
+#define __xdc_PKGVERS 1, 0, 0
 #define __xdc_PKGNAME xdc.rov.runtime
 #define __xdc_PKGPREFIX xdc_rov_runtime_
 
