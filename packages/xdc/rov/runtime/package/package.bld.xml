@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.rov.runtime" version="1, 0, 0" producerId="/db/ztree/library/trees/rov/rov-m40/src/xdc/rov/runtime/">
+<package name="xdc.rov.runtime" version="1, 0, 0" producerId="/db/ztree/library/trees/rov/rov-m45/src/xdc/rov/runtime/">
     <units>
         <module name="Monitor"/>
     </units>

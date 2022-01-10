@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="xdc_rov_runtime" label="default" date="1602538740067" buildCount="1" producerId="/db/ztree/library/trees/rov/rov-m40/src/xdc/rov/runtime/">
+<release name="xdc_rov_runtime" label="default" date="1620234503096" buildCount="1" producerId="/db/ztree/library/trees/rov/rov-m45/src/xdc/rov/runtime/">
 <package name="xdc.rov.runtime"
     version="1, 0, 0"/>
 <imports>

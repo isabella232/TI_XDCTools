@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/build.dtd -->
-<package name="xdc.rov.monserver" version="" producerId="/db/ztree/library/trees/rov/rov-m40/src/">
+<package name="xdc.rov.monserver" version="" producerId="/db/ztree/library/trees/rov/rov-m45/src/">
     <units>
         <module name="Main"/>
         <module name="CallStack"/>

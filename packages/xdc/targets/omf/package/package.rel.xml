@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="US-ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--  This file conforms to the DTD xdc/bld/release.dtd -->
-<release name="xdc_targets_omf" label="default" date="1602538754540" buildCount="1" producerId="/db/ztree/library/trees/rov/rov-m40/src/">
+<release name="xdc_targets_omf" label="default" date="1620234516186" buildCount="1" producerId="/db/ztree/library/trees/rov/rov-m45/src/">
 <package name="xdc.targets.omf"
     version=""/>
 <imports>
@@ -81,6 +81,6 @@
     </xdcRoot>
 </references>
 <orphans>
-    <file name="/db/ztree/library/trees/rov/rov-m40/src/config.bld"/>
+    <file name="/db/ztree/library/trees/rov/rov-m45/src/config.bld"/>
 </orphans>
 </release>
